@@ -1,0 +1,7 @@
+<div *ngIf="ingredient">
+  <div class="thisFlex"><h2>{{ ingredient.strIngredient | titlecase }}</h2></div>
+  <img [src]="'http://localhost:8080/ingredient/' + ingredient.strIngredient + '/image'" [alt]="ingredient.strIngredient">
+  <p *ngIf="ingredient.strDescription">{{ingredient.strDescription}}</p>
+
+
+</div>

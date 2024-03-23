@@ -1,0 +1,16 @@
+
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  text-align: start;
+  background-color: rgba(21, 64, 79, 0.9);
+  margin-bottom: 20px;
+  padding: 10px;
+
+}
+h1{
+  color: wheat;
+  font-weight: 250;
+}

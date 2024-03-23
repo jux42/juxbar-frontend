@@ -1,0 +1,52 @@
+.cocktail-card {
+  position: relative; /* Permet le positionnement absolu des éléments enfants par rapport à celui-ci */
+  padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
+
+  border-radius: 5% 10%;
+  width: 600px;
+  height: 800px;
+  margin: 30px;
+  border: 0.1em solid;
+
+  background-color: rgba(199, 174, 157, 0.8);
+  box-shadow: 5px 5px 20px black;
+}
+.thisFlex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.twoColumns {
+  text-align: center;
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divise l'espace disponible en deux colonnes de taille égale */
+  gap: 15px; /* Ajoute un petit espace entre les colonnes et les lignes */
+}
+
+p {
+  margin: 0; /* Réinitialise les marges par défaut des paragraphes pour un meilleur contrôle */
+  padding: 0 15px; /* Ajuste le padding si nécessaire pour l'espacement à l'intérieur des cellules de la grille */
+}
+img {
+
+  width: 580px;
+  height: 580px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 15%;
+}
+
+.instructions {
+  font-weight: bold;
+  position: absolute;
+  bottom: 40px; /* Ajustez selon le besoin pour la distance au bas du conteneur */
+  left: 0;
+  right: 0;
+  padding: 0 15px; /* Ajustez pour le padding intérieur */
+  text-align: center; /* Centre le texte horizontalement */
+}
+

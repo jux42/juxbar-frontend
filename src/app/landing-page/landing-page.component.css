@@ -1,0 +1,15 @@
+h1{
+  text-align: center;
+  font-size: 4em;
+  margin: 300px;
+  color: wheat;
+}
+
+.juxbar{
+  color: burlywood;
+}
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+
+}
