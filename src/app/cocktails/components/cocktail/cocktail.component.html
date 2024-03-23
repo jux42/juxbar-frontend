@@ -1,15 +1,10 @@
 <div *ngIf="cocktail" class="cocktail-card">
   <div class="thisFlex"><h2>{{ cocktail.strDrink | titlecase }}</h2>
-    <img class="clickable-image" (click)="goToCocktail()"
+    <img class="clickable" (click)="goToCocktail()"
             *ngIf="cocktail" [src]="'http://localhost:8080/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"/></div>
-  <div class="twoColumns" >
-    <p>{{ truncateText(cocktail.strIngredient1, 12) }}</p>
-    <p>{{ truncateText(cocktail.strIngredient2, 12) }}</p>
-    <p *ngIf="cocktail.strIngredient4">{{ truncateText(cocktail.strIngredient3, 12) }}</p>
-
-    <p *ngIf="cocktail.strIngredient4">{{ truncateText(cocktail.strIngredient4, 12) }}</p>
-    <p *ngIf="cocktail.strIngredient5">{{ truncateText(cocktail.strIngredient5, 12) }}</p>
-    <p *ngIf="cocktail.strIngredient6">{{ truncateText(cocktail.strIngredient6, 12) }}</p>
+  <div class="twoColumns">
+    <p *ngFor="let ingredient of getIngredients(cocktail)" class="clickable"
+       [routerLink]="'/juxbar/detailledingredient/' + ingredient">{{ ingredient }}</p>
   </div>
   <p class="instructions">{{ truncateText(cocktail.strInstructions, 75) }}</p>
 </div>

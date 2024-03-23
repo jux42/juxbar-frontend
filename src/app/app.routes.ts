@@ -10,7 +10,6 @@ export const routes: Routes = [
   {path: '', component: LandingPageComponent},
   {path: 'juxbar', component: CocktailListComponent},
   {path: 'juxbar/onecocktail/:id', component: SingleCocktailComponent},
-  {path: 'juxbar/ingredient/:strIngredient', component: IngredientComponent},
   {path: 'juxbar/detailledingredient/:strIngredient', component: SingleIngredientComponent },
   {path: 'juxbar/ingredients', component: IngredientListComponent},
 

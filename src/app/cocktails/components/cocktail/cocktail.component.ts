@@ -3,8 +3,8 @@ import {Cocktail} from "../../../core/models/cocktail";
 import {HttpClient} from "@angular/common/http";
 import {CocktailService} from "../../../core/services/cocktailService";
 import {map, Observable, tap} from "rxjs";
-import {AsyncPipe, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
+import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-cocktail',
@@ -13,7 +13,9 @@ import {ActivatedRoute, Router} from "@angular/router";
     AsyncPipe,
     TitleCasePipe,
     NgIf,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './cocktail.component.html',
   styleUrl: './cocktail.component.css'
@@ -42,5 +44,17 @@ export class CocktailComponent implements OnInit{
   }
   goToCocktail(){
     this.router.navigateByUrl(`juxbar/onecocktail/${this.cocktail.id}`)
+  }
+  getIngredients(cocktail: any): string[] {
+    let ingredients: string[] = [];
+
+    for (let i = 1; i <= 6; i++) {
+      const ingredient = cocktail[`strIngredient${i}`];
+      if (ingredient) {
+        ingredients.push(ingredient);
+      }
+    }
+
+    return ingredients;
   }
 }

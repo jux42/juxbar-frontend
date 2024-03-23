@@ -1,14 +1,10 @@
 <div *ngIf="cocktail"  class="cocktail-card">
+  <button (click)="goBack()">Retour</button>
   <div class="thisFlex"><h2>{{ cocktail.strDrink | titlecase }}</h2>
   <img *ngIf="cocktail" [src]="'http://localhost:8080/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"/></div>
-  <div class="twoColumns" >
-  <p>{{ cocktail.strIngredient1 }}</p>
-  <p>{{ cocktail.strIngredient2 }}</p>
-  <p >{{ cocktail.strIngredient3 }}</p>
-
-  <p *ngIf="cocktail.strIngredient4">{{ cocktail.strIngredient4 }}</p>
-  <p *ngIf="cocktail.strIngredient5">{{ cocktail.strIngredient5 }}</p>
-  <p *ngIf="cocktail.strIngredient6">{{ cocktail.strIngredient6 }}</p>
+  <div class="twoColumns">
+    <p *ngFor="let ingredient of getIngredients(cocktail)" class="clickable"
+       [routerLink]="'/juxbar/detailledingredient/' + ingredient">{{ ingredient }}</p>
   </div>
   <p class="instructions">{{ cocktail.strInstructions }}</p>
   </div>
