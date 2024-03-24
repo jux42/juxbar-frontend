@@ -16,6 +16,6 @@ export class LandingPageComponent implements OnInit {
   }
 
   onGotToCocktails() {
-    this.router.navigateByUrl('juxbar');
+    this.router.navigateByUrl('juxbar/listall');
   }
 }

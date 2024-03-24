@@ -1,15 +1,18 @@
 import {Component, Input} from '@angular/core';
-import {NgIf, TitleCasePipe} from "@angular/common";
+import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IngredientService} from "../../core/services/ingredientService";
+import {BoldWordsPipe} from "../../core/services/bold-words.pipe";
 
 @Component({
   selector: 'app-single-ingredient',
   standalone: true,
   imports: [
     NgIf,
-    TitleCasePipe
+    TitleCasePipe,
+    NgForOf,
+    BoldWordsPipe
   ],
   templateUrl: './single-ingredient.component.html',
   styleUrl: './single-ingredient.component.css'
@@ -30,6 +33,8 @@ export class SingleIngredientComponent {
     )
 
   }
-
+goBack(){
+    this.router.navigateByUrl("/juxbar/listall")
+}
 
 }

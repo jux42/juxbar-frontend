@@ -5,7 +5,7 @@ header {
   width: 99%;
   z-index: 1000;
   text-align: start;
-  background-color: rgba(21, 64, 79);
+  background-image: linear-gradient(#235c71 0, #15404f 100%);
   margin-bottom: 20px;
   padding: 10px;
   /*background-image: radial-gradient(circle, rgba(158,146,87,1) 0%, rgba(21,64,79,1) 50%);*/
@@ -13,5 +13,7 @@ header {
 }
 h1{
   color: wheat;
-  font-weight: 250;
+  font-weight: 400;
+  cursor: pointer;
+  width: fit-content;
 }

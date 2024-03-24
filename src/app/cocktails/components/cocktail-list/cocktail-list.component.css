@@ -5,3 +5,15 @@
   justify-content: space-around;
   align-items: center;
 }
+.cocktailForm{
+display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+.formGroup{
+  display: flex;
+  flex-direction: column;
+}

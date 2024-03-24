@@ -3,15 +3,13 @@
   padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
 
   border-radius: 5% 10%;
-  color: antiquewhite;
+  color: palegoldenrod;
 
-  border-color: burlywood;
-  border-style: groove;
   width: 250px;
-  height: 450px;
+  height: 400px;
   margin: 15px;
 
-  background: #15404f;
+  background-image: linear-gradient(#235c71 0, #15404f 100%);
   box-shadow: 5px 5px 20px black;
 }
 .thisFlex {
@@ -21,19 +19,22 @@
   justify-content: space-around;
   align-items: center;
 }
-.twoColumns {
-  text-align: center;
-  padding-top: 15px;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Divise l'espace disponible en deux colonnes de taille égale */
-  gap: 15px; /* Ajoute un petit espace entre les colonnes et les lignes */
+.ingBlock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Ajoute un peu d'espace entre les éléments */
+  margin-top: 50px;
+  justify-content: center;
+
 }
 
 .ingredient{
-
-  font-family: "Roboto Thin", sans-serif;
-  color: linen;
-  text-align: left;
+  text-align: justify;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: wheat;
+  padding: 0; /* Ajustez selon vos besoins */
+  font-size: 1em;
 }
 
 p {
@@ -42,6 +43,9 @@ p {
 }
 img {
 
+  /*filter: grayscale(100%) blur(50%);*/
+  -webkit-filter: grayscale(55%) blur(5px);
+  -webkit-transition: all 0.8s ease;
   width: 200px;
   height: 200px;
   margin-left: auto;
@@ -49,14 +53,18 @@ img {
   display: block;
   border-radius: 15%;
 }
+img:hover{
+  /*filter: grayscale(0%);*/
+  -webkit-filter: grayscale(0%) blur(0px) ;
 
-.instructions {
-  font-weight: bold;
-  position: absolute;
-  bottom: 10px; /* Ajustez selon le besoin pour la distance au bas du conteneur */
-  left: 0;
-  right: 0;
-  padding: 0 15px; /* Ajustez pour le padding intérieur */
-  text-align: center; /* Centre le texte horizontalement */
+  -ms-transform: scale(1.2);
+  transform: scale(1.2) ;
+  transition: 0.3s ease;
 }
+
+
+
+
+
+
 

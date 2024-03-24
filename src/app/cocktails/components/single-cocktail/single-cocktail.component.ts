@@ -5,18 +5,20 @@ import {CocktailService} from "../../../core/services/cocktailService";
 import {map, Observable, tap} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {BoldWordsPipe} from "../../../core/services/bold-words.pipe";
 
 @Component({
   selector: 'app-single-cocktail',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    TitleCasePipe,
-    NgIf,
-    NgOptimizedImage,
-    RouterLink,
-    NgForOf
-  ],
+    imports: [
+        AsyncPipe,
+        TitleCasePipe,
+        NgIf,
+        NgOptimizedImage,
+        RouterLink,
+        NgForOf,
+        BoldWordsPipe
+    ],
   templateUrl: './single-cocktail.component.html',
   styleUrl: './single-cocktail.component.css'
 })
@@ -47,7 +49,7 @@ constructor(private cocktailService: CocktailService, private route: ActivatedRo
   }
 
   goBack(){
-  this.router.navigateByUrl('juxbar');
+  this.router.navigateByUrl('juxbar/listall');
   }
   getIngredients(cocktail: any): string[] {
     let ingredients: string[] = [];
