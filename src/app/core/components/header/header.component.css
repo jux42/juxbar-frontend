@@ -2,13 +2,14 @@
 header {
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 99%;
   z-index: 1000;
   text-align: start;
-  background-color: rgba(21, 64, 79, 0.9);
+  background-color: rgba(21, 64, 79);
   margin-bottom: 20px;
   padding: 10px;
-
+  /*background-image: radial-gradient(circle, rgba(158,146,87,1) 0%, rgba(21,64,79,1) 50%);*/
+  opacity: 0.9;
 }
 h1{
   color: wheat;

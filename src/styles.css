@@ -1,3 +1,12 @@
 .clickable{
   cursor: pointer;
 }
+body{
+  background-image: radial-gradient(circle, #15404f 0%, #466b6a 0%, #819688 , #bfc2b1 70%, linen 100%);
+
+}
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+
+

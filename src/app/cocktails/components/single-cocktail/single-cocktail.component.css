@@ -6,9 +6,12 @@
   width: 600px;
   height: 800px;
   margin: 30px;
-  border: 0.1em solid;
 
-  background-color: rgba(199, 174, 157, 0.8);
+  color: antiquewhite;
+
+  border-color: burlywood;
+  border-style: groove;
+  background: #15404f;
   box-shadow: 5px 5px 20px black;
 }
 .thisFlex {
