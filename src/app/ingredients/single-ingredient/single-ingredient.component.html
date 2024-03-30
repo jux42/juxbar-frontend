@@ -4,7 +4,7 @@
 <div  class="ingredient-card" *ngIf="ingredient">
   <div class="thisFlex"><h2>{{ ingredient.strIngredient | titlecase }}</h2>
     <div>
-    <img class="pic" [src]="'http://localhost:8080/ingredient/'
+    <img class="pic" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
    + ingredient.strIngredient + '/image'" [alt]="ingredient.strIngredient">
   </div>
   </div>

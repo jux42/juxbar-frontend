@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cocktail} from "../../../core/models/cocktail";
-import {HttpClient} from "@angular/common/http";
 import {CocktailService} from "../../../core/services/cocktailService";
-import {map, Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {BoldWordsPipe} from "../../../core/services/bold-words.pipe";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-single-cocktail',
@@ -65,4 +65,5 @@ constructor(private cocktailService: CocktailService, private route: ActivatedRo
   }
 
   protected readonly RouterLink = RouterLink;
+  protected readonly environment = environment;
 }

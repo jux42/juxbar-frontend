@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cocktail} from "../../../core/models/cocktail";
-import {HttpClient} from "@angular/common/http";
 import {CocktailService} from "../../../core/services/cocktailService";
-import {map, Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-cocktail',
@@ -57,4 +57,6 @@ export class CocktailComponent implements OnInit{
 
     return ingredients;
   }
+
+  protected readonly environment = environment;
 }

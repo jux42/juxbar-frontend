@@ -52,7 +52,11 @@ export class CocktailListComponent implements OnInit{
       startWith({ strDrink: '', strFirstIngredient: '' , strSecondIngredient: '', strThirdIngredient: ''}),
       debounceTime(400),
       distinctUntilChanged(),
-      map(formValue => this.filterCocktails(formValue.strDrink, [formValue.strFirstIngredient, formValue.strSecondIngredient, formValue.strThirdIngredient] )),
+      map(formValue => this.filterCocktails(formValue.strDrink, [
+        formValue.strFirstIngredient,
+        formValue.strSecondIngredient,
+        formValue.strThirdIngredient
+      ] )),
     );
   }
 

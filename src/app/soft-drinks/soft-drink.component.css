@@ -1,4 +1,4 @@
-.cocktail-card {
+.softDrink-card {
   position: relative; /* Permet le positionnement absolu des éléments enfants par rapport à celui-ci */
   padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
 

@@ -4,6 +4,7 @@ import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IngredientService} from "../../core/services/ingredientService";
 import {BoldWordsPipe} from "../../core/services/bold-words.pipe";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-single-ingredient',
@@ -37,4 +38,5 @@ goBack(){
     this.router.navigateByUrl("/juxbar/listall")
 }
 
+  protected readonly environment = environment;
 }

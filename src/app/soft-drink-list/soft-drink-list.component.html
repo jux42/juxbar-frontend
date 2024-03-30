@@ -1,0 +1,30 @@
+<form class="softDrinkForm" [formGroup]="softDrinkForm">
+  <div class="formGroup">
+    <label for="strDrink">Nom</label>
+    <input formControlName="strDrink" id="strDrink" type="text">
+  </div>
+  <div class="formGroup">
+    <label for="strFirstIngredient">Ingrédient</label>
+    <input formControlName="strFirstIngredient" id="strFirstIngredient">
+  </div>
+  <div class="formGroup">
+    <label for="strSecondIngredient">Ingrédient</label>
+    <input formControlName="strSecondIngredient" id="strSecondIngredient">
+  </div>
+  <div class="formGroup">
+    <label for="strThirdIngredient">Ingrédient</label>
+    <input formControlName="strThirdIngredient" id="strThirdIngredient">
+  </div>
+</form>
+
+<div class="thisFlex">
+  <ng-container *ngIf="softDrinks$ | async as softDrinks">
+    <app-soft-drink *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
+  </ng-container>
+</div>
+
+
+
+<div class="thisFlex">
+  <app-soft-drink *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
+</div>

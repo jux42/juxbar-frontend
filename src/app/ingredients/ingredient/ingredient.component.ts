@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Ingredient} from "../../core/models/ingredient";
 import {NgIf, TitleCasePipe} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
-import {IngredientService} from "../../core/services/ingredientService";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-ingredient',
@@ -18,7 +17,7 @@ export class IngredientComponent implements OnInit{
 
   @Input() ingredient!: Ingredient;
 
-  constructor(private router: Router, private ingredientService: IngredientService, private route: ActivatedRoute  ) {
+  constructor( ) {
 
   }
 
@@ -27,7 +26,9 @@ export class IngredientComponent implements OnInit{
 
 
     }
-  }
+
+  protected readonly environment = environment;
+}
 
 
 
