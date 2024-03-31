@@ -6,7 +6,6 @@ import {Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {environment} from "../../../../environments/environment";
 
-
 @Component({
   selector: 'app-soft-drink',
   standalone: true,
@@ -21,21 +20,22 @@ import {environment} from "../../../../environments/environment";
   styleUrl: './soft-drink.component.css'
 })
 
+export class SoftDrinkComponent implements OnInit {
 
-  export class SoftDrinkComponent implements OnInit{
-
-  @Input()   softDrink !: SoftDrink;
+  @Input() softDrink !: SoftDrink;
   softDrink$!: Observable<SoftDrink>;
   imageData!: Response;
-  id!:number;
+  id!: number;
+  @Output() elementVisible = new EventEmitter<SoftDrink>();
+  protected readonly SoftDrink = SoftDrink;
+  protected readonly environment = environment;
+
   constructor(private softDrinkService: SoftDrinkService, private router: Router) {
   }
 
   ngOnInit() {
 
-
   }
-
 
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
@@ -44,7 +44,8 @@ import {environment} from "../../../../environments/environment";
       return text;
     }
   }
-  goToSoftDrink(){
+
+  goToSoftDrink() {
     window.scrollTo({
       top: 0,
       left: 0,
@@ -54,6 +55,7 @@ import {environment} from "../../../../environments/environment";
     this.router.navigateByUrl(`juxbar/onesoftdrink/${this.softDrink.id}`);
 
   }
+
   getIngredients(softDrink: any): string[] {
     let ingredients: string[] = [];
 
@@ -66,10 +68,4 @@ import {environment} from "../../../../environments/environment";
 
     return ingredients;
   }
-
-
-
-  protected readonly SoftDrink = SoftDrink;
-  protected readonly environment = environment;
-  @Output() elementVisible = new EventEmitter<SoftDrink>();
 }

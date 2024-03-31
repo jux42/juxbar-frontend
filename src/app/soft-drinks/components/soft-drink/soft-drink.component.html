@@ -1,10 +1,11 @@
 <div *ngIf="softDrink" class="softDrink-card ">
-  <div class="thisFlex"><h3>{{ truncateText(softDrink.strDrink | titlecase, 20)}}</h3>
-    <img class="clickable" (click)="goToSoftDrink()"
-         *ngIf="softDrink" [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"/></div>
+  <div class="thisFlex"><h3>{{ truncateText(softDrink.strDrink | titlecase, 20) }}</h3>
+    <img (click)="goToSoftDrink()" *ngIf="softDrink"
+         [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
+         class="clickable"/></div>
   <div class="ingBlock">
     <ng-container *ngFor="let ingredient of getIngredients(softDrink); let i = index; let last = last;">
-      <p class="ingredient clickable" [routerLink]="'/juxbar/detailledingredient/' + ingredient">
+      <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable">
         {{ ingredient }}<span *ngIf="!last">, </span>
       </p>
     </ng-container>

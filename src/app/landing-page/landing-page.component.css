@@ -1,33 +1,36 @@
-.greetings{
+.greetings {
   display: flex;
   flex-direction: column;
 
 }
 
-h1{
+h1 {
   background-color: transparent;
   font-size: 5em;
   margin-top: 300px;
   color: wheat;
   text-align: center;
 }
-.to{
-color: burlywood;
+
+.to {
+  color: burlywood;
 
 }
 
-.juxbar{
+.juxbar {
   color: goldenrod;
 }
-.buttonContainer{
+
+.buttonContainer {
   display: flex;
   justify-content: center;
 
 }
 
-.ButtonOne{
+.ButtonOne {
   margin-right: 10px;
 }
-.ButtonTwo{
+
+.ButtonTwo {
   margin-left: 10px;
 }

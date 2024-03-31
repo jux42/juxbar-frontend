@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SingleIngredientComponent } from './single-ingredient.component';
+import {SingleIngredientComponent} from './single-ingredient.component';
 
 describe('SingleIngredientComponent', () => {
   let component: SingleIngredientComponent;
@@ -10,8 +10,8 @@ describe('SingleIngredientComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SingleIngredientComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SingleIngredientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

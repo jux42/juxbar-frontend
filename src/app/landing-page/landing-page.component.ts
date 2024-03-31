@@ -6,7 +6,7 @@ interface OnInit {
 }
 
 @Component({
-  animations : [slideInAnimation],
+  animations: [slideInAnimation],
   selector: 'app-landing-page',
   standalone: true,
   imports: [],
@@ -20,6 +20,7 @@ export class LandingPageComponent implements OnInit {
   onGoToCocktails() {
     this.router.navigateByUrl('juxbar/listall');
   }
+
   onGoToSoftDrinks() {
     this.router.navigateByUrl('juxbar/listallsofts');
   }

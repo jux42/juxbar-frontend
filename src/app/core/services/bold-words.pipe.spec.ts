@@ -1,4 +1,4 @@
-import { BoldWordsPipe } from './bold-words.pipe';
+import {BoldWordsPipe} from './bold-words.pipe';
 
 describe('BoldWordsPipe', () => {
   it('create an instance', () => {

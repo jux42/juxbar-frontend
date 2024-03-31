@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SingleSoftDrinkComponent } from './single-soft-drink.component';
+import {SingleSoftDrinkComponent} from './single-soft-drink.component';
 
 describe('SingleSoftDrinkComponent', () => {
   let component: SingleSoftDrinkComponent;
@@ -10,8 +10,8 @@ describe('SingleSoftDrinkComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SingleSoftDrinkComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SingleSoftDrinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

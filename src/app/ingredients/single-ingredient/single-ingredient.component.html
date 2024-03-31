@@ -1,23 +1,23 @@
 <div class="mainFlex">
   <button (click)="goBack()">Retour</button>
 
-<div  class="ingredient-card" *ngIf="ingredient">
-  <div class="thisFlex"><h3>{{ ingredient.strIngredient | titlecase }}</h3>
-    <div>
-    <img class="pic" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
-   + ingredient.strIngredient + '/image'" [alt]="ingredient.strIngredient">
-  </div>
-  </div>
+  <div *ngIf="ingredient" class="ingredient-card">
+    <div class="thisFlex"><h3>{{ ingredient.strIngredient | titlecase }}</h3>
+      <div>
+        <img [alt]="ingredient.strIngredient" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
+   + ingredient.strIngredient + '/image'" class="pic">
+      </div>
+    </div>
   </div>
   <div class="twoColumns">
-    <div >
-      <h2 *ngIf=!ingredient.strDescription>This is some {{ingredient.strIngredient}}</h2>
-      <p [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"
-         *ngIf=ingredient.strDescription>{{ingredient.strDescription}}</p>
+    <div>
+      <h2 *ngIf=!ingredient.strDescription>This is some {{ ingredient.strIngredient }}</h2>
+      <p
+        *ngIf=ingredient.strDescription
+        [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']">{{ ingredient.strDescription }}</p>
 
 
-
-  </div>
+    </div>
   </div>
 
 

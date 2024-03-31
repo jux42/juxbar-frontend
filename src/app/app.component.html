@@ -1,4 +1,4 @@
 <app-header></app-header>
-<div class="route-content" [@routeAnimation]="prepareRoute(outlet)">
+<div [@routeAnimation]="prepareRoute(outlet)" class="route-content">
   <router-outlet #outlet="outlet"></router-outlet>
 </div>

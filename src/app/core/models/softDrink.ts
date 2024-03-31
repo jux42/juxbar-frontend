@@ -1,17 +1,16 @@
 export class SoftDrink {
 
-
   id !: number;
 
   idDrink!: string;
 
   strDrink!: string;
 
-  strDrinkThumb !:string;
+  strDrinkThumb !: string;
 
   strInstructions !: string;
 
-  strIngredient1 !:string;
+  strIngredient1 !: string;
 
   strIngredient2!: string;
 
@@ -21,9 +20,8 @@ export class SoftDrink {
 
   strIngredient5 !: string;
 
-  strIngredient6 !:string;
+  strIngredient6 !: string;
 
-  strIngredient7 !:string;
-
+  strIngredient7 !: string;
 
 }

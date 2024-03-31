@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SoftDrinkListComponent } from './soft-drink-list.component';
+import {SoftDrinkListComponent} from './soft-drink-list.component';
 
 describe('SoftDrinkListComponent', () => {
   let component: SoftDrinkListComponent;
@@ -10,7 +10,7 @@ describe('SoftDrinkListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SoftDrinkListComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SoftDrinkListComponent);
     component = fixture.componentInstance;

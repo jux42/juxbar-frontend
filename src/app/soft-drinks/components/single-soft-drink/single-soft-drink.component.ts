@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SoftDrink} from "../../../core/models/softDrink";
-import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SoftDrinkService} from "../../../core/services/softDrinkService";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {environment} from "../../../../environments/environment";
@@ -22,6 +22,7 @@ export class SingleSoftDrinkComponent implements OnInit {
   @Input() softDrink!: SoftDrink;
 
   id!: number;
+  protected readonly environment = environment;
 
   constructor(private router: Router, private route: ActivatedRoute, private softDrinkService: SoftDrinkService) {
   }
@@ -40,20 +41,19 @@ export class SingleSoftDrinkComponent implements OnInit {
       : text;
   }
 
-  getIngredients(softDrink: any) : string[]{
+  getIngredients(softDrink: any): string[] {
     let ingredients: string[] = [];
-  for (let i = 1 ; i<=7 ; i++){
+    for (let i = 1; i <= 7; i++) {
 
-    const ingredient = softDrink[`strIngredient${i}`];
-    if (ingredient) ingredients.push(ingredient);
-            }
+      const ingredient = softDrink[`strIngredient${i}`];
+      if (ingredient) ingredients.push(ingredient);
+    }
 
-return ingredients;
+    return ingredients;
   }
-  goBack(){
+
+  goBack() {
     this.router.navigateByUrl("/juxbar/listallsofts");
   }
-
-  protected readonly environment = environment;
 }
 

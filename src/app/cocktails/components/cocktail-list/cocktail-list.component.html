@@ -1,6 +1,5 @@
-
-<div *ngIf="cocktails">
-  <form class="cocktailForm" [formGroup]="cocktailForm">
+<div class="formBlock">
+  <form [formGroup]="cocktailForm" class="cocktailForm">
     <div class="formGroup">
       <label for="strDrink">Nom</label>
       <input formControlName="strDrink" id="strDrink" type="text">
@@ -26,7 +25,6 @@
 </div>
 
 
-
 <div class="thisFlex">
-<app-cocktail *ngFor="let cocktail of cocktails" [cocktail]="cocktail"></app-cocktail>
+  <app-cocktail *ngFor="let cocktail of cocktails" [cocktail]="cocktail"></app-cocktail>
 </div>

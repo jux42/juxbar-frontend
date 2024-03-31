@@ -11,16 +11,17 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
   protected readonly RouterLink = RouterLink;
 
   constructor(private router: Router) {
   }
+
   ngOnInit() {
   }
 
-  goHome(){
+  goHome() {
     this.router.navigateByUrl("/")
   }
 

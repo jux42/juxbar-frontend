@@ -10,26 +10,29 @@ import {environment} from "../../../../environments/environment";
 @Component({
   selector: 'app-single-cocktail',
   standalone: true,
-    imports: [
-        AsyncPipe,
-        TitleCasePipe,
-        NgIf,
-        NgOptimizedImage,
-        RouterLink,
-        NgForOf,
-        BoldWordsPipe
-    ],
+  imports: [
+    AsyncPipe,
+    TitleCasePipe,
+    NgIf,
+    NgOptimizedImage,
+    RouterLink,
+    NgForOf,
+    BoldWordsPipe
+  ],
   templateUrl: './single-cocktail.component.html',
   styleUrl: './single-cocktail.component.css'
 })
-export class SingleCocktailComponent implements OnInit{
+export class SingleCocktailComponent implements OnInit {
 
-  @Input()   cocktail !: Cocktail;
+  @Input() cocktail !: Cocktail;
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
-  id!:number;
-constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private router: Router) {
-}
+  id!: number;
+  protected readonly RouterLink = RouterLink;
+  protected readonly environment = environment;
+
+  constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
     const id = +this.route.snapshot.params['id'];
@@ -41,10 +44,10 @@ constructor(private cocktailService: CocktailService, private route: ActivatedRo
 
   }
 
-
-  goBack(){
-  this.router.navigateByUrl('juxbar/listall');
+  goBack() {
+    this.router.navigateByUrl('juxbar/listall');
   }
+
   getIngredients(cocktail: any): string[] {
     let ingredients: string[] = [];
 
@@ -57,7 +60,4 @@ constructor(private cocktailService: CocktailService, private route: ActivatedRo
 
     return ingredients;
   }
-
-  protected readonly RouterLink = RouterLink;
-  protected readonly environment = environment;
 }

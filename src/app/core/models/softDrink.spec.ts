@@ -1,4 +1,4 @@
-import { SoftDrink } from './softDrink';
+import {SoftDrink} from './softDrink';
 
 describe('SoftDrink', () => {
   it('should create an instance', () => {

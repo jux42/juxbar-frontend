@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
 import {Ingredient} from "../../core/models/ingredient";
 import {IngredientService} from "../../core/services/ingredientService";
 import {IngredientComponent} from "../ingredient/ingredient.component";
@@ -16,18 +15,17 @@ import {NgForOf} from "@angular/common";
   templateUrl: './ingredient-list.component.html',
   styleUrl: './ingredient-list.component.css'
 })
-export class IngredientListComponent implements OnInit{
-  @Input()   ingredient !: Ingredient;
+export class IngredientListComponent implements OnInit {
+  @Input() ingredient !: Ingredient;
   ingredients!: Ingredient[];
-  constructor(private ingredientService: IngredientService, private route: ActivatedRoute) {
+
+  constructor(private ingredientService: IngredientService) {
   }
 
   ngOnInit() {
-    this.ingredientService.getAllIngredients().subscribe(data=>
+    this.ingredientService.getAllIngredients().subscribe(data =>
       this.ingredients = [...data]
     )
   }
-
-
 
 }

@@ -13,21 +13,18 @@ import {environment} from "../../../environments/environment";
   templateUrl: './ingredient.component.html',
   styleUrl: './ingredient.component.css'
 })
-export class IngredientComponent implements OnInit{
+export class IngredientComponent implements OnInit {
 
   @Input() ingredient!: Ingredient;
+  protected readonly environment = environment;
 
-  constructor( ) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
 
-
-
-    }
-
-  protected readonly environment = environment;
+  }
 }
 
 

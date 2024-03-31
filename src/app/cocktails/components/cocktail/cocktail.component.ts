@@ -20,20 +20,20 @@ import {environment} from "../../../../environments/environment";
   templateUrl: './cocktail.component.html',
   styleUrl: './cocktail.component.css'
 })
-export class CocktailComponent implements OnInit{
+export class CocktailComponent implements OnInit {
 
-  @Input()   cocktail !: Cocktail;
+  @Input() cocktail !: Cocktail;
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
-  id!:number;
+  id!: number;
+  protected readonly environment = environment;
+
   constructor(private cocktailService: CocktailService, private router: Router) {
   }
 
   ngOnInit() {
 
-
-      }
-
+  }
 
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
@@ -42,7 +42,8 @@ export class CocktailComponent implements OnInit{
       return text;
     }
   }
-  goToCocktail(){
+
+  goToCocktail() {
     window.scrollTo({
       top: 0,
       left: 0,
@@ -50,6 +51,7 @@ export class CocktailComponent implements OnInit{
     });
     this.router.navigateByUrl(`juxbar/onecocktail/${this.cocktail.id}`)
   }
+
   getIngredients(cocktail: any): string[] {
     let ingredients: string[] = [];
 
@@ -62,6 +64,4 @@ export class CocktailComponent implements OnInit{
 
     return ingredients;
   }
-
-  protected readonly environment = environment;
 }
