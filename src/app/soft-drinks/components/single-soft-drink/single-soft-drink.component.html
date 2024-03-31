@@ -1,0 +1,17 @@
+<div class="mainFlex">
+  <button (click)="goBack()">Retour</button>
+
+  <div *ngIf="softDrink"  class="softDrink-card">
+    <div class="thisFlex"><h2>{{ softDrink.strDrink | titlecase }}</h2>
+      <img *ngIf="softDrink" [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="soft Image"/></div>
+    <div class="twoColumns">
+      <p *ngFor="let ingredient of getIngredients(softDrink)" class="clickable"
+         [routerLink]="'/juxbar/detailledingredient/' + ingredient">{{ ingredient }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="softDrink" class="instructions">
+    <div ><p class="instructions">{{ softDrink.strInstructions }}</p>
+    </div>
+  </div>
+</div>

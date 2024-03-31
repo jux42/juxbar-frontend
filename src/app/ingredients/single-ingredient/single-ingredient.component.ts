@@ -1,10 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IngredientService} from "../../core/services/ingredientService";
 import {BoldWordsPipe} from "../../core/services/bold-words.pipe";
 import {environment} from "../../../environments/environment";
+import {Location} from "@angular/common";
+import {last} from "rxjs";
 
 @Component({
   selector: 'app-single-ingredient',
@@ -18,10 +20,10 @@ import {environment} from "../../../environments/environment";
   templateUrl: './single-ingredient.component.html',
   styleUrl: './single-ingredient.component.css'
 })
-export class SingleIngredientComponent {
+export class SingleIngredientComponent implements OnInit{
   @Input() ingredient!: Ingredient;
 
-  constructor(private router: Router, private ingredientService: IngredientService, private route: ActivatedRoute  ) {
+  constructor(private location: Location, private ingredientService: IngredientService, private route: ActivatedRoute  ) {
 
   }
 
@@ -35,8 +37,8 @@ export class SingleIngredientComponent {
 
   }
 goBack(){
-    this.router.navigateByUrl("/juxbar/listall")
-}
+    this.location.back();
+  }
 
   protected readonly environment = environment;
 }

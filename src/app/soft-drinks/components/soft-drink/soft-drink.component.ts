@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {SoftDrink} from "../core/models/softDrink";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SoftDrink} from "../../../core/models/softDrink";
 import {Observable} from "rxjs";
-import {SoftDrinkService} from "../core/services/softDrinkService";
+import {SoftDrinkService} from "../../../core/services/softDrinkService";
 import {Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../../environments/environment";
+
 
 @Component({
   selector: 'app-soft-drink',
@@ -13,7 +14,8 @@ import {environment} from "../../environments/environment";
     NgForOf,
     NgIf,
     TitleCasePipe,
-    RouterLink
+    RouterLink,
+
   ],
   templateUrl: './soft-drink.component.html',
   styleUrl: './soft-drink.component.css'
@@ -43,7 +45,14 @@ import {environment} from "../../environments/environment";
     }
   }
   goToSoftDrink(){
-    this.router.navigateByUrl(`juxbar/onesoftDrink/${this.softDrink.id}`)
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+    this.router.navigateByUrl(`juxbar/onesoftdrink/${this.softDrink.id}`);
+
   }
   getIngredients(softDrink: any): string[] {
     let ingredients: string[] = [];
@@ -58,6 +67,9 @@ import {environment} from "../../environments/environment";
     return ingredients;
   }
 
+
+
   protected readonly SoftDrink = SoftDrink;
   protected readonly environment = environment;
+  @Output() elementVisible = new EventEmitter<SoftDrink>();
 }

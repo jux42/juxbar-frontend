@@ -1,14 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SoftDrink} from "../core/models/softDrink";
+import {SoftDrink} from "../../../core/models/softDrink";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, startWith} from "rxjs";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {SoftDrinkService} from "../core/services/softDrinkService";
-import {ActivatedRoute} from "@angular/router";
+import {SoftDrinkService} from "../../../core/services/softDrinkService";
+import {ActivatedRoute, RouterOutlet} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {CocktailComponent} from "../cocktails/components/cocktail/cocktail.component";
-import {SoftDrinkComponent} from "../soft-drinks/soft-drink.component";
+import {CocktailComponent} from "../../../cocktails/components/cocktail/cocktail.component";
+import {SoftDrinkComponent} from "../soft-drink/soft-drink.component";
+import {slideInAnimation} from "../../../animations";
 
 @Component({
+  animations : [slideInAnimation],
   selector: 'app-soft-drink-list',
   standalone: true,
   imports: [
@@ -20,6 +22,8 @@ import {SoftDrinkComponent} from "../soft-drinks/soft-drink.component";
     ReactiveFormsModule,
     SoftDrinkComponent
   ],
+
+
   templateUrl: './soft-drink-list.component.html',
   styleUrl: './soft-drink-list.component.css'
 })
@@ -80,5 +84,6 @@ export class SoftDrinkListComponent implements OnInit{
     }
     return false;
   }
+
 }
 

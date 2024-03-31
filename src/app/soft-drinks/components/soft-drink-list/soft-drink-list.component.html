@@ -1,3 +1,4 @@
+<div *ngIf="softDrinks" class="formBlock">
 <form class="softDrinkForm" [formGroup]="softDrinkForm">
   <div class="formGroup">
     <label for="strDrink">Nom</label>
@@ -16,7 +17,7 @@
     <input formControlName="strThirdIngredient" id="strThirdIngredient">
   </div>
 </form>
-
+</div>
 <div class="thisFlex">
   <ng-container *ngIf="softDrinks$ | async as softDrinks">
     <app-soft-drink *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
@@ -24,7 +25,3 @@
 </div>
 
 
-
-<div class="thisFlex">
-  <app-soft-drink *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
-</div>

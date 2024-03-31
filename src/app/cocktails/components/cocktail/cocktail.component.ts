@@ -43,6 +43,11 @@ export class CocktailComponent implements OnInit{
     }
   }
   goToCocktail(){
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
     this.router.navigateByUrl(`juxbar/onecocktail/${this.cocktail.id}`)
   }
   getIngredients(cocktail: any): string[] {

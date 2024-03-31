@@ -40,13 +40,7 @@ constructor(private cocktailService: CocktailService, private route: ActivatedRo
     });
 
   }
-  truncateText(text: string, maxLength: number): string {
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
-    } else {
-      return text;
-    }
-  }
+
 
   goBack(){
   this.router.navigateByUrl('juxbar/listall');

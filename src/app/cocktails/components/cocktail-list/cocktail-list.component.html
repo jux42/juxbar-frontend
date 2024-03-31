@@ -1,5 +1,5 @@
 
-
+<div *ngIf="cocktails">
   <form class="cocktailForm" [formGroup]="cocktailForm">
     <div class="formGroup">
       <label for="strDrink">Nom</label>
@@ -18,7 +18,7 @@
       <input formControlName="strThirdIngredient" id="strThirdIngredient">
     </div>
   </form>
-
+</div>
 <div class="thisFlex">
   <ng-container *ngIf="cocktails$ | async as cocktails">
     <app-cocktail *ngFor="let cocktail of cocktails" [cocktail]="cocktail"></app-cocktail>
