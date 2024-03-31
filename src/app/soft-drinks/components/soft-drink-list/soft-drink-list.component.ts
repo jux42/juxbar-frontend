@@ -8,9 +8,24 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {CocktailComponent} from "../../../cocktails/components/cocktail/cocktail.component";
 import {SoftDrinkComponent} from "../soft-drink/soft-drink.component";
 import {slideInAnimation} from "../../../animations";
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
-  animations: [slideInAnimation],
+  animations: [
+    slideInAnimation,
+    trigger('listAnimation', [
+      transition('* <=> *', [
+        query(':leave', [
+          stagger('30ms', animate('500ms ease-in', style({ transform: 'translateY(100%)', opacity: 0.5 })))
+        ], { optional: true }),
+        query(':enter', [
+          style({ transform: 'translateX(-100%)', opacity: 90 }),
+          stagger('30ms', animate('800ms 500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 })))
+        ], { optional: true })
+      ])
+    ])
+
+  ],
   selector: 'app-soft-drink-list',
   standalone: true,
   imports: [
@@ -29,12 +44,10 @@ import {slideInAnimation} from "../../../animations";
 export class SoftDrinkListComponent implements OnInit {
   @Input() softDrink !: SoftDrink;
   softDrinks$!: Observable<SoftDrink[]>;
-  softDrinks!: SoftDrink[];
   softDrinkForm!: FormGroup;
-  softDrinkFilter$!: Observable<SoftDrink>
   id!: number;
   private softDrinksSubject = new BehaviorSubject<SoftDrink[]>([]);
-
+  listLoaded: boolean = false;
   constructor(private softDrinkService: SoftDrinkService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
   }
 
@@ -48,7 +61,7 @@ export class SoftDrinkListComponent implements OnInit {
     });
 
     this.softDrinkService.getAllSoftDrinks().subscribe(data => {
-      this.softDrinksSubject.next(data);
+      this.softDrinksSubject.next(data)
 
     });
 
@@ -61,15 +74,19 @@ export class SoftDrinkListComponent implements OnInit {
         formValue.strSecondIngredient,
         formValue.strThirdIngredient
       ])),
+
     );
   }
 
   private filterSoftDrinks(searchText: string, searchIngredient: string[]): SoftDrink[] {
-    return this.softDrinksSubject.value.filter(softDrink => {
-      const textMatch = !searchText || softDrink.strDrink.toLowerCase().includes(searchText.toLowerCase());
-      const ingredientMatch = searchIngredient.every(searchIngredient => searchIngredient ? this.ingredientMatches(softDrink, searchIngredient) : true);
-      return textMatch && ingredientMatch;
-    });
+    return this.softDrinksSubject.value
+     .filter(softDrink => {
+       const textMatch = !searchText || softDrink.strDrink.toLowerCase().includes(searchText.toLowerCase());
+       const ingredientMatch = searchIngredient.every(ingredient =>
+         ingredient ? this.ingredientMatches(softDrink, ingredient) : true);
+       return textMatch && ingredientMatch;
+     })
+     .map(sofDrink => ({...sofDrink, _uniqueKey: Date.now() + Math.random()}));
   }
 
   private ingredientMatches(softDrink: SoftDrink, searchIngredient: string): boolean {

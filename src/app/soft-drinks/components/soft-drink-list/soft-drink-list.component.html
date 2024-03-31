@@ -1,5 +1,4 @@
-<div class="initialBlock">
-
+<ng-container *ngIf="softDrinks$ | async as softDrinks">
   <div class="formBlock">
     <form [formGroup]="softDrinkForm" class="softDrinkForm">
       <div class="formGroup">
@@ -20,10 +19,10 @@
       </div>
     </form>
   </div>
-  <div class="thisFlex">
-    <ng-container *ngIf="softDrinks$ | async as softDrinks">
-      <app-soft-drink *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
-    </ng-container>
-  </div>
-</div>
+  <div  class="thisFlex">
 
+      <app-soft-drink @listAnimation *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
+
+  </div>
+
+</ng-container>

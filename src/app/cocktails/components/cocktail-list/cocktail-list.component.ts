@@ -6,11 +6,29 @@ import {ActivatedRoute} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {CocktailComponent} from "../cocktail/cocktail.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {slideInAnimation} from "../../../animations";
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-cocktail-list',
   standalone: true,
+  animations: [
+    slideInAnimation,
+    trigger('listAnimation', [
+      transition('* <=> *', [
+        query(':leave', [
+          stagger('30ms', animate('500ms ease-in', style({ transform: 'translateY(100%)', opacity: 0.5 })))
+        ], { optional: true }),
+        query(':enter', [
+          style({ transform: 'translateX(-100%)', opacity: 90 }),
+          stagger('30ms', animate('800ms 500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 })))
+        ], { optional: true })
+      ])
+    ])
+
+  ],
   imports: [
+
     NgForOf,
     CocktailComponent,
     ReactiveFormsModule,
@@ -23,9 +41,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 export class CocktailListComponent implements OnInit {
   @Input() cocktail !: Cocktail;
   cocktails$!: Observable<Cocktail[]>;
-  cocktails!: Cocktail[];
   cocktailForm!: FormGroup;
-  cocktailFilter$!: Observable<Cocktail>
   id!: number;
   private cocktailsSubject = new BehaviorSubject<Cocktail[]>([]);
 
@@ -59,11 +75,14 @@ export class CocktailListComponent implements OnInit {
   }
 
   private filterCocktails(searchText: string, searchIngredient: string[]): Cocktail[] {
-    return this.cocktailsSubject.value.filter(cocktail => {
-      const textMatch = !searchText || cocktail.strDrink.toLowerCase().includes(searchText.toLowerCase());
-      const ingredientMatch = searchIngredient.every(searchIngredient => searchIngredient ? this.ingredientMatches(cocktail, searchIngredient) : true);
-      return textMatch && ingredientMatch;
-    });
+    return this.cocktailsSubject.value
+      .filter(cocktail => {
+        const textMatch = !searchText || cocktail.strDrink.toLowerCase().includes(searchText.toLowerCase());
+        const ingredientMatch = searchIngredient.every(ingredient =>
+          ingredient ? this.ingredientMatches(cocktail, ingredient) : true);
+        return textMatch && ingredientMatch;
+      })
+      .map(cocktail=> ({...cocktail, _uniqueKey: Date.now() + Math.random()}))
   }
 
   private ingredientMatches(cocktail: Cocktail, searchIngredient: string): boolean {
