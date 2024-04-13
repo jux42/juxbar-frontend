@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {SoftDrinksComponent} from './soft-drink.component';
+import {SoftDrinkComponent} from './soft-drink.component';
 
-describe('SoftDrinksComponent', () => {
-  let component: SoftDrinksComponent;
-  let fixture: ComponentFixture<SoftDrinksComponent>;
+describe('SoftDrinkComponent', () => {
+  let component: SoftDrinkComponent;
+  let fixture: ComponentFixture<SoftDrinkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SoftDrinksComponent]
+      imports: [SoftDrinkComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(SoftDrinksComponent);
+    fixture = TestBed.createComponent(SoftDrinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

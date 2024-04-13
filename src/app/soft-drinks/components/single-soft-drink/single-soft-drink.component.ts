@@ -15,7 +15,7 @@ import {environment} from "../../../../environments/environment";
     RouterLink
   ],
   templateUrl: './single-soft-drink.component.html',
-  styleUrl: './single-soft-drink.component.css'
+  styleUrl: './single-soft-drink.component.scss'
 })
 export class SingleSoftDrinkComponent implements OnInit {
 

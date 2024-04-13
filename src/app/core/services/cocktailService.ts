@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {environment} from "../../../environments/environment";
 
@@ -24,5 +24,12 @@ export class CocktailService {
     return this.http.get<Cocktail>(`http://${environment.apiUrl}/cocktail/${id}`);
 
   }
+getCocktailsByIngredient(ingredient: string): Observable<Cocktail[]>{
+
+    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`).pipe(
+      map(cocktails => cocktails.filter(cocktail=>
+      Object.values(cocktail).slice(0, 12).includes(ingredient)))
+    );
+}
 
 }

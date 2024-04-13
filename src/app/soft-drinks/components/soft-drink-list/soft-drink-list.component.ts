@@ -39,7 +39,7 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
   ],
 
   templateUrl: './soft-drink-list.component.html',
-  styleUrl: './soft-drink-list.component.css'
+  styleUrl: './soft-drink-list.component.scss'
 })
 export class SoftDrinkListComponent implements OnInit {
   @Input() softDrink !: SoftDrink;

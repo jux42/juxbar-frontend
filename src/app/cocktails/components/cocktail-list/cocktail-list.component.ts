@@ -36,7 +36,7 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
     NgIf
   ],
   templateUrl: './cocktail-list.component.html',
-  styleUrls: ['./cocktail-list.component.css']
+  styleUrls: ['./cocktail-list.component.scss']
 })
 export class CocktailListComponent implements OnInit {
   @Input() cocktail !: Cocktail;

@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
     TitleCasePipe,
   ],
   templateUrl: './ingredient.component.html',
-  styleUrl: './ingredient.component.css'
+  styleUrl: './ingredient.component.scss'
 })
 export class IngredientComponent implements OnInit {
 

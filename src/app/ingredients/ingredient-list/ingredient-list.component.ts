@@ -13,7 +13,7 @@ import {NgForOf} from "@angular/common";
     IngredientComponent
   ],
   templateUrl: './ingredient-list.component.html',
-  styleUrl: './ingredient-list.component.css'
+  styleUrl: './ingredient-list.component.scss'
 })
 export class IngredientListComponent implements OnInit {
   @Input() ingredient !: Ingredient;

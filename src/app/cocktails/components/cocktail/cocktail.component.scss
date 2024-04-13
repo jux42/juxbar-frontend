@@ -1,0 +1,74 @@
+.cocktail-card {
+  position: relative; /* Permet le positionnement absolu des éléments enfants par rapport à celui-ci */
+  padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
+
+  border-radius: 5% 10%;
+  color: palegoldenrod;
+
+  width: 250px;
+  height: 400px;
+  margin: 15px;
+
+  background-image: linear-gradient(#235c71 0, #15404f 100%);
+  box-shadow: 5px 5px 20px black;
+}
+
+.thisFlex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ingBlock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Ajoute un peu d'espace entre les éléments */
+  margin-top: 50px;
+  justify-content: center;
+
+}
+
+.ingredient {
+  text-align: justify;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: wheat;
+  padding: 0; /* Ajustez selon vos besoins */
+  font-size: 1em;
+}
+
+p {
+  margin: 0; /* Réinitialise les marges par défaut des paragraphes pour un meilleur contrôle */
+  padding: 0 15px; /* Ajuste le padding si nécessaire pour l'espacement à l'intérieur des cellules de la grille */
+}
+
+img {
+
+  /*filter: grayscale(100%) blur(50%);*/
+  -webkit-filter: grayscale(55%) blur(1px);
+  -webkit-transition: all 0.8s ease;
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 15%;
+}
+
+img:hover {
+  /*filter: grayscale(0%);*/
+  -webkit-filter: grayscale(0%) blur(0px);
+
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  transition: 0.3s ease;
+}
+
+
+
+
+
+
+

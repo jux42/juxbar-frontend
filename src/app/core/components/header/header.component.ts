@@ -9,7 +9,7 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
     RouterLinkActive
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
 

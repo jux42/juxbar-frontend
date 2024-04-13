@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,SAAU;EACR,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,YAAY;EAC7B,WAAW,EAAE,MAAM",
+"sources": ["ingredient.component.scss"],
+"names": [],
+"file": "ingredient.component.css"
+}

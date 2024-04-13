@@ -18,7 +18,7 @@ import {environment} from "../../../../environments/environment";
     RouterLink
   ],
   templateUrl: './cocktail.component.html',
-  styleUrl: './cocktail.component.css'
+  styleUrl: './cocktail.component.scss'
 })
 export class CocktailComponent implements OnInit {
 

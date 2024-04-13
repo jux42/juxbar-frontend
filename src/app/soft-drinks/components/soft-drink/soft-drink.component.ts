@@ -17,7 +17,7 @@ import {environment} from "../../../../environments/environment";
 
   ],
   templateUrl: './soft-drink.component.html',
-  styleUrl: './soft-drink.component.css'
+  styleUrl: './soft-drink.component.scss'
 })
 
 export class SoftDrinkComponent implements OnInit {

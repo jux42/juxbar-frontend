@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {slideInAnimation} from "../animations";
 
-interface OnInit {
-}
+
 
 @Component({
   animations: [slideInAnimation],
@@ -11,11 +10,13 @@ interface OnInit {
   standalone: true,
   imports: [],
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.css'
+  styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent implements OnInit {
   constructor(private router: Router) {
   }
+ngOnInit() {
+}
 
   onGoToCocktails() {
     this.router.navigateByUrl('juxbar/listall');

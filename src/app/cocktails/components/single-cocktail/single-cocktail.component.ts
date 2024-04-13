@@ -20,7 +20,7 @@ import {environment} from "../../../../environments/environment";
     BoldWordsPipe
   ],
   templateUrl: './single-cocktail.component.html',
-  styleUrl: './single-cocktail.component.css'
+  styleUrl: './single-cocktail.component.scss'
 })
 export class SingleCocktailComponent implements OnInit {
 

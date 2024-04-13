@@ -8,7 +8,7 @@ import {slideInAnimation} from "./animations";
   standalone: true,
   imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
   animations: [
     slideInAnimation
   ],

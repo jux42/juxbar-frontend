@@ -3,8 +3,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
-}
+  align-items: center; }
 
 .cocktailForm {
   display: flex;
@@ -12,16 +11,11 @@
   justify-content: flex-start;
   gap: 15px;
   margin-left: 30px;
-  margin-bottom: 30px;
-}
+  margin-bottom: 30px; }
 
 .formGroup {
   display: flex;
-  flex-direction: column;
-}
-.initialBlock {
-
-}
+  flex-direction: column; }
 
 .formBlock {
   display: flex;
@@ -36,10 +30,9 @@
   margin-left: 345px;
   z-index: 1001;
   text-align: center;
-  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  background-image: linear-gradient(#c1b18d 0, #9d9267 100%);
   margin-bottom: 20px;
-  opacity: 1;
-}
+  opacity: 1; }
 
 .thisFlex {
   position: relative;
@@ -47,8 +40,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
-}
+  align-items: center; }
 
 .softDrinkForm {
   display: flex;
@@ -56,12 +48,10 @@
   justify-content: flex-start;
   gap: 15px;
   margin-left: 30px;
-  margin-bottom: 30px;
-}
+  margin-bottom: 30px; }
 
 .formGroup {
-
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
+/*# sourceMappingURL=cocktail-list.component.css.map */

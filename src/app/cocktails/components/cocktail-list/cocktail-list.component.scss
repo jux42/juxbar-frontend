@@ -1,0 +1,67 @@
+.thisFlex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cocktailForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+.initialBlock {
+
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  color: darkslategray;
+  position: sticky;
+  top: 15px;
+  border-radius: 5px;
+  width: 46%;
+  height: 70px;
+  margin-left: 345px;
+  z-index: 1001;
+  text-align: center;
+  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  margin-bottom: 20px;
+  opacity: 1;
+}
+
+.thisFlex {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.softDrinkForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+
+  display: flex;
+  flex-direction: column;
+}
+
