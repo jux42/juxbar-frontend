@@ -1,27 +1,27 @@
 <ng-container *ngIf="cocktails$ | async as cocktails">
   <div class="formBlock">
     <form [formGroup]="cocktailForm" class="cocktailForm">
-  <div class="formGroup">
-      <label for="strDrink">Nom</label>
-      <input formControlName="strDrink" id="strDrink" type="text">
-    </div>
-    <div class="formGroup">
-      <label for="strFirstIngredient">Ingrédient</label>
-      <input formControlName="strFirstIngredient" id="strFirstIngredient">
-    </div>
-    <div class="formGroup">
-      <label for="strSecondIngredient">Ingrédient</label>
-      <input formControlName="strSecondIngredient" id="strSecondIngredient">
-    </div>
-    <div class="formGroup">
-      <label for="strThirdIngredient">Ingrédient</label>
-      <input formControlName="strThirdIngredient" id="strThirdIngredient">
-    </div></form>
+      <div class="formGroup">
+        <label for="strDrink">Nom</label>
+        <input formControlName="strDrink" id="strDrink" type="text">
+      </div>
+      <div class="formGroup">
+        <label for="strFirstIngredient">Ingrédient</label>
+        <input formControlName="strFirstIngredient" id="strFirstIngredient">
+      </div>
+      <div class="formGroup">
+        <label for="strSecondIngredient">Ingrédient</label>
+        <input formControlName="strSecondIngredient" id="strSecondIngredient">
+      </div>
+      <div class="formGroup">
+        <label for="strThirdIngredient">Ingrédient</label>
+        <input formControlName="strThirdIngredient" id="strThirdIngredient">
+      </div></form>
   </div>
 
-<div class="thisFlex">
+  <div class="thisFlex">
 
     <app-cocktail @listAnimation *ngFor="let cocktail of cocktails" [cocktail]="cocktail"></app-cocktail>
 
-</div>
+  </div>
 </ng-container>

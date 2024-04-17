@@ -56,4 +56,3 @@ export class SingleSoftDrinkComponent implements OnInit {
     this.router.navigateByUrl("/juxbar/listallsofts");
   }
 }
-

@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {CocktailListComponent} from "./cocktails/components/cocktail-list/cocktail-list.component";
 import {LandingPageComponent} from "./landing-page/landing-page.component";
 import {MainPageComponent} from "./main-page/main-page.component";
 import {SoftDrinkListComponent} from "./soft-drinks/components/soft-drink-list/soft-drink-list.component";
@@ -7,7 +6,8 @@ import {SoftDrinkListComponent} from "./soft-drinks/components/soft-drink-list/s
 export const routes: Routes = [
   {path: '', component: LandingPageComponent, data: {animation: 'LandingPage'}},
   {path: 'juxbar/mainpage', component: MainPageComponent, data: {animation: 'MainPage'}},
-  {path: 'juxbar/listall', component: CocktailListComponent, data: {animation: 'CocktailListPage'}},
+  {path: 'juxbar/listall', loadComponent: () => import('./cocktails/components/cocktail-list/cocktail-list.component')
+      .then(mod => mod.CocktailListComponent), data: {animation: 'CocktailListPage'}},
   {
     path: 'juxbar/onecocktail/:id',
     loadComponent: () => import('./cocktails/components/single-cocktail/single-cocktail.component')
@@ -29,4 +29,3 @@ export const routes: Routes = [
   }
 
 ];
-

@@ -80,13 +80,13 @@ export class SoftDrinkListComponent implements OnInit {
 
   private filterSoftDrinks(searchText: string, searchIngredient: string[]): SoftDrink[] {
     return this.softDrinksSubject.value
-     .filter(softDrink => {
-       const textMatch = !searchText || softDrink.strDrink.toLowerCase().includes(searchText.toLowerCase());
-       const ingredientMatch = searchIngredient.every(ingredient =>
-         ingredient ? this.ingredientMatches(softDrink, ingredient) : true);
-       return textMatch && ingredientMatch;
-     })
-     .map(sofDrink => ({...sofDrink, _uniqueKey: Date.now() + Math.random()}));
+      .filter(softDrink => {
+        const textMatch = !searchText || softDrink.strDrink.toLowerCase().includes(searchText.toLowerCase());
+        const ingredientMatch = searchIngredient.every(ingredient =>
+          ingredient ? this.ingredientMatches(softDrink, ingredient) : true);
+        return textMatch && ingredientMatch;
+      })
+      .map(sofDrink => ({...sofDrink, _uniqueKey: Date.now() + Math.random()}));
   }
 
   private ingredientMatches(softDrink: SoftDrink, searchIngredient: string): boolean {
@@ -100,4 +100,3 @@ export class SoftDrinkListComponent implements OnInit {
   }
 
 }
-

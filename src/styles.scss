@@ -50,13 +50,13 @@ button:hover {
     width: 150px;
   }
 }
-  @media screen and (max-width: 600px) {
-    button {
-      font-size: 11px;
-      height: 40px;
-      line-height: 40px;
-      width: 75px;
-    }
+@media screen and (max-width: 600px) {
+  button {
+    font-size: 11px;
+    height: 40px;
+    line-height: 40px;
+    width: 75px;
+  }
 
 
 }

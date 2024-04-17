@@ -26,14 +26,3 @@ export class IngredientComponent implements OnInit {
 
   }
 }
-
-
-
-
-
-
-
-
-
-
-

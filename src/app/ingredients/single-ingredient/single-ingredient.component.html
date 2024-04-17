@@ -3,27 +3,27 @@
 
   <div class="listContainer" *ngIf="cocktails$ | async as cocktails">
     <h3>Cocktails with this ingredient:</h3>
-      <p *ngIf="(cocktails.length === 0)" style="font-style: italic; text-align: center"> no cocktail with that.</p>
-      <ul class="threeColumnsRecap" style="list-style-type: none;">
-        <li *ngFor="let cocktail of cocktails">
-          <a class="clickable" (click)="goToCocktail(cocktail)">
-            <img class="preview" src="{{cocktail.strDrinkThumb}}/preview" alt="">
-          </a>
-        </li>
-      </ul>
-    </div>
+    <p *ngIf="(cocktails.length === 0)" style="font-style: italic; text-align: center"> no cocktail with that.</p>
+    <ul class="threeColumnsRecap" style="list-style-type: none;">
+      <li *ngFor="let cocktail of cocktails">
+        <a class="clickable" (click)="goToCocktail(cocktail)">
+          <img class="preview" src="{{cocktail.strDrinkThumb}}/preview" alt="">
+        </a>
+      </li>
+    </ul>
+  </div>
 
   <div class="listContainer" *ngIf="softDrinks$ | async as softDrinks">
     <h3>Softs with this ingredient:</h3>
     <p *ngIf="(softDrinks.length === 0)" style="font-style: italic; text-align: center"> no soft with that.</p>
 
-      <ul class="threeColumnsRecap" style="list-style-type: none;">
-        <li *ngFor="let softDrink of softDrinks">
-          <a class="clickable" (click)="goToSoftDrink(softDrink)">
-            <img class="preview" src="{{softDrink.strDrinkThumb}}/preview" alt="">
-          </a>
-        </li>
-      </ul>
+    <ul class="threeColumnsRecap" style="list-style-type: none;">
+      <li *ngFor="let softDrink of softDrinks">
+        <a class="clickable" (click)="goToSoftDrink(softDrink)">
+          <img class="preview" src="{{softDrink.strDrinkThumb}}/preview" alt="">
+        </a>
+      </li>
+    </ul>
 
   </div>
   <div *ngIf="ingredient" class="ingredient-card">
@@ -34,28 +34,28 @@
       </div>
     </div>
   </div>
-<div class="twoColumns">
-  <ng-container *ngIf="ingredient; else loading">
-    <div>
-      <!-- Condition pour vérifier s'il y a une description ou non -->
-      <ng-container *ngIf="ingredient.strDescription; then hasDescription else noDescription"></ng-container>
-    </div>
-  </ng-container>
+  <div class="twoColumns">
+    <ng-container *ngIf="ingredient; else loading">
+      <div>
+        <!-- Condition pour vérifier s'il y a une description ou non -->
+        <ng-container *ngIf="ingredient.strDescription; then hasDescription else noDescription"></ng-container>
+      </div>
+    </ng-container>
 
-  <!-- Template affiché si `ingredient` n'est pas encore chargé -->
-  <ng-template #loading>
-    <p>Loading...</p>
-  </ng-template>
+    <!-- Template affiché si `ingredient` n'est pas encore chargé -->
+    <ng-template #loading>
+      <p>Loading...</p>
+    </ng-template>
 
-  <!-- Template affiché si `ingredient.strDescription` existe -->
-  <ng-template #hasDescription>
-    <p [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"></p>
-  </ng-template>
+    <!-- Template affiché si `ingredient.strDescription` existe -->
+    <ng-template #hasDescription>
+      <p [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"></p>
+    </ng-template>
 
-  <!-- Template affiché s'il n'y a pas de description -->
-  <ng-template #noDescription>
-    <h2>This is some {{ ingredient.strIngredient }}</h2>
-  </ng-template>
+    <!-- Template affiché s'il n'y a pas de description -->
+    <ng-template #noDescription>
+      <h2>This is some {{ ingredient.strIngredient }}</h2>
+    </ng-template>
 
   </div>
 

@@ -1,4 +1,4 @@
-import {Component, input, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AsyncPipe, Location, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {Ingredient} from "../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,7 +9,7 @@ import {Cocktail} from "../../core/models/cocktail";
 import {SoftDrink} from "../../core/models/softDrink";
 import {CocktailService} from "../../core/services/cocktailService";
 import {SoftDrinkService} from "../../core/services/softDrinkService";
-import {filter, map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-single-ingredient',
@@ -46,8 +46,8 @@ export class SingleIngredientComponent implements OnInit {
 
     const strIngredient: string = this.route.snapshot.params['strIngredient'];
     this.ingredientService.getOneIngredientByName(strIngredient).subscribe(data => {
-      this.cocktails$ = this.cocktailService.getCocktailsByIngredient(strIngredient);
-      this.softDrinks$ = this.softDrinkService.getSoftDrinkByIngredient(strIngredient);
+        this.cocktails$ = this.cocktailService.getCocktailsByIngredient(strIngredient);
+        this.softDrinks$ = this.softDrinkService.getSoftDrinkByIngredient(strIngredient);
         this.ingredient = data;
 
       },
