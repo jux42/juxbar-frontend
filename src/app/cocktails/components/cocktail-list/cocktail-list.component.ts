@@ -3,11 +3,11 @@ import {Cocktail} from "../../../core/models/cocktail";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, startWith} from "rxjs";
 import {CocktailService} from "../../../core/services/cocktailService";
 import {ActivatedRoute} from "@angular/router";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {CocktailComponent} from "../cocktail/cocktail.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {slideInAnimation} from "../../../animations";
-import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {animate, animation, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-cocktail-list',
@@ -33,7 +33,8 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
     CocktailComponent,
     ReactiveFormsModule,
     AsyncPipe,
-    NgIf
+    NgIf,
+    NgClass
   ],
   templateUrl: './cocktail-list.component.html',
   styleUrls: ['./cocktail-list.component.scss']
@@ -43,6 +44,7 @@ export class CocktailListComponent implements OnInit {
   cocktails$!: Observable<Cocktail[]>;
   cocktailForm!: FormGroup;
   id!: number;
+  isLoading: boolean = true;
   private cocktailsSubject = new BehaviorSubject<Cocktail[]>([]);
 
   constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
@@ -59,6 +61,7 @@ export class CocktailListComponent implements OnInit {
 
     this.cocktailService.getAllCocktails().subscribe(data => {
       this.cocktailsSubject.next(data);
+      this.isLoading = false;
 
     });
 
@@ -94,4 +97,6 @@ export class CocktailListComponent implements OnInit {
     }
     return false;
   }
+
+  protected readonly animation = animation;
 }
