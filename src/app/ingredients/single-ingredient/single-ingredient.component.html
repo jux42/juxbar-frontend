@@ -23,7 +23,7 @@
       <li *ngFor="let softDrink of softDrinks">
         <a class="clickable" (click)="goToSoftDrink(softDrink)">
           <img class="preview fadeIn" [class.visible]="imageLoaded[softDrink.id]"
-          [src]="'http://' + [environment.apiUrl] + '/cocktail/' + softDrink.id + '/preview'" alt=""
+          [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/preview'" alt=""
           (load)="imageLoaded[softDrink.id] = true">
         </a>
       </li>
