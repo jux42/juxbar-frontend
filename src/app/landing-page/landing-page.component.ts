@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {slideInAnimation} from "../animations";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 
 
 
@@ -8,14 +11,25 @@ import {slideInAnimation} from "../animations";
   animations: [slideInAnimation],
   selector: 'app-landing-page',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf,
+    AsyncPipe,
+    NgForOf
+  ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
 export class LandingPageComponent implements OnInit {
-  constructor(private router: Router) {
+  appName!: string;
+  constructor(private router: Router,private http: HttpClient) {
   }
+
+
 ngOnInit() {
+  this.http.get(`http://${environment.apiUrl}/appname`, {responseType: 'text'}).subscribe(data => {
+    this.appName = data;
+  });
+
 }
 
   onGoToCocktails() {

@@ -30,6 +30,8 @@ export class SingleCocktailComponent implements OnInit {
   id!: number;
   protected readonly RouterLink = RouterLink;
   protected readonly environment = environment;
+  imageLoaded: {[key: string]: boolean} = {};
+
 
   constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private router: Router) {
   }

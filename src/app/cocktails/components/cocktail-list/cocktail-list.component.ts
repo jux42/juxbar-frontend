@@ -16,12 +16,9 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
     slideInAnimation,
     trigger('listAnimation', [
       transition('* <=> *', [
-        query(':leave', [
-          stagger('30ms', animate('500ms ease-in', style({ transform: 'translateY(100%)', opacity: 0.5 })))
-        ], { optional: true }),
         query(':enter', [
-          style({ transform: 'translateX(-100%)', opacity: 90 }),
-          stagger('30ms', animate('800ms 500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 })))
+          style({ transform: 'translateY(100%)', opacity: 0 }),
+          stagger('10ms', animate('700ms ease-in', style({ transform: 'translateY(0)', opacity: 1 })))
         ], { optional: true })
       ])
     ])

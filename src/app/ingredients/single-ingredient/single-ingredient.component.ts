@@ -28,6 +28,7 @@ export class SingleIngredientComponent implements OnInit {
   @Input() ingredient!: Ingredient;
   cocktails$!: Observable<Cocktail[]>;
   softDrinks$!: Observable<SoftDrink[]>;
+  imageLoaded: {[key: string]: boolean} = {};
 
 
   protected readonly environment = environment;

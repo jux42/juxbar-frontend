@@ -29,6 +29,8 @@ export class SoftDrinkComponent implements OnInit {
   @Output() elementVisible = new EventEmitter<SoftDrink>();
   protected readonly SoftDrink = SoftDrink;
   protected readonly environment = environment;
+  imageLoaded: {[key: string]: boolean} = {};
+
 
   constructor(private softDrinkService: SoftDrinkService, private router: Router) {
   }

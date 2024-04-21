@@ -27,6 +27,7 @@ export class CocktailComponent implements OnInit {
   imageData!: Response;
   id!: number;
   protected readonly environment = environment;
+  imageLoaded: {[key: string]: boolean} = {};
 
   constructor(private cocktailService: CocktailService, private router: Router) {
   }

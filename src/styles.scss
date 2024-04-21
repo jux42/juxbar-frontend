@@ -1,10 +1,11 @@
+
+
 .clickable {
   cursor: pointer;
 }
 
 body {
   background-size: cover;
-  //background: radial-gradient(circle at 50% 50%, rgba(95, 158, 160, 1) 0%, rgba(245, 222, 179, 1) 100%) no-repeat fixed;
   background: radial-gradient(circle at 50% 50%, rgba(35, 92, 113, 1) 0%, rgba(245, 222, 179, 1) 100%) no-repeat fixed;
 
   font-family: "Raleway", sans-serif;
@@ -59,4 +60,12 @@ button:hover {
   }
 
 
+}
+.fadeIn {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fadeIn.visible {
+  opacity: 1;
 }

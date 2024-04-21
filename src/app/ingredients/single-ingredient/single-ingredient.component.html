@@ -7,7 +7,9 @@
     <ul class="threeColumnsRecap" style="list-style-type: none;">
       <li *ngFor="let cocktail of cocktails">
         <a class="clickable" (click)="goToCocktail(cocktail)">
-          <img class="preview" src="{{cocktail.strDrinkThumb}}/preview" alt="">
+          <img class="preview fadeIn" [class.visible]="imageLoaded[cocktail.id]"
+               [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'" alt=""
+               (load)="imageLoaded[cocktail.id] = true">
         </a>
       </li>
     </ul>
@@ -20,7 +22,9 @@
     <ul class="threeColumnsRecap" style="list-style-type: none;">
       <li *ngFor="let softDrink of softDrinks">
         <a class="clickable" (click)="goToSoftDrink(softDrink)">
-          <img class="preview" src="{{softDrink.strDrinkThumb}}/preview" alt="">
+          <img class="preview fadeIn" [class.visible]="imageLoaded[softDrink.id]"
+          [src]="'http://' + [environment.apiUrl] + '/cocktail/' + softDrink.id + '/preview'" alt=""
+          (load)="imageLoaded[softDrink.id] = true">
         </a>
       </li>
     </ul>
@@ -29,8 +33,10 @@
   <div *ngIf="ingredient" class="ingredient-card">
     <div class="thisFlex"><h3>{{ ingredient.strIngredient | titlecase }}</h3>
       <div>
-        <img class="pic" [alt]="ingredient.strIngredient" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
-   + ingredient.strIngredient + '/image'">
+        <img class="pic fadeIn" [class.visible]="imageLoaded[ingredient.id]"
+             [alt]="ingredient.strIngredient" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
+              + ingredient.strIngredient + '/image'"
+             (load)="imageLoaded[ingredient.id] = true">>
       </div>
     </div>
   </div>

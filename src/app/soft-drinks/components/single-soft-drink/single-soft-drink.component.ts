@@ -20,6 +20,7 @@ import {environment} from "../../../../environments/environment";
 export class SingleSoftDrinkComponent implements OnInit {
 
   @Input() softDrink!: SoftDrink;
+  imageLoaded: {[key: string]: boolean} = {};
 
   id!: number;
   protected readonly environment = environment;
