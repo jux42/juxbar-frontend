@@ -1,8 +1,13 @@
 import {Routes} from '@angular/router';
 import {MainPageComponent} from "./main-page/main-page.component";
+import {LoginComponent} from "./core/login/login.component";
+import {ProfileComponent} from "./core/profile/profile.component";
 
 export const routes: Routes = [
+
   {path: '', loadComponent:()=>import('./landing-page/landing-page.component').then(mod=>mod.LandingPageComponent), data: {animation: 'LandingPage'}},
+  {path: 'login', component: LoginComponent, },
+  {path: 'juxbar/profile', component: ProfileComponent},
   {path: 'juxbar/mainpage', component: MainPageComponent, data: {animation: 'MainPage'}},
   {path: 'juxbar/listall', loadComponent: () => import('./cocktails/components/cocktail-list/cocktail-list.component')
       .then(mod => mod.CocktailListComponent), data: {animation: 'CocktailListPage'}},
