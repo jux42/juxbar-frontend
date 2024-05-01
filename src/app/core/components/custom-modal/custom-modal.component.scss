@@ -9,23 +9,41 @@
   background-color: rgba(0, 0, 0, 0.4);
 
   .custom-modal-content {
-    background-color: #fefefe;
+    background-color: wheat;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 40%;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
   }
 
-  .custom-modal-header,
+  .confirm{
+  font-style: italic;
+    font-weight: normal;
+    text-align: left;
+
+  }
+
+  .message{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+    color: darkblue;
+  }
+
   .custom-modal-body,
   .custom-modal-footer {
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5px;
   }
 
   .btn {
+
     cursor: pointer;
-    padding: 10px 20px;
-    margin: 5px;
+
+    margin: 25px 100px 5px;
   }
 }

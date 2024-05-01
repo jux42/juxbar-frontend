@@ -1,0 +1,20 @@
+
+<div *ngIf="personalCocktail" class="personalCocktail-card">
+  <div class="thisFlex"><h3>{{ truncateText(personalCocktail.strDrink | titlecase, 25) }}</h3>
+    <img *ngIf="personalCocktail"
+         [src]="personalCocktail.strDrinkThumb"
+         class="clickable fadeIn" [class.visible]="imageLoaded[personalCocktail.id]"
+         (load)="imageLoaded[personalCocktail.id] = true"
+    ></div>
+
+    <ng-container *ngFor="let ingredient of getIngredients(personalCocktail); let i = index; let last = last;">
+      <div class="ingBlock">
+      <p class="ingredient clickable">
+        {{ ingredient }}<span *ngIf="!last">, </span>
+      </p>
+  </div>
+    </ng-container>
+
+
+
+</div>

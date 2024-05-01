@@ -1,1 +1,9 @@
-<p>profile works!</p>
+<h1 *ngIf="loggedIn">Welcome to your personal page, {{userName}}</h1>
+<div *ngIf="isLoading"  ></div>
+<div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+<ng-container *ngIf="personalCocktails ">
+
+<app-personalCocktail @listAnimation *ngFor="let personalCocktail of personalCocktails" [personalCocktail]="personalCocktail"></app-personalCocktail>
+  </ng-container>
+</div>
+

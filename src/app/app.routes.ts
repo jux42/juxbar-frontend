@@ -10,7 +10,7 @@ export const routes: Routes = [
 
   {path: '', loadComponent:()=>import('./landing-page/landing-page.component').then(mod=>mod.LandingPageComponent), data: {animation: 'LandingPage'}},
   {path: 'login', component: LoginComponent, },
-  {path: 'juxbar/profile', component: ProfileComponent},
+  {path: 'juxbar/profile', component: ProfileComponent, data: {animation: 'ProfilePage'}},
   {path: 'juxbar/mainpage', component: MainPageComponent, data: {animation: 'MainPage'}},
   {path: 'juxbar/listall', component : CocktailListComponent, data: {animation: 'CocktailListPage'}},
   {
