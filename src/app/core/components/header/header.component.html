@@ -4,12 +4,13 @@
     <nav class="titles">
       <ng-container *ngIf="isLoggedIn | async; then loggedInBlock; else loggedOutBlock"></ng-container>
       <ng-template #loggedInBlock>
-        <a class="login">{{ username | async }}</a>
+        <a class="login">{{ username$ | async }}</a>
+        <a class="logout" (click)="goLogout()">logout</a>
       </ng-template>
       <ng-template #loggedOutBlock>
         <a class="login" routerLink="/login">Login</a>
       </ng-template>
-      <a class="logout" (click)="goLogout()">logout</a>
+
     </nav>
   </div>
 </header>

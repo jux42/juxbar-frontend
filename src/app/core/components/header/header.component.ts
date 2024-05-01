@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {AuthService} from "../../login/auth-service";
-import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -21,22 +20,25 @@ import {HttpClient} from "@angular/common/http";
 export class HeaderComponent implements OnInit {
 
   isLoggedIn = this.authService.isLoggedIn();
-  username = this.authService.getUsername();
+  username$ = this.authService.getUsername();
   protected readonly RouterLink = RouterLink;
 
   constructor(private router: Router, private authService: AuthService) {
-    this.authService.isLoggedIn().subscribe(loggedIn => {
-      console.log('Is logged in:', loggedIn);
+
+  }
+
+  ngOnInit() {
+    sessionStorage.getItem('username')
+    this.authService.isLoggedIn().subscribe(isLoggedIn => {
+      console.log('Is logged in:', isLoggedIn);
     });
     this.authService.getUsername().subscribe(username => {
       console.log('Current username:', username);
     });
+
   }
 
-  ngOnInit() {
-  }
-
-  goHome() {
+    goHome() {
     this.router.navigateByUrl("/")
   }
 
@@ -44,7 +46,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl("/login")
   }
   goLogout() {
-    this.authService.logout();
+     this.authService.logout();
   }
 
 }
