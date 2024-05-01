@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {AuthService} from "../../login/auth-service";
+import {CustomModalComponent} from "../custom-modal/custom-modal.component";
 
 
 @Component({
@@ -12,7 +13,8 @@ import {AuthService} from "../../login/auth-service";
     RouterLinkActive,
     NgIf,
     AsyncPipe,
-    NgForOf
+    NgForOf,
+    CustomModalComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = this.authService.isLoggedIn();
   username$ = this.authService.getUsername();
   protected readonly RouterLink = RouterLink;
+  showModal = false;
 
   constructor(private router: Router, private authService: AuthService) {
 
@@ -47,6 +50,17 @@ export class HeaderComponent implements OnInit {
   }
   goLogout() {
      this.authService.logout();
+  }
+
+  handleConfirmation(result: boolean) {
+    this.showModal = false;
+    if (result) {
+      console.log('User clicked OK');
+      this.goLogout()
+    } else {
+      console.log('User clicked Cancel');
+    }
+
   }
 
 }

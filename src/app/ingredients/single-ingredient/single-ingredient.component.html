@@ -6,8 +6,8 @@
     <p *ngIf="(cocktails.length === 0)" style="font-style: italic; text-align: center"> no cocktail with that.</p>
     <ul class="threeColumnsRecap" style="list-style-type: none;">
       <li *ngFor="let cocktail of cocktails">
-        <a class="clickable" (click)="goToCocktail(cocktail)">
-          <img class="preview fadeIn" [class.visible]="imageLoaded[cocktail.id]"
+        <a  class="clickable" (click)="goToCocktail(cocktail)">
+          <img *ngIf="cocktail" class="preview fadeIn" [class.visible]="imageLoaded[cocktail.id]"
                [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'" alt=""
                (load)="imageLoaded[cocktail.id] = true">
         </a>
@@ -22,7 +22,7 @@
     <ul class="threeColumnsRecap" style="list-style-type: none;">
       <li *ngFor="let softDrink of softDrinks">
         <a class="clickable" (click)="goToSoftDrink(softDrink)">
-          <img class="preview fadeIn" [class.visible]="imageLoaded[softDrink.id]"
+          <img *ngIf="softDrink" class="preview fadeIn" [class.visible]="imageLoaded[softDrink.id]"
           [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/preview'" alt=""
           (load)="imageLoaded[softDrink.id] = true">
         </a>

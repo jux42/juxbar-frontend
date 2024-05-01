@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from "@angular/router";
 
 export interface AuthRequest {
@@ -12,14 +12,12 @@ export interface AuthRequest {
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:8080/login';
-
   username = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
   loggedIn = new BehaviorSubject<boolean>(sessionStorage.getItem('isAuthenticated') === 'true');
+  private loginUrl = 'http://localhost:8080/login';
 
-
-
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   setLoginState(isAuthenticated: boolean) {
     this.loggedIn.next(isAuthenticated);
@@ -43,15 +41,17 @@ export class AuthService {
 
 
     // Assurez-vous que cette méthode retourne un Observable
-    return this.http.post(this.loginUrl, body.toString(), { headers, withCredentials: true, responseType: 'text' as 'json' });
+    return this.http.post(this.loginUrl, body.toString(), {
+      headers,
+      withCredentials: true,
+      responseType: 'text' as 'json'
+    });
   }
-
 
 
   getUsername(): Observable<string | null> {
     return this.username.asObservable();
   }
-
 
 
   isLoggedIn(): Observable<boolean> {
@@ -63,8 +63,9 @@ export class AuthService {
   }
 
   logout(): void {
+
     this.setLoginState(false)
     this.username.next('')
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

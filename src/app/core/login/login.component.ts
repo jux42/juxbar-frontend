@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.credentials).subscribe({
       next: () => {
         this.authService.setLoggedIn(true);
-        this.router.navigate(['/']); // Naviguer vers la page d'accueil après la connexion
+        this.router.navigate(['juxbar/profile']); // Naviguer vers la page d'accueil après la connexion
       },
       error: (error: any) => {
         console.error('Login failed', error);
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
 
 
   logout(): void {
+
 
     this.authService.logout();
   }

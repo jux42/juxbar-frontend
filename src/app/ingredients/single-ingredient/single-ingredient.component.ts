@@ -51,6 +51,7 @@ export class SingleIngredientComponent implements OnInit {
         this.softDrinks$ = this.softDrinkService.getSoftDrinkByIngredient(strIngredient);
         this.ingredient = data;
 
+
       },
     )
 
