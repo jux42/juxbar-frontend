@@ -44,6 +44,9 @@ export class SingleSoftDrinkComponent implements OnInit {
 
   getIngredients(softDrink: any): string[] {
     let ingredients: string[] = [];
+    if(!softDrink) {
+      return ingredients;
+    }
     for (let i = 1; i <= 7; i++) {
 
       const ingredient = softDrink[`strIngredient${i}`];

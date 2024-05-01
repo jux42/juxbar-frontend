@@ -15,14 +15,14 @@
 
 
   </div>
-  <div class="ingredientList clickable" >
+  <div *ngIf="cocktail" class="ingredientList clickable" >
     <div *ngFor="let ingredient of getIngredients(cocktail)" [routerLink]="'/juxbar/detailledingredient/' + ingredient"
     ><img class="pic fadeIn" [class.visible]="imageLoaded[ingredient]" [alt]="ingredient" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
    + ingredient + '/image'" (load)="imageLoaded[ingredient] = true"><p> {{ ingredient }} </p></div>
 
   </div>
 
-  <div class="instructions">
+  <div *ngIf="cocktail" class="instructions">
     <div><p class="instructions">{{ cocktail.strInstructions }}</p>
 
     </div>

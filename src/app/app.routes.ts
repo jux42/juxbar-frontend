@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {MainPageComponent} from "./main-page/main-page.component";
 import {LoginComponent} from "./core/login/login.component";
 import {ProfileComponent} from "./core/profile/profile.component";
+import {CocktailListComponent} from "./cocktails/components/cocktail-list/cocktail-list.component";
 
 export const routes: Routes = [
 
@@ -9,8 +10,7 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent, },
   {path: 'juxbar/profile', component: ProfileComponent},
   {path: 'juxbar/mainpage', component: MainPageComponent, data: {animation: 'MainPage'}},
-  {path: 'juxbar/listall', loadComponent: () => import('./cocktails/components/cocktail-list/cocktail-list.component')
-      .then(mod => mod.CocktailListComponent), data: {animation: 'CocktailListPage'}},
+  {path: 'juxbar/listall', component : CocktailListComponent, data: {animation: 'CocktailListPage'}},
   {
     path: 'juxbar/onecocktail/:id',
     loadComponent: () => import('./cocktails/components/single-cocktail/single-cocktail.component')

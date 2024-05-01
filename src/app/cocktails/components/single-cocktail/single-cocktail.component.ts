@@ -53,6 +53,10 @@ export class SingleCocktailComponent implements OnInit {
   getIngredients(cocktail: any): string[] {
     let ingredients: string[] = [];
 
+    if (!cocktail) {
+      return ingredients;
+    }
+
     for (let i = 1; i <= 6; i++) {
       const ingredient = cocktail[`strIngredient${i}`];
       if (ingredient) {
