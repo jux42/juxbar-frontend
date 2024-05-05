@@ -38,6 +38,12 @@ export class CocktailService {
     );
   }
 
+  getFavouriteCocktails(username: string): Observable<Cocktail[]> {
+    const url: string = `http://${environment.apiUrl}/favouritecocktails`;
+    const userRequest = new UserRequest(username);
+    return this.http.post<Cocktail[]>(url, userRequest);
+
+  }
 }
 @Injectable({
   providedIn: 'root'
@@ -55,7 +61,9 @@ export class PersonalCocktailService {
     return this.http.post<PersonalCocktail[]>(url, userRequest); // userRequest doit être un objet simple
   }
 
-  getOneCocktailById(id: number): Observable<PersonalCocktail> {
+
+
+  getOnePersonalCocktailById(id: number): Observable<PersonalCocktail> {
 
     return this.http.get<PersonalCocktail>(`http://${environment.apiUrl}/personalcocktail/${id}`);
 

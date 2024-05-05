@@ -18,6 +18,7 @@ export const routes: Routes = [
   },
   {path: 'juxbar/profile', component: ProfileComponent, data: {animation: 'ProfilePage'}},
   {path: 'juxbar/mainpage', component: MainPageComponent, data: {animation: 'MainPage'}},
+
   {path: 'juxbar/listall', component : CocktailListComponent, data: {animation: 'CocktailListPage'}},
   {
     path: 'juxbar/onecocktail/:id',

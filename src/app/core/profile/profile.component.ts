@@ -4,13 +4,31 @@ import {Router} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {PersonalCocktailComponent} from "../../personal-cocktail/personal-cocktail.component";
 import {CocktailComponent} from "../../cocktails/components/cocktail/cocktail.component";
-import {PersonalCocktailService} from "../services/cocktailService";
+import {CocktailService, PersonalCocktailService} from "../services/cocktailService";
 import {PersonalCocktail} from "../models/personal-cocktail";
+import {slideInAnimation} from "../../animations";
+import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {Observable} from "rxjs";
+import {Cocktail} from "../models/cocktail";
+import {SoftDrink} from "../models/softDrink";
+import {SoftDrinkService} from "../services/softDrinkService";
+
 
 @Component({
   selector: 'app-profile',
   standalone: true,
+  animations: [
+    slideInAnimation,
+    trigger('listAnimation', [
+      transition('* <=> *', [
+        query(':enter', [
+          style({ transform: 'translateY(100%)', opacity: 0 }),
+          stagger('10ms', animate('700ms ease-in', style({ transform: 'translateY(0)', opacity: 1 })))
+        ], { optional: true })
+      ])
+    ])
 
+  ],
   imports: [
     NgIf,
     PersonalCocktailComponent,
@@ -35,25 +53,29 @@ export class ProfileComponent implements OnInit{
 
   personalCocktails!: PersonalCocktail[];
 
+  favouriteCocktails!: Cocktail[];
+  favouriteCocktails$ !: Observable<Cocktail[]>
+  favouriteSoftDrinks$ !: Observable<SoftDrink[]>
 
-  constructor(private authService: AuthService, private router: Router, private personalCocktailService : PersonalCocktailService) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private personalCocktailService : PersonalCocktailService,
+              private cocktailService: CocktailService,
+              private softDrinkService: SoftDrinkService) {
   }
 
   ngOnInit() {
 
-    // this.checkLoggedIn();
-    console.log(this.loggedIn)
+    this.checkLoggedIn();
+
     if (this.loggedIn) {
+      console.log(this.loggedIn)
       this.loadPersonalCocktails();
+      this.loadFavouriteCocktails();
+
     }
 
-    // this.personalCocktails$ = this.personalCocktailsSubject.asObservable();
-    // this.personalCocktailService.getAllPersonalCocktails().subscribe(data => {
-    //   this.personalCocktailsSubject.next(data);
-    //   this.isLoading = false;
-    //   console.log(data)
 
-    // });
   }
 
   loadPersonalCocktails() {
@@ -76,18 +98,40 @@ export class ProfileComponent implements OnInit{
     });
   }
 
-  // checkLoggedIn(): void {
-  //   this.authService.isLoggedIn().subscribe(isLoggedIn => {
-  //     this.loggedIn = isLoggedIn;
-  //     if (!isLoggedIn) {
-  //       this.router.navigate(['/login']);
-  //     }
-  //   });
+  loadFavouriteCocktails() {
+    this.authService.getUsername().subscribe(username => {
+      if (username) {
+        this.cocktailService.getFavouriteCocktails(username)
+          .subscribe({
 
-  //   this.authService.getUsername().subscribe(username => {
-  //     this.userName = username;
-  //   });
-  // }
+            next: (favCocktails) => {
+              this.favouriteCocktails = favCocktails;
+            },
+            error: (error) => {
+              console.error('Error loading fav cocktails', error);
+              this.isLoading = false;  // Mettre à jour même en cas d'erreur
+            }
+          })
+      }
+    })
+  }
+
+
+
+
+
+  checkLoggedIn(): void {
+    this.authService.isLoggedIn().subscribe(isLoggedIn => {
+      this.loggedIn = isLoggedIn;
+      if (!isLoggedIn) {
+        this.router.navigate(['/login']);
+      }
+    });
+
+    this.authService.getUsername().subscribe(username => {
+      this.userName = username;
+    });
+  }
 
 
 
