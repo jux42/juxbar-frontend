@@ -40,7 +40,6 @@ export class AuthService {
     this.username.next(credentials.username)
 
 
-    // Assurez-vous que cette méthode retourne un Observable
     return this.http.post(this.loginUrl, body.toString(), {
       headers,
       withCredentials: true,
@@ -63,9 +62,10 @@ export class AuthService {
   }
 
   logout(): void {
-
-    this.setLoginState(false)
-    this.username.next('')
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('username');
+    this.loggedIn.next(false);
+    this.username.next(null);
     this.router.navigate(['/']);
   }
 }

@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../login/auth-service";
-import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {PersonalCocktailComponent} from "../../personal-cocktail/personal-cocktail.component";
@@ -11,6 +10,7 @@ import {PersonalCocktail} from "../models/personal-cocktail";
 @Component({
   selector: 'app-profile',
   standalone: true,
+
   imports: [
     NgIf,
     PersonalCocktailComponent,
@@ -21,10 +21,11 @@ import {PersonalCocktail} from "../models/personal-cocktail";
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
+
 })
 export class ProfileComponent implements OnInit{
 
-  userName!: string | undefined;
+  userName!: string | null;
   loggedIn: boolean = false;
   invite!: string;
 
@@ -40,9 +41,12 @@ export class ProfileComponent implements OnInit{
 
   ngOnInit() {
 
-    this.checkLoggedIn();
+    // this.checkLoggedIn();
     console.log(this.loggedIn)
-    this.loadPersonalCocktails();
+    if (this.loggedIn) {
+      this.loadPersonalCocktails();
+    }
+
     // this.personalCocktails$ = this.personalCocktailsSubject.asObservable();
     // this.personalCocktailService.getAllPersonalCocktails().subscribe(data => {
     //   this.personalCocktailsSubject.next(data);
@@ -72,18 +76,18 @@ export class ProfileComponent implements OnInit{
     });
   }
 
-  checkLoggedIn(): boolean{
+  // checkLoggedIn(): void {
+  //   this.authService.isLoggedIn().subscribe(isLoggedIn => {
+  //     this.loggedIn = isLoggedIn;
+  //     if (!isLoggedIn) {
+  //       this.router.navigate(['/login']);
+  //     }
+  //   });
 
-    this.authService.isLoggedIn().pipe(
-      tap(next => {
-        this.userName=this.authService.username.getValue()?.toString();
-        this.loggedIn = true;
-      })
-
-    ).subscribe();
-    return this.loggedIn;
-
-  }
+  //   this.authService.getUsername().subscribe(username => {
+  //     this.userName = username;
+  //   });
+  // }
 
 
 

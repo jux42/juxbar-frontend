@@ -5,11 +5,17 @@ import {ProfileComponent} from "./core/profile/profile.component";
 import {CocktailListComponent} from "./cocktails/components/cocktail-list/cocktail-list.component";
 import {SingleCocktailComponent} from "./cocktails/components/single-cocktail/single-cocktail.component";
 import {SingleSoftDrinkComponent} from "./soft-drinks/components/single-soft-drink/single-soft-drink.component";
+import {authGuard} from "./auth-guard";
 
 export const routes: Routes = [
 
   {path: '', loadComponent:()=>import('./landing-page/landing-page.component').then(mod=>mod.LandingPageComponent), data: {animation: 'LandingPage'}},
   {path: 'login', component: LoginComponent, },
+  {
+    path: 'juxbar/profile',
+    component: ProfileComponent,
+    canActivate: [authGuard]
+  },
   {path: 'juxbar/profile', component: ProfileComponent, data: {animation: 'ProfilePage'}},
   {path: 'juxbar/mainpage', component: MainPageComponent, data: {animation: 'MainPage'}},
   {path: 'juxbar/listall', component : CocktailListComponent, data: {animation: 'CocktailListPage'}},
@@ -28,6 +34,7 @@ export const routes: Routes = [
     loadComponent: () => (import('./ingredients/single-ingredient/single-ingredient.component'))
       .then(mod => mod.SingleIngredientComponent,),
     data: {animation: 'OneIngredientPage'}
-  }
+  },
+
 
 ];
