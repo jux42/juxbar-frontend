@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, catchError, Observable, tap, throwError} from 'rxjs';
 import {Router} from "@angular/router";
 
 export interface AuthRequest {
@@ -12,8 +12,8 @@ export interface AuthRequest {
   providedIn: 'root'
 })
 export class AuthService {
-  username = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
-  loggedIn = new BehaviorSubject<boolean>(sessionStorage.getItem('isAuthenticated') === 'true');
+  username = new BehaviorSubject<string | null>(localStorage.getItem('username'));
+  loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isAuthenticated') === 'true');
   private loginUrl = 'http://localhost:8080/login';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -21,30 +21,37 @@ export class AuthService {
 
   setLoginState(isAuthenticated: boolean) {
     this.loggedIn.next(isAuthenticated);
-    sessionStorage.setItem('isAuthenticated', isAuthenticated.toString());
+    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
 
   }
 
-  login(credentials: any): Observable<any> {
-    const body = new URLSearchParams();
-    body.set('username', credentials.username);
-    body.set('password', credentials.password);
+  private setAuthState(isAuthenticated: boolean, username: string | null): void {
+    this.loggedIn.next(isAuthenticated);
+    this.username.next(username);
+    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+    if (username) {
+      localStorage.setItem('username', username);
+    } else {
+      localStorage.removeItem('username');
+    }
+  }
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-    console.log('Login successful, setting username:', credentials.username);
-    this.setLoginState(true)
-    this.loggedIn.next(true);
-    sessionStorage.setItem('username', credentials.username);
-    this.username.next(credentials.username)
+  login(credentials: { username: string; password: string }): Observable<string> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams(credentials);
 
-
-    return this.http.post(this.loginUrl, body.toString(), {
-      headers,
-      withCredentials: true,
-      responseType: 'text' as 'json'
-    });
+    return this.http.post<string>(this.loginUrl, body.toString(), { headers, responseType: 'text' as 'json' })
+      .pipe(
+        tap(token => {
+          localStorage.setItem('token', token);  // Stockez le token JWT ici
+          this.setAuthState(true, credentials.username);
+        }),
+        catchError(error => {
+          console.error('Login failed', error);
+          this.setAuthState(false, null);
+          return throwError(() => new Error('Login failed'));
+        })
+      );
   }
 
 
@@ -62,10 +69,10 @@ export class AuthService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('isAuthenticated');
-    sessionStorage.removeItem('username');
-    this.loggedIn.next(false);
-    this.username.next(null);
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+    this.setAuthState(false, null);
     this.router.navigate(['/']);
   }
 }

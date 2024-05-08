@@ -20,6 +20,23 @@
 .initialBlock {
 
 }
+.loading{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+  animation: breatheAnimation 3s ease-out infinite;
+
+}
+@keyframes breatheAnimation {
+ 100% {
+    font-size: 124px;
+  }
+  0% {
+    font-size: 8px;
+  }
+}
 
 .formBlock {
   display: flex;

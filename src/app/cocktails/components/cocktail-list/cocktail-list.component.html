@@ -1,5 +1,13 @@
 
-<div *ngIf="isLoading"  ></div>
+
+
+<ng-container *ngIf="this.isLoading;  then loadingBlock; else loadedBlock"></ng-container>
+  <ng-template #loadingBlock>
+    <h1 class="loading">LOADING</h1>
+  </ng-template>
+
+
+  <ng-template #loadedBlock>
 <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
 <ng-container *ngIf="cocktails$ | async as cocktails">
   <div class="formBlock">
@@ -29,3 +37,4 @@
   </div>
 </ng-container>
 </div>
+  </ng-template>

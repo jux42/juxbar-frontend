@@ -84,11 +84,11 @@ export class ProfileComponent implements OnInit{
         this.personalCocktailService.getAllPersonalCocktails(username).subscribe({
           next: (cocktails) => {
             this.personalCocktails = cocktails;
-            this.isLoading = false;  // Assurez-vous de mettre à jour le statut de chargement
+            this.isLoading = false;
           },
           error: (error) => {
             console.error('Error loading personal cocktails', error);
-            this.isLoading = false;  // Mettre à jour même en cas d'erreur
+            this.isLoading = false;
           }
         });
       } else {
@@ -109,7 +109,7 @@ export class ProfileComponent implements OnInit{
             },
             error: (error) => {
               console.error('Error loading fav cocktails', error);
-              this.isLoading = false;  // Mettre à jour même en cas d'erreur
+              this.isLoading = false;
             }
           })
       }

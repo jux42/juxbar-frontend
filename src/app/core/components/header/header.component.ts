@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    sessionStorage.getItem('username')
+    localStorage.getItem('username')
     this.authService.isLoggedIn().subscribe(isLoggedIn => {
       console.log('Is logged in:', isLoggedIn);
     });
@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl("/login")
   }
   goLogout() {
+
      this.authService.logout();
   }
 
