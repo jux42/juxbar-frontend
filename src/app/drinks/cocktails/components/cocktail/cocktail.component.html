@@ -1,0 +1,17 @@
+<div *ngIf="cocktail" class="cocktail-card">
+  <div class="thisFlex"><h3>{{ truncateText(cocktail.strDrink | titlecase, 25) }}</h3>
+    <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"
+         *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
+         [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
+         class="clickable fadeIn"
+    ></div>
+  <div class="ingBlock">
+    <ng-container *ngFor="let ingredient of getIngredients(cocktail); let i = index; let last = last;">
+      <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable">
+        {{ ingredient }}<span *ngIf="!last">, </span>
+      </p>
+    </ng-container>
+
+
+  </div>
+</div>

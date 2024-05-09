@@ -2,16 +2,25 @@
 <h1 *ngIf="loggedIn">Welcome to your personal page, {{userName}}</h1>
 <div *ngIf="isLoading"  ></div>
 <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+  <h2>your creations</h2>
 <ng-container *ngIf="personalCocktails ">
 
 <app-personalCocktail @listAnimation *ngFor="let personalCocktail of personalCocktails" [personalCocktail]="personalCocktail"></app-personalCocktail>
   </ng-container>
 </div>
-
+<h2>Your favourites</h2>
 <div  [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
   <ng-container *ngIf="favouriteCocktails ">
-    <div class="thisFlex">
+    <div class="thisGrid">
     <app-cocktail @listAnimation *ngFor="let favouriteCocktail of favouriteCocktails" [cocktail]="favouriteCocktail"></app-cocktail>
+    </div>
+  </ng-container>
+</div>
+
+<div  [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+  <ng-container *ngIf="favouriteSoftDrinks ">
+    <div class="thisGrid">
+      <app-soft-drink @listAnimation *ngFor="let favouriteSoftDrink of favouriteSoftDrinks" [softDrink]="favouriteSoftDrink"></app-soft-drink>
     </div>
   </ng-container>
 </div>

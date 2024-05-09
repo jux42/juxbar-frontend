@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../login/auth-service";
 import {Router} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {PersonalCocktailComponent} from "../../personal-cocktail/personal-cocktail.component";
-import {CocktailComponent} from "../../cocktails/components/cocktail/cocktail.component";
+import {PersonalCocktailComponent} from "../../drinks/personal-cocktail/personal-cocktail.component";
+import {CocktailComponent} from "../../drinks/cocktails/components/cocktail/cocktail.component";
 import {CocktailService, PersonalCocktailService} from "../services/cocktailService";
 import {PersonalCocktail} from "../models/personal-cocktail";
 import {slideInAnimation} from "../../animations";
@@ -12,6 +12,7 @@ import {Observable} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
+import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 
 
 @Component({
@@ -35,7 +36,8 @@ import {SoftDrinkService} from "../services/softDrinkService";
     CocktailComponent,
     NgForOf,
     AsyncPipe,
-    NgClass
+    NgClass,
+    SoftDrinkComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -54,6 +56,7 @@ export class ProfileComponent implements OnInit{
   personalCocktails!: PersonalCocktail[];
 
   favouriteCocktails!: Cocktail[];
+  favouriteSoftDrinks!: SoftDrink[];
   favouriteCocktails$ !: Observable<Cocktail[]>
   favouriteSoftDrinks$ !: Observable<SoftDrink[]>
 
@@ -72,6 +75,7 @@ export class ProfileComponent implements OnInit{
       console.log(this.loggedIn)
       this.loadPersonalCocktails();
       this.loadFavouriteCocktails();
+      this.loadFavouriteSoftDrinks();
 
     }
 
@@ -113,7 +117,25 @@ export class ProfileComponent implements OnInit{
             }
           })
       }
-    })
+    });
+  }
+
+    loadFavouriteSoftDrinks() {
+      this.authService.getUsername().subscribe(username => {
+        if (username) {
+          this.softDrinkService.getFavouriteSoftDrinks(username)
+            .subscribe({
+
+              next: (favSoftDrinks) => {
+                this.favouriteSoftDrinks = favSoftDrinks;
+              },
+              error: (error) => {
+                console.error('Error loading fav softs', error);
+                this.isLoading = false;
+              }
+            })
+        }
+      });
   }
 
 

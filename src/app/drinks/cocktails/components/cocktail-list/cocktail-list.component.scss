@@ -1,0 +1,115 @@
+.this-animation {
+  animation-delay: 1s !important;
+}
+.thisGrid {
+  display: grid;
+  margin-top: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+.searchBlock{
+  position: sticky;
+  top: 15px;
+  z-index: 1001;
+
+  display: flex;
+  flex-direction: row;
+  margin-left: 115px;
+}
+
+.alphabet-navigation {
+  position: sticky;
+  flex-direction: row;
+  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  color: darkslategray;
+  z-index: 1000;
+}
+button{
+  height: 60px;
+  width: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  padding : 3px;
+  background: white;
+}
+
+
+h2 {
+  padding-top: 70px; /* Adjust according to your header's height */
+  margin-top: -70px; /* Same as padding-top but negative */
+}
+.cocktailForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+.initialBlock {
+
+}
+.loading{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+  animation: breatheAnimation 3s infinite;
+
+}
+@keyframes breatheAnimation {
+ 100% {
+    font-size: 124px;
+  }
+  0% {
+    font-size: 8px;
+  }
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  color: darkslategray;
+  //position: sticky;
+  //top: 15px;
+  border-radius: 5px;
+  width: 48%;
+  height: 70px;
+  margin-left: 45px;
+  text-align: center;
+  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  margin-bottom: 20px;
+  opacity: 1;
+}
+
+//.thisFlex {
+//  position: relative;
+//  display: flex;
+//  flex-wrap: wrap;
+//  flex-direction: row;
+//  justify-content: space-around;
+//  align-items: center;
+//}
+
+.softDrinkForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+
+  display: flex;
+  flex-direction: column;
+}

@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {map, Observable} from "rxjs";
 import {Cocktail} from "../models/cocktail";
@@ -20,6 +20,14 @@ export class CocktailService {
 
     return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`)
   }
+  getCocktailsPaginated(page: number = 0, limit: number = 10): Observable<Cocktail[]> {
+    let params = new HttpParams()
+      .set('page', String(page))
+      .set('size', String(limit));
+
+    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`, { params });
+  }
+
 
   getOneCocktailById(id: number): Observable<Cocktail> {
 

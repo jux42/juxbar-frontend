@@ -19,11 +19,11 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  setLoginState(isAuthenticated: boolean) {
-    this.loggedIn.next(isAuthenticated);
-    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
-
-  }
+  // setLoginState(isAuthenticated: boolean) {
+  //   this.loggedIn.next(isAuthenticated);
+  //   localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+  //
+  // }
 
   private setAuthState(isAuthenticated: boolean, username: string | null): void {
     this.loggedIn.next(isAuthenticated);
@@ -31,9 +31,11 @@ export class AuthService {
     localStorage.setItem('isAuthenticated', isAuthenticated.toString());
     if (username) {
       localStorage.setItem('username', username);
+      console.log(localStorage)
     } else {
       localStorage.removeItem('username');
     }
+
   }
 
   login(credentials: { username: string; password: string }): Observable<string> {

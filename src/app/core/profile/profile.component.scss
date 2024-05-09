@@ -3,6 +3,14 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-around;
+
+  justify-content: space-evenly;
   align-items: center;
+}
+
+.thisGrid {
+  display: grid;
+  margin-top: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
 }
