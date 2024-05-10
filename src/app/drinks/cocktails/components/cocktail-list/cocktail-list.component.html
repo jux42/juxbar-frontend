@@ -1,10 +1,10 @@
 
 <div id="top"></div>
 
-<ng-container *ngIf="this.isLoading;  then loadingBlock; else loadedBlock"></ng-container>
+<ng-container *ngIf="isLoading;  then loadingBlock; else loadedBlock"></ng-container>
   <ng-template #loadingBlock>
 
-    <h1 class="loading">LOADING</h1>
+    <h1  class="loading">LOADING</h1>
   </ng-template>
 
   <ng-template #loadedBlock>

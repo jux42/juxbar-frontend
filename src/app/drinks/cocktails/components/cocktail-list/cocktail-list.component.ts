@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, startWith} from "rxjs";
+import {BehaviorSubject, debounceTime, distinctUntilChanged, finalize, map, Observable, startWith, tap} from "rxjs";
 import {CocktailService} from "../../../../core/services/cocktailService";
 import {ActivatedRoute} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf, ViewportScroller} from "@angular/common";
@@ -18,9 +18,9 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
     trigger('listAnimation', [
       transition('* <=> *', [
         query(':enter', [
-          style({ transform: 'translateY(100%)', opacity: 0 }),
-          stagger('10ms', animate('700ms ease-in', style({ transform: 'translateY(0)', opacity: 1 })))
-        ], { optional: true })
+          style({ transform: 'translateY(100%)', opacity: 0.2 }),
+          stagger('1ms', animate('200ms ease-out', style({ transform: 'translateY(0)', opacity: 1 })))
+        ], { optional: false })
       ])
     ])
 
@@ -55,11 +55,10 @@ export class CocktailListComponent implements OnInit {
   ngOnInit() {
 
 
-    this.cocktailService.getAllCocktails().subscribe(data => {
-      this.cocktailsSubject.next(data);
-      this.isLoading = false;
-
-    });
+    this.cocktailService.getAllCocktails().pipe(
+      tap(data=>this.cocktailsSubject.next(data)),
+      finalize(()=>this.isLoading=false))
+      .subscribe();
 
 
     this.cocktailForm = this.formBuilder.group({
