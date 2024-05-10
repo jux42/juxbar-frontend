@@ -1,19 +1,25 @@
 .initialBlock {
 }
 
+h2 {
+  padding-top: 70px; /* Adjust according to your header's height */
+  margin-top: -70px; /* Same as padding-top but negative */
+}
+
 .formBlock {
   display: flex;
   flex-direction: row;
   font-weight: bold;
   color: darkslategray;
-  position: sticky;
-  top: 15px;
+  //position: sticky;
+  //top: 15px;
   border-radius: 5px;
-  width: 46%;
-  height: 70px;
-  margin-left: 345px;
-  z-index: 1001;
+  width: 50%;
+  height: 65px;
+  margin-left: 45px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
   background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
   margin-bottom: 20px;
   opacity: 1;
@@ -37,8 +43,46 @@
   margin-bottom: 30px;
 }
 
-.formGroup {
+
+.searchBlock{
+  position: sticky;
+  top: 15px;
+  z-index: 1001;
 
   display: flex;
+  flex-direction: row;
+  margin-left: 115px;
+}
+
+.alphabet-navigation {
+  position: sticky;
+  height: 65px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  color: darkslategray;
+  z-index: 1000;
+}
+button{
+  height: 60px;
+  width: 25px;
+  margin-left: 2px;
+  padding : 3px;
+  background: white;
+}
+.softDrinkForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  margin-top: 20px;
+  display: flex;
   flex-direction: column;
+  width : 100px;
+  justify-content: center;
 }

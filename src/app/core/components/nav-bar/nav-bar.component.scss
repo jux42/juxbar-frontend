@@ -1,4 +1,5 @@
-.mainFrame{
+.mainFrame {
+  transition: transform 0.4s ease-out; // S'assure que les transitions sont fluides
   width: 200px;
   display: flex;
   flex-direction: column;

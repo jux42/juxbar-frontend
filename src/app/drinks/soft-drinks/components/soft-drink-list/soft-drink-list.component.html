@@ -1,4 +1,9 @@
 <ng-container *ngIf="softDrinks$ | async as softDrinks">
+
+  <div class = "searchBlock">
+
+    <button class="alphabet-navigation" *ngFor="let letter of alphabet" (click)="goDown(letter)">{{ letter }}</button>
+
   <div class="formBlock">
     <form [formGroup]="softDrinkForm" class="softDrinkForm">
       <div class="formGroup">
@@ -19,10 +24,13 @@
       </div>
     </form>
   </div>
+  </div>
   <div  class="thisFlex">
 
-    <app-soft-drink @listAnimation *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"></app-soft-drink>
+    <app-soft-drink @listAnimation *ngFor="let softDrink of softDrinks" [softDrink]="softDrink"
+                    [attr.id]="getAnchorId(softDrink.strDrink)"></app-soft-drink>
 
   </div>
+
 
 </ng-container>

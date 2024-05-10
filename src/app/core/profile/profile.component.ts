@@ -105,14 +105,14 @@ export class ProfileComponent implements OnInit{
   loadFavouriteCocktails() {
     this.authService.getUsername().subscribe(username => {
       if (username) {
-        this.cocktailService.getFavouriteCocktails(username)
-          .subscribe({
+        this.cocktailService.getFavouriteCocktails(username)?.subscribe({
 
             next: (favCocktails) => {
+              if (!favCocktails) favCocktails = [];
               this.favouriteCocktails = favCocktails;
             },
             error: (error) => {
-              console.error('Error loading fav cocktails', error);
+              console.error('No cocktails to load', error);
               this.isLoading = false;
             }
           })
@@ -123,14 +123,14 @@ export class ProfileComponent implements OnInit{
     loadFavouriteSoftDrinks() {
       this.authService.getUsername().subscribe(username => {
         if (username) {
-          this.softDrinkService.getFavouriteSoftDrinks(username)
-            .subscribe({
+          this.softDrinkService.getFavouriteSoftDrinks(username)?.subscribe({
 
               next: (favSoftDrinks) => {
+                if (!favSoftDrinks) favSoftDrinks = [];
                 this.favouriteSoftDrinks = favSoftDrinks;
               },
               error: (error) => {
-                console.error('Error loading fav softs', error);
+                console.error('no softdrinks to load', error);
                 this.isLoading = false;
               }
             })

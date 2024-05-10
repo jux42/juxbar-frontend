@@ -42,6 +42,8 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
   styleUrl: './soft-drink-list.component.scss'
 })
 export class SoftDrinkListComponent implements OnInit {
+  alphabet: string[] =['#','A', 'B', 'C', 'D', 'E', 'F', 'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  lastAnchorLetter = '';
   @Input() softDrink !: SoftDrink;
   softDrinks$!: Observable<SoftDrink[]>;
   softDrinkForm!: FormGroup;
@@ -78,6 +80,28 @@ export class SoftDrinkListComponent implements OnInit {
       ])),
 
     );
+  }
+  shouldAddAnchor(softDrinkNake: string): boolean {
+    const currentFirstLetter = softDrinkNake[0].toUpperCase();
+    if (currentFirstLetter !== this.lastAnchorLetter) {
+      this.lastAnchorLetter = currentFirstLetter;
+      return true;
+    }
+    return false;
+  }
+
+  getAnchorId(softDrinkName: string): string {
+    return softDrinkName[0].toUpperCase();
+  }
+
+  goDown(letter: string) {
+    letter = letter == '#' ? 'top'
+      :letter;
+    const element = document.getElementById(letter);
+    if (element) {
+
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   private filterSoftDrinks(searchText: string, searchIngredient: string[]): SoftDrink[] {
