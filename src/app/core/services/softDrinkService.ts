@@ -1,9 +1,10 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable} from "rxjs";
+import {map, Observable, of, switchMap} from "rxjs";
 import {SoftDrink} from "../models/softDrink";
 import {environment} from "../../../environments/environment";
-import {UserRequest} from "../models/UserRequest";
+import {take} from "rxjs/operators";
+import {AuthService} from "../login/auth-service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {UserRequest} from "../models/UserRequest";
 
 export class SoftDrinkService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService : AuthService) {
   }
 
   getAllSoftDrinks(): Observable<SoftDrink[]> {
@@ -36,10 +37,16 @@ export class SoftDrinkService {
     );
   }
 
-  getFavouriteSoftDrinks(username: string): Observable<SoftDrink[]> {
-    const url: string = `http://${environment.apiUrl}/user/favouritesoftdrinks`;
-    const userRequest = new UserRequest(username);
-    return this.http.post<SoftDrink[]>(url, userRequest);
-
+  getFavouriteSoftDrinks(): Observable<SoftDrink[]> {
+    return this.authService.getUsername().pipe(
+      take(1),
+      switchMap(username => {
+        if (username) {
+          const url = `http://${environment.apiUrl}/user/favouritesoftdrinks`;
+          return this.http.get<SoftDrink[]>(url);
+        } else
+          return of([]);
+      })
+    );
   }
 }

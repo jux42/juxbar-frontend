@@ -12,6 +12,15 @@
   background-image: linear-gradient(#235c71 0, #15404f 100%);
   box-shadow: 5px 5px 20px black;
 }
+.titleRow{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.favIcon{
+  margin-top: 10px;
+}
 
 .thisFlex {
   display: flex;

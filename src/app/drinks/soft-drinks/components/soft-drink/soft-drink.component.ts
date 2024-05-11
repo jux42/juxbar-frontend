@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SoftDrink} from "../../../../core/models/softDrink";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {SoftDrinkService} from "../../../../core/services/softDrinkService";
 import {Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
@@ -30,13 +30,17 @@ export class SoftDrinkComponent implements OnInit {
   protected readonly SoftDrink = SoftDrink;
   protected readonly environment = environment;
   imageLoaded: {[key: string]: boolean} = {};
-
+  isFavourite: boolean = false;
 
   constructor(private softDrinkService: SoftDrinkService, private router: Router) {
   }
 
   ngOnInit() {
-
+    this.softDrinkService.getFavouriteSoftDrinks().pipe(
+      map(favouriteSoftDrinks => {
+        this.isFavourite = favouriteSoftDrinks.some(favSoft => favSoft.id === this.softDrink.id);
+      })
+    ).subscribe();
   }
 
   truncateText(text: string, maxLength: number): string {

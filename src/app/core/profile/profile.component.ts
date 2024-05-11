@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit{
   ngOnInit() {
 
     this.checkLoggedIn();
+  this.loadPersonalCocktails();
 
     if (this.loggedIn) {
       console.log(this.loggedIn)
@@ -83,9 +84,7 @@ export class ProfileComponent implements OnInit{
   }
 
   loadPersonalCocktails() {
-    this.authService.getUsername().subscribe(username => {
-      if (username) {
-        this.personalCocktailService.getAllPersonalCocktails(username).subscribe({
+           this.personalCocktailService.getAllPersonalCocktails().subscribe({
           next: (cocktails) => {
             this.personalCocktails = cocktails;
             this.isLoading = false;
@@ -95,11 +94,7 @@ export class ProfileComponent implements OnInit{
             this.isLoading = false;
           }
         });
-      } else {
-        console.error('Username is null');
-        this.isLoading = false;
-      }
-    });
+
   }
 
   loadFavouriteCocktails() {
@@ -122,7 +117,7 @@ export class ProfileComponent implements OnInit{
     loadFavouriteSoftDrinks() {
       this.authService.getUsername().subscribe(username => {
         if (username) {
-          this.softDrinkService.getFavouriteSoftDrinks(username)?.subscribe({
+          this.softDrinkService.getFavouriteSoftDrinks()?.subscribe({
 
               next: (favSoftDrinks) => {
                 if (!favSoftDrinks) favSoftDrinks = [];

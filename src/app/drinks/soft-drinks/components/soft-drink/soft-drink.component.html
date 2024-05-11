@@ -1,5 +1,16 @@
 <div *ngIf="softDrink" class="softDrink-card ">
-  <div class="thisFlex"><h3>{{ truncateText(softDrink.strDrink | titlecase, 20) }}</h3>
+  <div class="thisFlex">
+    <div class="titleRow">
+      <div class="favIcon">
+        @if (isFavourite) {
+          <a>⭐</a>
+        } @else {
+          <a>➕</a>
+        }
+      </div>
+      <h3>{{ truncateText(softDrink.strDrink | titlecase, 25) }}</h3>
+    </div>
+
     <img (click)="goToSoftDrink()" *ngIf="softDrink"
          [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
          class="clickable fadeIn" [class.visible]="imageLoaded[softDrink.id]"

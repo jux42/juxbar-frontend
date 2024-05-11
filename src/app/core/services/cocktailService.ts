@@ -4,7 +4,6 @@ import {map, Observable, of, switchMap} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {environment} from "../../../environments/environment";
 import {PersonalCocktail} from "../models/personal-cocktail";
-import {UserRequest} from "../models/UserRequest";
 import {AuthService} from "../login/auth-service";
 import {take} from "rxjs/operators";
 
@@ -62,22 +61,28 @@ export class CocktailService {
     );
   }
 }
+
+
 @Injectable({
   providedIn: 'root'
 
 })
 export class PersonalCocktailService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  getAllPersonalCocktails(username: string): Observable<PersonalCocktail[]> {
-    const url = `http://${environment.apiUrl}/personalcocktails`;
-    const userRequest = new UserRequest(username);  // Assurez-vous que ceci est correctement instancié
-
-    console.log(userRequest.username);
-    return this.http.post<PersonalCocktail[]>(url, userRequest); // userRequest doit être un objet simple
+  getAllPersonalCocktails(): Observable<PersonalCocktail[]> {
+    return this.authService.getUsername().pipe(
+      take(1),
+      switchMap(username => {
+        if (username) {
+          const url = `http://${environment.apiUrl}/user/personalcocktails`;
+          return this.http.get<PersonalCocktail[]>(url);
+        } else
+          return of([]);
+      })
+    );
   }
-
 
 
   getOnePersonalCocktailById(id: number): Observable<PersonalCocktail> {
