@@ -103,9 +103,8 @@ export class ProfileComponent implements OnInit{
   }
 
   loadFavouriteCocktails() {
-    this.authService.getUsername().subscribe(username => {
-      if (username) {
-        this.cocktailService.getFavouriteCocktails(username)?.subscribe({
+
+        this.cocktailService.getFavouriteCocktails().subscribe({
 
             next: (favCocktails) => {
               if (!favCocktails) favCocktails = [];
@@ -116,9 +115,9 @@ export class ProfileComponent implements OnInit{
               this.isLoading = false;
             }
           })
-      }
-    });
-  }
+
+    }
+
 
     loadFavouriteSoftDrinks() {
       this.authService.getUsername().subscribe(username => {

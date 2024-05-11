@@ -12,7 +12,6 @@ export function authGuard(): Observable<boolean | UrlTree> {
     take(1),
     map(isLoggedIn => {
       if (!isLoggedIn) {
-        // Utilisez createUrlTree pour naviguer avec des queryParams
         return router.createUrlTree(['/login'], { queryParams: { authRequired: 'true' } });
       }
       return true;

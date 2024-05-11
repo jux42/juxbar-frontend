@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
+import {UserRequest} from "../../../../core/models/UserRequest";
 
 @Component({
   selector: 'app-cocktail',
@@ -28,13 +29,24 @@ export class CocktailComponent implements OnInit {
   id!: number;
   protected readonly environment = environment;
   imageLoaded: {[key: string]: boolean} = {};
+  isFavourite: boolean = false;
+@Input() userRequest!: UserRequest
 
-  constructor(private cocktailService: CocktailService, private router: Router) {
+
+  constructor(private cocktailService: CocktailService, private router: Router, ) {
   }
 
   ngOnInit() {
 
+    this.cocktailService.getFavouriteCocktails().pipe(
+      map(favouriteCocktails => {
+        this.isFavourite = favouriteCocktails.some(favCocktail => favCocktail.id === this.cocktail.id);
+      })
+    ).subscribe();
+
+
   }
+
 
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {

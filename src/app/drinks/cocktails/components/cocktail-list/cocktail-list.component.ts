@@ -19,8 +19,8 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
       transition('* <=> *', [
         query(':enter', [
           style({ transform: 'translateY(100%)', opacity: 0.2 }),
-          stagger('1ms', animate('200ms ease-out', style({ transform: 'translateY(0)', opacity: 1 })))
-        ], { optional: false })
+          stagger('10ms', animate('200ms ease-out', style({ transform: 'translateY(0)', opacity: 1 })))
+        ], { optional: true })
       ])
     ])
 

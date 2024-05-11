@@ -37,7 +37,7 @@ export class SoftDrinkService {
   }
 
   getFavouriteSoftDrinks(username: string): Observable<SoftDrink[]> {
-    const url: string = `http://${environment.apiUrl}/favouritesoftdrinks`;
+    const url: string = `http://${environment.apiUrl}/user/favouritesoftdrinks`;
     const userRequest = new UserRequest(username);
     return this.http.post<SoftDrink[]>(url, userRequest);
 

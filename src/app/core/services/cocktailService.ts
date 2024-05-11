@@ -1,10 +1,12 @@
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable} from "rxjs";
+import {map, Observable, of, switchMap} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {environment} from "../../../environments/environment";
 import {PersonalCocktail} from "../models/personal-cocktail";
 import {UserRequest} from "../models/UserRequest";
+import {AuthService} from "../login/auth-service";
+import {take} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ import {UserRequest} from "../models/UserRequest";
 
 export class CocktailService {
 
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getAllCocktails(): Observable<Cocktail[]> {
@@ -46,11 +49,17 @@ export class CocktailService {
     );
   }
 
-  getFavouriteCocktails(username: string): Observable<Cocktail[]> {
-    const url: string = `http://${environment.apiUrl}/favouritecocktails`;
-    const userRequest = new UserRequest(username);
-    return this.http.post<Cocktail[]>(url, userRequest);
-
+  getFavouriteCocktails(): Observable<Cocktail[]> {
+    return this.authService.getUsername().pipe(
+      take(1),
+      switchMap(username => {
+        if (username) {
+          const url = `http://${environment.apiUrl}/user/favouritecocktails`;
+          return this.http.get<Cocktail[]>(url);
+        } else
+        return of([]);
+      })
+    );
   }
 }
 @Injectable({
