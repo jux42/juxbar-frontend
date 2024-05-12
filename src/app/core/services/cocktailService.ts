@@ -1,6 +1,6 @@
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable, of, switchMap} from "rxjs";
+import {map, Observable, of, shareReplay, switchMap} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {environment} from "../../../environments/environment";
 import {PersonalCocktail} from "../models/personal-cocktail";
@@ -14,6 +14,12 @@ import {take} from "rxjs/operators";
 
 export class CocktailService {
 
+  private favouriteCocktails$ = this.getFavouriteCocktails().pipe(
+    shareReplay(1)
+  );
+  private allCocktails$ = this.getAllCocktails().pipe(
+    shareReplay(1)
+  );
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -28,6 +34,10 @@ export class CocktailService {
       .set('size', String(limit));
 
     return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`, { params });
+  }
+
+  getAllCocktailsCached(){
+    return this.allCocktails$.pipe();
   }
 
 
@@ -60,7 +70,16 @@ export class CocktailService {
       })
     );
   }
+
+
+  getFavouriteCocktailsCached(): Observable<Cocktail[]> {
+    return this.favouriteCocktails$;
+  }
+
+
+
 }
+
 
 
 @Injectable({

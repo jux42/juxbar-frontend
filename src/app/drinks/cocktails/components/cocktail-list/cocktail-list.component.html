@@ -11,7 +11,7 @@
 
 
     <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
-<ng-container *ngIf="cocktails$ | async as cocktails">
+<ng-container *ngIf="cocktails$ | async as cocktails; ">
 
 
 <div class = "searchBlock">
@@ -42,7 +42,7 @@
 
   <div class="thisFlex" >
 
-    <app-cocktail @listAnimation *ngFor="let cocktail of cocktails" [cocktail]="cocktail"
+    <app-cocktail @listAnimation *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" [cocktail]="cocktail "
                    [attr.id]="getAnchorId(cocktail.strDrink)">
 
     </app-cocktail>

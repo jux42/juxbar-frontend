@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {map, Observable} from "rxjs";
+import {map, Observable, Subject} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
@@ -9,6 +9,7 @@ import {UserRequest} from "../../../../core/models/UserRequest";
 
 @Component({
   selector: 'app-cocktail',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     AsyncPipe,
@@ -21,16 +22,18 @@ import {UserRequest} from "../../../../core/models/UserRequest";
   templateUrl: './cocktail.component.html',
   styleUrl: './cocktail.component.scss'
 })
-export class CocktailComponent implements OnInit {
+export class CocktailComponent implements OnInit, OnDestroy {
 
   @Input() cocktail !: Cocktail;
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
+  private destroy$ = new Subject<void>();
+
   id!: number;
   protected readonly environment = environment;
   imageLoaded: {[key: string]: boolean} = {};
   isFavourite: boolean = false;
-@Input() userRequest!: UserRequest
+  @Input() userRequest!: UserRequest
 
 
   constructor(private cocktailService: CocktailService, private router: Router, ) {
@@ -38,13 +41,17 @@ export class CocktailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.cocktailService.getFavouriteCocktails().pipe(
+    this.cocktailService.getFavouriteCocktailsCached().pipe(
+
       map(favouriteCocktails => {
         this.isFavourite = favouriteCocktails.some(favCocktail => favCocktail.id === this.cocktail.id);
       })
     ).subscribe();
+  }
 
-
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 

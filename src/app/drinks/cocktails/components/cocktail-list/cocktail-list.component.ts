@@ -1,6 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, finalize, map, Observable, startWith, tap} from "rxjs";
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  finalize,
+  map,
+  Observable,
+  startWith,
+  Subject, takeUntil,
+  tap
+} from "rxjs";
 import {CocktailService} from "../../../../core/services/cocktailService";
 import {ActivatedRoute} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf, ViewportScroller} from "@angular/common";
@@ -49,13 +59,17 @@ export class CocktailListComponent implements OnInit {
   isLoading: boolean = true;
   private cocktailsSubject = new BehaviorSubject<Cocktail[]>([]);
 
+  private destroy$ = new Subject<void>();
+
+
   constructor(private scroller: ViewportScroller, private cocktailService: CocktailService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
 
 
-    this.cocktailService.getAllCocktails().pipe(
+    this.cocktailService.getAllCocktailsCached().pipe(
+      takeUntil(this.destroy$),
       tap(data=>this.cocktailsSubject.next(data)),
       finalize(()=>this.isLoading=false))
       .subscribe();
@@ -81,6 +95,13 @@ export class CocktailListComponent implements OnInit {
         formValue.strThirdIngredient
       ])),
     );
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  trackByCocktails(index: number, cocktail: Cocktail): number {
+    return cocktail.id; // ou une autre propriété unique
   }
 
   shouldAddAnchor(cocktailName: string): boolean {
