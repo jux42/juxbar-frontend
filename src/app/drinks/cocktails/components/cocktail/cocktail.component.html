@@ -6,7 +6,7 @@
         @if (isFavourite) {
           <a>⭐</a>
         } @else {
-          <a>➕</a>
+          <a  class="clickable">➕</a>
         }
       </div>
       <h3>{{ truncateText(cocktail.strDrink | titlecase, 25) }}</h3>

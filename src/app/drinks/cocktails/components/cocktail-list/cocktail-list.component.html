@@ -15,9 +15,9 @@
 
 
 <div class = "searchBlock">
-
+<div class="alphabetBlock">
   <button class="alphabet-navigation" *ngFor="let letter of alphabet" (click)="goDown(letter)">{{ letter }}</button>
-
+</div>
   <div class="formBlock">
     <form [formGroup]="cocktailForm" class="cocktailForm">
       <div class="formGroup">

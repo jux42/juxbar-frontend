@@ -66,7 +66,7 @@ export class CocktailService {
           const url = `http://${environment.apiUrl}/user/favouritecocktails`;
           return this.http.get<Cocktail[]>(url);
         } else
-        return of([]);
+          return of([]);
       })
     );
   }
@@ -75,6 +75,7 @@ export class CocktailService {
   getFavouriteCocktailsCached(): Observable<Cocktail[]> {
     return this.favouriteCocktails$;
   }
+
 
 
 
