@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'app-side-bar',
   standalone: true,
   imports: [],
-  templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.scss',
+  templateUrl: './side-bar.component.html',
+  styleUrl: './side-bar.component.scss',
   animations: [
     trigger('fadeInSlide', [
       transition(':enter', [
@@ -16,6 +16,6 @@ import {animate, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class NavBarComponent {
+export class SideBarComponent {
 
 }

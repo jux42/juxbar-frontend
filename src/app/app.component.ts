@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./core/components/header/header.component";
 import {slideInAnimation} from "./animations";
-import {NavBarComponent} from "./core/components/nav-bar/nav-bar.component";
+import {SideBarComponent} from "./core/components/side-bar/side-bar.component";
 import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, NavBarComponent, NgIf],
+  imports: [RouterOutlet, HeaderComponent, SideBarComponent, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [

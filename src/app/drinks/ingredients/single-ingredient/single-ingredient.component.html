@@ -36,7 +36,7 @@
         <img class="pic fadeIn" [class.visible]="imageLoaded[ingredient.id]"
              [alt]="ingredient.strIngredient" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
               + ingredient.strIngredient + '/image'"
-             (load)="imageLoaded[ingredient.id] = true">>
+             (load)="imageLoaded[ingredient.id] = true">
       </div>
     </div>
   </div>

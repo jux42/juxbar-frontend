@@ -10,6 +10,9 @@ header {
   /*background-image: radial-gradient(circle, rgba(158,146,87,1) 0%, rgba(21,64,79,1) 50%);*/
   opacity: 0.9;
 }
+.clickable:hover{
+  color: goldenrod;
+}
 
 h1 {
   color: wheat;
@@ -41,5 +44,8 @@ h1 {
   font-weight: 400;
   cursor: pointer;
   width: fit-content;
+}
+.clickable:hover{
+  color: goldenrod;
 }
 

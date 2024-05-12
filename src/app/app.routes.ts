@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {LoginComponent} from "./core/login/login.component";
 import {ProfileComponent} from "./core/profile/profile.component";
 import {authGuard} from "./auth-guard";
+import {CocktailListComponent} from "./drinks/cocktails/components/cocktail-list/cocktail-list.component";
 
 export const routes: Routes = [
 
@@ -14,8 +15,7 @@ export const routes: Routes = [
   },
   {path: 'juxbar/profile', component: ProfileComponent, data: {animation: 'ProfilePage'}},
 
-  {path: 'juxbar/listall', loadComponent : ()=>import('./drinks/cocktails/components/cocktail-list/cocktail-list.component')
-      .then(mod=>mod.CocktailListComponent), data: {animation: 'CocktailListPage'}},
+  {path: 'juxbar/listall', component: CocktailListComponent, data: {animation: 'CocktailListPage'}},
   {
     path: 'juxbar/onecocktail/:id',
     loadComponent: ()=>import('./drinks/cocktails/components/single-cocktail/single-cocktail.component')

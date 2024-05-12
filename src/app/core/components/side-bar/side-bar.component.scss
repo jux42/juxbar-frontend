@@ -8,8 +8,13 @@
   height:85vh ;
   border-radius: 5px;
 }
+.clickable:hover{
+  color: goldenrod;
+}
 
 .innerFrame{
-  text-align: center;
+  text-align: left;
+  margin-left: 15px;
   color: wheat;
 }
+

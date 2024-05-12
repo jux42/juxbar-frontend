@@ -1,6 +1,8 @@
 .clickable {
   cursor: pointer; }
 
+
+
 body {
   background-size: cover;
   background: radial-gradient(circle at 50% 50%, #235c71 0%, wheat 100%) no-repeat fixed;
