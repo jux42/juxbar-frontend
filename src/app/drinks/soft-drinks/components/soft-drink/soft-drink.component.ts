@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SoftDrink} from "../../../../core/models/softDrink";
-import {map, Observable} from "rxjs";
+import {map, Observable, Subject} from "rxjs";
 import {SoftDrinkService} from "../../../../core/services/softDrinkService";
 import {Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {environment} from "../../../../../environments/environment";
+import {AuthService} from "../../../../core/login/auth-service";
 
 @Component({
   selector: 'app-soft-drink',
@@ -20,27 +21,38 @@ import {environment} from "../../../../../environments/environment";
   styleUrl: './soft-drink.component.scss'
 })
 
-export class SoftDrinkComponent implements OnInit {
+export class SoftDrinkComponent implements OnInit, OnDestroy {
 
   @Input() softDrink !: SoftDrink;
   softDrink$!: Observable<SoftDrink>;
   imageData!: Response;
   id!: number;
+  private destroy$ = new Subject<void>();
+
   @Output() elementVisible = new EventEmitter<SoftDrink>();
   protected readonly SoftDrink = SoftDrink;
   protected readonly environment = environment;
   imageLoaded: {[key: string]: boolean} = {};
   isFavourite: boolean = false;
 
-  constructor(private softDrinkService: SoftDrinkService, private router: Router) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.softDrinkService.getFavouriteSoftDrinks().pipe(
-      map(favouriteSoftDrinks => {
-        this.isFavourite = favouriteSoftDrinks.some(favSoft => favSoft.id === this.softDrink.id);
-      })
-    ).subscribe();
+    if (this.softDrink) {
+      this.checkFavourites();
+      this.cdr.detectChanges();
+    }
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  checkFavourites() {
+    let userFav = JSON.parse(localStorage.getItem('favouritesoftdrinks') || '[]');
+    console.log(userFav);
+    this.isFavourite = userFav.some((fav: any) => fav.id === this.softDrink.id);
   }
 
   truncateText(text: string, maxLength: number): string {

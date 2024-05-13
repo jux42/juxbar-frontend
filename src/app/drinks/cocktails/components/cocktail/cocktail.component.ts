@@ -6,6 +6,7 @@ import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angula
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
 import {UserRequest} from "../../../../core/models/UserRequest";
+import {AuthService} from "../../../../core/login/auth-service";
 
 @Component({
   selector: 'app-cocktail',
@@ -35,16 +36,15 @@ export class CocktailComponent implements OnInit, OnDestroy {
   isFavourite$!: Observable<boolean>;
   @Input() userRequest!: UserRequest
 
-  constructor(private cdr: ChangeDetectorRef, private cocktailService: CocktailService, private router: Router) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private cocktailService: CocktailService) {
   }
 
   ngOnInit() {
 
-  if (this.cocktail){
+  if (this.cocktail) {
     this.checkFavourites();
     this.cdr.detectChanges();
   }
-
   }
 
 
@@ -59,12 +59,46 @@ export class CocktailComponent implements OnInit, OnDestroy {
     this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
   }
 
+onAddFavourite(cocktail: Cocktail): void {
+  if(!this.isFavourite) {
+    let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+    this.cocktailService.addFavouriteCocktail(cocktail.id).subscribe(
+      fav=>{
+        this.isFavourite = true;
+      }
+    );
+    userFav.push(this.cocktail);
+    localStorage.setItem('favouritecocktails', JSON.stringify(userFav));
+  }
+    else {
+    alert("This is already a fav");
+  }
+  this.checkFavourites();
+  this.cdr.detectChanges();
+
+}
 
 
+  onRemoveFavourite(cocktail: Cocktail): void {
+    if(this.isFavourite) {
+      let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+      this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(
+        fav=>{
+          this.isFavourite = false;
+        }
+      );
+      const filteredFavs = userFav.filter((fav: Cocktail) => { fav != cocktail})
+      localStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
+    }
+  else {
+  alert("This is NOT a fav yet");
+}
+this.checkFavourites();
+this.cdr.detectChanges();
+}
 
 
-
-  truncateText(text: string, maxLength: number): string {
+    truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     } else {

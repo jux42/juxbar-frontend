@@ -117,14 +117,25 @@ export class CocktailListComponent implements OnInit {
     return cocktailName[0].toUpperCase();
   }
 
-  goDown(letter: string) {
+  goToLetter(letter: string) {
     letter = letter == '#' ? 'top'
       :letter;
-    const element = document.getElementById(letter);
-    if (element) {
-
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (letter == 'top'){
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
     }
+    else{
+      const element = document.getElementById(letter);
+      if (element) {
+
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+
+    }
+
   }
 
 

@@ -76,6 +76,18 @@ export class CocktailService {
     );
   }
 
+  addFavouriteCocktail(id:number): Observable<String> {
+    const url = `http://${environment.apiUrl}/user/favouritecocktail/${id}`;
+    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+  }
+
+  removeFavouriteCocktail(id:number): Observable<String> {
+    const url = `http://${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
+    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+  }
+
+
+
 
   getFavouriteCocktailsCached(): Observable<Cocktail[]> {
     return this.favouriteCocktails$;

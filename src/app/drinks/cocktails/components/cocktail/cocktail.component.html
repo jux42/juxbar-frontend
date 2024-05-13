@@ -4,9 +4,9 @@
     <div class="titleRow">
       <div class="favIcon">
         @if (isFavourite) {
-          <a>⭐</a>
+          <a class="clickable" (click)="onRemoveFavourite(cocktail)"> ⭐</a>
         } @else {
-          <a  class="clickable">➕</a>
+          <a  class="clickable" (click)="onAddFavourite(cocktail)">➕</a>
         }
       </div>
       <h3>{{ truncateText(cocktail.strDrink | titlecase, 25) }}</h3>
@@ -23,7 +23,6 @@
         {{ ingredient }}<span *ngIf="!last">, </span>
       </p>
     </ng-container>
-
 
   </div>
 </div>

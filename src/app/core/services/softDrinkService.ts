@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable, of, switchMap} from "rxjs";
+import {map, Observable, of, switchMap, tap} from "rxjs";
 import {SoftDrink} from "../models/softDrink";
 import {environment} from "../../../environments/environment";
 import {take} from "rxjs/operators";
@@ -43,7 +43,11 @@ export class SoftDrinkService {
       switchMap(username => {
         if (username) {
           const url = `http://${environment.apiUrl}/user/favouritesoftdrinks`;
-          return this.http.get<SoftDrink[]>(url);
+          return this.http.get<SoftDrink[]>(url).pipe(
+            tap(favDrinks => {
+              localStorage.setItem("favouritesoftdrinks", JSON.stringify(favDrinks));
+            })
+          );
         } else
           return of([]);
       })
