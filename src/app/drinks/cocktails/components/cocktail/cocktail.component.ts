@@ -41,10 +41,10 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-  if (this.cocktail) {
-    this.checkFavourites();
-    this.cdr.detectChanges();
-  }
+    if (this.cocktail) {
+      this.checkFavourites();
+      this.cdr.detectChanges();
+    }
   }
 
 
@@ -59,27 +59,36 @@ export class CocktailComponent implements OnInit, OnDestroy {
     this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
   }
 
-onAddFavourite(cocktail: Cocktail): void {
-  if(!this.isFavourite) {
-    let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
-    this.cocktailService.addFavouriteCocktail(cocktail.id).subscribe(
-      fav=>{
-        this.isFavourite = true;
-      }
-    );
-    userFav.push(this.cocktail);
-    localStorage.setItem('favouritecocktails', JSON.stringify(userFav));
-  }
+  onAddFavouriteCocktail(cocktail: Cocktail): void {
+    if(localStorage.getItem('username') == null) {
+      this.router.navigate(['/login']);
+
+    }
     else {
-    alert("This is already a fav");
+
+      if (!this.isFavourite) {
+        let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+        this.cocktailService.addFavouriteCocktail(cocktail.id).subscribe(
+          fav => {
+            this.isFavourite = true;
+          }
+        );
+        userFav.push(this.cocktail);
+        localStorage.setItem('favouritecocktails', JSON.stringify(userFav));
+      }
+
+      else {
+        alert("This is already a fav");
+      }
+      this.checkFavourites();
+      this.cdr.detectChanges();
+
+    }
+
   }
-  this.checkFavourites();
-  this.cdr.detectChanges();
-
-}
 
 
-  onRemoveFavourite(cocktail: Cocktail): void {
+  onRemoveFavouriteCocktail(cocktail: Cocktail): void {
     if(this.isFavourite) {
       let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
       this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(
@@ -90,15 +99,15 @@ onAddFavourite(cocktail: Cocktail): void {
       const filteredFavs = userFav.filter((fav: Cocktail) => { fav != cocktail})
       localStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
     }
-  else {
-  alert("This is NOT a fav yet");
-}
-this.checkFavourites();
-this.cdr.detectChanges();
-}
+    else {
+      alert("This is NOT a fav yet");
+    }
+    this.checkFavourites();
+    this.cdr.detectChanges();
+  }
 
 
-    truncateText(text: string, maxLength: number): string {
+  truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
     } else {

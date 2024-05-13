@@ -53,4 +53,14 @@ export class SoftDrinkService {
       })
     );
   }
+  addFavouriteSoftDrink(id:number): Observable<String> {
+    const url = `http://${environment.apiUrl}/user/favouritesoftdrink/${id}`;
+    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+  }
+
+  removeFavouriteCocktail(id:number): Observable<String> {
+    const url = `http://${environment.apiUrl}/user/rmfavouritesoftdrink/${id}`;
+    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+  }
+
 }

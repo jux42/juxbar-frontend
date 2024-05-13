@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../login/auth-service";
 import {Router} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
@@ -8,7 +8,6 @@ import {CocktailService, PersonalCocktailService} from "../services/cocktailServ
 import {PersonalCocktail} from "../models/personal-cocktail";
 import {slideInAnimation} from "../../animations";
 import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
-import {Observable} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
@@ -54,17 +53,16 @@ export class ProfileComponent implements OnInit{
   @Input() personalCocktail!: PersonalCocktail;
 
   personalCocktails!: PersonalCocktail[];
-
   favouriteCocktails!: Cocktail[];
   favouriteSoftDrinks!: SoftDrink[];
-  favouriteCocktails$ !: Observable<Cocktail[]>
-  favouriteSoftDrinks$ !: Observable<SoftDrink[]>
+
 
   constructor(private authService: AuthService,
               private router: Router,
               private personalCocktailService : PersonalCocktailService,
               private cocktailService: CocktailService,
-              private softDrinkService: SoftDrinkService) {
+              private softDrinkService: SoftDrinkService,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -75,7 +73,6 @@ export class ProfileComponent implements OnInit{
     });
 
     this.checkLoggedIn();
-    this.loadPersonalCocktails();
 
     if (this.loggedIn) {
       console.log(this.loggedIn)
@@ -87,6 +84,7 @@ export class ProfileComponent implements OnInit{
 
 
   }
+
 
   loadPersonalCocktails() {
     this.personalCocktailService.getAllPersonalCocktails().subscribe({
@@ -109,6 +107,7 @@ export class ProfileComponent implements OnInit{
       next: (favCocktails) => {
         if (!favCocktails) favCocktails = [];
         this.favouriteCocktails = favCocktails;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('No cocktails to load', error);

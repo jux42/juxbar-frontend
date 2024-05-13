@@ -35,7 +35,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   imageLoaded: {[key: string]: boolean} = {};
   isFavourite: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private softDrinkService: SoftDrinkService) {
   }
 
   ngOnInit() {
@@ -53,6 +53,52 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
     let userFav = JSON.parse(localStorage.getItem('favouritesoftdrinks') || '[]');
     console.log(userFav);
     this.isFavourite = userFav.some((fav: any) => fav.id === this.softDrink.id);
+  }
+
+  onAddFavouriteSoftDrink(softDrink: SoftDrink): void {
+    if(localStorage.getItem('username') == null) {
+      this.router.navigate(['/login']);
+
+    }
+    else {
+
+      if (!this.isFavourite) {
+        let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+        this.softDrinkService.addFavouriteSoftDrink(softDrink.id).subscribe(
+          fav => {
+            this.isFavourite = true;
+          }
+        );
+        userFav.push(this.softDrink);
+        localStorage.setItem('favouritesoftdrinks', JSON.stringify(userFav));
+      }
+
+      else {
+        alert("This is already a fav");
+      }
+      this.checkFavourites();
+      this.cdr.detectChanges();
+
+    }
+
+  }
+
+  onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {
+    if(this.isFavourite) {
+      let userFav = JSON.parse(localStorage.getItem('favouritesoftdrinks') || '[]');
+      this.softDrinkService.removeFavouriteCocktail(softDrink.id).subscribe(
+        fav=>{
+          this.isFavourite = false;
+        }
+      );
+      const filteredFavs = userFav.filter((fav: SoftDrink) => { fav != softDrink})
+      localStorage.setItem('favouritesoftdrinks', JSON.stringify(filteredFavs));
+    }
+    else {
+      alert("This is NOT a fav yet");
+    }
+    this.checkFavourites();
+    this.cdr.detectChanges();
   }
 
   truncateText(text: string, maxLength: number): string {

@@ -2,52 +2,51 @@
 <div id="top"></div>
 
 <ng-container *ngIf="isLoading;  then loadingBlock; else loadedBlock"></ng-container>
-  <ng-template #loadingBlock>
+<ng-template #loadingBlock>
 
-    <h1  class="loading">LOADING</h1>
-  </ng-template>
+  <h1  class="loading">LOADING</h1>
+</ng-template>
 
-  <ng-template #loadedBlock>
-
-
-    <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
-<ng-container *ngIf="cocktails$ | async as cocktails; ">
+<ng-template #loadedBlock>
 
 
-<div class = "searchBlock">
-<div class="alphabetBlock">
-  <button class="alphabet-navigation" *ngFor="let letter of alphabet" (click)="goToLetter(letter)">{{ letter }}</button>
-</div>
-  <div class="formBlock">
-    <form [formGroup]="cocktailForm" class="cocktailForm">
-      <div class="formGroup">
-        <label for="strDrink">Nom</label>
-        <input formControlName="strDrink" id="strDrink" type="text">
+  <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+    <ng-container *ngIf="cocktails$ | async as cocktails; ">
+
+
+      <div class = "searchBlock">
+        <div class="alphabetBlock">
+          <button class="alphabet-navigation" *ngFor="let letter of alphabet" (click)="goToLetter(letter)">{{ letter }}</button>
+        </div>
+        <div class="formBlock">
+          <form [formGroup]="cocktailForm" class="cocktailForm">
+            <div class="formGroup">
+              <label for="strDrink">Nom</label>
+              <input formControlName="strDrink" id="strDrink" type="text">
+            </div>
+            <div class="formGroup">
+              <label for="strFirstIngredient">Ingrédient</label>
+              <input formControlName="strFirstIngredient" id="strFirstIngredient">
+            </div>
+            <div class="formGroup">
+              <label for="strSecondIngredient">Ingrédient</label>
+              <input formControlName="strSecondIngredient" id="strSecondIngredient">
+            </div>
+            <div class="formGroup">
+              <label for="strThirdIngredient">Ingrédient</label>
+              <input formControlName="strThirdIngredient" id="strThirdIngredient">
+            </div></form>
+        </div>
+
       </div>
-      <div class="formGroup">
-        <label for="strFirstIngredient">Ingrédient</label>
-        <input formControlName="strFirstIngredient" id="strFirstIngredient">
+
+      <div class="thisFlex" >
+
+        <app-cocktail @listAnimation *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" [cocktail]="cocktail "
+                      [attr.id]="getAnchorId(cocktail.strDrink)">
+
+        </app-cocktail>
       </div>
-      <div class="formGroup">
-        <label for="strSecondIngredient">Ingrédient</label>
-        <input formControlName="strSecondIngredient" id="strSecondIngredient">
-      </div>
-      <div class="formGroup">
-        <label for="strThirdIngredient">Ingrédient</label>
-        <input formControlName="strThirdIngredient" id="strThirdIngredient">
-      </div></form>
+    </ng-container>
   </div>
-
-    </div>
-
-  <div class="thisFlex" >
-
-    <app-cocktail @listAnimation *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" [cocktail]="cocktail "
-                   [attr.id]="getAnchorId(cocktail.strDrink)">
-
-    </app-cocktail>
-    </div>
-</ng-container>
-</div>
-  </ng-template>
-
+</ng-template>

@@ -43,7 +43,7 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
     AsyncPipe,
     NgIf,
     NgClass,
-   ],
+  ],
   templateUrl: './cocktail-list.component.html',
   styleUrls: ['./cocktail-list.component.scss']
 })

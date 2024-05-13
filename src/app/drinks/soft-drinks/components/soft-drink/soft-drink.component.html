@@ -3,9 +3,9 @@
     <div class="titleRow">
       <div class="favIcon">
         @if (isFavourite) {
-          <a>⭐</a>
+          <a class="clickable" (click)="onRemoveFavouriteSoftDrink(softDrink)">⭐</a>
         } @else {
-          <a>➕</a>
+          <a class="clickable" (click)="onAddFavouriteSoftDrink(softDrink)">➕</a>
         }
       </div>
       <h3>{{ truncateText(softDrink.strDrink | titlecase, 25) }}</h3>
