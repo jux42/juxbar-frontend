@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {map, Observable, Subject} from "rxjs";
+import { Observable, Subject} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
@@ -9,7 +9,6 @@ import {UserRequest} from "../../../../core/models/UserRequest";
 
 @Component({
   selector: 'app-cocktail',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     AsyncPipe,
@@ -31,28 +30,38 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   id!: number;
   protected readonly environment = environment;
-  imageLoaded: {[key: string]: boolean} = {};
+  imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
+  isFavourite$!: Observable<boolean>;
   @Input() userRequest!: UserRequest
 
-
-  constructor(private cocktailService: CocktailService, private router: Router, ) {
+  constructor(private cdr: ChangeDetectorRef, private cocktailService: CocktailService, private router: Router) {
   }
 
   ngOnInit() {
 
-    this.cocktailService.getFavouriteCocktailsCached().pipe(
-
-      map(favouriteCocktails => {
-        this.isFavourite = favouriteCocktails.some(favCocktail => favCocktail.id === this.cocktail.id);
-      })
-    ).subscribe();
+  if (this.cocktail){
+    this.checkFavourites();
+    this.cdr.detectChanges();
   }
+
+  }
+
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  checkFavourites() {
+    let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+    console.log(userFav);
+    this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
+  }
+
+
+
+
 
 
   truncateText(text: string, maxLength: number): string {

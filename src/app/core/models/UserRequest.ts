@@ -1,4 +1,6 @@
 
 export class UserRequest {
-  constructor(public username: string) {}
+  constructor(public username: string) {
+
+  }
 }

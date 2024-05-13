@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit{
   ngOnInit() {
 
     this.checkLoggedIn();
-  this.loadPersonalCocktails();
+    this.loadPersonalCocktails();
 
     if (this.loggedIn) {
       console.log(this.loggedIn)
@@ -84,52 +84,52 @@ export class ProfileComponent implements OnInit{
   }
 
   loadPersonalCocktails() {
-           this.personalCocktailService.getAllPersonalCocktails().subscribe({
-          next: (cocktails) => {
-            this.personalCocktails = cocktails;
-            this.isLoading = false;
-          },
-          error: (error) => {
-            console.error('Error loading personal cocktails', error);
-            this.isLoading = false;
-          }
-        });
+    this.personalCocktailService.getAllPersonalCocktails().subscribe({
+      next: (cocktails) => {
+        this.personalCocktails = cocktails;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading personal cocktails', error);
+        this.isLoading = false;
+      }
+    });
 
   }
 
   loadFavouriteCocktails() {
 
-        this.cocktailService.getFavouriteCocktails().subscribe({
+    this.cocktailService.getFavouriteCocktails().subscribe({
 
-            next: (favCocktails) => {
-              if (!favCocktails) favCocktails = [];
-              this.favouriteCocktails = favCocktails;
-            },
-            error: (error) => {
-              console.error('No cocktails to load', error);
-              this.isLoading = false;
-            }
-          })
+      next: (favCocktails) => {
+        if (!favCocktails) favCocktails = [];
+        this.favouriteCocktails = favCocktails;
+      },
+      error: (error) => {
+        console.error('No cocktails to load', error);
+        this.isLoading = false;
+      }
+    })
 
-    }
+  }
 
 
-    loadFavouriteSoftDrinks() {
-      this.authService.getUsername().subscribe(username => {
-        if (username) {
-          this.softDrinkService.getFavouriteSoftDrinks()?.subscribe({
+  loadFavouriteSoftDrinks() {
+    this.authService.getUsername().subscribe(username => {
+      if (username) {
+        this.softDrinkService.getFavouriteSoftDrinks()?.subscribe({
 
-              next: (favSoftDrinks) => {
-                if (!favSoftDrinks) favSoftDrinks = [];
-                this.favouriteSoftDrinks = favSoftDrinks;
-              },
-              error: (error) => {
-                console.error('no softdrinks to load', error);
-                this.isLoading = false;
-              }
-            })
-        }
-      });
+          next: (favSoftDrinks) => {
+            if (!favSoftDrinks) favSoftDrinks = [];
+            this.favouriteSoftDrinks = favSoftDrinks;
+          },
+          error: (error) => {
+            console.error('no softdrinks to load', error);
+            this.isLoading = false;
+          }
+        })
+      }
+    });
   }
 
 

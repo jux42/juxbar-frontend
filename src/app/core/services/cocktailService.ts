@@ -1,6 +1,6 @@
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable, of, shareReplay, switchMap} from "rxjs";
+import {map, Observable, of, shareReplay, switchMap, tap} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {environment} from "../../../environments/environment";
 import {PersonalCocktail} from "../models/personal-cocktail";
@@ -64,9 +64,14 @@ export class CocktailService {
       switchMap(username => {
         if (username) {
           const url = `http://${environment.apiUrl}/user/favouritecocktails`;
-          return this.http.get<Cocktail[]>(url);
-        } else
+          return this.http.get<Cocktail[]>(url).pipe(
+            tap(favCocktails => {
+              localStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
+            })
+          );
+        } else {
           return of([]);
+        }
       })
     );
   }
@@ -75,6 +80,7 @@ export class CocktailService {
   getFavouriteCocktailsCached(): Observable<Cocktail[]> {
     return this.favouriteCocktails$;
   }
+
 
 
 

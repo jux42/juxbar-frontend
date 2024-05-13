@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, catchError, Observable, tap, throwError} from 'rxjs';
 import {Router} from "@angular/router";
+import {Cocktail} from "../models/cocktail";
 
 export interface AuthRequest {
   username: string;
@@ -12,6 +13,7 @@ export interface AuthRequest {
   providedIn: 'root'
 })
 export class AuthService {
+  favList  = new BehaviorSubject<Cocktail[]>([]);
   username = new BehaviorSubject<string | null>(localStorage.getItem('username'));
   loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isAuthenticated') === 'true');
   private loginUrl = 'http://localhost:8080/login';
@@ -19,18 +21,17 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  // setLoginState(isAuthenticated: boolean) {
-  //   this.loggedIn.next(isAuthenticated);
-  //   localStorage.setItem('isAuthenticated', isAuthenticated.toString());
-  //
-  // }
+
 
   private setAuthState(isAuthenticated: boolean, username: string | null): void {
+
     this.loggedIn.next(isAuthenticated);
     this.username.next(username);
+    this.favList.next(this.favList.value)
     localStorage.setItem('isAuthenticated', isAuthenticated.toString());
     if (username) {
       localStorage.setItem('username', username);
+      // localStorage.setItem("favouritecocktails", JSON.stringify(this.favList) )
       console.log(localStorage)
     } else {
       localStorage.removeItem('username');
