@@ -1,11 +1,43 @@
 <div @fadeInSlide class = "mainFrame">
 
+  <div *ngIf="cocktail">
+    <h3 class="innerFrameBold" >le Cocktail du jour : </h3>
+
+    <img class="clickable dayPic" (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'"
+         alt="Cocktail Image">
+
+    <div>
+      <p class="innerFrameBold">++++++++++++++++++++++++++</p>
+    </div>
+
+  </div>
   <div class="innerFrame clickable">
     <p>Créer un cocktail</p>
 
   </div>
   <div class="innerFrame clickable">
     <p (click)="onGoToRandomCocktail()">voir un cocktail au hasard</p>
+  </div>
+
+
+
+  <div>
+    <p class="innerFrameBold">chercher un ingrédient :</p>
+    <div *ngIf="ingredientsList; else loading">
+      <select class="ingredientSelect" [(ngModel)]="ingredient" (change)="goToIngredient(ingredient.strIngredient)">
+        <option class="ingOption" *ngFor="let ingredient of ingredientsList" [ngValue]="ingredient">
+          {{ ingredient.strIngredient }}
+        </option>
+      </select>
+    </div>
+
+
+    <ng-template #loading>
+      <div class="ingLoader">
+      <p>LOADING...</p>
+      </div>
+    </ng-template>
+  </div>
 
   </div>
   <div class="innerFrame clickable">
@@ -16,16 +48,7 @@
     <p>On verra</p>
   </div>
 
-    <div *ngIf="cocktail">
-      <h3 class="innerFrame" >le Cocktail du jour : </h3>
-      <p class="dayFrame">{{cocktail.strDrink}}</p>
-      <img class="clickable dayPic" (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'"
-           alt="Cocktail Image"
-           >
 
 
-    </div>
-
-  </div>
 
 

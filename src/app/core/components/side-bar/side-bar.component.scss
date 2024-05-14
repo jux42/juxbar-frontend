@@ -13,10 +13,36 @@
 }
 
 .innerFrame{
-  text-align: left;
+  text-align: justify;
   margin-left: 15px;
+  margin-right: 60px;
   color: wheat;
 }
+
+.innerFrameBold {
+  text-align: center;
+  font-weight: bold;
+  color: wheat;
+}
+
+.ingLoader{
+  text-align: center;
+  font-size: medium;
+  font-weight: bolder;
+  font-style: italic;
+  color: goldenrod;
+  animation: breatheAnimation 1s ease-out infinite;
+
+}
+@keyframes breatheAnimation {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 
 .dayFrame{
   font-weight: bold;
@@ -35,5 +61,12 @@
   transform: scale(1.1);
   transition-duration: 0.8s;
   cursor: pointer;
+}
+
+.ingredientSelect{
+  display: block;
+  max-width: calc(100% - 25px);
+  margin: 0 auto;
+
 }
 

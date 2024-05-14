@@ -1,11 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {CocktailService} from "../../services/cocktailService";
 import {CocktailComponent} from "../../../drinks/cocktails/components/cocktail/cocktail.component";
 import {Cocktail} from "../../models/cocktail";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {environment} from "../../../../environments/environment";
+import {IngredientService} from "../../services/ingredientService";
+import {FormsModule} from "@angular/forms";
+import {map} from "rxjs";
+import {Ingredient} from "../../models/ingredient";
+import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
 
 @Component({
   selector: 'app-side-bar',
@@ -13,7 +18,10 @@ import {environment} from "../../../../environments/environment";
   imports: [
     CocktailComponent,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    FormsModule,
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss',
@@ -29,20 +37,40 @@ import {environment} from "../../../../environments/environment";
 export class SideBarComponent implements OnInit{
 
   cocktailOfTheDayId!: number;
-
   cocktail!: Cocktail;
-  constructor(private router: Router, private cocktailService: CocktailService) {
+  ingredientsList!: Ingredient[];
+  ingredient!: Ingredient;
+  ingredientString!: string;
+
+  constructor(private router: Router,
+              private cocktailService: CocktailService,
+              private ingredientService: IngredientService,
+              private cdr: ChangeDetectorRef,
+              private capitalizeFirst: CapitalizeFirstPipe) {
   }
 
   ngOnInit() {
 
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
     console.log(this.cocktailOfTheDayId)
-    this.cocktailService.getOneCocktailById(this.cocktailOfTheDayId).subscribe(
+    this.cocktailService.getOneCocktailById(this.cocktailOfTheDayId).pipe(
+      map(
       data => this.cocktail = data
-    );
+      )
+    ).subscribe();
+
+
+    this.ingredientService.getAllIngredients().subscribe(
+      data=>this.ingredientsList = data
+    )
   }
 
+  goToIngredient(ingredientString: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      const formattedIngredient = this.capitalizeFirst.transform(ingredientString);
+      this.router.navigate([`juxbar/detailledingredient/${formattedIngredient}`]);
+    });
+  }
 
 
   onGoToRandomCocktail() {

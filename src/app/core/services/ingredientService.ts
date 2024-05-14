@@ -31,4 +31,8 @@ export class IngredientService {
 
   }
 
+  getAllIngredientsStrings(): Observable<string[]> {
+    return this.http.get<string[]>(`http://${environment.apiUrl}/ingredientstrings`);
+  }
+
 }
