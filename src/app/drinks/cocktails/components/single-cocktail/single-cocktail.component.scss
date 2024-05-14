@@ -2,23 +2,20 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  background-color: rgba(whitesmoke, 0.2);
+  width: 99%
 }
 
 .cocktail-card {
-  padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
-
-  border-radius: 5% 10%;
+  padding-bottom: 30px;
+  border-radius: 1%;
   width: 650px;
   height: 750px;
-  margin: 10px 50px 10px 120px ;
-
-
+  margin: 10px 50px 10px 120px;
   color: antiquewhite;
-
-  background-image: linear-gradient(#235c71 0, #15404f 100%);
+  background-image: linear-gradient(rgba(35, 92, 113, 1), rgba(21, 64, 79, 0.9)); // Gradient avec transparence
   box-shadow: 5px 5px 20px black;
 }
-
 .thisFlex {
   display: flex;
   flex-wrap: wrap;
@@ -53,7 +50,7 @@ img {
   height: 500px;
   margin: 25px;
   display: block;
-  border-radius: 15%;
+  border-radius: 1%;
 }
 .pic:hover{
   -ms-transform: scale(2);
@@ -66,7 +63,7 @@ img:hover {
   -ms-transform: scale(1.1);
   transform: scale(1.1);
   transition: 0.8s ease;
-
+  opacity: 0.8; // Ajout d'une légère transparence lors du survol
 }
 
 .instructions {

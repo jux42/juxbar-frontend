@@ -1,12 +1,12 @@
 .mainFrame {
-  transition: transform 0.4s ease-out; // S'assure que les transitions sont fluides
+  transition: transform 0.4s ease-out;
   width: 200px;
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(#235c71 0, #15404f 100%);  position: sticky;
   top: 110px;
   height:85vh ;
-  border-radius: 5px;
+  border-radius: 1%;
 }
 .clickable:hover{
   color: goldenrod;
@@ -16,5 +16,24 @@
   text-align: left;
   margin-left: 15px;
   color: wheat;
+}
+
+.dayFrame{
+  font-weight: bold;
+  text-align: center;
+  color: palegoldenrod;
+}
+
+.dayPic {
+  display: block;
+  max-width: calc(100% - 25px);
+  margin: 0 auto;
+  height: auto;
+}
+
+.dayPic:hover{
+  transform: scale(1.1);
+  transition-duration: 0.8s;
+  cursor: pointer;
 }
 

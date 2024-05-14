@@ -55,7 +55,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   checkFavourites() {
     let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
-    console.log(userFav);
+    // console.log(userFav);
     this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
   }
 

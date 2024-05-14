@@ -2,7 +2,7 @@
   position: relative; /* Permet le positionnement absolu des éléments enfants par rapport à celui-ci */
   padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
 
-  border-radius: 5% 10%;
+  border-radius: 1%;
   color: palegoldenrod;
 
   width: 250px;
@@ -64,7 +64,7 @@ img {
   margin-left: auto;
   margin-right: auto;
   display: block;
-  border-radius: 15%;
+  border-radius: 1%;
 }
 
 img:hover {

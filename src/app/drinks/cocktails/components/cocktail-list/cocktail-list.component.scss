@@ -11,22 +11,32 @@
 //}
 .searchBlock{
   position: sticky;
-  top: 15px;
+  top: 10px;
   z-index: 1001;
-
+  background-color: rgba(white, 0.2);
+  height: 100%;
   display: flex;
   flex-direction: row;
-  margin-left: 115px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 105px;
+  margin-right: 80px;
+  border-radius: 1%;
 }
 
 .alphabet-navigation {
   position: sticky;
   height: 65px;
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
   flex-direction: row;
   background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
   color: darkslategray;
   z-index: 1000;
+}
+
+.alphabetBlock{
+  margin-left: 25px ;
+
 }
 button{
   height: 60px;
@@ -86,14 +96,15 @@ h2 {
   //position: sticky;
   //top: 15px;
   border-radius: 5px;
-  width: 50%;
+  width: 45%;
   height: 65px;
-  margin-left: 5px;
   text-align: center;
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 25px;
   opacity: 1;
 }
 

@@ -5,7 +5,7 @@
 
   </div>
   <div class="innerFrame clickable">
-    <p>10 cocktails au hasard</p>
+    <p (click)="onGoToRandomCocktail()">voir un cocktail au hasard</p>
 
   </div>
   <div class="innerFrame clickable">
@@ -14,7 +14,18 @@
   </div>
   <div class="innerFrame clickable">
     <p>On verra</p>
+  </div>
+
+    <div *ngIf="cocktail">
+      <h3 class="innerFrame" >le Cocktail du jour : </h3>
+      <p class="dayFrame">{{cocktail.strDrink}}</p>
+      <img class="clickable dayPic" (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'"
+           alt="Cocktail Image"
+           >
+
+
+    </div>
 
   </div>
 
-</div>
+

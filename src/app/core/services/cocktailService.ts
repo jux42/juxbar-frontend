@@ -93,10 +93,15 @@ export class CocktailService {
     return this.favouriteCocktails$;
   }
 
-
-
-
-
+  getCocktailOfTheDayId(maxId: number): number {
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    return this.pseudoRandomNumber(seed, 1, maxId);
+  }
+  private pseudoRandomNumber(seed: number, min: number, max: number): number {
+    const x = Math.sin(seed) * 10000;
+    return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+  }
 }
 
 
