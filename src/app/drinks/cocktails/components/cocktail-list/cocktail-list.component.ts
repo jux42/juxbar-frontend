@@ -13,7 +13,7 @@ import {
 } from "rxjs";
 import {CocktailService} from "../../../../core/services/cocktailService";
 import {ActivatedRoute} from "@angular/router";
-import {AsyncPipe, NgClass, NgForOf, NgIf, ViewportScroller} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle, ViewportScroller} from "@angular/common";
 import {CocktailComponent} from "../cocktail/cocktail.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {slideInAnimation} from "../../../../animations";
@@ -43,6 +43,7 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
     AsyncPipe,
     NgIf,
     NgClass,
+    NgStyle,
   ],
   templateUrl: './cocktail-list.component.html',
   styleUrls: ['./cocktail-list.component.scss']
@@ -65,14 +66,17 @@ export class CocktailListComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
 
     this.cocktailService.getAllCocktailsCached().pipe(
       takeUntil(this.destroy$),
       tap(data=>this.cocktailsSubject.next(data)),
       finalize(()=>this.isLoading=false))
       .subscribe();
-
 
     this.cocktailForm = this.formBuilder.group({
       strDrink: '',
@@ -100,7 +104,7 @@ export class CocktailListComponent implements OnInit {
 
 
   trackByCocktails(index: number, cocktail: Cocktail): number {
-    return cocktail.id; // ou une autre propriété unique
+    return cocktail.id;
   }
 
   shouldAddAnchor(cocktailName: string): boolean {

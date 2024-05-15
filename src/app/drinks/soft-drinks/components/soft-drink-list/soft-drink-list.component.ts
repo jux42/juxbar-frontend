@@ -55,7 +55,16 @@ export class SoftDrinkListComponent implements OnInit {
   constructor(private softDrinkService: SoftDrinkService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
   }
 
+
+
   ngOnInit() {
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
     this.softDrinkForm = this.formBuilder.group({
       strDrink: '',
       strFirstIngredient: '',

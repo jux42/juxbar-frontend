@@ -14,9 +14,7 @@
     position: relative;
     grid-template-areas:
       "titleRow"
-      "image"
-      "favIcon"
-      "ingBlock";
+      "image";
     justify-items: center;
     align-items: start;
     gap: 15px; /* Ajout d'un espace entre les éléments */
@@ -30,34 +28,58 @@
   }
 
   .favIcon {
-    grid-area: favIcon;
-    margin-top: 30px;
+    margin-top: 5px;
     display: block;
-    text-align: center;
+    text-align: end;
   }
 
   .ingBlock {
-    grid-area: ingBlock;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px; /* Ajout d'un espace entre les éléments */
-    margin-top: 50px;
+    gap: 15px;
+    margin-top: 10px;
     justify-content: center;
+  }
+}
+
+.floating-window {
+  z-index: 5000;
+  position: absolute;
+  //top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 150px;
+  background: linear-gradient(#235c71 0, #15404f 100%);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out, visibility 0.1s ease-in-out;
+
+  &.fadeIn {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.fadeOut {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
 .ingredient {
   text-align: justify;
-  margin-left: 5px;
-  margin-right: 5px;
-  color: wheat;
-  padding: 0; /* Ajustez selon vos besoins */
+  margin-left: 15px;
+  margin-right: 15px;
+  color: palegoldenrod;
+  padding: 0;
   font-size: 1em;
+  font-weight: bold;
 }
 
 p {
-  margin: 0; /* Réinitialise les marges par défaut des paragraphes pour un meilleur contrôle */
-  padding: 0 15px; /* Ajuste le padding si nécessaire pour l'espacement à l'intérieur des cellules de la grille */
+  margin: 0;
+  padding: 0 15px;
 }
 
 img {

@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SoftDrink} from "../../../../core/models/softDrink";
-import {map, Observable, Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {SoftDrinkService} from "../../../../core/services/softDrinkService";
 import {Router, RouterLink} from "@angular/router";
-import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
+import {NgClass, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {environment} from "../../../../../environments/environment";
 import {AuthService} from "../../../../core/login/auth-service";
 
@@ -15,6 +15,7 @@ import {AuthService} from "../../../../core/login/auth-service";
     NgIf,
     TitleCasePipe,
     RouterLink,
+    NgClass,
 
   ],
   templateUrl: './soft-drink.component.html',
@@ -28,7 +29,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   imageData!: Response;
   id!: number;
   private destroy$ = new Subject<void>();
-
+  mouseIsOn: boolean = false;
   @Output() elementVisible = new EventEmitter<SoftDrink>();
   protected readonly SoftDrink = SoftDrink;
   protected readonly environment = environment;
@@ -81,6 +82,15 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
 
     }
 
+  }
+  onMouseEnter() {
+    this.mouseIsOn=true;
+    console.log("mouse enter");
+  }
+
+  onMouseLeave() {
+    this.mouseIsOn=false;
+    console.log("mouse leave");
   }
 
   onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {

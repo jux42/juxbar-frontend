@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {Observable, of, Subject} from "rxjs";
-import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, NgStyle, TitleCasePipe} from "@angular/common";
+import { Observable, Subject} from "rxjs";
+import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
 import {UserRequest} from "../../../../core/models/UserRequest";
@@ -18,7 +18,8 @@ import {AuthService} from "../../../../core/login/auth-service";
     NgOptimizedImage,
     NgForOf,
     RouterLink,
-    NgStyle
+    NgStyle,
+    NgClass
   ],
   templateUrl: './cocktail.component.html',
   styleUrl: './cocktail.component.scss'
@@ -30,7 +31,6 @@ export class CocktailComponent implements OnInit, OnDestroy {
   imageData!: Response;
   private destroy$ = new Subject<void>();
   id!: number;
-  zIndex: number = 1;
 
   protected readonly environment = environment;
   imageLoaded: { [key: string]: boolean } = {};
@@ -44,8 +44,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.zInDexRaise().subscribe();
-    // this.zIndex = 570-this.cocktail.id;
+
     if (this.cocktail) {
 
       this.checkFavourites();
@@ -96,19 +95,6 @@ export class CocktailComponent implements OnInit, OnDestroy {
   }
 
 
-  zInDexRaise(){
-    if(this.mouseIsOn){
-      this.zIndex = 1000;
-      console.log("z-index for " + this.cocktail.strDrink + " : " + this.zIndex );
-      return of(this.zIndex)
-    }
-    else{
-      this.zIndex = 1;
-      console.log("z-index for " + this.cocktail.strDrink + " : " + this.zIndex );
-      return of (this.zIndex);
-    }
-
-  }
 
   onMouseEnter() {
     this.mouseIsOn=true;
