@@ -3,12 +3,7 @@
 .this-animation {
   animation-delay: 1s !important;
 }
-//.thisGrid {
-//  display: grid;
-//  margin-top: 50px;
-//  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-//  grid-gap: 10px;
-//}
+
 .searchBlock{
   position: sticky;
   top: 10px;
@@ -108,6 +103,7 @@ h2 {
   opacity: 1;
 }
 
+
 .thisFlex {
   position: relative;
   display: flex;
@@ -116,6 +112,8 @@ h2 {
   justify-content: space-around;
   align-items: center;
 }
+
+
 
 
 

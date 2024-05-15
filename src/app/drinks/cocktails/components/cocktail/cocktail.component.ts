@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import { Observable, Subject} from "rxjs";
-import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
+import {Observable, of, Subject} from "rxjs";
+import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, NgStyle, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
 import {UserRequest} from "../../../../core/models/UserRequest";
@@ -17,7 +17,8 @@ import {AuthService} from "../../../../core/login/auth-service";
     NgIf,
     NgOptimizedImage,
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgStyle
   ],
   templateUrl: './cocktail.component.html',
   styleUrl: './cocktail.component.scss'
@@ -28,20 +29,25 @@ export class CocktailComponent implements OnInit, OnDestroy {
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
   private destroy$ = new Subject<void>();
-
   id!: number;
+  zIndex: number = 1;
+
   protected readonly environment = environment;
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
   isFavourite$!: Observable<boolean>;
   @Input() userRequest!: UserRequest
+  mouseIsOn: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private cocktailService: CocktailService) {
   }
 
   ngOnInit() {
 
+    this.zInDexRaise().subscribe();
+    // this.zIndex = 570-this.cocktail.id;
     if (this.cocktail) {
+
       this.checkFavourites();
       this.cdr.detectChanges();
     }
@@ -52,6 +58,8 @@ export class CocktailComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+
 
   checkFavourites() {
     let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
@@ -87,6 +95,30 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   }
 
+
+  zInDexRaise(){
+    if(this.mouseIsOn){
+      this.zIndex = 1000;
+      console.log("z-index for " + this.cocktail.strDrink + " : " + this.zIndex );
+      return of(this.zIndex)
+    }
+    else{
+      this.zIndex = 1;
+      console.log("z-index for " + this.cocktail.strDrink + " : " + this.zIndex );
+      return of (this.zIndex);
+    }
+
+  }
+
+  onMouseEnter() {
+    this.mouseIsOn=true;
+    console.log("mouse enter");
+  }
+
+  onMouseLeave() {
+    this.mouseIsOn=false;
+    console.log("mouse leave");
+  }
 
   onRemoveFavouriteCocktail(cocktail: Cocktail): void {
     if(this.isFavourite) {

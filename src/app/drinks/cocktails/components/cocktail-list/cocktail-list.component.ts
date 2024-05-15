@@ -51,7 +51,6 @@ export class CocktailListComponent implements OnInit {
 
   alphabet: string[] =['#','A', 'B', 'C', 'D', 'E', 'F', 'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   lastAnchorLetter = '';
-
   @Input() cocktail !: Cocktail;
   cocktails$!: Observable<Cocktail[]>;
   cocktailForm!: FormGroup;
@@ -83,8 +82,6 @@ export class CocktailListComponent implements OnInit {
 
     });
 
-
-
     this.cocktails$ = this.cocktailForm.valueChanges.pipe(
       startWith({strDrink: '', strFirstIngredient: '', strSecondIngredient: '', strThirdIngredient: ''}),
       debounceTime(400),
@@ -100,6 +97,8 @@ export class CocktailListComponent implements OnInit {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+
   trackByCocktails(index: number, cocktail: Cocktail): number {
     return cocktail.id; // ou une autre propriété unique
   }
