@@ -1,60 +1,45 @@
 .softDrink-card {
-  position: relative;
-  padding-bottom: 30px;
-  transition: all 0.8s;
-  border-radius: 1%;
-  color: palegoldenrod;
-  width: 250px;
-  margin: 15px;
-  background-image: linear-gradient(#235c71 0, #15404f 100%);
-  box-shadow: 5px 5px 20px black;
 
-  .thisGrid {
-    display: grid;
+  &.active {
     position: relative;
-    grid-template-areas:
-      "titleRow"
-      "image";
-    justify-items: center;
-    align-items: start;
-    gap: 15px;
-  }
+    padding-bottom: 30px;
+    //transition: all 0.8s;
+    //border-radius: 1%;
+    color: palegoldenrod;
+    width: 250px;
+    margin: 15px;
+    background-color: #186b85;
+    box-shadow: 5px 5px 20px black;
 
-  .titleRow {
-    grid-area: titleRow;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
-
-  .favIcon {
-    margin-top: 5px;
-    display: block;
-    text-align: end;
-  }
-
-  .ingBlock {
-    gap: 15px;
-    margin-top: 10px;
-    justify-content: center;
+  &.inactive {
+    position: relative;
+    padding-bottom: 30px;
+    transition: all 0.8s;
+    border-radius: 1%;
+    color: palegoldenrod;
+    width: 250px;
+    margin: 15px;
+    background-image: linear-gradient(#235c71 0, #15404f 100%);
+    box-shadow: 5px 5px 20px black;
   }
 }
 
 .floating-window {
   z-index: 5000;
   position: absolute;
-  top: 100%;
+  top: 129%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
+  width: 220px;
   height: 150px;
-  background: linear-gradient(#235c71 0, #15404f 100%);
+  background-color: #186b85;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 3% 3%;
+  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease-in-out, visibility 0.1s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.1s ease-in-out;
 
   &.fadeIn {
     opacity: 1;
@@ -65,6 +50,35 @@
     opacity: 0;
     visibility: hidden;
   }
+}
+.thisGrid {
+  display: grid;
+  position: relative;
+  grid-template-areas:
+      "titleRow"
+      "image";
+  justify-items: center;
+  align-items: start;
+  gap: 15px; /* Ajout d'un espace entre les éléments */
+}
+
+.titleRow {
+  grid-area: titleRow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favIcon {
+  margin-top: 5px;
+  display: block;
+  text-align: end;
+}
+
+.ingBlock {
+  gap: 15px;
+  margin-top: 10px;
+  justify-content: center;
 }
 
 .ingredient {

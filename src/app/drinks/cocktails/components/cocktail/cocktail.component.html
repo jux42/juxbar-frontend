@@ -1,7 +1,7 @@
 <div>
   <div *ngIf="cocktail"
        class="cocktail-card"
-       (mouseenter)="onMouseEnter()"
+       [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}"
        (mouseleave)="onMouseLeave()">
 
     <div class="thisGrid">
@@ -9,7 +9,7 @@
         <h3>{{ truncateText(cocktail.strDrink | titlecase, 25) }}</h3>
       </div>
 
-      <img (click)="goToCocktail()"
+      <img (click)="goToCocktail()" (mouseenter)="onMouseEnter()"
            (load)="imageLoaded[cocktail.id] = true"
            *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
            [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"

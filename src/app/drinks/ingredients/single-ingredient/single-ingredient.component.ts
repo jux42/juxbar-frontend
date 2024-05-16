@@ -45,6 +45,12 @@ export class SingleIngredientComponent implements OnInit {
 
   ngOnInit(): void {
 
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
     const strIngredient: string = this.route.snapshot.params['strIngredient'];
     this.ingredientService.getOneIngredientByName(strIngredient).subscribe(data => {
         this.cocktails$ = this.cocktailService.getCocktailsByIngredient(strIngredient);

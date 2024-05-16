@@ -24,7 +24,16 @@ export class LoginComponent implements OnInit {
     console.log('Constructor: credentials', this.credentials);
   }
 
+
+
   ngOnInit() {
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
     console.log('OnInit: credentials', this.credentials);
     this.route.queryParams.subscribe(params => {
       if (params['authRequired']) {
