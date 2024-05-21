@@ -95,6 +95,10 @@ export class SideBarComponent implements OnInit{
     });
   }
 
+  onCreateCocktail(){
+    this.router.navigate(['profile/createcocktail']);
+  }
+
   protected readonly environment = environment;
 }
 

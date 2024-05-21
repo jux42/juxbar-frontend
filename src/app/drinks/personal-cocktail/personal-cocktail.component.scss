@@ -1,67 +1,126 @@
-.personalCocktail-card {
-  position: relative; /* Permet le positionnement absolu des éléments enfants par rapport à celui-ci */
-  padding-bottom: 30px; /* Fournit de l'espace pour le paragraphe positionné absolument */
+.cocktail-card {
 
-  border-radius: 5% 10%;
-  color: palegoldenrod;
 
-  width: 250px;
-  height: 400px;
-  margin: 15px;
+  &.active {
+    position: relative;
+    padding-bottom: 30px;
+    //transition: all 0.8s;
+    //border-radius: 1%;
+    color: palegoldenrod;
+    width: 250px;
+    margin: 15px;
+    background-color: #186b85;
+    box-shadow: 5px 5px 20px black;
 
-  background-image: linear-gradient(#235c71 0, #15404f 100%);
-  box-shadow: 5px 5px 20px black;
+  }
+  &.inactive {
+    position: relative;
+    padding-bottom: 30px;
+    transition: all 0.8s;
+    border-radius: 1%;
+    color: palegoldenrod;
+    width: 250px;
+    margin: 15px;
+    background-image: linear-gradient(#235c71 0, #15404f 100%);
+    box-shadow: 5px 5px 20px black;
+  }
 }
 
-.thisFlex {
+.floating-window {
+  z-index: 5000;
+  position: absolute;
+  top: 129%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 150px;
+  background-color: #186b85;
+  padding: 15px;
+  border-radius: 0 0 3% 3%;
+  //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.1s ease-in-out;
+
+  &.fadeIn {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.fadeOut {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+.thisGrid {
+  display: grid;
+  position: relative;
+  grid-template-areas:
+      "titleRow"
+      "image";
+  justify-items: center;
+  align-items: start;
+  gap: 15px; /* Ajout d'un espace entre les éléments */
+}
+
+
+.titleRow {
+  grid-area: titleRow;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
 }
 
-.ingBlock {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px; /* Ajoute un peu d'espace entre les éléments */
-  margin-top: 50px;
-  justify-content: center;
-
+.favIcon {
+  margin-top: 5px;
+  display: block;
+  text-align: end;
 }
+
+.ingBlock {
+  gap: 15px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+
+
 
 .ingredient {
   text-align: justify;
-  margin-left: 5px;
-  margin-right: 5px;
-  color: wheat;
-  padding: 0; /* Ajustez selon vos besoins */
+  margin-left: 15px;
+  margin-right: 15px;
+  color: palegoldenrod;
+  padding: 0;
   font-size: 1em;
+  font-weight: bold;
 }
 
 p {
-  margin: 0; /* Réinitialise les marges par défaut des paragraphes pour un meilleur contrôle */
-  padding: 0 15px; /* Ajuste le padding si nécessaire pour l'espacement à l'intérieur des cellules de la grille */
+  margin: 0;
+  padding: 0 15px;
 }
 
 img {
-
-  /*filter: grayscale(100%) blur(50%);*/
+  grid-area: image;
   -webkit-filter: grayscale(55%) blur(1px);
   -webkit-transition: all 0.8s ease;
   width: 200px;
   height: 200px;
-  margin-left: auto;
-  margin-right: auto;
   display: block;
-  border-radius: 15%;
+  border-radius: 1%;
 }
 
 img:hover {
-  /*filter: grayscale(0%);*/
   -webkit-filter: grayscale(0%) blur(0px);
-
   -ms-transform: scale(1.2);
   transform: scale(1.2);
   transition: 0.3s ease;
 }
+
+.clickable:hover {
+  color: goldenrod;
+}
+

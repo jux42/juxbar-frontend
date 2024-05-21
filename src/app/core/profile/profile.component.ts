@@ -136,10 +136,6 @@ export class ProfileComponent implements OnInit{
     });
   }
 
-
-
-
-
   checkLoggedIn(): void {
     this.authService.isLoggedIn().subscribe(isLoggedIn => {
       this.loggedIn = isLoggedIn;
@@ -152,7 +148,6 @@ export class ProfileComponent implements OnInit{
       this.userName = username;
     });
   }
-
 
 
 }

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PersonalCocktail} from "../../core/models/personal-cocktail";
 import {Observable} from "rxjs";
-import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {environment} from "../../../environments/environment";
 
@@ -14,7 +14,8 @@ import {environment} from "../../../environments/environment";
     NgIf,
     NgOptimizedImage,
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgClass
   ],
 
   templateUrl: './personal-cocktail.component.html',
@@ -29,6 +30,7 @@ export class PersonalCocktailComponent implements OnInit {
   id!: number;
   protected readonly environment = environment;
   imageLoaded: {[key: string]: boolean} = {};
+  mouseIsOn: boolean = false;
 
   constructor() {
   }
@@ -45,7 +47,19 @@ export class PersonalCocktailComponent implements OnInit {
     }
   }
 
+  onMouseEnter() {
+    this.mouseIsOn=true;
+    console.log("mouse enter");
+  }
 
+  onMouseLeave() {
+    this.mouseIsOn=false;
+    console.log("mouse leave");
+  }
+
+  goToCocktail(){
+    //TODO : go personal cocktail
+  }
 
   getIngredients(personalCocktail: any): string[] {
     let ingredients: string[] = [];

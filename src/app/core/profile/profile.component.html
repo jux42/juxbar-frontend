@@ -4,9 +4,11 @@
 <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
   <h2>your creations</h2>
 <ng-container *ngIf="personalCocktails ">
-
+<div class="thisFlex">
 <app-personalCocktail @listAnimation *ngFor="let personalCocktail of personalCocktails" [personalCocktail]="personalCocktail"></app-personalCocktail>
+</div>
   </ng-container>
+
 </div>
 <h2>Your favourites</h2>
 <div  [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">

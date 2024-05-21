@@ -130,7 +130,7 @@ export class PersonalCocktailService {
 
   getOnePersonalCocktailById(id: number): Observable<PersonalCocktail> {
 
-    return this.http.get<PersonalCocktail>(`http://${environment.apiUrl}/personalcocktail/${id}`);
+    return this.http.get<PersonalCocktail>(`http://${environment.apiUrl}/user/personalcocktail/${id}`);
 
   }
 

@@ -11,9 +11,11 @@ export const routes: Routes = [
   {
     path: 'juxbar/profile',
     component: ProfileComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
+    data: {animation: 'ProfilePage'}
   },
-  {path: 'juxbar/profile', component: ProfileComponent, data: {animation: 'ProfilePage'}},
+  {path: 'juxbar/profil/createcocktail', loadComponent:()=>import ('./core/profile/personal-cocktail-creation-page/personal-cocktail-creation-page.component')
+  .then(mod=>mod.PersonalCocktailCreationPageComponent), data: {animation: 'profilePage'}},
 
   {path: 'juxbar/listall', component: CocktailListComponent, data: {animation: 'CocktailListPage'}},
   {

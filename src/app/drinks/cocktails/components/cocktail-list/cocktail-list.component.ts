@@ -93,7 +93,7 @@ export class CocktailListComponent implements OnInit {
       map(formValue => this.filterCocktails(formValue.strDrink, [
         formValue.strFirstIngredient,
         formValue.strSecondIngredient,
-        formValue.strThirdIngredient
+        formValue.strThirdIngredient,
       ])),
     );
   }

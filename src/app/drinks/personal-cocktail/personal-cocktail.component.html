@@ -1,20 +1,33 @@
+<div>
+  <div *ngIf="personalCocktail"
+       class="cocktail-card"
+       [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}"
+       (mouseleave)="onMouseLeave()">
 
-<div *ngIf="personalCocktail" class="personalCocktail-card">
-  <div class="thisFlex"><h3>{{ truncateText(personalCocktail.strDrink | titlecase, 25) }}</h3>
-    <img *ngIf="personalCocktail"
-         [src]="personalCocktail.strDrinkThumb"
-         class="clickable fadeIn" [class.visible]="imageLoaded[personalCocktail.id]"
-         (load)="imageLoaded[personalCocktail.id] = true"
-    ></div>
+    <div class="thisGrid">
+      <div class="titleRow">
+        <h3>{{ truncateText(personalCocktail.strDrink | titlecase, 25) }}</h3>
+      </div>
 
-    <ng-container *ngFor="let ingredient of getIngredients(personalCocktail); let i = index; let last = last;">
+      <img (click)="goToCocktail()" (mouseenter)="onMouseEnter()"
+           (load)="imageLoaded[personalCocktail.id] = true"
+           *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
+           [src]=personalCocktail.strDrinkThumb alt="Cocktail Image"
+           class="clickable fadeIn">
+    </div>
+
+    <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
+      <div class="favIcon">
+        <p>🙂</p>
+      </div>
+
       <div class="ingBlock">
-      <p class="ingredient clickable">
-        {{ ingredient }}<span *ngIf="!last">, </span>
-      </p>
+        <ng-container *ngFor="let ingredient of getIngredients(personalCocktail); let i = index; let last = last;">
+          <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable">
+            {{ ingredient }}<span *ngIf="!last">, </span>
+          </p>
+        </ng-container>
+      </div>
+    </div>
   </div>
-    </ng-container>
-
-
-
 </div>
