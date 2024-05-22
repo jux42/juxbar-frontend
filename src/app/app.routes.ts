@@ -14,8 +14,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: {animation: 'ProfilePage'}
   },
-  {path: 'juxbar/profil/createcocktail', loadComponent:()=>import ('./core/profile/personal-cocktail-creation-page/personal-cocktail-creation-page.component')
-  .then(mod=>mod.PersonalCocktailCreationPageComponent), data: {animation: 'profilePage'}},
+  {path: 'juxbar/profile/createcocktail', loadComponent:()=>import ('./core/profile/personal-cocktail-creation-page/personal-cocktail-creation-page.component')
+  .then(mod=>mod.PersonalCocktailCreationPageComponent),
+    canActivate: [authGuard],},
+
 
   {path: 'juxbar/listall', component: CocktailListComponent, data: {animation: 'CocktailListPage'}},
   {

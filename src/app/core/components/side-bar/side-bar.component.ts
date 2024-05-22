@@ -96,7 +96,7 @@ export class SideBarComponent implements OnInit{
   }
 
   onCreateCocktail(){
-    this.router.navigate(['profile/createcocktail']);
+    this.router.navigate(['juxbar/profile/createcocktail']);
   }
 
   protected readonly environment = environment;

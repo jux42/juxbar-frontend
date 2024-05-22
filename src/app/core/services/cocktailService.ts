@@ -134,4 +134,10 @@ export class PersonalCocktailService {
 
   }
 
+
+  savePersonalCocktail(personalCocktail : PersonalCocktail) : Observable<any>{
+
+
+    return this.http.post(`http://${environment.apiUrl}/user/personalcocktail`, personalCocktail, { responseType: 'text' as 'json' });
+  }
 }

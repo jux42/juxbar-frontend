@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Suppose que la route de la landing page est '/'
+
         this.showNavBar = event.url !== '/';
       }
     });

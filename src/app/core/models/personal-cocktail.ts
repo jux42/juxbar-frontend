@@ -24,4 +24,6 @@ export class PersonalCocktail {
 
   strIngredient7 !: string;
 
+  ownerName !: string;
+
 }
