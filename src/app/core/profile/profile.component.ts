@@ -22,9 +22,9 @@ import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink
     trigger('listAnimation', [
       transition('* <=> *', [
         query(':enter', [
-          style({ transform: 'translateY(100%)', opacity: 0 }),
-          stagger('10ms', animate('700ms ease-in', style({ transform: 'translateY(0)', opacity: 1 })))
-        ], { optional: true })
+          style({transform: 'translateY(100%)', opacity: 0}),
+          stagger('10ms', animate('700ms ease-in', style({transform: 'translateY(0)', opacity: 1})))
+        ], {optional: true})
       ])
     ])
 
@@ -42,7 +42,7 @@ import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink
   styleUrl: './profile.component.scss'
 
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
 
   userName!: string | null;
   loggedIn: boolean = false;
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit{
 
   constructor(private authService: AuthService,
               private router: Router,
-              private personalCocktailService : PersonalCocktailService,
+              private personalCocktailService: PersonalCocktailService,
               private cocktailService: CocktailService,
               private softDrinkService: SoftDrinkService,
               private cdr: ChangeDetectorRef) {

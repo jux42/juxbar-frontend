@@ -1,24 +1,22 @@
-
 <div class="mainFlex">
-
-
 
 
   <div *ngIf="cocktail" class="cocktail-card">
     <div class="thisFlex"><h2>{{ cocktail.strDrink | titlecase }}</h2>
-      <img class="fadeIn" [class.visible]="imageLoaded[cocktail.id]"
-        *ngIf="cocktail" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'"
+      <img (load)="imageLoaded[cocktail.id] = true" *ngIf="cocktail"
+           [class.visible]="imageLoaded[cocktail.id]" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'"
            alt="Cocktail Image"
-          (load)="imageLoaded[cocktail.id] = true">
+           class="fadeIn">
       <button (click)="goBack()">Retour</button>
     </div>
 
 
   </div>
-  <div *ngIf="cocktail" class="ingredientList clickable" >
+  <div *ngIf="cocktail" class="ingredientList clickable">
     <div *ngFor="let ingredient of getIngredients(cocktail)" [routerLink]="'/juxbar/detailledingredient/' + ingredient"
-    ><img class="pic fadeIn" [class.visible]="imageLoaded[ingredient]" [alt]="ingredient" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
-   + ingredient + '/image'" (load)="imageLoaded[ingredient] = true"><p> {{ ingredient }} </p></div>
+    ><img (load)="imageLoaded[ingredient] = true" [alt]="ingredient" [class.visible]="imageLoaded[ingredient]" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
+   + ingredient + '/image'" class="pic fadeIn">
+      <p> {{ ingredient }} </p></div>
 
   </div>
 

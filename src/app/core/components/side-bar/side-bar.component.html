@@ -1,10 +1,11 @@
-<div @fadeInSlide class = "mainFrame">
+<div @fadeInSlide class="mainFrame">
 
   <div *ngIf="cocktail">
-    <h3 class="innerFrameBold" >le Cocktail du jour : </h3>
+    <h3 class="innerFrameBold">le Cocktail du jour : </h3>
 
-    <img class="clickable dayPic" (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'"
-         alt="Cocktail Image">
+    <img (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'"
+         alt="Cocktail Image"
+         class="clickable dayPic">
 
     <div>
       <p class="innerFrameBold">++++++++++++++++++++++++++</p>
@@ -20,12 +21,11 @@
   </div>
 
 
-
   <div>
     <p class="innerFrameBold">chercher un ingrédient :</p>
     <div *ngIf="ingredientsList; else loading">
-      <select class="ingredientSelect" [(ngModel)]="ingredient" (change)="goToIngredient(ingredient.strIngredient)">
-        <option class="ingOption" *ngFor="let ingredient of ingredientsList" [ngValue]="ingredient">
+      <select (change)="goToIngredient(ingredient.strIngredient)" [(ngModel)]="ingredient" class="ingredientSelect">
+        <option *ngFor="let ingredient of ingredientsList" [ngValue]="ingredient" class="ingOption">
           {{ ingredient.strIngredient }}
         </option>
       </select>
@@ -34,19 +34,19 @@
 
     <ng-template #loading>
       <div class="ingLoader">
-      <p>LOADING...</p>
+        <p>LOADING...</p>
       </div>
     </ng-template>
   </div>
 
-  </div>
-  <div class="innerFrame clickable">
-    <p>quoi d'autre</p>
+</div>
+<div class="innerFrame clickable">
+  <p>quoi d'autre</p>
 
-  </div>
-  <div class="innerFrame clickable">
-    <p>On verra</p>
-  </div>
+</div>
+<div class="innerFrame clickable">
+  <p>On verra</p>
+</div>
 
 
 

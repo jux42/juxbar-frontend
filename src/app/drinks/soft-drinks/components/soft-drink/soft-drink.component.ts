@@ -28,13 +28,13 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   softDrink$!: Observable<SoftDrink>;
   imageData!: Response;
   id!: number;
-  private destroy$ = new Subject<void>();
   mouseIsOn: boolean = false;
   @Output() elementVisible = new EventEmitter<SoftDrink>();
+  imageLoaded: { [key: string]: boolean } = {};
+  isFavourite: boolean = false;
   protected readonly SoftDrink = SoftDrink;
   protected readonly environment = environment;
-  imageLoaded: {[key: string]: boolean} = {};
-  isFavourite: boolean = false;
+  private destroy$ = new Subject<void>();
 
   constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private softDrinkService: SoftDrinkService) {
   }
@@ -45,6 +45,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
       this.cdr.detectChanges();
     }
   }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
@@ -57,11 +58,10 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   }
 
   onAddFavouriteSoftDrink(softDrink: SoftDrink): void {
-    if(localStorage.getItem('username') == null) {
+    if (localStorage.getItem('username') == null) {
       this.router.navigate(['/login']);
 
-    }
-    else {
+    } else {
 
       if (!this.isFavourite) {
         let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
@@ -72,9 +72,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
         );
         userFav.push(this.softDrink);
         localStorage.setItem('favouritesoftdrinks', JSON.stringify(userFav));
-      }
-
-      else {
+      } else {
         alert("This is already a fav");
       }
       this.checkFavourites();
@@ -83,28 +81,30 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
     }
 
   }
+
   onMouseEnter() {
-    this.mouseIsOn=true;
+    this.mouseIsOn = true;
     console.log("mouse enter");
   }
 
   onMouseLeave() {
-    this.mouseIsOn=false;
+    this.mouseIsOn = false;
     console.log("mouse leave");
   }
 
   onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {
-    if(this.isFavourite) {
+    if (this.isFavourite) {
       let userFav = JSON.parse(localStorage.getItem('favouritesoftdrinks') || '[]');
       this.softDrinkService.removeFavouriteCocktail(softDrink.id).subscribe(
-        fav=>{
+        fav => {
           this.isFavourite = false;
         }
       );
-      const filteredFavs = userFav.filter((fav: SoftDrink) => { fav != softDrink})
+      const filteredFavs = userFav.filter((fav: SoftDrink) => {
+        fav != softDrink
+      })
       localStorage.setItem('favouritesoftdrinks', JSON.stringify(filteredFavs));
-    }
-    else {
+    } else {
       alert("This is NOT a fav yet");
     }
     this.checkFavourites();

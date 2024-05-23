@@ -3,10 +3,10 @@ import {appConfig} from './app/app.config';
 import {AppComponent} from './app/app.component';
 import {importProvidersFrom, isDevMode} from "@angular/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./app/auth.interceptor";
-import { provideServiceWorker } from '@angular/service-worker';
+import {provideServiceWorker} from '@angular/service-worker';
 
 
 bootstrapApplication(AppComponent, {
@@ -14,12 +14,12 @@ bootstrapApplication(AppComponent, {
   providers: [
     ...appConfig.providers,
     provideHttpClient(
-    // registering interceptors
-    withInterceptors([authInterceptor])),
+      // registering interceptors
+      withInterceptors([authInterceptor])),
     importProvidersFrom(BrowserAnimationsModule), provideAnimationsAsync(),
     provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
     })
-]
+  ]
 }).catch((err: any) => console.error(err));

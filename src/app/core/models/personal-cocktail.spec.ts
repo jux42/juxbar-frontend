@@ -1,4 +1,4 @@
-import { PersonalCocktail } from './personal-cocktail';
+import {PersonalCocktail} from './personal-cocktail';
 
 describe('PersonalCocktail', () => {
   it('should create an instance', () => {

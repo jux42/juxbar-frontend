@@ -1,16 +1,16 @@
 <div>
-  <div *ngIf="softDrink"
-       class="softDrink-card"
+  <div (mouseleave)="onMouseLeave()"
+       *ngIf="softDrink"
        [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}"
-       (mouseleave)="onMouseLeave()">
+       class="softDrink-card">
 
     <div class="thisGrid">
       <div class="titleRow">
         <h3>{{ truncateText(softDrink.strDrink | titlecase, 25) }}</h3>
       </div>
 
-      <img (click)="goToSoftDrink()" (mouseenter)="onMouseEnter()"
-           (load)="imageLoaded[softDrink.id] = true"
+      <img (click)="goToSoftDrink()" (load)="imageLoaded[softDrink.id] = true"
+           (mouseenter)="onMouseEnter()"
            *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
            [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
            class="clickable fadeIn">

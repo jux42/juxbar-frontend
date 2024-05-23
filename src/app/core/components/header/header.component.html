@@ -5,8 +5,9 @@
       <ng-container *ngIf="isLoggedIn | async; then loggedInBlock; else loggedOutBlock"></ng-container>
       <ng-template #loggedInBlock>
         <h2 class="login" routerLink="/juxbar/profile">{{ username$ | async }}</h2>
-        <h3 class="logout" (click)="showModal = true">🚪</h3>
-        <app-custom-modal *ngIf="showModal" [message]="'logout: Sure ? ?'" (confirm)="handleConfirmation($event)"></app-custom-modal>
+        <h3 (click)="showModal = true" class="logout">🚪</h3>
+        <app-custom-modal (confirm)="handleConfirmation($event)" *ngIf="showModal"
+                          [message]="'logout: Sure ? ?'"></app-custom-modal>
       </ng-template>
       <ng-template #loggedOutBlock>
         <h2 class="login" routerLink="/login">Login</h2>

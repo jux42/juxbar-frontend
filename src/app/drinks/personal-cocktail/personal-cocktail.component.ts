@@ -28,9 +28,9 @@ export class PersonalCocktailComponent implements OnInit {
   personalCocktail$!: Observable<PersonalCocktail>;
   imageData!: Response;
   id!: number;
-  protected readonly environment = environment;
-  imageLoaded: {[key: string]: boolean} = {};
+  imageLoaded: { [key: string]: boolean } = {};
   mouseIsOn: boolean = false;
+  protected readonly environment = environment;
 
   constructor() {
   }
@@ -48,16 +48,16 @@ export class PersonalCocktailComponent implements OnInit {
   }
 
   onMouseEnter() {
-    this.mouseIsOn=true;
+    this.mouseIsOn = true;
     console.log("mouse enter");
   }
 
   onMouseLeave() {
-    this.mouseIsOn=false;
+    this.mouseIsOn = false;
     console.log("mouse leave");
   }
 
-  goToCocktail(){
+  goToCocktail() {
     //TODO : go personal cocktail
   }
 

@@ -28,10 +28,9 @@ export class SingleCocktailComponent implements OnInit {
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
   id!: number;
+  imageLoaded: { [key: string]: boolean } = {};
   protected readonly RouterLink = RouterLink;
   protected readonly environment = environment;
-  imageLoaded: {[key: string]: boolean} = {};
-
 
   constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private router: Router) {
   }

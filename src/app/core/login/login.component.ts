@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { AuthService, AuthRequest } from './auth-service';
+import {AuthRequest, AuthService} from './auth-service';
 import {FormsModule} from "@angular/forms";
 import {AsyncPipe, NgIf} from "@angular/common";
 
@@ -19,11 +19,9 @@ export class LoginComponent implements OnInit {
   message: string = '';
 
 
-
   constructor(protected authService: AuthService, private router: Router, private route: ActivatedRoute) {
     console.log('Constructor: credentials', this.credentials);
   }
-
 
 
   ngOnInit() {
@@ -42,8 +40,6 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
-
 
 
   login(): void {

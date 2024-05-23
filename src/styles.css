@@ -1,6 +1,6 @@
 .clickable {
-  cursor: pointer; }
-
+  cursor: pointer;
+}
 
 
 body {
@@ -9,7 +9,8 @@ body {
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
-  font-style: normal; }
+  font-style: normal;
+}
 
 button {
   background-color: initial;
@@ -33,22 +34,29 @@ button {
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: bottom;
-  width: 260px; }
+  width: 260px;
+}
 
 button:hover {
-  opacity: .7; }
+  opacity: .7;
+}
 
 @media screen and (max-width: 1000px) {
   button {
     font-size: 14px;
     height: 55px;
     line-height: 55px;
-    width: 150px; } }
+    width: 150px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   button {
     font-size: 11px;
     height: 40px;
     line-height: 40px;
-    width: 75px; } }
+    width: 75px;
+  }
+}
 
 /*# sourceMappingURL=styles.css.map */

@@ -26,6 +26,7 @@
   justify-content: space-around;
   align-items: center;
 }
+
 .ingredientList {
 
   display: grid;
@@ -37,12 +38,14 @@ p {
   margin-top: 15px; /* Réinitialise les marges par défaut des paragraphes pour un meilleur contrôle */
   padding: 0 15px; /* Ajuste le padding si nécessaire pour l'espacement à l'intérieur des cellules de la grille */
 }
-.pic{
+
+.pic {
   margin-top: 50px;
   width: 150px;
   height: 150px;
 
 }
+
 img {
   -webkit-transition: all 0.8s ease;
 
@@ -60,7 +63,7 @@ img:hover {
 
 }
 
-.pic:hover{
+.pic:hover {
   -ms-transform: scale(2);
   transform: scale(2);
   transition: 0.3s ease;

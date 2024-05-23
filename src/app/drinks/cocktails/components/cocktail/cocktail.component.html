@@ -1,16 +1,16 @@
 <div>
-  <div *ngIf="cocktail"
-       class="cocktail-card"
+  <div (mouseleave)="onMouseLeave()"
+       *ngIf="cocktail"
        [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}"
-       (mouseleave)="onMouseLeave()">
+       class="cocktail-card">
 
     <div class="thisGrid">
       <div class="titleRow">
         <h3>{{ truncateText(cocktail.strDrink | titlecase, 25) }}</h3>
       </div>
 
-      <img (click)="goToCocktail()" (mouseenter)="onMouseEnter()"
-           (load)="imageLoaded[cocktail.id] = true"
+      <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"
+           (mouseenter)="onMouseEnter()"
            *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
            [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
            class="clickable fadeIn">

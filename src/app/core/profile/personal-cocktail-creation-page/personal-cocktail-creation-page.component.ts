@@ -13,7 +13,7 @@ import {tap} from "rxjs";
   templateUrl: './personal-cocktail-creation-page.component.html',
   styleUrl: './personal-cocktail-creation-page.component.scss'
 })
-export class PersonalCocktailCreationPageComponent implements OnInit{
+export class PersonalCocktailCreationPageComponent implements OnInit {
 
   personalCocktailForm!: FormGroup;
   username!: string | null;
@@ -22,39 +22,40 @@ export class PersonalCocktailCreationPageComponent implements OnInit{
   constructor(private formBuilder: FormBuilder, private personalCocktailService: PersonalCocktailService, private router: Router) {
   }
 
-ngOnInit() {
+  ngOnInit() {
 
-  this.username = localStorage.getItem('username');
-  this.urlRegex = this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
+    this.username = localStorage.getItem('username');
+    this.urlRegex = this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
 
-  this.personalCocktailForm = this.formBuilder.group({
-    strDrink: ['', Validators.required],
-    strDrinkThumb: ['', Validators.required, Validators.pattern(this.urlRegex)],
-    strIngredient1: ['', Validators.required],
-    strIngredient2: ['', Validators.required],
-    strIngredient3: ['', Validators.required],
-    strIngredient4: ['', Validators.required],
-    strIngredient5: ['', Validators.required],
-    strIngredient6: ['', Validators.required],
-    strInstructions: ['', Validators.required],
+    this.personalCocktailForm = this.formBuilder.group({
+      strDrink: ['', Validators.required],
+      strDrinkThumb: ['', Validators.required, Validators.pattern(this.urlRegex)],
+      strIngredient1: ['', Validators.required],
+      strIngredient2: ['', Validators.required],
+      strIngredient3: ['', Validators.required],
+      strIngredient4: ['', Validators.required],
+      strIngredient5: ['', Validators.required],
+      strIngredient6: ['', Validators.required],
+      strInstructions: ['', Validators.required],
 
-  });
-  //TODO : reactive template
-}
-onSubmitForm(): void{
-  console.log('Local Storage Username:', localStorage.getItem('username'));
-  if (!this.username) {
-    console.error('Username is not defined');
-    return;
+    });
+    //TODO : reactive template
   }
-  const cocktailData = {
-    ...this.personalCocktailForm.value,
-    ownerName: localStorage.getItem('username')
-  };
-  console.log(cocktailData)
 
-  this.personalCocktailService.savePersonalCocktail(cocktailData).pipe(
-     tap(()=>this.router.navigateByUrl('juxbar/profile')))
-    .subscribe();
-}
+  onSubmitForm(): void {
+    console.log('Local Storage Username:', localStorage.getItem('username'));
+    if (!this.username) {
+      console.error('Username is not defined');
+      return;
+    }
+    const cocktailData = {
+      ...this.personalCocktailForm.value,
+      ownerName: localStorage.getItem('username')
+    };
+    console.log(cocktailData)
+
+    this.personalCocktailService.savePersonalCocktail(cocktailData).pipe(
+      tap(() => this.router.navigateByUrl('juxbar/profile')))
+      .subscribe();
+  }
 }

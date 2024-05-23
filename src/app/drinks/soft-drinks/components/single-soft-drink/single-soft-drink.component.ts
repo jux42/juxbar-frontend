@@ -20,7 +20,7 @@ import {environment} from "../../../../../environments/environment";
 export class SingleSoftDrinkComponent implements OnInit {
 
   @Input() softDrink!: SoftDrink;
-  imageLoaded: {[key: string]: boolean} = {};
+  imageLoaded: { [key: string]: boolean } = {};
 
   id!: number;
   protected readonly environment = environment;
@@ -44,7 +44,7 @@ export class SingleSoftDrinkComponent implements OnInit {
 
   getIngredients(softDrink: any): string[] {
     let ingredients: string[] = [];
-    if(!softDrink) {
+    if (!softDrink) {
       return ingredients;
     }
     for (let i = 1; i <= 7; i++) {

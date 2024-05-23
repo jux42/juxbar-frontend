@@ -6,9 +6,8 @@ import {CocktailService} from "./cocktailService";
 export class FavouriteStateService {
 
 
-
-  constructor(private cocktailService: CocktailService ) {
-  this.cocktailService.getFavouriteCocktails();
+  constructor(private cocktailService: CocktailService) {
+    this.cocktailService.getFavouriteCocktails();
   }
 
 
@@ -19,8 +18,6 @@ export class FavouriteStateService {
   //       this.isFavourite = favouriteCocktails.some(favCocktail => favCocktail.id === this.cocktail.id);
   //     })
   //   ).subscribe();
-
-
 
 
 }

@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn = this.authService.isLoggedIn();
   username$ = this.authService.getUsername();
-  protected readonly RouterLink = RouterLink;
   showModal = false;
+  protected readonly RouterLink = RouterLink;
 
   constructor(private router: Router, private authService: AuthService) {
 
@@ -41,16 +41,17 @@ export class HeaderComponent implements OnInit {
 
   }
 
-    goHome() {
+  goHome() {
     this.router.navigateByUrl("/")
   }
 
   goLogin() {
     this.router.navigateByUrl("/login")
   }
+
   goLogout() {
 
-     this.authService.logout();
+    this.authService.logout();
   }
 
   handleConfirmation(result: boolean) {

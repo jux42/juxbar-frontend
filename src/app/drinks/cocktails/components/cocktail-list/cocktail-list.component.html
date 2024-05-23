@@ -1,25 +1,26 @@
-
 <div id="top"></div>
 
 <ng-container *ngIf="isLoading;  then loadingBlock; else loadedBlock"></ng-container>
 <ng-template #loadingBlock>
 
-  <h1  class="loading">LOADING</h1>
+  <h1 class="loading">LOADING</h1>
 </ng-template>
 
 <ng-template #loadedBlock>
 
 
-  <div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
     <ng-container *ngIf="cocktails$ | async as cocktails; ">
 
 
-      <div class = "searchBlock">
+      <div class="searchBlock">
         <div class="alphabetBlock">
-          <button class="alphabet-navigation" *ngFor="let letter of alphabet" (click)="goToLetter(letter)">{{ letter }}</button>
+          <button (click)="goToLetter(letter)" *ngFor="let letter of alphabet"
+                  class="alphabet-navigation">{{ letter }}
+          </button>
         </div>
         <div class="formBlock">
-          <form [formGroup]="cocktailForm" class="cocktailForm" >
+          <form [formGroup]="cocktailForm" class="cocktailForm">
             <div class="formGroup">
               <label for="strDrink">Nom</label>
               <input formControlName="strDrink" id="strDrink" type="text">
@@ -35,18 +36,19 @@
             <div class="formGroup">
               <label for="strThirdIngredient">Ingrédient</label>
               <input formControlName="strThirdIngredient" id="strThirdIngredient">
-            </div></form>
+            </div>
+          </form>
         </div>
 
       </div>
-      <div class="nothing" *ngIf="(cocktails$ | async)?.length === 0">
+      <div *ngIf="(cocktails$ | async)?.length === 0" class="nothing">
         No cocktail found
       </div>
 
-      <div class="thisFlex" >
+      <div class="thisFlex">
 
-        <app-cocktail  @listAnimation *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" [cocktail]="cocktail"
-                      [attr.id]="getAnchorId(cocktail.strDrink)">
+        <app-cocktail *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" @listAnimation [attr.id]="getAnchorId(cocktail.strDrink)"
+                      [cocktail]="cocktail">
 
 
         </app-cocktail>

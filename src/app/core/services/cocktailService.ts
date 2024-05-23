@@ -28,15 +28,16 @@ export class CocktailService {
 
     return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`)
   }
+
   getCocktailsPaginated(page: number = 0, limit: number = 10): Observable<Cocktail[]> {
     let params = new HttpParams()
       .set('page', String(page))
       .set('size', String(limit));
 
-    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`, { params });
+    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`, {params});
   }
 
-  getAllCocktailsCached(){
+  getAllCocktailsCached() {
     return this.allCocktails$.pipe();
   }
 
@@ -47,10 +48,10 @@ export class CocktailService {
 
   }
 
-  getCocktailsByIngredient(ingredient: string): Observable<Cocktail[]>{
+  getCocktailsByIngredient(ingredient: string): Observable<Cocktail[]> {
 
     return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`).pipe(
-      map(cocktails => cocktails.filter(cocktail=>
+      map(cocktails => cocktails.filter(cocktail =>
         Object.values(cocktail).slice(0, 12).includes(ingredient) ||
         Object.values(cocktail).slice(0, 12).includes(ingredient.replace(/\b\w/g, first => first.toLocaleUpperCase())) ||
         Object.values(cocktail).slice(0, 12).includes(ingredient.toLowerCase()))
@@ -76,17 +77,15 @@ export class CocktailService {
     );
   }
 
-  addFavouriteCocktail(id:number): Observable<String> {
+  addFavouriteCocktail(id: number): Observable<String> {
     const url = `http://${environment.apiUrl}/user/favouritecocktail/${id}`;
-    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+    return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
-  removeFavouriteCocktail(id:number): Observable<String> {
+  removeFavouriteCocktail(id: number): Observable<String> {
     const url = `http://${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
-    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+    return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
-
-
 
 
   getFavouriteCocktailsCached(): Observable<Cocktail[]> {
@@ -98,12 +97,12 @@ export class CocktailService {
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     return this.pseudoRandomNumber(seed, 1, maxId);
   }
+
   private pseudoRandomNumber(seed: number, min: number, max: number): number {
     const x = Math.sin(seed) * 10000;
     return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
   }
 }
-
 
 
 @Injectable({
@@ -135,9 +134,9 @@ export class PersonalCocktailService {
   }
 
 
-  savePersonalCocktail(personalCocktail : PersonalCocktail) : Observable<any>{
+  savePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
 
 
-    return this.http.post(`http://${environment.apiUrl}/user/personalcocktail`, personalCocktail, { responseType: 'text' as 'json' });
+    return this.http.post(`http://${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
   }
 }

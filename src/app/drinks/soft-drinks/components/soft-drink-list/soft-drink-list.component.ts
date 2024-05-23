@@ -16,12 +16,12 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
     trigger('listAnimation', [
       transition('* <=> *', [
         query(':leave', [
-          stagger('30ms', animate('500ms ease-in', style({ transform: 'translateY(100%)', opacity: 0.5 })))
-        ], { optional: true }),
+          stagger('30ms', animate('500ms ease-in', style({transform: 'translateY(100%)', opacity: 0.5})))
+        ], {optional: true}),
         query(':enter', [
-          style({ transform: 'translateX(-100%)', opacity: 90 }),
-          stagger('30ms', animate('800ms 500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 })))
-        ], { optional: true })
+          style({transform: 'translateX(-100%)', opacity: 90}),
+          stagger('30ms', animate('800ms 500ms ease-out', style({transform: 'translateX(0)', opacity: 1})))
+        ], {optional: true})
       ])
     ])
 
@@ -42,19 +42,17 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
   styleUrl: './soft-drink-list.component.scss'
 })
 export class SoftDrinkListComponent implements OnInit {
-  alphabet: string[] =['#','A', 'B', 'C', 'D', 'E', 'F', 'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  alphabet: string[] = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   lastAnchorLetter = '';
   @Input() softDrink !: SoftDrink;
   softDrinks$!: Observable<SoftDrink[]>;
   softDrinkForm!: FormGroup;
   id!: number;
-  private softDrinksSubject = new BehaviorSubject<SoftDrink[]>([]);
   listLoaded: boolean = false;
-
+  private softDrinksSubject = new BehaviorSubject<SoftDrink[]>([]);
 
   constructor(private softDrinkService: SoftDrinkService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
   }
-
 
 
   ngOnInit() {
@@ -87,9 +85,9 @@ export class SoftDrinkListComponent implements OnInit {
         formValue.strSecondIngredient,
         formValue.strThirdIngredient
       ])),
-
     );
   }
+
   shouldAddAnchor(softDrinkNake: string): boolean {
     const currentFirstLetter = softDrinkNake[0].toUpperCase();
     if (currentFirstLetter !== this.lastAnchorLetter) {
@@ -105,11 +103,11 @@ export class SoftDrinkListComponent implements OnInit {
 
   goDown(letter: string) {
     letter = letter == '#' ? 'top'
-      :letter;
+      : letter;
     const element = document.getElementById(letter);
     if (element) {
 
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({behavior: 'smooth'});
     }
   }
 

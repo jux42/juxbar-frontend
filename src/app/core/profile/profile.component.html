@@ -1,28 +1,30 @@
-
-<h1 *ngIf="loggedIn">Welcome to your personal page, {{userName}}</h1>
-<div *ngIf="isLoading"  ></div>
-<div [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+<h1 *ngIf="loggedIn">Welcome to your personal page, {{ userName }}</h1>
+<div *ngIf="isLoading"></div>
+<div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
   <h2>your creations</h2>
-<ng-container *ngIf="personalCocktails ">
-<div class="thisFlex">
-<app-personalCocktail @listAnimation *ngFor="let personalCocktail of personalCocktails" [personalCocktail]="personalCocktail"></app-personalCocktail>
-</div>
+  <ng-container *ngIf="personalCocktails ">
+    <div class="thisFlex">
+      <app-personalCocktail *ngFor="let personalCocktail of personalCocktails" @listAnimation
+                            [personalCocktail]="personalCocktail"></app-personalCocktail>
+    </div>
   </ng-container>
 
 </div>
 <h2>Your favourites</h2>
-<div  [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+<div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
   <ng-container *ngIf="favouriteCocktails ">
     <div class="thisFlex">
-    <app-cocktail @listAnimation *ngFor="let favouriteCocktail of favouriteCocktails" [cocktail]="favouriteCocktail"></app-cocktail>
+      <app-cocktail *ngFor="let favouriteCocktail of favouriteCocktails" @listAnimation
+                    [cocktail]="favouriteCocktail"></app-cocktail>
     </div>
   </ng-container>
 </div>
 
-<div  [ngClass]="{'this-animation': !isLoading}" *ngIf="!isLoading">
+<div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
   <ng-container *ngIf="favouriteSoftDrinks ">
     <div class="thisFlex">
-      <app-soft-drink @listAnimation *ngFor="let favouriteSoftDrink of favouriteSoftDrinks" [softDrink]="favouriteSoftDrink"></app-soft-drink>
+      <app-soft-drink *ngFor="let favouriteSoftDrink of favouriteSoftDrinks" @listAnimation
+                      [softDrink]="favouriteSoftDrink"></app-soft-drink>
     </div>
   </ng-container>
 </div>

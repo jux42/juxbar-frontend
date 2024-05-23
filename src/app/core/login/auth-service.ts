@@ -14,7 +14,7 @@ export interface AuthRequest {
   providedIn: 'root'
 })
 export class AuthService {
-  favCocktailsList  = new BehaviorSubject<Cocktail[]>([]);
+  favCocktailsList = new BehaviorSubject<Cocktail[]>([]);
   favSoftDrinksList: BehaviorSubject<SoftDrink[]> = new BehaviorSubject<SoftDrink[]>([]);
   username = new BehaviorSubject<string | null>(localStorage.getItem('username'));
   loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isAuthenticated') === 'true');
@@ -23,29 +23,11 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-
-
-  private setAuthState(isAuthenticated: boolean, username: string | null): void {
-
-    this.loggedIn.next(isAuthenticated);
-    this.username.next(username);
-    this.favCocktailsList.next(this.favCocktailsList.value);
-    this.favSoftDrinksList.next(this.favSoftDrinksList.value);
-    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
-    if (username) {
-      localStorage.setItem('username', username);
-      console.log(localStorage)
-    } else {
-      localStorage.removeItem('username');
-    }
-
-  }
-
   login(credentials: { username: string; password: string }): Observable<string> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams(credentials);
 
-    return this.http.post<string>(this.loginUrl, body.toString(), { headers, responseType: 'text' as 'json' })
+    return this.http.post<string>(this.loginUrl, body.toString(), {headers, responseType: 'text' as 'json'})
       .pipe(
         tap(token => {
           localStorage.setItem('token', token);  // Stockez le token JWT ici
@@ -59,11 +41,9 @@ export class AuthService {
       );
   }
 
-
   getUsername(): Observable<string | null> {
     return this.username.asObservable();
   }
-
 
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
@@ -81,5 +61,21 @@ export class AuthService {
     localStorage.removeItem('favouritesoftdrinks');
     this.setAuthState(false, null);
     this.router.navigate(['/']);
+  }
+
+  private setAuthState(isAuthenticated: boolean, username: string | null): void {
+
+    this.loggedIn.next(isAuthenticated);
+    this.username.next(username);
+    this.favCocktailsList.next(this.favCocktailsList.value);
+    this.favSoftDrinksList.next(this.favSoftDrinksList.value);
+    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+    if (username) {
+      localStorage.setItem('username', username);
+      console.log(localStorage)
+    } else {
+      localStorage.removeItem('username');
+    }
+
   }
 }

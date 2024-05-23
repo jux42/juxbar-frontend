@@ -3,16 +3,18 @@
   width: 200px;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(#235c71 0, #15404f 100%);  position: sticky;
+  background-image: linear-gradient(#235c71 0, #15404f 100%);
+  position: sticky;
   top: 110px;
-  height:85vh ;
+  height: 85vh;
   border-radius: 1%;
 }
-.clickable:hover{
+
+.clickable:hover {
   color: goldenrod;
 }
 
-.innerFrame{
+.innerFrame {
   text-align: justify;
   margin-left: 15px;
   margin-right: 60px;
@@ -25,7 +27,7 @@
   color: wheat;
 }
 
-.ingLoader{
+.ingLoader {
   text-align: center;
   font-size: medium;
   font-weight: bolder;
@@ -34,6 +36,7 @@
   animation: breatheAnimation 1s ease-out infinite;
 
 }
+
 @keyframes breatheAnimation {
   0%, 100% {
     opacity: 0.5;
@@ -44,7 +47,7 @@
 }
 
 
-.dayFrame{
+.dayFrame {
   font-weight: bold;
   text-align: center;
   color: palegoldenrod;
@@ -57,13 +60,13 @@
   height: auto;
 }
 
-.dayPic:hover{
+.dayPic:hover {
   transform: scale(1.1);
   transition-duration: 0.8s;
   cursor: pointer;
 }
 
-.ingredientSelect{
+.ingredientSelect {
   display: block;
   max-width: calc(100% - 25px);
   margin: 0 auto;

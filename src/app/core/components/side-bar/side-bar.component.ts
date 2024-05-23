@@ -28,19 +28,20 @@ import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
   animations: [
     trigger('fadeInSlide', [
       transition(':enter', [
-        style({ transform: 'translateX(100%)' }),
-        animate('400ms ease-out', style({ transform: 'translateX(0)' }))
+        style({transform: 'translateX(100%)'}),
+        animate('400ms ease-out', style({transform: 'translateX(0)'}))
       ])
     ])
   ]
 })
-export class SideBarComponent implements OnInit{
+export class SideBarComponent implements OnInit {
 
   cocktailOfTheDayId!: number;
   cocktail!: Cocktail;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
   ingredientString!: string;
+  protected readonly environment = environment;
 
   constructor(private router: Router,
               private cocktailService: CocktailService,
@@ -55,23 +56,22 @@ export class SideBarComponent implements OnInit{
     console.log(this.cocktailOfTheDayId)
     this.cocktailService.getOneCocktailById(this.cocktailOfTheDayId).pipe(
       map(
-      data => this.cocktail = data
+        data => this.cocktail = data
       )
     ).subscribe();
 
 
     this.ingredientService.getAllIngredients().subscribe(
-      data=>this.ingredientsList = data
+      data => this.ingredientsList = data
     )
   }
 
   goToIngredient(ingredientString: string) {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       const formattedIngredient = this.capitalizeFirst.transform(ingredientString);
       this.router.navigate([`juxbar/detailledingredient/${formattedIngredient}`]);
     });
   }
-
 
   onGoToRandomCocktail() {
     let randomCocktailId = Math.floor(Math.random() * 570);
@@ -83,23 +83,21 @@ export class SideBarComponent implements OnInit{
       behavior: 'auto'
     });
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([`juxbar/onecocktail/${randomCocktailId}`]);
     });
   }
 
-  onGoToCocktailOfTheDay(id:number){
+  onGoToCocktailOfTheDay(id: number) {
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([`juxbar/onecocktail/${id}`]);
     });
   }
 
-  onCreateCocktail(){
+  onCreateCocktail() {
     this.router.navigate(['juxbar/profile/createcocktail']);
   }
-
-  protected readonly environment = environment;
 }
 
 

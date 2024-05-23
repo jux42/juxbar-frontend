@@ -6,7 +6,6 @@ import {environment} from "../../environments/environment";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 
 
-
 @Component({
   animations: [slideInAnimation],
   selector: 'app-landing-page',
@@ -21,16 +20,17 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 })
 export class LandingPageComponent implements OnInit {
   appName!: string;
-  constructor(private router: Router,private http: HttpClient) {
+
+  constructor(private router: Router, private http: HttpClient) {
   }
 
 
-ngOnInit() {
-  this.http.get(`http://${environment.apiUrl}/appname`, {responseType: 'text'}).subscribe(data => {
-    this.appName = data;
-  });
+  ngOnInit() {
+    this.http.get(`http://${environment.apiUrl}/appname`, {responseType: 'text'}).subscribe(data => {
+      this.appName = data;
+    });
 
-}
+  }
 
   onGoToCocktails() {
     this.router.navigateByUrl('juxbar/listall');

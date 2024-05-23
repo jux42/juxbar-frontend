@@ -28,7 +28,7 @@ export class SingleIngredientComponent implements OnInit {
   @Input() ingredient!: Ingredient;
   cocktails$!: Observable<Cocktail[]>;
   softDrinks$!: Observable<SoftDrink[]>;
-  imageLoaded: {[key: string]: boolean} = {};
+  imageLoaded: { [key: string]: boolean } = {};
 
 
   protected readonly environment = environment;
@@ -38,7 +38,7 @@ export class SingleIngredientComponent implements OnInit {
     private ingredientService: IngredientService,
     private route: ActivatedRoute,
     private router: Router,
-    private cocktailService:CocktailService,
+    private cocktailService: CocktailService,
     private softDrinkService: SoftDrinkService) {
 
   }
@@ -71,7 +71,8 @@ export class SingleIngredientComponent implements OnInit {
     });
     this.router.navigateByUrl(`juxbar/onecocktail/${cocktail.id}`)
   }
-  goToSoftDrink(softDrink: SoftDrink){
+
+  goToSoftDrink(softDrink: SoftDrink) {
 
     window.scrollTo({
       top: 0,

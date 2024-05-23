@@ -13,7 +13,7 @@ import {AuthService} from "../login/auth-service";
 
 export class SoftDrinkService {
 
-  constructor(private http: HttpClient, private authService : AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getAllSoftDrinks(): Observable<SoftDrink[]> {
@@ -27,10 +27,10 @@ export class SoftDrinkService {
 
   }
 
-  getSoftDrinkByIngredient(ingredient: string): Observable<SoftDrink[]>{
+  getSoftDrinkByIngredient(ingredient: string): Observable<SoftDrink[]> {
 
     return this.http.get<SoftDrink[]>(`http://${environment.apiUrl}/softdrinks`).pipe(
-      map(softDrinks   => softDrinks.filter(softDrink=>
+      map(softDrinks => softDrinks.filter(softDrink =>
         Object.values(softDrink).slice(0, 12).includes(ingredient) ||
         Object.values(softDrink).slice(0, 12).includes(ingredient.replace(/\b\w/g, first => first.toLocaleUpperCase())) ||
         Object.values(softDrink).slice(0, 12).includes(ingredient.toLowerCase)))
@@ -53,14 +53,15 @@ export class SoftDrinkService {
       })
     );
   }
-  addFavouriteSoftDrink(id:number): Observable<String> {
+
+  addFavouriteSoftDrink(id: number): Observable<String> {
     const url = `http://${environment.apiUrl}/user/favouritesoftdrink/${id}`;
-    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+    return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
-  removeFavouriteCocktail(id:number): Observable<String> {
+  removeFavouriteCocktail(id: number): Observable<String> {
     const url = `http://${environment.apiUrl}/user/rmfavouritesoftdrink/${id}`;
-    return this.http.put<String>(url, {}, { responseType: 'text' as 'json' });
+    return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
 }

@@ -8,7 +8,8 @@ import {
   map,
   Observable,
   startWith,
-  Subject, takeUntil,
+  Subject,
+  takeUntil,
   tap
 } from "rxjs";
 import {CocktailService} from "../../../../core/services/cocktailService";
@@ -28,9 +29,9 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
     trigger('listAnimation', [
       transition('* <=> *', [
         query(':enter', [
-          style({ transform: 'translateY(100%)', opacity: 0.2 }),
-          stagger('10ms', animate('200ms ease-out', style({ transform: 'translateY(0)', opacity: 1 })))
-        ], { optional: true })
+          style({transform: 'translateY(100%)', opacity: 0.2}),
+          stagger('10ms', animate('200ms ease-out', style({transform: 'translateY(0)', opacity: 1})))
+        ], {optional: true})
       ])
     ])
 
@@ -50,17 +51,16 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
 })
 export class CocktailListComponent implements OnInit {
 
-  alphabet: string[] =['#','A', 'B', 'C', 'D', 'E', 'F', 'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  alphabet: string[] = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   lastAnchorLetter = '';
   @Input() cocktail !: Cocktail;
   cocktails$!: Observable<Cocktail[]>;
   cocktailForm!: FormGroup;
   id!: number;
   isLoading: boolean = true;
+  protected readonly animation = animation;
   private cocktailsSubject = new BehaviorSubject<Cocktail[]>([]);
-
   private destroy$ = new Subject<void>();
-
 
   constructor(private scroller: ViewportScroller, private cocktailService: CocktailService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
   }
@@ -74,8 +74,8 @@ export class CocktailListComponent implements OnInit {
 
     this.cocktailService.getAllCocktailsCached().pipe(
       takeUntil(this.destroy$),
-      tap(data=>this.cocktailsSubject.next(data)),
-      finalize(()=>this.isLoading=false))
+      tap(data => this.cocktailsSubject.next(data)),
+      finalize(() => this.isLoading = false))
       .subscribe();
 
     this.cocktailForm = this.formBuilder.group({
@@ -97,11 +97,11 @@ export class CocktailListComponent implements OnInit {
       ])),
     );
   }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 
   trackByCocktails(index: number, cocktail: Cocktail): number {
     return cocktail.id;
@@ -122,25 +122,23 @@ export class CocktailListComponent implements OnInit {
 
   goToLetter(letter: string) {
     letter = letter == '#' ? 'top'
-      :letter;
-    if (letter == 'top'){
+      : letter;
+    if (letter == 'top') {
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: 'smooth'
       });
-    }
-    else{
+    } else {
       const element = document.getElementById(letter);
       if (element) {
 
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({behavior: 'smooth'});
       }
 
     }
 
   }
-
 
   private filterCocktails(searchText: string, searchIngredient: string[]): Cocktail[] {
     return this.cocktailsSubject.value
@@ -150,7 +148,7 @@ export class CocktailListComponent implements OnInit {
           ingredient ? this.ingredientMatches(cocktail, ingredient) : true);
         return textMatch && ingredientMatch;
       })
-      .map(cocktail=> ({...cocktail, _uniqueKey: Date.now() + Math.random()}))
+      .map(cocktail => ({...cocktail, _uniqueKey: Date.now() + Math.random()}))
   }
 
   private ingredientMatches(cocktail: Cocktail, searchIngredient: string): boolean {
@@ -162,6 +160,4 @@ export class CocktailListComponent implements OnInit {
     }
     return false;
   }
-
-  protected readonly animation = animation;
 }

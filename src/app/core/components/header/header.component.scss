@@ -10,7 +10,8 @@ header {
   /*background-image: radial-gradient(circle, rgba(158,146,87,1) 0%, rgba(21,64,79,1) 50%);*/
   opacity: 0.9;
 }
-.clickable:hover{
+
+.clickable:hover {
   color: goldenrod;
 }
 
@@ -20,14 +21,15 @@ h1 {
   cursor: pointer;
   width: fit-content;
 }
-.titles{
+
+.titles {
   height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.login{
+.login {
   margin-top: 25px;
   margin-right: 20px;
   color: wheat;
@@ -37,7 +39,7 @@ h1 {
 }
 
 
-.logout{
+.logout {
   margin-top: 29px;
   margin-right: 10px;
   color: wheat;
@@ -45,7 +47,8 @@ h1 {
   cursor: pointer;
   width: fit-content;
 }
-.clickable:hover{
+
+.clickable:hover {
   color: goldenrod;
 }
 

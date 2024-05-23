@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import { Observable, Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
@@ -29,15 +29,14 @@ export class CocktailComponent implements OnInit, OnDestroy {
   @Input() cocktail !: Cocktail;
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
-  private destroy$ = new Subject<void>();
   id!: number;
-
-  protected readonly environment = environment;
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
   isFavourite$!: Observable<boolean>;
   @Input() userRequest!: UserRequest
   mouseIsOn: boolean = false;
+  protected readonly environment = environment;
+  private destroy$ = new Subject<void>();
 
   constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private cocktailService: CocktailService) {
   }
@@ -59,7 +58,6 @@ export class CocktailComponent implements OnInit, OnDestroy {
   }
 
 
-
   checkFavourites() {
     let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
     // console.log(userFav);
@@ -67,11 +65,10 @@ export class CocktailComponent implements OnInit, OnDestroy {
   }
 
   onAddFavouriteCocktail(cocktail: Cocktail): void {
-    if(localStorage.getItem('username') == null) {
+    if (localStorage.getItem('username') == null) {
       this.router.navigate(['/login']);
 
-    }
-    else {
+    } else {
 
       if (!this.isFavourite) {
         let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
@@ -82,9 +79,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
         );
         userFav.push(this.cocktail);
         localStorage.setItem('favouritecocktails', JSON.stringify(userFav));
-      }
-
-      else {
+      } else {
         alert("This is already a fav");
       }
       this.checkFavourites();
@@ -95,29 +90,29 @@ export class CocktailComponent implements OnInit, OnDestroy {
   }
 
 
-
   onMouseEnter() {
-    this.mouseIsOn=true;
+    this.mouseIsOn = true;
     console.log("mouse enter");
   }
 
   onMouseLeave() {
-    this.mouseIsOn=false;
+    this.mouseIsOn = false;
     console.log("mouse leave");
   }
 
   onRemoveFavouriteCocktail(cocktail: Cocktail): void {
-    if(this.isFavourite) {
+    if (this.isFavourite) {
       let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
       this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(
-        fav=>{
+        fav => {
           this.isFavourite = false;
         }
       );
-      const filteredFavs = userFav.filter((fav: Cocktail) => { fav != cocktail})
+      const filteredFavs = userFav.filter((fav: Cocktail) => {
+        fav != cocktail
+      })
       localStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
-    }
-    else {
+    } else {
       alert("This is NOT a fav yet");
     }
     this.checkFavourites();

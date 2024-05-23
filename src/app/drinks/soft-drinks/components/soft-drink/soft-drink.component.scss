@@ -12,6 +12,7 @@
     box-shadow: 5px 5px 20px black;
 
   }
+
   &.inactive {
     position: relative;
     padding-bottom: 30px;
@@ -51,6 +52,7 @@
     visibility: hidden;
   }
 }
+
 .thisGrid {
   display: grid;
   position: relative;

@@ -1,5 +1,4 @@
 
-
 .clickable {
   cursor: pointer;
 }
@@ -52,6 +51,7 @@ button:hover {
     width: 150px;
   }
 }
+
 @media screen and (max-width: 600px) {
   button {
     font-size: 11px;
@@ -62,6 +62,7 @@ button:hover {
 
 
 }
+
 .fadeIn {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;

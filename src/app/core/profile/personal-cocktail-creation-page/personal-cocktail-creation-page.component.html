@@ -40,7 +40,7 @@
       </div>
 
       <div class="action-buttons">
-        <button (click)="onSubmitForm()" type="submit" [disabled]="personalCocktailForm.invalid">CREATE</button>
+        <button (click)="onSubmitForm()" [disabled]="personalCocktailForm.invalid" type="submit">CREATE</button>
       </div>
     </form>
   </div>
@@ -49,19 +49,19 @@
 
     <div style="display: flex ;  flex-direction : row ; justify-content: center ; align-items: center">
 
-<!--      <div *ngIf="faceSnapPreview$ | async as faceSnap">-->
-<!--        <div class="face-snap-card">-->
-<!--          <div class="thisFlex"><h2>{{ faceSnap.title | titlecase }}</h2>-->
-<!--            <a routerLink="/facesnaps">BACK</a></div>-->
-<!--          <p>mis en ligne le {{ faceSnap.createdDate | date: 'd MMMM YYYY' }}</p>-->
-<!--          <img [src]="faceSnap.imageUrl">-->
-<!--          <p>{{ faceSnap.description }}</p>-->
-<!--          <p *ngIf="faceSnap.location; then thenBlock else elseBlock"></p>-->
-<!--          <ng-template #thenBlock><p>photo prise à {{ faceSnap.location }}</p></ng-template>-->
-<!--          <ng-template #elseBlock><p class="unknownPlace">Emplacement inconnu</p></ng-template>-->
+      <!--      <div *ngIf="faceSnapPreview$ | async as faceSnap">-->
+      <!--        <div class="face-snap-card">-->
+      <!--          <div class="thisFlex"><h2>{{ faceSnap.title | titlecase }}</h2>-->
+      <!--            <a routerLink="/facesnaps">BACK</a></div>-->
+      <!--          <p>mis en ligne le {{ faceSnap.createdDate | date: 'd MMMM YYYY' }}</p>-->
+      <!--          <img [src]="faceSnap.imageUrl">-->
+      <!--          <p>{{ faceSnap.description }}</p>-->
+      <!--          <p *ngIf="faceSnap.location; then thenBlock else elseBlock"></p>-->
+      <!--          <ng-template #thenBlock><p>photo prise à {{ faceSnap.location }}</p></ng-template>-->
+      <!--          <ng-template #elseBlock><p class="unknownPlace">Emplacement inconnu</p></ng-template>-->
 
-<!--        </div>-->
-<!--      </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
   </div>
 </div>
