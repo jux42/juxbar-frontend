@@ -7,6 +7,7 @@ import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
 import {UserRequest} from "../../../../core/models/UserRequest";
 import {AuthService} from "../../../../core/login/auth-service";
+import {PersonalCocktail} from "../../../../core/models/personal-cocktail";
 
 @Component({
   selector: 'app-cocktail',
@@ -38,7 +39,10 @@ export class CocktailComponent implements OnInit, OnDestroy {
   protected readonly environment = environment;
   private destroy$ = new Subject<void>();
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private cocktailService: CocktailService) {
+  constructor(private cdr: ChangeDetectorRef,
+              private router: Router,
+              private authService: AuthService,
+              private cocktailService: CocktailService) {
   }
 
   ngOnInit() {
@@ -149,4 +153,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
     return ingredients;
   }
+
+
+  protected readonly PersonalCocktail = PersonalCocktail;
 }

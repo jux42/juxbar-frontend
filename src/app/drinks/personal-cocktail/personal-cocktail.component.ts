@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {environment} from "../../../environments/environment";
+import {PersonalCocktailService} from "../../core/services/cocktailService";
 
 @Component({
   selector: 'app-personalCocktail',
@@ -32,7 +33,7 @@ export class PersonalCocktailComponent implements OnInit {
   mouseIsOn: boolean = false;
   protected readonly environment = environment;
 
-  constructor() {
+  constructor(private personalCocktailService: PersonalCocktailService) {
   }
 
   ngOnInit() {
@@ -70,7 +71,14 @@ export class PersonalCocktailComponent implements OnInit {
         ingredients.push(ingredient);
       }
     }
-
     return ingredients;
+  }
+  onDeleteCocktail(personalCocktail : PersonalCocktail) {
+    this.personalCocktailService.deletePersonalCocktail(personalCocktail).subscribe(
+      value =>{
+        console.log(value);
+        window.location.reload();
+              }
+    );
   }
 }

@@ -139,4 +139,9 @@ export class PersonalCocktailService {
 
     return this.http.post(`http://${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
   }
+
+  deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any>{
+    return this.http.delete(`http://${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
+  }
+
 }

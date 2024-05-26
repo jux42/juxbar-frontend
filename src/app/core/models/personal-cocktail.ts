@@ -1,30 +1,32 @@
-export class PersonalCocktail {
+import {Cocktail} from "./cocktail";
 
-  id !: number;
+export class PersonalCocktail extends Cocktail{
 
-  idDrink!: string;
+  override id !: number;
 
-  strDrink!: string;
+  override idDrink!: string;
 
-  strDrinkThumb !: string;
+  override strDrink!: string;
+
+  override strDrinkThumb !: string;
 
   imageData!: Blob;
 
-  strInstructions !: string;
+  override strInstructions !: string;
 
-  strIngredient1 !: string;
+  override strIngredient1 !: string;
 
-  strIngredient2!: string;
+  override strIngredient2!: string;
 
-  strIngredient3 !: string;
+  override strIngredient3 !: string;
 
-  strIngredient4 !: string;
+  override strIngredient4 !: string;
 
-  strIngredient5 !: string;
+  override strIngredient5 !: string;
 
-  strIngredient6 !: string;
+  override strIngredient6 !: string;
 
-  strIngredient7 !: string;
+  override strIngredient7 !: string;
 
   ownerName !: string;
 

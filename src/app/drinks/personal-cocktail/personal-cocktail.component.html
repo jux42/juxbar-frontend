@@ -18,6 +18,9 @@
 
     <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
       <div class="favIcon">
+        <p (click)="onDeleteCocktail(personalCocktail)" class="clickable">❌</p>
+      </div>
+      <div class="favIcon">
         <p>🙂</p>
       </div>
 
