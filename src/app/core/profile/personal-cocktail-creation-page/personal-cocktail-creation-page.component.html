@@ -1,68 +1,145 @@
 <h2 style="text-align: center">New Personal Cocktail</h2>
-<div style="display: flex ; flex-direction: column ; justify-content: space-evenly">
+<div class="container">
   <div class="formCard">
-    <form [formGroup]="personalCocktailForm">
+
+    <form [formGroup]="personalCocktailForm" (ngSubmit)="onSubmitForm()">
       <div class="formGroup">
-        <label for="strDrink">name</label>
+        <label for="strDrink">Name</label>
         <input formControlName="strDrink" id="strDrink" type="text">
       </div>
       <div class="formGroup">
-        <label for="strDrinkThumb">image URL</label>
+        <label for="strDrinkThumb">Image URL</label>
         <input formControlName="strDrinkThumb" id="strDrinkThumb" type="text">
       </div>
       <div class="formGroup">
-        <label for="strIngredient1">1st ingredient</label>
-        <textarea formControlName="strIngredient1" id="strIngredient1" type="text"></textarea>
+        <label for="strIngredient1">1st Ingredient</label>
+        <div *ngIf="ingredientsList; else loading">
+        <select formControlName="strIngredient1" class="ingredientSelect">
+          <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+            {{ ingredient.strIngredient }}
+          </option>
+        </select>
+        </div>
+        <ng-template #loading>
+          <div class="ingLoader">
+            <p>LOADING...</p>
+          </div>
+        </ng-template>
+        <input formControlName="strIngredient2" id="strIngredient2">
       </div>
       <div class="formGroup">
-        <label for="strIngredient2">2nd ingredient</label>
-        <textarea formControlName="strIngredient2" id="strIngredient2" type="text"></textarea>
+        <label for="strIngredient2">2nd Ingredient</label>
+        <div *ngIf="ingredientsList; else loading">
+          <select formControlName="strIngredient2" class="ingredientSelect">
+            <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+              {{ ingredient.strIngredient }}
+            </option>
+          </select>
+        </div>
+        <ng-template #loading>
+          <div class="ingLoader">
+            <p>LOADING...</p>
+          </div>
+        </ng-template>
+        <input formControlName="strIngredient3" id="strIngredient3">
       </div>
       <div class="formGroup">
-        <label for="strIngredient3">3rd ingredient</label>
-        <textarea formControlName="strIngredient3" id="strIngredient3" type="text"></textarea>
+        <label for="strIngredient3">3rd Ingredient</label>
+        <div *ngIf="ingredientsList; else loading">
+          <select formControlName="strIngredient3" class="ingredientSelect">
+            <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+              {{ ingredient.strIngredient }}
+            </option>
+          </select>
+        </div>
+        <ng-template #loading>
+          <div class="ingLoader">
+            <p>LOADING...</p>
+          </div>
+        </ng-template>
+        <input formControlName="strIngredient4" id="strIngredient4">
       </div>
       <div class="formGroup">
-        <label for="strIngredient4">4th ingredient</label>
-        <textarea formControlName="strIngredient4" id="strIngredient4" type="text"></textarea>
+        <label for="strIngredient4">4th Ingredient</label>
+        <div *ngIf="ingredientsList; else loading">
+          <select formControlName="strIngredient4" class="ingredientSelect">
+            <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+              {{ ingredient.strIngredient }}
+            </option>
+          </select>
+        </div>
+        <ng-template #loading>
+          <div class="ingLoader">
+            <p>LOADING...</p>
+          </div>
+        </ng-template>
+        <input formControlName="strIngredient5" id="strIngredient5">
       </div>
       <div class="formGroup">
-        <label for="strIngredient5">5th ingredient</label>
-        <textarea formControlName="strIngredient5" id="strIngredient5" type="text"></textarea>
+        <label for="strIngredient5">5th Ingredient</label>
+        <div *ngIf="ingredientsList; else loading">
+          <select formControlName="strIngredient5" class="ingredientSelect">
+            <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+              {{ ingredient.strIngredient }}
+            </option>
+          </select>
+        </div>
+        <ng-template #loading>
+          <div class="ingLoader">
+            <p>LOADING...</p>
+          </div>
+        </ng-template>
+        <input formControlName="strIngredient6" id="strIngredient6">
       </div>
       <div class="formGroup">
-        <label for="strIngredient6">6th ingredient</label>
-        <textarea formControlName="strIngredient6" id="strIngredient6" type="text"></textarea>
+        <label for="strIngredient6">6th Ingredient</label>
+        <div *ngIf="ingredientsList; else loading">
+          <select formControlName="strIngredient6" class="ingredientSelect">
+            <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+              {{ ingredient.strIngredient }}
+            </option>
+          </select>
+        </div>
+        <ng-template #loading>
+          <div class="ingLoader">
+            <p>LOADING...</p>
+          </div>
+        </ng-template>
+        <input formControlName="strIngredient1" id="strIngredient1">
       </div>
       <div class="formGroup">
-        <label for="strInstructions">instructions</label>
-        <input formControlName="strInstructions" id="strInstructions" type="text">
+        <label for="strInstructions">Instructions</label>
+        <input formControlName="strInstructions" id="strInstructions">
       </div>
-
       <div class="action-buttons">
-        <button (click)="onSubmitForm()" [disabled]="personalCocktailForm.invalid" type="submit">CREATE</button>
+        <button [disabled]="personalCocktailForm.invalid" type="submit">CREATE</button>
       </div>
     </form>
   </div>
-  <div>
+  <div class="preview">
     <h2 style="text-align: center">Aperçu :</h2>
-
-    <div style="display: flex ;  flex-direction : row ; justify-content: center ; align-items: center">
-
-      <!--      <div *ngIf="cocktailPreview$ | async as cocktail">-->
-      <!--        <div class="cocktail-card">-->
-      <!--          <div class="thisFlex"><h2>{{ cocktail.strDrink | titlecase }}</h2>-->
-      <!--          <img [src]="cocktail.strDrinkThumb">-->
-      <!--          <p>{{ cocktail.strIngredient1 }}</p>-->
-      <!--          <p>{{ cocktail.strIngredient2 }}</p>-->
-      <!--          <p>{{ cocktail.strIngredient3 }}</p>-->
-      <!--          <p>{{ cocktail.strIngredient4 }}</p>-->
-      <!--          <p>{{ cocktail.strIngredient5 }}</p>-->
-      <!--          <p>{{ cocktail.strIngredient6 }}</p>-->
-      <!--          <p>{{ cocktail.strInstructions }}</p>-->
-      <!--        </div>-->
-      <!--      </div>-->
+    <div (mouseleave)="onMouseLeave()">
+    <div *ngIf="cocktailPreview$ | async as cocktail" class="cocktail-card" [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}">
+      <div class="thisGrid">
+        <div class="titleRow">
+          <h3>{{ truncateText(cocktail.strDrink | titlecase, 18) }}</h3>
+        </div>
+        <img [src]="cocktail.strDrinkThumb" (mouseenter)="onMouseEnter()"  alt="Cocktail Image" class="clickable">
+      </div>
+      <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
+        <div class="favIcon">
+          <a class="clickable">😁</a>
+        </div>
+        <div class="ingBlock">
+          <p *ngIf="cocktail.strIngredient1" class="ingredient clickable">{{ cocktail.strIngredient1 }}</p>
+          <p *ngIf="cocktail.strIngredient2" class="ingredient clickable">{{ cocktail.strIngredient2 }}</p>
+          <p *ngIf="cocktail.strIngredient3" class="ingredient clickable">{{ cocktail.strIngredient3 }}</p>
+          <p *ngIf="cocktail.strIngredient4" class="ingredient clickable">{{ cocktail.strIngredient4 }}</p>
+          <p *ngIf="cocktail.strIngredient5" class="ingredient clickable">{{ cocktail.strIngredient5 }}</p>
+          <p *ngIf="cocktail.strIngredient6" class="ingredient clickable">{{ cocktail.strIngredient6 }}</p>
+        </div>
+      </div>
     </div>
   </div>
+  </div>
 </div>
-

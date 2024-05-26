@@ -88,8 +88,8 @@ export class SoftDrinkListComponent implements OnInit {
     );
   }
 
-  shouldAddAnchor(softDrinkNake: string): boolean {
-    const currentFirstLetter = softDrinkNake[0].toUpperCase();
+  shouldAddAnchor(softDrinkName: string): boolean {
+    const currentFirstLetter = softDrinkName[0].toUpperCase();
     if (currentFirstLetter !== this.lastAnchorLetter) {
       this.lastAnchorLetter = currentFirstLetter;
       return true;

@@ -8,6 +8,8 @@ export class PersonalCocktail {
 
   strDrinkThumb !: string;
 
+  imageData!: Blob;
+
   strInstructions !: string;
 
   strIngredient1 !: string;

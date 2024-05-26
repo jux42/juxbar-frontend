@@ -6,7 +6,7 @@
 
     <div class="thisGrid">
       <div class="titleRow">
-        <h3>{{ truncateText(cocktail.strDrink | titlecase, 25) }}</h3>
+        <h3>{{ truncateText(cocktail.strDrink | titlecase, 18) }}</h3>
       </div>
 
       <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"

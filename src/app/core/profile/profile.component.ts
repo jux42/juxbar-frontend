@@ -46,8 +46,6 @@ export class ProfileComponent implements OnInit {
 
   userName!: string | null;
   loggedIn: boolean = false;
-  invite!: string;
-
   isLoading: boolean = true;
 
   @Input() personalCocktail!: PersonalCocktail;
@@ -91,6 +89,7 @@ export class ProfileComponent implements OnInit {
       next: (cocktails) => {
         this.personalCocktails = cocktails;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error loading personal cocktails', error);
@@ -101,22 +100,23 @@ export class ProfileComponent implements OnInit {
   }
 
   loadFavouriteCocktails() {
-
-    this.cocktailService.getFavouriteCocktails().subscribe({
+    this.authService.getUsername().subscribe(username => {
+      if (username) {
+        this.cocktailService.getFavouriteCocktails()?.subscribe({
 
       next: (favCocktails) => {
         if (!favCocktails) favCocktails = [];
         this.favouriteCocktails = favCocktails;
-        this.cdr.detectChanges();
+
       },
       error: (error) => {
         console.error('No cocktails to load', error);
         this.isLoading = false;
       }
-    })
-
+        })
+      }
+    });
   }
-
 
   loadFavouriteSoftDrinks() {
     this.authService.getUsername().subscribe(username => {
