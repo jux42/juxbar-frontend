@@ -10,7 +10,7 @@ export class CapitalizeFirstPipe implements PipeTransform {
     if (!value) return value;
     let words = value.split(' ');
     return words.map((word, index) =>
-      index === 0 ? word : word.toLowerCase()
+      index === 0 ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : word.toLowerCase()
     ).join(' ');
   }
 
