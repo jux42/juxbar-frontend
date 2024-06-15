@@ -8,6 +8,7 @@ import {environment} from "../../../../../environments/environment";
 import {UserRequest} from "../../../../core/models/UserRequest";
 import {AuthService} from "../../../../core/login/auth-service";
 import {PersonalCocktail} from "../../../../core/models/personal-cocktail";
+import {FavouriteService} from "../../../../core/services/favourite.service";
 
 @Component({
   selector: 'app-cocktail',
@@ -42,7 +43,8 @@ export class CocktailComponent implements OnInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef,
               private router: Router,
               private authService: AuthService,
-              private cocktailService: CocktailService) {
+              private cocktailService: CocktailService,
+              private favouriteService: FavouriteService) {
   }
 
   ngOnInit() {
@@ -110,8 +112,10 @@ export class CocktailComponent implements OnInit, OnDestroy {
       this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(
         fav => {
           this.isFavourite = false;
+          this.favouriteService.announceFavouriteRemoved(cocktail.id, 'cocktail');
         }
       );
+
       const filteredFavs = userFav.filter((fav: Cocktail) => {
         fav != cocktail
       })

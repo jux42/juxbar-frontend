@@ -12,6 +12,8 @@ import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
+import {FavouriteService} from "../services/favourite.service";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -53,6 +55,9 @@ export class ProfileComponent implements OnInit {
   personalCocktails!: PersonalCocktail[];
   favouriteCocktails!: Cocktail[];
   favouriteSoftDrinks!: SoftDrink[];
+  private favouriteRemovedSubscription!: Subscription;
+  removingCocktailIds: Set<number> = new Set();
+  removingSoftDrinkIds: Set<number> = new Set();
 
 
   constructor(private authService: AuthService,
@@ -60,7 +65,8 @@ export class ProfileComponent implements OnInit {
               private personalCocktailService: PersonalCocktailService,
               private cocktailService: CocktailService,
               private softDrinkService: SoftDrinkService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private favouriteService: FavouriteService) {
   }
 
   ngOnInit() {
@@ -77,7 +83,16 @@ export class ProfileComponent implements OnInit {
       this.loadPersonalCocktails();
       this.loadFavouriteCocktails();
       this.loadFavouriteSoftDrinks();
-
+      this.favouriteRemovedSubscription = this.favouriteService.favouriteRemoved$.subscribe(({id, type}) => {
+        if (type==='cocktail'){
+          this.removeCocktailById(id);
+          this.startRemoveCocktail(id);
+        }
+        else if (type === 'softDrink') {
+          this.removeSoftDrinkById(id);
+          this.startRemoveSoftDrink(id);
+        }
+      });
     }
 
 
@@ -148,6 +163,31 @@ export class ProfileComponent implements OnInit {
       this.userName = username;
     });
   }
+  removeCocktailById(cocktailId: number) {
+    this.favouriteCocktails = this.favouriteCocktails.filter(cocktail => cocktail.id !== cocktailId);
+  }
+  removeSoftDrinkById(softDrinkId: number){
+    this.favouriteSoftDrinks = this.favouriteSoftDrinks.filter(softDrink=>softDrink.id !== softDrinkId);
+  }
 
+  startRemoveCocktail(cocktailId: number) {
+    this.removingCocktailIds.add(cocktailId);
+    setTimeout(() => {
+      this.removingCocktailIds.delete(cocktailId);
+      this.removeCocktailById(cocktailId);
+      this.cdr.detectChanges();
+
+    }, 1000);
+  }
+
+  startRemoveSoftDrink(softDrinkId: number) {
+    this.removingSoftDrinkIds.add(softDrinkId);
+    setTimeout(() => {
+      this.removingSoftDrinkIds.delete(softDrinkId);
+      this.removeSoftDrinkById(softDrinkId);
+      this.cdr.detectChanges();
+
+    }, 1000);
+  }
 
 }

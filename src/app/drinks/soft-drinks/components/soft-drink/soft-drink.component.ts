@@ -6,6 +6,7 @@ import {Router, RouterLink} from "@angular/router";
 import {NgClass, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {environment} from "../../../../../environments/environment";
 import {AuthService} from "../../../../core/login/auth-service";
+import {FavouriteService} from "../../../../core/services/favourite.service";
 
 @Component({
   selector: 'app-soft-drink',
@@ -36,7 +37,11 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   protected readonly environment = environment;
   private destroy$ = new Subject<void>();
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private authService: AuthService, private softDrinkService: SoftDrinkService) {
+  constructor(private cdr: ChangeDetectorRef,
+              private router: Router,
+              private authService: AuthService,
+              private softDrinkService: SoftDrinkService,
+              private favouriteService: FavouriteService) {
   }
 
   ngOnInit() {
@@ -98,6 +103,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
       this.softDrinkService.removeFavouriteCocktail(softDrink.id).subscribe(
         fav => {
           this.isFavourite = false;
+          this.favouriteService.announceFavouriteRemoved(softDrink.id, 'softDrink');
         }
       );
       const filteredFavs = userFav.filter((fav: SoftDrink) => {

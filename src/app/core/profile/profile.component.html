@@ -1,30 +1,32 @@
-<h1 *ngIf="loggedIn">Welcome to your personal page, {{ userName }}</h1>
+<h1 *ngIf="loggedIn" class="test-class">Welcome to your personal page, {{ userName }}</h1>
 <div *ngIf="isLoading"></div>
 <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-  <h2>your creations</h2>
-  <ng-container *ngIf="personalCocktails ">
+  <h2>Your creations</h2>
+  <ng-container *ngIf="personalCocktails">
     <div class="thisFlex">
-      <app-personalCocktail *ngFor="let personalCocktail of personalCocktails" @listAnimation
+      <app-personalCocktail *ngFor="let personalCocktail of personalCocktails"
                             [personalCocktail]="personalCocktail"></app-personalCocktail>
     </div>
   </ng-container>
 </div>
 <h2>Your favourites</h2>
 <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-  <ng-container *ngIf="favouriteCocktails ">
+  <ng-container *ngIf="favouriteCocktails">
     <div class="thisFlex">
-      <app-cocktail *ngFor="let favouriteCocktail of favouriteCocktails" @listAnimation
-                    [cocktail]="favouriteCocktail"></app-cocktail>
+      <div *ngFor="let favouriteCocktail of favouriteCocktails"
+           [ngClass]="{'fade-out': true, 'fade-out-leave': removingCocktailIds.has(favouriteCocktail.id)}">
+        <app-cocktail [cocktail]="favouriteCocktail"></app-cocktail>
+      </div>
     </div>
   </ng-container>
 </div>
-
 <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-  <ng-container *ngIf="favouriteSoftDrinks ">
+  <ng-container *ngIf="favouriteSoftDrinks">
     <div class="thisFlex">
-      <app-soft-drink *ngFor="let favouriteSoftDrink of favouriteSoftDrinks" @listAnimation
-                      [softDrink]="favouriteSoftDrink"></app-soft-drink>
+      <div *ngFor="let favouriteSoftDrink of favouriteSoftDrinks"
+           [ngClass]="{'fade-out': true, 'fade-out-leave': removingSoftDrinkIds.has(favouriteSoftDrink.id)}">
+        <app-soft-drink [softDrink]="favouriteSoftDrink"></app-soft-drink>
+      </div>
     </div>
   </ng-container>
 </div>
-
