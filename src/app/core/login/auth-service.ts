@@ -30,7 +30,7 @@ export class AuthService {
     return this.http.post<string>(this.loginUrl, body.toString(), {headers, responseType: 'text' as 'json'})
       .pipe(
         tap(token => {
-          localStorage.setItem('token', token);  // Stockez le token JWT ici
+          localStorage.setItem('token', token);
           this.setAuthState(true, credentials.username);
         }),
         catchError(error => {
