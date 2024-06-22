@@ -33,7 +33,8 @@ export class SoftDrinkService {
       map(softDrinks => softDrinks.filter(softDrink =>
         Object.values(softDrink).slice(0, 12).includes(ingredient) ||
         Object.values(softDrink).slice(0, 12).includes(ingredient.replace(/\b\w{3,}\b/g, word =>
-          word.replace(/^\w/, first => first.toLocaleUpperCase()))) ||        Object.values(softDrink).slice(0, 12).includes(ingredient.toLowerCase)))
+          word.replace(/^\w/, first => first.toLocaleUpperCase()))) ||
+        Object.values(softDrink).slice(0, 12).includes(ingredient.toLowerCase)))
     );
   }
 
