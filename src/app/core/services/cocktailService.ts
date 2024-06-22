@@ -49,13 +49,17 @@ export class CocktailService {
   }
 
   getCocktailsByIngredient(ingredient: string): Observable<Cocktail[]> {
+    console.log(ingredient);
 
     return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`).pipe(
       map(cocktails => cocktails.filter(cocktail =>
         Object.values(cocktail).slice(0, 12).includes(ingredient) ||
-        Object.values(cocktail).slice(0, 12).includes(ingredient.replace(/\b\w/g, first => first.toLocaleUpperCase())) ||
+        Object.values(cocktail).slice(0, 12).includes(ingredient.replace(/\b\w{3,}\b/g, word =>
+          word.replace(/^\w/, first => first.toLocaleUpperCase()))) ||
         Object.values(cocktail).slice(0, 12).includes(ingredient.toLowerCase()))
+
       )
+
     );
   }
 

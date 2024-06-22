@@ -12,7 +12,7 @@
 
   </div>
   <div *ngIf="softDrink" class="ingredientList clickable">
-    <div *ngFor="let ingredient of getIngredients(softDrink)" [routerLink]="'/juxbar/detailledingredient/' + ingredient"
+    <div *ngFor="let ingredient of getIngredients(softDrink)" [routerLink]=formatIngredientURL(ingredient)
     ><img (load)="imageLoaded[ingredient] = true" [alt]="ingredient"
           [class.visible]="imageLoaded[ingredient]" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
    + ingredient + '/image'"

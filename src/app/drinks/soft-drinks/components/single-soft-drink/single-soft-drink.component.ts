@@ -4,6 +4,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SoftDrinkService} from "../../../../core/services/softDrinkService";
 import {NgForOf, NgIf, TitleCasePipe} from "@angular/common";
 import {environment} from "../../../../../environments/environment";
+import {CapitalizeFirstPipe} from "../../../../capitalize-first.pipe";
 
 @Component({
   selector: 'app-single-soft-drink',
@@ -25,7 +26,7 @@ export class SingleSoftDrinkComponent implements OnInit {
   id!: number;
   protected readonly environment = environment;
 
-  constructor(private router: Router, private route: ActivatedRoute, private softDrinkService: SoftDrinkService) {
+  constructor(private router: Router, private route: ActivatedRoute, private softDrinkService: SoftDrinkService, private capitalizeFirst: CapitalizeFirstPipe) {
   }
 
   ngOnInit() {
@@ -58,5 +59,10 @@ export class SingleSoftDrinkComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl("/juxbar/listallsofts");
+  }
+
+  formatIngredientURL(ingredient: string): string {
+    let formattedIngredient:string = this.capitalizeFirst.transform(ingredient)
+    return `/juxbar/detailledingredient/${formattedIngredient}`;
   }
 }
