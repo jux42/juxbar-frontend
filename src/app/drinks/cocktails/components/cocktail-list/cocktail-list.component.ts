@@ -72,7 +72,7 @@ export class CocktailListComponent implements OnInit {
       behavior: 'smooth'
     });
 
-    this.cocktailService.getAllCocktailsCached().pipe(
+    this.cocktailService.getCocktailsPaginated().pipe(
       takeUntil(this.destroy$),
       tap(data => this.cocktailsSubject.next(data)),
       finalize(() => this.isLoading = false))

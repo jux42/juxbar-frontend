@@ -6,6 +6,7 @@ import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angula
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {BoldWordsPipe} from "../../../../core/services/bold-words.pipe";
 import {environment} from "../../../../../environments/environment";
+import {CapitalizeFirstPipe} from "../../../../capitalize-first.pipe";
 
 @Component({
   selector: 'app-single-cocktail',
@@ -32,7 +33,7 @@ export class SingleCocktailComponent implements OnInit {
   protected readonly RouterLink = RouterLink;
   protected readonly environment = environment;
 
-  constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private router: Router) {
+  constructor(private cocktailService: CocktailService, private route: ActivatedRoute, private router: Router, private capitalizeFirst: CapitalizeFirstPipe) {
   }
 
   ngOnInit() {
@@ -64,5 +65,10 @@ export class SingleCocktailComponent implements OnInit {
     }
 
     return ingredients;
+  }
+
+  formatIngredientURL(ingredient: string): string {
+    let formattedIngredient:string = this.capitalizeFirst.transform(ingredient)
+    return `/juxbar/detailledingredient/${formattedIngredient}`;
   }
 }
