@@ -8,7 +8,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {environment} from "../../../../environments/environment";
 import {IngredientService} from "../../services/ingredientService";
 import {FormsModule} from "@angular/forms";
-import {map} from "rxjs";
+import {forkJoin, map} from "rxjs";
 import {Ingredient} from "../../models/ingredient";
 import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
 
@@ -98,6 +98,24 @@ export class SideBarComponent implements OnInit {
   onCreateCocktail() {
     this.router.navigate(['juxbar/profile/createcocktail']);
   }
+
+  onDevUpdate(){
+    forkJoin(this.cocktailService.updateAllListsFromExtAPI()).subscribe(
+      (responses) => {
+        responses.forEach(response => {
+          console.log(response); // Log each response
+          alert(`Update successful: ${response}`);
+
+        });
+      },
+      (error) => {
+        console.error('An error occurred:', error);
+        alert(`An error occurred: ${error.message}`);
+      }
+    );
+  }
+
+
 }
 
 

@@ -106,6 +106,24 @@ export class CocktailService {
     const x = Math.sin(seed) * 10000;
     return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
   }
+
+  updateAllListsFromExtAPI(){
+    return[
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/save`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/saveimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/savepreviews`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/save`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softDrinks/saveimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/savepreviews`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/save`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/saveimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/savesmallimages`,{responseType: 'text' as 'json'}),
+
+
+    ]
+
+  }
+
 }
 
 
@@ -147,5 +165,6 @@ export class PersonalCocktailService {
   deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any>{
     return this.http.delete(`http://${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
   }
+
 
 }
