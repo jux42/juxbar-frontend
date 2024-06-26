@@ -38,15 +38,28 @@
     </ng-template>
   </div>
 
-
+  <div *ngIf="isAdmin$ | async">
 <div class="innerFrameBold devBlock">
-  <h3>ESPACE DEV</h3>
-<p class="innerFrame clickable" (click)="onDevUpdate()"> Mettre à jour les listes</p>y
+  <h3>ESPACE ADMIN</h3>
+<p class=" clickable" (click)="onDevUpdate()"> Mettre à jour les listes</p>
+  <p class=" clickable" (click)="onListUsers()"> Afficher les utilisateurs</p>
+  <p>créer un utilisateur : </p>
+  <form #userForm="ngForm" (ngSubmit)="onCreateUser(userForm)">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" ngModel required>
 
-<ng-template>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" ngModel required>
+
+    <button class="form-button" type="submit">Create User</button>
+  </form>
+
+
+  <ng-template>
 
 </ng-template>
 
+</div>
 </div>
 </div>
 

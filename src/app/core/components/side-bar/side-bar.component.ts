@@ -8,9 +8,10 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {environment} from "../../../../environments/environment";
 import {IngredientService} from "../../services/ingredientService";
 import {FormsModule} from "@angular/forms";
-import {forkJoin, map} from "rxjs";
+import {BehaviorSubject, firstValueFrom, forkJoin, map} from "rxjs";
 import {Ingredient} from "../../models/ingredient";
 import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
+import {AdminService} from "../../services/admin.service";
 
 @Component({
   selector: 'app-side-bar',
@@ -42,15 +43,20 @@ export class SideBarComponent implements OnInit {
   ingredient!: Ingredient;
   ingredientString!: string;
   protected readonly environment = environment;
+  isAdmin$ = new BehaviorSubject<boolean>(false);
+  newUser = { username: '', password: '' };
 
   constructor(private router: Router,
               private cocktailService: CocktailService,
               private ingredientService: IngredientService,
+              private adminService : AdminService,
               private cdr: ChangeDetectorRef,
               private capitalizeFirst: CapitalizeFirstPipe) {
   }
 
   ngOnInit() {
+
+    this.checkIfAdmin();
 
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
     console.log(this.cocktailOfTheDayId)
@@ -61,10 +67,17 @@ export class SideBarComponent implements OnInit {
     ).subscribe();
 
 
+
     this.ingredientService.getAllIngredients().subscribe(
       data => this.ingredientsList = data
     )
   }
+
+  checkIfAdmin() {
+    const username = localStorage.getItem('username');
+    this.isAdmin$.next(username === 'admin');
+  }
+
 
   goToIngredient(ingredientString: string) {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
@@ -115,7 +128,32 @@ export class SideBarComponent implements OnInit {
     );
   }
 
+  async onListUsers() {
+    //TODO implémenter composant UserManagement
 
+    try {
+      const users = await firstValueFrom(this.adminService.listUsers());
+      console.log(users);
+    } catch (error) {
+      console.error('An error occurred while fetching users:', error);
+    }
+  }
+
+  async onCreateUser(form: any) {
+    const { username, password } = form.value;
+    try {
+      const response = await firstValueFrom(this.adminService.createUser(username, password));
+      console.log(response);
+      alert(`User created: ${username}`);
+      form.reset(); // Reset form
+    } catch (error) {
+      console.error('An error occurred while creating user:', error);
+      alert(`An error occurred: ${error}`);
+    }
+  }
+
+
+  protected readonly localStorage = localStorage;
 }
 
 
