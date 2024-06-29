@@ -37,29 +37,35 @@
       </div>
     </ng-template>
   </div>
+  <div class="innerFrameBold" >
+    <button class="adminButton" (click)="showAdminSection()">{{adminButtonText}}</button>
+  </div>
+    <div *ngIf="adminSectionIsOn">
 
-  <div *ngIf="isAdmin$ | async">
-<div class="innerFrameBold devBlock">
-  <h3>ESPACE ADMIN</h3>
-<p class=" clickable" (click)="onDevUpdate()"> Mettre à jour les listes</p>
-  <p class=" clickable" (click)="onListUsers()"> Afficher les utilisateurs</p>
-  <p>créer un utilisateur : </p>
-  <form #userForm="ngForm" (ngSubmit)="onCreateUser(userForm)">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" ngModel required>
+      <div *ngIf="isAdmin$ | async">
+        <div class="innerFrameBold devBlock">
+          <h3>ESPACE ADMIN</h3>
+          <p class=" clickable" (click)="onDevUpdate()"> Mettre à jour les listes</p>
+          <p class=" clickable" (click)="onListUsers()"> Afficher les utilisateurs</p>
+          <p>créer un utilisateur : </p>
+          <form #userForm="ngForm" (ngSubmit)="onCreateUser(userForm)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" ngModel required>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" ngModel required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" ngModel required>
 
-    <button class="form-button" type="submit">Create User</button>
-  </form>
+            <button class="form-button" type="submit">Create User</button>
+          </form>
 
+        </div>
+      </div>
+      <div *ngIf="!(isAdmin$ | async)">
+        <p class="innerFrame">vous n'êtes pas administrateur</p>
+      </div>
 
-  <ng-template>
+    </div>
 
-</ng-template>
+  </div>
 
-</div>
-</div>
-</div>
 

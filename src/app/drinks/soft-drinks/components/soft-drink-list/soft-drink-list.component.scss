@@ -1,81 +1,54 @@
-.initialBlock {
+
+.this-animation {
+  animation-delay: 1s !important;
 }
+
+.searchBlock {
+  position: sticky;
+  top: 10px;
+  z-index: 1001;
+  background-color: rgba(white, 0.2);
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 105px;
+  margin-right: 15px;
+  border-radius: 1%;
+  margin-bottom: 10px;
+}
+
+.alphabet-navigation {
+  position: sticky;
+  height: 65px;
+  //margin-bottom: 20px;
+  flex-direction: row;
+  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  color: darkslategray;
+  z-index: 1002;
+}
+
+
+button {
+  height: 60px;
+  width: 25px;
+  margin-left: 1px;
+  margin-right: 1px;
+  padding: 3px;
+  background: white;
+}
+
 
 h2 {
   padding-top: 70px; /* Adjust according to your header's height */
   margin-top: -70px; /* Same as padding-top but negative */
 }
 
-.formBlock {
+.softDrinkForm {
   display: flex;
   flex-direction: row;
-  font-weight: bold;
-  color: darkslategray;
-  //position: sticky;
-  //top: 15px;
-  border-radius: 5px;
-  width: 50%;
-  height: 65px;
-  margin-left: 45px;
-  text-align: center;
   justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
-  margin-bottom: 20px;
-  opacity: 1;
-}
-
-.thisFlex {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.softDrinkForm {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 15px;
-  margin-left: 30px;
-  margin-bottom: 30px;
-}
-
-
-.searchBlock {
-  position: sticky;
-  top: 15px;
-  z-index: 1001;
-
-  display: flex;
-  flex-direction: row;
-  margin-left: 115px;
-}
-
-.alphabet-navigation {
-  position: sticky;
-  height: 65px;
-  margin-bottom: 20px;
-  flex-direction: row;
-  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
-  color: darkslategray;
-  z-index: 1000;
-}
-
-button {
-  height: 60px;
-  width: 25px;
-  margin-left: 2px;
-  padding: 3px;
-  background: white;
-}
-
-.softDrinkForm {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   gap: 15px;
   margin-left: 30px;
   margin-bottom: 30px;
@@ -86,5 +59,81 @@ button {
   display: flex;
   flex-direction: column;
   width: 100px;
+  justify-content: space-between;
+}
+
+.initialBlock {
+
+}
+
+.loading {
+
+  display: flex;
   justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+  animation: breatheAnimation 3s infinite;
+
+}
+
+@keyframes breatheAnimation {
+  100% {
+    font-size: 124px;
+  }
+  0% {
+    font-size: 8px;
+  }
+}
+
+.alphabetBlock {
+  margin-left: 25px;
+
+
+}
+
+.formBlock {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  color: darkslategray;
+  //position: sticky;
+  //top: 15px;
+  border-radius: 5px;
+  width: 45%;
+  height: 65px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 25px;
+  opacity: 1;
+}
+
+.nothing {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.thisFlex {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.formGroup {
+
+  display: flex;
+  flex-direction: column;
 }

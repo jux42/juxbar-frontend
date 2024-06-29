@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
-import {Router, RouterLink} from "@angular/router";
+import { Router, RouterLink} from "@angular/router";
 import {CocktailService} from "../../services/cocktailService";
 import {CocktailComponent} from "../../../drinks/cocktails/components/cocktail/cocktail.component";
 import {Cocktail} from "../../models/cocktail";
@@ -41,10 +41,12 @@ export class SideBarComponent implements OnInit {
   cocktail!: Cocktail;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
-  ingredientString!: string;
+  // ingredientString!: string;
   protected readonly environment = environment;
   isAdmin$ = new BehaviorSubject<boolean>(false);
-  newUser = { username: '', password: '' };
+  adminSectionIsOn : boolean = false;
+  adminButtonText: string = "afficher l'espace Admin";
+  // newUser = { username: '', password: '' };
 
   constructor(private router: Router,
               private cocktailService: CocktailService,
@@ -57,7 +59,6 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
 
     this.checkIfAdmin();
-
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
     console.log(this.cocktailOfTheDayId)
     this.cocktailService.getOneCocktailById(this.cocktailOfTheDayId).pipe(
@@ -78,6 +79,19 @@ export class SideBarComponent implements OnInit {
     this.isAdmin$.next(username === 'admin');
   }
 
+  showAdminSection(){
+    this.checkIfAdmin();
+    if(this.adminSectionIsOn){
+      this.adminSectionIsOn = false;
+      this.adminButtonText = "afficher l'espace admin"
+    }
+    else {
+      this.adminSectionIsOn = true;
+      this.adminButtonText = "cacher l'espace admin"
+    }
+    console.log(this.adminSectionIsOn)
+  }
+
 
   goToIngredient(ingredientString: string) {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
@@ -96,16 +110,14 @@ export class SideBarComponent implements OnInit {
       behavior: 'auto'
     });
 
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([`juxbar/onecocktail/${randomCocktailId}`]);
-    });
+    this.reloadComponent(`juxbar/onecocktail/${randomCocktailId}`);
+
   }
 
   onGoToCocktailOfTheDay(id: number) {
 
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([`juxbar/onecocktail/${id}`]);
-    });
+    this.reloadComponent(`juxbar/onecocktail/${id}`);
+
   }
 
   onCreateCocktail() {
@@ -150,6 +162,12 @@ export class SideBarComponent implements OnInit {
       console.error('An error occurred while creating user:', error);
       alert(`An error occurred: ${error}`);
     }
+  }
+
+  reloadComponent(page: string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([`${page}`]);
+    });
   }
 
 

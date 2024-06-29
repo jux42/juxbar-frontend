@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, catchError, Observable, tap, throwError} from 'rxjs';
+import {BehaviorSubject, catchError, Observable, of, tap, throwError} from 'rxjs';
 import {Router} from "@angular/router";
 import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
@@ -51,6 +51,11 @@ export class AuthService {
 
   setLoggedIn(value: boolean): void {
     this.loggedIn.next(value);
+  }
+
+  isAdmin$(): Observable<boolean> {
+    const username = sessionStorage.getItem('username');
+    return of(username === 'admin');
   }
 
   logout(): void {
