@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.getItem('username')
+    sessionStorage.getItem('username')
     this.authService.isLoggedIn().subscribe(isLoggedIn => {
       console.log('Is logged in:', isLoggedIn);
     });

@@ -16,8 +16,8 @@ export interface AuthRequest {
 export class AuthService {
   favCocktailsList = new BehaviorSubject<Cocktail[]>([]);
   favSoftDrinksList: BehaviorSubject<SoftDrink[]> = new BehaviorSubject<SoftDrink[]>([]);
-  username = new BehaviorSubject<string | null>(localStorage.getItem('username'));
-  loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isAuthenticated') === 'true');
+  username = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
+  loggedIn = new BehaviorSubject<boolean>(sessionStorage.getItem('isAuthenticated') === 'true');
   private loginUrl = 'http://localhost:8080/login';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -30,7 +30,7 @@ export class AuthService {
     return this.http.post<string>(this.loginUrl, body.toString(), {headers, responseType: 'text' as 'json'})
       .pipe(
         tap(token => {
-          localStorage.setItem('token', token);
+          sessionStorage.setItem('token', token);
           this.setAuthState(true, credentials.username);
         }),
         catchError(error => {
@@ -54,11 +54,11 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-    localStorage.removeItem('favouritecocktails')
-    localStorage.removeItem('favouritesoftdrinks');
+    sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('favouritecocktails')
+    sessionStorage.removeItem('favouritesoftdrinks');
     this.setAuthState(false, null);
     this.router.navigate(['/']);
   }
@@ -69,12 +69,12 @@ export class AuthService {
     this.username.next(username);
     this.favCocktailsList.next(this.favCocktailsList.value);
     this.favSoftDrinksList.next(this.favSoftDrinksList.value);
-    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+    sessionStorage.setItem('isAuthenticated', isAuthenticated.toString());
     if (username) {
-      localStorage.setItem('username', username);
-      console.log(localStorage)
+      sessionStorage.setItem('username', username);
+      console.log(sessionStorage)
     } else {
-      localStorage.removeItem('username');
+      sessionStorage.removeItem('username');
     }
 
   }

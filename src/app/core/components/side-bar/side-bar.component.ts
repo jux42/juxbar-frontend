@@ -74,7 +74,7 @@ export class SideBarComponent implements OnInit {
   }
 
   checkIfAdmin() {
-    const username = localStorage.getItem('username');
+    const username = sessionStorage.getItem('username');
     this.isAdmin$.next(username === 'admin');
   }
 
@@ -145,7 +145,7 @@ export class SideBarComponent implements OnInit {
       const response = await firstValueFrom(this.adminService.createUser(username, password));
       console.log(response);
       alert(`User created: ${username}`);
-      form.reset(); // Reset form
+      form.reset();
     } catch (error) {
       console.error('An error occurred while creating user:', error);
       alert(`An error occurred: ${error}`);
@@ -153,7 +153,7 @@ export class SideBarComponent implements OnInit {
   }
 
 
-  protected readonly localStorage = localStorage;
+  protected readonly sessionStorage = sessionStorage;
 }
 
 

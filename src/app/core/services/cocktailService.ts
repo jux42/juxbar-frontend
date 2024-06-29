@@ -71,7 +71,7 @@ export class CocktailService {
           const url = `http://${environment.apiUrl}/user/favouritecocktails`;
           return this.http.get<Cocktail[]>(url).pipe(
             tap(favCocktails => {
-              localStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
+              sessionStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
             })
           );
         } else {

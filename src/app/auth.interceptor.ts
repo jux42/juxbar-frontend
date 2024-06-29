@@ -1,7 +1,7 @@
 import {HttpInterceptorFn} from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const token = localStorage.getItem('token');  // Récupérer le token stocké
+  const token = sessionStorage.getItem('token');  // Récupérer le token stocké
 
   if (token) {
     // Cloner la requête pour ajouter l'en-tête d'autorisation

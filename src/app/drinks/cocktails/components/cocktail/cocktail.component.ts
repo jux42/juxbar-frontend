@@ -65,26 +65,26 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
 
   checkFavourites() {
-    let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+    let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
     // console.log(userFav);
     this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
   }
 
   onAddFavouriteCocktail(cocktail: Cocktail): void {
-    if (localStorage.getItem('username') == null) {
+    if (sessionStorage.getItem('username') == null) {
       this.router.navigate(['/login']);
 
     } else {
 
       if (!this.isFavourite) {
-        let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+        let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
         this.cocktailService.addFavouriteCocktail(cocktail.id).subscribe(
           fav => {
             this.isFavourite = true;
           }
         );
         userFav.push(this.cocktail);
-        localStorage.setItem('favouritecocktails', JSON.stringify(userFav));
+        sessionStorage.setItem('favouritecocktails', JSON.stringify(userFav));
       } else {
         alert("This is already a fav");
       }
@@ -108,7 +108,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   onRemoveFavouriteCocktail(cocktail: Cocktail): void {
     if (this.isFavourite) {
-      let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+      let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
       this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(
         fav => {
           this.isFavourite = false;
@@ -119,7 +119,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
       const filteredFavs = userFav.filter((fav: Cocktail) => {
         fav != cocktail
       })
-      localStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
+      sessionStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
     } else {
       alert("This is NOT a fav yet");
     }

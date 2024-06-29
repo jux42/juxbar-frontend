@@ -57,26 +57,26 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   }
 
   checkFavourites() {
-    let userFav = JSON.parse(localStorage.getItem('favouritesoftdrinks') || '[]');
+    let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
     console.log(userFav);
     this.isFavourite = userFav.some((fav: any) => fav.id === this.softDrink.id);
   }
 
   onAddFavouriteSoftDrink(softDrink: SoftDrink): void {
-    if (localStorage.getItem('username') == null) {
+    if (sessionStorage.getItem('username') == null) {
       this.router.navigate(['/login']);
 
     } else {
 
       if (!this.isFavourite) {
-        let userFav = JSON.parse(localStorage.getItem('favouritecocktails') || '[]');
+        let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
         this.softDrinkService.addFavouriteSoftDrink(softDrink.id).subscribe(
           fav => {
             this.isFavourite = true;
           }
         );
         userFav.push(this.softDrink);
-        localStorage.setItem('favouritesoftdrinks', JSON.stringify(userFav));
+        sessionStorage.setItem('favouritesoftdrinks', JSON.stringify(userFav));
       } else {
         alert("This is already a fav");
       }
@@ -99,7 +99,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
 
   onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {
     if (this.isFavourite) {
-      let userFav = JSON.parse(localStorage.getItem('favouritesoftdrinks') || '[]');
+      let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
       this.softDrinkService.removeFavouriteCocktail(softDrink.id).subscribe(
         fav => {
           this.isFavourite = false;
@@ -109,7 +109,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
       const filteredFavs = userFav.filter((fav: SoftDrink) => {
         fav != softDrink
       })
-      localStorage.setItem('favouritesoftdrinks', JSON.stringify(filteredFavs));
+      sessionStorage.setItem('favouritesoftdrinks', JSON.stringify(filteredFavs));
     } else {
       alert("This is NOT a fav yet");
     }

@@ -46,7 +46,7 @@ export class SoftDrinkService {
           const url = `http://${environment.apiUrl}/user/favouritesoftdrinks`;
           return this.http.get<SoftDrink[]>(url).pipe(
             tap(favDrinks => {
-              localStorage.setItem("favouritesoftdrinks", JSON.stringify(favDrinks));
+              sessionStorage.setItem("favouritesoftdrinks", JSON.stringify(favDrinks));
             })
           );
         } else

@@ -46,7 +46,7 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
       data => this.ingredientsList = data
     )
 
-    this.username = localStorage.getItem('username');
+    this.username = sessionStorage.getItem('username');
     this.urlRegex = this.urlRegex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)/;
 
     this.personalCocktailForm = this.formBuilder.group({
@@ -70,14 +70,14 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
   }
 
   onSubmitForm(): void {
-    console.log('Local Storage Username:', localStorage.getItem('username'));
+    console.log('Local Storage Username:', sessionStorage.getItem('username'));
     if (!this.username) {
       console.error('Username is not defined');
       return;
     }
     const cocktailData = {
       ...this.personalCocktailForm.value,
-      ownerName: localStorage.getItem('username')
+      ownerName: sessionStorage.getItem('username')
     };
     console.log(cocktailData)
 
