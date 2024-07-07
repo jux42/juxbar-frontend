@@ -6,22 +6,20 @@
 
     <div class="thisGrid">
       <div class="titleRow">
-        <h3>{{ truncateText(personalCocktail.strDrink | titlecase, 25) }}</h3>
+        <h4>{{ truncateText(personalCocktail.strDrink | titlecase, 15) }}</h4>
       </div>
-
-      <img (click)="goToCocktail()" (load)="imageLoaded[personalCocktail.id] = true"
-           (mouseenter)="onMouseEnter()"
-           *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
-           [src]=personalCocktail.strDrinkThumb alt="Cocktail Image"
-           class="clickable fadeIn">
+      <div class="img-container">
+        <img (click)="goToCocktail()" (load)="imageLoaded[personalCocktail.id] = true"
+             (mouseenter)="onMouseEnter()"
+             *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
+             [src]="personalCocktail.strDrinkThumb"
+             class="clickable fadeIn">
+      </div>
     </div>
-
     <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
       <div class="favIcon">
-        <p (click)="onDeleteCocktail(personalCocktail)" class="clickable">❌</p>
-      </div>
-      <div class="favIcon">
-        <p>🙂</p>
+                <a class="clickable">😁</a>
+
       </div>
 
       <div class="ingBlock">

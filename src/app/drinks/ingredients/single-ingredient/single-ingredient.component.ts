@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AsyncPipe, Location, NgForOf, NgIf, TitleCasePipe} from "@angular/common";
+import {AsyncPipe, Location, NgForOf, NgIf, NgStyle, TitleCasePipe} from "@angular/common";
 import {Ingredient} from "../../../core/models/ingredient";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IngredientService} from "../../../core/services/ingredientService";
@@ -19,7 +19,8 @@ import {Observable} from "rxjs";
     TitleCasePipe,
     NgForOf,
     BoldWordsPipe,
-    AsyncPipe
+    AsyncPipe,
+    NgStyle
   ],
   templateUrl: './single-ingredient.component.html',
   styleUrl: './single-ingredient.component.scss'

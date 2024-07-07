@@ -1,9 +1,9 @@
 .cocktail-card {
 
+  padding-bottom: 10px;
 
   &.active {
     position: relative;
-    padding-bottom: 30px;
     transition: transform 0.2s ease, background-color 0s;
     //border-radius: 1%;
     color: palegoldenrod;
@@ -16,7 +16,6 @@
 
   &.inactive {
     position: relative;
-    padding-bottom: 30px;
     transition: transform 0.4s ease, background-color 0s;
     border-radius: 1%;
     color: palegoldenrod;
@@ -38,7 +37,7 @@
 .floating-window {
   z-index: 5000;
   position: absolute;
-  top: 129%;
+  top: 139%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 130px;
@@ -49,11 +48,12 @@
   //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.1s ease-in-out;
+  transition: opacity 0.3s ease-in-out 0.5s, visibility 0.1s ease-in-out 0.5s;
 
   &.fadeIn {
     opacity: 1;
     visibility: visible;
+
   }
 
   &.fadeOut {
