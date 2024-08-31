@@ -24,12 +24,14 @@ import {Router} from "@angular/router";
 export class CocktailHomepageComponent implements OnInit {
 
   cocktails$!: Observable<Cocktail[]>;
-  currentClass!: string;
+  classes: string[] = [];
+  index!: number;
 
   constructor(private cocktailService: CocktailService, private router: Router) {}
 
   ngOnInit(): void {
     this.cocktails$ = this.getRandomCocktails();
+    this.initializeClasses();
   }
 
   goToCocktail(id: number) {
@@ -43,38 +45,30 @@ export class CocktailHomepageComponent implements OnInit {
   }
 
   getRandomCocktails(): Observable<Cocktail[]> {
-    const randomIds = Array.from({ length: 100 }, () => Math.floor(Math.random() * 569) + 1);
+    const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * 569) + 1);
     const requests = randomIds.map(id => this.cocktailService.getOneCocktailById(id));
     return forkJoin(requests);
   }
-  getRandomDelay(): string {
-    const minDelay = 0;
-    const maxDelay = 2; // Maximum 2 secondes de délai
-    const delay = Math.random() * (maxDelay - minDelay) + minDelay;
-    return `${delay}s`; // Retourne un délai sous forme de chaîne de caractères
-  }
 
-  getRandomDuration(): string {
-    const minDuration = 3;
-    const maxDuration = 6; // Durée entre 3 et 6 secondes
-    const duration = Math.random() * (maxDuration - minDuration) + minDuration;
-    return `${duration}s`; // Retourne une durée sous forme de chaîne de caractères
-  }
-
-  getRandomClass(): string {
-    const classes = [
-      'tiny','tiny','tiny','tiny','tiny','tiny','tiny','tiny',
-      'small','small','small','small',
-      'medium','medium','medium',
-      'large',
+  initializeClasses(): void {
+    this.classes = [
+      'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'large', 'tiny', 'medium', 'small',
+      'tiniest', 'small', 'tiny', 'medium', 'tiny', 'tiny', 'tiny', 'small', 'medium', 'tiniest',
+      'tiny', 'small', 'medium', 'tiniest', 'tiny', 'tiny', 'small', 'medium', 'large', 'small',
+      'tiny', 'tiny', 'small', 'tiniest', 'medium', 'medium', 'small', 'tiny', 'medium', 'tiniest',
+      'small', 'tiny', 'tiny', 'small', 'medium', 'tiniest', 'tiny', 'medium', 'small', 'large',
+      'tiny', 'tiny', 'small', 'tiniest', 'medium', 'tiny', 'small', 'medium', 'tiniest', 'tiny',
+      'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'tiny', 'small', 'medium', 'tiny',
+      'tiny', 'tiniest', 'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'medium', 'large',
+      'tiniest', 'small', 'tiny', 'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'tiny',
+      'tiniest', 'tiny', 'small', 'medium', 'tiny', 'small', 'tiny', 'medium', 'tiniest', 'tiny',
+      'small', 'medium', 'tiniest', 'tiny', 'small', 'medium', 'tiny', 'tiniest', 'small', 'tiny',
+      'small', 'tiny', 'medium', 'tiniest', 'small', 'tiny', 'tiny', 'small', 'medium', 'medium'
     ];
-    let newClass = classes[Math.floor(Math.random() * classes.length)];
+  }
 
-    while ( this.currentClass == newClass ) {
-      newClass = classes[Math.floor(Math.random() * classes.length)];
-    }
-    this.currentClass = newClass;
-    return this.currentClass;
+  getClass(index: number): string {
+    return this.classes[index % this.classes.length];
   }
 
   protected readonly environment = environment;

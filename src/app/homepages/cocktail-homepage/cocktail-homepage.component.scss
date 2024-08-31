@@ -1,9 +1,9 @@
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(24, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  gap: 60px;
-  padding: 20px;
+  gap: 20px;
+  padding: 10px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -13,9 +13,8 @@
   overflow: hidden;
   border-radius: 50%;
   text-align: center;
-  filter: blur(1px);
   aspect-ratio: 1 / 1;
-  animation: float 10s ease-in-out infinite;
+  animation: float  ease-in-out infinite;
   box-shadow: 2px 2px 20px gray;
 
 }
@@ -33,35 +32,50 @@
     transform: translate(0, 0);
   }
   25% {
-    transform: translate(3px, -3px);
+    transform: translate(2px, -3px);
   }
-    50% {
-      transform: translate(0, 4px);
-    }
+  50% {
+    transform: translate(-1px, 2px);
+  }
 
-    75% {
-      transform: translate(3px, -3px);
-    }
+  75% {
+    transform: translate(-4px, -2px);
   }
+}
+
+.tiniest{
+  grid-column: span 2;
+  grid-row: span 2;
+  animation-duration: 40s;
+  animation-timing-function: ease-in-out;
+}
 
 .tiny {
-  grid-column: span 1;
-  grid-row: span 1;
+  grid-column: span 3;
+  grid-row: span 3;
+  animation-duration: 60s;
+  animation-timing-function: ease-in-out;
 }
 
 .small {
-  grid-column: span 2;
-  grid-row: span 2;
+  grid-column: span 4;
+  grid-row: span 4;
+  animation-duration: 80s;
+  animation-timing-function: ease-in-out;
 }
 
 .medium {
-  grid-column: span 3;
-  grid-row: span 3;
+  grid-column: span 5;
+  grid-row: span 5;
+  animation-duration: 100s;
+  animation-timing-function: ease-in-out;
 }
 
 .large {
-  grid-column: span 4;
-  grid-row: span 4;
+  grid-column: span 7;
+  grid-row: span 7;
+  animation-duration: 120s;
+  animation-timing-function: ease-in-out;
 }
 
 
@@ -70,5 +84,5 @@
   transition: transform 2s ease, filter 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
   height: 100%;
-  object-fit: cover;  /* Pour s'assurer que l'image couvre tout le bloc sans déformation */
+  object-fit: cover;
 }

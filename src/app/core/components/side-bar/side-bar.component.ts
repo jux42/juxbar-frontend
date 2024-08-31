@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
 import { Router, RouterLink} from "@angular/router";
 import {CocktailService} from "../../services/cocktailService";
@@ -49,6 +49,7 @@ export class SideBarComponent implements OnInit {
   // newUser = { username: '', password: '' };
 
   constructor(private router: Router,
+              private ngZone: NgZone,
               private cocktailService: CocktailService,
               private ingredientService: IngredientService,
               private adminService : AdminService,
@@ -73,6 +74,7 @@ export class SideBarComponent implements OnInit {
       data => this.ingredientsList = data
     )
   }
+
 
   checkIfAdmin() {
     const username = sessionStorage.getItem('username');

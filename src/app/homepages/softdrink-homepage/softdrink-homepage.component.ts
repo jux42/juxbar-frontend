@@ -24,12 +24,14 @@ import {Router} from "@angular/router";
 export class SoftdrinkHomepageComponent implements OnInit {
 
   softDrinks$!: Observable<SoftDrink[]>;
-  currentClass!: string;
+  classes: string[] = [];
+  index!: number;
 
   constructor(private softDrinkService: SoftDrinkService, private router: Router) {}
 
   ngOnInit(): void {
     this.softDrinks$ = this.getRandomSoftDrinks();
+    this.initializeClasses();
   }
 
   goToSoftDrink(id: number) {
@@ -43,38 +45,37 @@ export class SoftdrinkHomepageComponent implements OnInit {
   }
 
   getRandomSoftDrinks(): Observable<SoftDrink[]> {
-    const randomIds = Array.from({ length: 58 }, () => Math.floor(Math.random() * 58) + 1);
-    const requests = randomIds.map(id => this.softDrinkService.getOneSoftDrinkById(id));
+    const uniqueIds = new Set<number>();
+    const maxId = 58;
+    const numIdsNeeded = 58;
+
+    while (uniqueIds.size < numIdsNeeded) {
+      const randomId = Math.floor(Math.random() * maxId) + 1;
+      uniqueIds.add(randomId);
+    }
+
+    const requests = Array.from(uniqueIds).map(id => this.softDrinkService.getOneSoftDrinkById(id));
     return forkJoin(requests);
   }
-  getRandomDelay(): string {
-    const minDelay = 0;
-    const maxDelay = 2; // Maximum 2 secondes de délai
-    const delay = Math.random() * (maxDelay - minDelay) + minDelay;
-    return `${delay}s`; // Retourne un délai sous forme de chaîne de caractères
-  }
-
-  getRandomDuration(): string {
-    const minDuration = 3;
-    const maxDuration = 6; // Durée entre 3 et 6 secondes
-    const duration = Math.random() * (maxDuration - minDuration) + minDuration;
-    return `${duration}s`; // Retourne une durée sous forme de chaîne de caractères
-  }
-
-  getRandomClass(): string {
-    const classes = [
-      'tiny','tiny','tiny','tiny','tiny','tiny','tiny','tiny',
-      'small','small','small','small',
-      'medium','medium','medium',
-      'large',
+  initializeClasses(): void {
+    this.classes = [
+      'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'large', 'tiny', 'medium', 'small',
+      'tiniest', 'small', 'tiny', 'medium', 'tiny', 'tiny', 'tiny', 'small', 'medium', 'tiniest',
+      'tiny', 'small', 'medium', 'tiniest', 'tiny', 'tiny', 'small', 'medium', 'large', 'small',
+      'tiny', 'tiny', 'small', 'tiniest', 'medium', 'medium', 'small', 'tiny', 'medium', 'tiniest',
+      'small', 'tiny', 'tiny', 'small', 'medium', 'tiniest', 'tiny', 'medium', 'small', 'large',
+      'tiny', 'tiny', 'small', 'tiniest', 'medium', 'tiny', 'small', 'medium', 'tiniest', 'tiny',
+      'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'tiny', 'small', 'medium', 'tiny',
+      'tiny', 'tiniest', 'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'medium', 'large',
+      'tiniest', 'small', 'tiny', 'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'tiny',
+      'tiniest', 'tiny', 'small', 'medium', 'tiny', 'small', 'tiny', 'medium', 'tiniest', 'tiny',
+      'small', 'medium', 'tiniest', 'tiny', 'small', 'medium', 'tiny', 'tiniest', 'small', 'tiny',
+      'small', 'tiny', 'medium', 'tiniest', 'small', 'tiny', 'tiny', 'small', 'medium', 'medium'
     ];
-    let newClass = classes[Math.floor(Math.random() * classes.length)];
+  }
 
-    while ( this.currentClass == newClass ) {
-      newClass = classes[Math.floor(Math.random() * classes.length)];
-    }
-    this.currentClass = newClass;
-    return this.currentClass;
+  getClass(index: number): string {
+    return this.classes[index % this.classes.length];
   }
 
   protected readonly environment = environment;
