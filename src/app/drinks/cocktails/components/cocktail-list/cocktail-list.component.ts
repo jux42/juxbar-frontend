@@ -17,7 +17,6 @@ import {ActivatedRoute} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle, ViewportScroller} from "@angular/common";
 import {CocktailComponent} from "../cocktail/cocktail.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {slideInAnimation} from "../../../../animations";
 import {animate, animation, query, stagger, style, transition, trigger} from "@angular/animations";
 
 
@@ -25,16 +24,12 @@ import {animate, animation, query, stagger, style, transition, trigger} from "@a
   selector: 'app-cocktail-list',
   standalone: true,
   animations: [
-    slideInAnimation,
-    trigger('listAnimation', [
-      transition('* <=> *', [
-        query(':enter', [
-          style({transform: 'translateY(100%)', opacity: 0.2}),
-          stagger('10ms', animate('200ms ease-out', style({transform: 'translateY(0)', opacity: 1})))
-        ], {optional: true})
+    trigger('simpleFadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ])
-
   ],
   imports: [
 

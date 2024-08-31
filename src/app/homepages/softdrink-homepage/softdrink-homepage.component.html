@@ -1,0 +1,13 @@
+<div class="grid-container">
+  <ng-container *ngIf="softDrinks$ | async as softDrinks">
+    <div
+      *ngFor="let softDrink of softDrinks; let i = index"
+      class="grid-item"
+      [ngClass]="getRandomClass()"
+      [ngStyle]="{'animation-delay': getRandomDelay(), 'animation-duration': getRandomDuration()}">
+      <img [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'"
+           alt="Soft Image" class="softdrink-image clickable" (click)="goToSoftDrink(softDrink.id)">
+    </div>
+  </ng-container>
+</div>
+

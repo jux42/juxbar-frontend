@@ -1,0 +1,13 @@
+<div class="grid-container">
+  <ng-container *ngIf="cocktails$ | async as cocktails">
+    <div
+      *ngFor="let cocktail of cocktails; let i = index"
+      class="grid-item"
+      [ngClass]="getRandomClass()"
+      [ngStyle]="{'animation-delay': getRandomDelay(), 'animation-duration': getRandomDuration()}">
+      <img [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'"
+           alt="Cocktail Image" class="cocktail-image clickable" (click)="goToCocktail(cocktail.id)">
+    </div>
+  </ng-container>
+</div>
+

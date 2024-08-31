@@ -47,7 +47,7 @@
 
       <div class="thisFlex">
 
-        <app-cocktail *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" @listAnimation [attr.id]="getAnchorId(cocktail.strDrink)"
+        <app-cocktail *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" @simpleFadeInAnimation [attr.id]="getAnchorId(cocktail.strDrink)"
                       [cocktail]="cocktail">
 
 

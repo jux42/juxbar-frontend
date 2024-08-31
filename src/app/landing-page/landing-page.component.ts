@@ -33,10 +33,10 @@ export class LandingPageComponent implements OnInit {
   }
 
   onGoToCocktails() {
-    this.router.navigateByUrl('juxbar/listall');
+    this.router.navigateByUrl('juxbar/cocktailhome');
   }
 
   onGoToSoftDrinks() {
-    this.router.navigateByUrl('juxbar/listallsofts');
+    this.router.navigateByUrl('juxbar/softdrinkhome');
   }
 }

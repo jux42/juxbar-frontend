@@ -12,15 +12,6 @@
     </div>
 
   </div>
-  <div class="innerFrame clickable">
-    <p (click)="onCreateCocktail()">Créer un cocktail</p>
-
-  </div>
-  <div class="innerFrame clickable">
-    <p (click)="onGoToRandomCocktail()">voir un cocktail au hasard</p>
-  </div>
-
-
   <div>
     <p class="innerFrameBold">chercher un ingrédient :</p>
     <div *ngIf="ingredientsList; else loading">
@@ -37,9 +28,25 @@
       </div>
     </ng-template>
   </div>
+
+  <div class="innerFrame clickable">
+    <p (click)="onCreateCocktail()">Créer un cocktail</p>
+
+  </div>
+  <div class="innerFrame clickable">
+    <p (click)="onGoToRandomCocktail()">voir un cocktail au hasard</p>
+  </div>
+  <div class="innerFrame clickable">
+    <p (click)="onGoToCocktailsAlpha()">voir tous les cocktails</p>
+  </div>
+  <div class="innerFrame clickable">
+    <p (click)="onGoToSoftdrinksAlpha()">voir tous les softdrinks</p>
+  </div>
+
   <div class="innerFrameBold" >
     <button class="adminButton" (click)="showAdminSection()">{{adminButtonText}}</button>
   </div>
+
     <div *ngIf="adminSectionIsOn">
 
       <div *ngIf="isAdmin$ | async">

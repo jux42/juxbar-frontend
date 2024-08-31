@@ -12,19 +12,12 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
 
 @Component({
   animations: [
-    slideInAnimation,
-    trigger('listAnimation', [
-      transition('* <=> *', [
-        query(':leave', [
-          stagger('30ms', animate('500ms ease-in', style({transform: 'translateY(100%)', opacity: 0.5})))
-        ], {optional: true}),
-        query(':enter', [
-          style({transform: 'translateX(-100%)', opacity: 90}),
-          stagger('30ms', animate('800ms 500ms ease-out', style({transform: 'translateX(0)', opacity: 1})))
-        ], {optional: true})
+    trigger('simpleFadeInAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ])
-
   ],
   selector: 'app-soft-drink-list',
   standalone: true,

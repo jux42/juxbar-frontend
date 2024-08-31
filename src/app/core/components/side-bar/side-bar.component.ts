@@ -92,6 +92,14 @@ export class SideBarComponent implements OnInit {
     console.log(this.adminSectionIsOn)
   }
 
+  onGoToCocktailsAlpha(){
+
+    this.router.navigateByUrl('/juxbar/listall', {skipLocationChange: true});
+
+  }
+  onGoToSoftdrinksAlpha(){
+    this.router.navigateByUrl('/juxbar/listallsofts', {skipLocationChange: true});
+  }
 
   goToIngredient(ingredientString: string) {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

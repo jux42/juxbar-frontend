@@ -13,12 +13,12 @@ export const slideInAnimation = trigger('routeAnimation', [
 
     group([
       query(':leave', [
-        animate('0.3s 50ms ease-in', style({transform: 'translateX(-100%)'}))
+        animate('0.8s 80ms ease-in', style({transform: 'translateX(-100%)'}))
       ], {optional: true}),
 
       query(':enter', [
         style({transform: 'scale(0.2)'}),
-        animate('500ms 50ms ease-out', style({transform: 'translateX(0)'}))
+        animate('800ms 80ms ease-out', style({transform: 'translateX(0)'}))
       ], {optional: true})
     ])
   ])

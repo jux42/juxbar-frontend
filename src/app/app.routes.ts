@@ -3,6 +3,8 @@ import {LoginComponent} from "./core/login/login.component";
 import {ProfileComponent} from "./core/profile/profile.component";
 import {authGuard} from "./auth-guard";
 import {CocktailListComponent} from "./drinks/cocktails/components/cocktail-list/cocktail-list.component";
+import {CocktailHomepageComponent} from "./homepages/cocktail-homepage/cocktail-homepage.component";
+import {SoftdrinkHomepageComponent} from "./homepages/softdrink-homepage/softdrink-homepage.component";
 
 export const routes: Routes = [
 
@@ -12,6 +14,9 @@ export const routes: Routes = [
     data: {animation: 'LandingPage'}
   },
   {path: 'login', component: LoginComponent,},
+  {path: 'juxbar/cocktailhome', component: CocktailHomepageComponent},
+  {path: 'juxbar/softdrinkhome', component: SoftdrinkHomepageComponent},
+
   {
     path: 'juxbar/profile',
     component: ProfileComponent,
