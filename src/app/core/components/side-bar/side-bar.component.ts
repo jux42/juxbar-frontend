@@ -78,7 +78,7 @@ export class SideBarComponent implements OnInit {
 
   checkIfAdmin() {
     const username = sessionStorage.getItem('username');
-    this.isAdmin$.next(username === 'admin');
+    this.isAdmin$.next(username === 'admin' || username === 'superadmin');
   }
 
   showAdminSection(){
@@ -96,7 +96,7 @@ export class SideBarComponent implements OnInit {
 
   onGoToCocktailsAlpha(){
 
-    this.router.navigateByUrl('/juxbar/listall', {skipLocationChange: true});
+    this.router.navigate(['/juxbar/listall']);
 
   }
   onGoToSoftdrinksAlpha(){
