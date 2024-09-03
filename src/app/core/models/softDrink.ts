@@ -1,27 +1,13 @@
-export class SoftDrink {
+import {Drink} from "./drink";
+import {Ingredient} from "./ingredient";
 
-  id !: number;
+export class SoftDrink extends Drink{
 
-  idDrink!: string;
+  override id !: number;
 
-  strDrink!: string;
+  override idDrink!: string;
 
-  strDrinkThumb !: string;
+  _uniqueKey?: number;
 
-  strInstructions !: string;
-
-  strIngredient1 !: string;
-
-  strIngredient2!: string;
-
-  strIngredient3 !: string;
-
-  strIngredient4 !: string;
-
-  strIngredient5 !: string;
-
-  strIngredient6 !: string;
-
-  strIngredient7 !: string;
 
 }

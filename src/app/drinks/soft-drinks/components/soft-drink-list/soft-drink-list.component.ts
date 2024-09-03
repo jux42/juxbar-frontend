@@ -1,14 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SoftDrink} from "../../../../core/models/softDrink";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, map, Observable, startWith} from "rxjs";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SoftDrinkService} from "../../../../core/services/softDrinkService";
 import {ActivatedRoute} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {CocktailComponent} from "../../../cocktails/components/cocktail/cocktail.component";
-import {SoftDrinkComponent} from "../soft-drink/soft-drink.component";
-import {slideInAnimation} from "../../../../animations";
 import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {SoftDrink} from "../../../../core/models/softDrink";
+import {SoftDrinkComponent} from "../soft-drink/soft-drink.component";
+import {Cocktail} from "../../../../core/models/cocktail";
 
 @Component({
   animations: [
@@ -23,7 +22,7 @@ import {animate, query, stagger, style, transition, trigger} from "@angular/anim
   standalone: true,
   imports: [
     AsyncPipe,
-    CocktailComponent,
+    SoftDrinkComponent,
     FormsModule,
     NgForOf,
     NgIf,
@@ -112,13 +111,13 @@ export class SoftDrinkListComponent implements OnInit {
           ingredient ? this.ingredientMatches(softDrink, ingredient) : true);
         return textMatch && ingredientMatch;
       })
-      .map(sofDrink => ({...sofDrink, _uniqueKey: Date.now() + Math.random()}));
+      .map(softDrink => ({...softDrink, _uniqueKey: Date.now() + Math.random()}));
   }
 
-  private ingredientMatches(softDrink: SoftDrink, searchIngredient: string): boolean {
-    for (let i = 1; i <= 6; i++) {
-      const ingredient = (softDrink as any)[`strIngredient${i}`];
-      if (ingredient && ingredient.toLowerCase().includes(searchIngredient.toLowerCase())) {
+  private ingredientMatches(cocktail: Cocktail, searchIngredient: string): boolean {
+    for (let i = 1; i <= 7; i++) {
+      const ingredientName = (cocktail as any)[`strIngredient${i}`];
+      if (ingredientName && ingredientName.toLowerCase().includes(searchIngredient.toLowerCase())) {
         return true;
       }
     }

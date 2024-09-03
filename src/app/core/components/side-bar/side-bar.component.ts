@@ -60,6 +60,7 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
 
     this.checkIfAdmin();
+    //TODO: ID de référence aligné sur l'ID max en BDD ==> créer une méthode pour récupérer ID max
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
     console.log(this.cocktailOfTheDayId)
     this.cocktailService.getOneCocktailById(this.cocktailOfTheDayId).pipe(

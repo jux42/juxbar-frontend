@@ -136,11 +136,12 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
 
   }
 
-  getIngredients(softDrink: any): string[] {
+  getIngredients(cocktail: any): string[] {
     let ingredients: string[] = [];
 
     for (let i = 1; i <= 6; i++) {
-      const ingredient = softDrink[`strIngredient${i}`];
+      const ingredientKey = `strIngredient${i}`;
+      const ingredient = cocktail[ingredientKey];
       if (ingredient) {
         ingredients.push(ingredient);
       }

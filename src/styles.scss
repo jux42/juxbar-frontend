@@ -39,10 +39,12 @@ button {
   vertical-align: bottom;
   width: 260px;
 }
-
 button:hover {
   opacity: .7;
+  backdrop-filter: blur(10px); /* Applique un flou à l'arrière-plan */
+
 }
+
 
 @media screen and (max-width: 1000px) {
   button {

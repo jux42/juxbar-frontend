@@ -99,6 +99,7 @@ export class CocktailService {
   getCocktailOfTheDayId(maxId: number): number {
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    //TODO créer méthode backend pour récup tableau ID
     return this.pseudoRandomNumber(seed, 1, maxId);
   }
 

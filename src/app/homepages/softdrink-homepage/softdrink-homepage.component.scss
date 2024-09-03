@@ -1,3 +1,17 @@
+.background-softdrinkHome-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background-image: url('/assets/images/DALL·E 2024-09-01 17.36.06.webp');
+  filter: blur(5px) grayscale(50%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(24, 1fr);
@@ -11,6 +25,7 @@
 .grid-item {
   position: relative;
   overflow: hidden;
+  border: solid 2px darkslategrey;
   border-radius: 50%;
   text-align: center;
   aspect-ratio: 1 / 1;

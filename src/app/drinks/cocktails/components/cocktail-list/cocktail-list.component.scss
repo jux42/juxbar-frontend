@@ -1,4 +1,16 @@
-
+.background-cocktailList-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background-image: url('/assets/images/DALL·E 2024-09-03 16.43.32.webp');
+  filter: blur(10px) grayscale(20%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
 .this-animation {
   animation-delay: 1s !important;
 }

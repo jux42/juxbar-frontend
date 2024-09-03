@@ -18,6 +18,7 @@ import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle, ViewportScroller} from "@ang
 import {CocktailComponent} from "../cocktail/cocktail.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {animate, animation, query, stagger, style, transition, trigger} from "@angular/animations";
+import {Ingredient} from "../../../../core/models/ingredient";
 
 
 @Component({
@@ -143,13 +144,13 @@ export class CocktailListComponent implements OnInit {
           ingredient ? this.ingredientMatches(cocktail, ingredient) : true);
         return textMatch && ingredientMatch;
       })
-      .map(cocktail => ({...cocktail, _uniqueKey: Date.now() + Math.random()}))
+      .map(cocktail => ({...cocktail, _uniqueKey: Date.now() + Math.random()}));
   }
 
   private ingredientMatches(cocktail: Cocktail, searchIngredient: string): boolean {
-    for (let i = 1; i <= 6; i++) {
-      const ingredient = (cocktail as any)[`strIngredient${i}`];
-      if (ingredient && ingredient.toLowerCase().includes(searchIngredient.toLowerCase())) {
+    for (let i = 1; i <= 7; i++) {
+      const ingredientName = (cocktail as any)[`strIngredient${i}`];
+      if (ingredientName && ingredientName.toLowerCase().includes(searchIngredient.toLowerCase())) {
         return true;
       }
     }

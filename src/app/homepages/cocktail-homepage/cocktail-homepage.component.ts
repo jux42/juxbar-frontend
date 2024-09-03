@@ -45,7 +45,8 @@ export class CocktailHomepageComponent implements OnInit {
   }
 
   getRandomCocktails(): Observable<Cocktail[]> {
-    const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * 569) + 1);
+    //TODO chiffres alignés sur les id de la BDD ==> crée méthode back qui retourne un tableau d'id
+    const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * 569));
     const requests = randomIds.map(id => this.cocktailService.getOneCocktailById(id));
     return forkJoin(requests);
   }

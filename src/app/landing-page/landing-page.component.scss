@@ -1,42 +1,46 @@
-
 .background-container {
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
   background-image: url('/assets/images/DALL·E 2024-09-01 17.35.43 .webp');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  width: 99vw;
-  height: 80vh;
-
 }
 
 
 .greetings {
-  top:0;
-  margin-top: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
-
+  align-items: center; /* Centre le contenu horizontalement */
+  margin-top: 50px;
+  justify-content: center; /* Centre le contenu verticalement */
+  height: 100vh; /* S'assure que la section couvre toute la hauteur de la vue */
 }
 
 h1 {
-  background-color: rgba(255, 255, 255, 0.4);
-  background-position: center;
+  background-color: rgba(255, 255, 255, 0.2); /* Couleur de fond semi-transparente */
+  backdrop-filter: blur(10px); /* Applique un flou à l'arrière-plan */
+  padding: 20px 40px; /* Ajoute du padding autour du texte pour créer un espace */
+  border-radius: 10px; /* Adoucit les bords */
   font-size: 5em;
-  margin-top: 340px;
-  width: 100%;
-  color: wheat;
+  color: #333333;
   text-align: center;
+  width: auto; /* Ajuste automatiquement la largeur en fonction du contenu */
+  display: inline-block; /* Permet à l'élément de s'ajuster au contenu */
 }
 
 .to {
-  color: burlywood;
+  color: dimgrey;
 
 }
 
 .juxbar {
-  color: goldenrod;
+  color: #2A3E5F;
 }
 
 .buttonContainer {
@@ -44,11 +48,23 @@ h1 {
   justify-content: center;
 
 }
+button:hover {
+  opacity: .9;
+  background:#A9BDA7 ;
+
+}
 
 .ButtonOne {
+
+  font-size: 18px;
+  background:#A9BDA7 ;
+  color: #2A3E5F;
   margin-right: 10px;
 }
 
 .ButtonTwo {
+  font-size: 18px;
+  background:#A9BDA7 ;
+  color: #2A3E5F;
   margin-left: 10px;
 }
