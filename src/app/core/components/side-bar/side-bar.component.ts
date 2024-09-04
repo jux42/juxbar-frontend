@@ -167,7 +167,7 @@ export class SideBarComponent implements OnInit {
     try {
       const response = await firstValueFrom(this.adminService.createUser(username, password));
       console.log(response);
-      alert(`User created: ${username}`);
+      alert(`${response}`);
       form.reset();
     } catch (error) {
       console.error('An error occurred while creating user:', error);

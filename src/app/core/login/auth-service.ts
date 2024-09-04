@@ -19,6 +19,7 @@ export class AuthService {
   username = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
   loggedIn = new BehaviorSubject<boolean>(sessionStorage.getItem('isAuthenticated') === 'true');
   private loginUrl = 'http://localhost:8080/login';
+  private tokenKey = 'token';
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -30,7 +31,7 @@ export class AuthService {
     return this.http.post<string>(this.loginUrl, body.toString(), {headers, responseType: 'text' as 'json'})
       .pipe(
         tap(token => {
-          sessionStorage.setItem('token', token);
+          this.storeToken(token);
           this.setAuthState(true, credentials.username);
         }),
         catchError(error => {
@@ -40,6 +41,15 @@ export class AuthService {
         })
       );
   }
+
+  private storeToken(token: string): void {
+    sessionStorage.setItem(this.tokenKey, token);
+  }
+
+  getToken(): string | null {
+    return sessionStorage.getItem(this.tokenKey);
+  }
+
 
   getUsername(): Observable<string | null> {
     return this.username.asObservable();
