@@ -14,6 +14,7 @@ import {SoftDrinkService} from "../services/softDrinkService";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 import {FavouriteService} from "../services/favourite.service";
 import {Subscription} from "rxjs";
+import {State} from "../models/state";
 
 
 @Component({
@@ -58,6 +59,8 @@ export class ProfileComponent implements OnInit {
   private favouriteRemovedSubscription!: Subscription;
   removingCocktailIds: Set<number> = new Set();
   removingSoftDrinkIds: Set<number> = new Set();
+  State = State;
+
 
 
   constructor(private authService: AuthService,
@@ -70,6 +73,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
     window.scrollTo({
       top: 0,
       left: 0,
@@ -102,7 +106,10 @@ export class ProfileComponent implements OnInit {
   loadPersonalCocktails() {
     this.personalCocktailService.getAllPersonalCocktails().subscribe({
       next: (cocktails) => {
-        this.personalCocktails = cocktails;
+        this.personalCocktails = cocktails.map(cocktail => {
+          cocktail.state = cocktail.state || State.SHOWED;  // Assigner un état si non défini
+          return cocktail;
+        });
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -111,7 +118,6 @@ export class ProfileComponent implements OnInit {
         this.isLoading = false;
       }
     });
-
   }
 
   loadFavouriteCocktails() {
@@ -190,4 +196,5 @@ export class ProfileComponent implements OnInit {
     }, 1000);
   }
 
+  protected readonly PersonalCocktail = PersonalCocktail;
 }

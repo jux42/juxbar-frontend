@@ -5,6 +5,7 @@ import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from
 import {RouterLink} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {PersonalCocktailService} from "../../core/services/cocktailService";
+import {State} from "../../core/models/state";
 
 @Component({
   selector: 'app-personalCocktail',
@@ -23,7 +24,6 @@ import {PersonalCocktailService} from "../../core/services/cocktailService";
   styleUrl: './personal-cocktail.component.scss'
 })
 export class PersonalCocktailComponent implements OnInit {
-
 
   @Input() personalCocktail !: PersonalCocktail;
   personalCocktail$!: Observable<PersonalCocktail>;
@@ -79,6 +79,15 @@ export class PersonalCocktailComponent implements OnInit {
         console.log(value);
         window.location.reload();
               }
+    );
+  }
+
+  onTrashCocktail(personalCocktail : PersonalCocktail) {
+    this.personalCocktailService.trashPersonalCocktail(personalCocktail).subscribe(
+      value =>{
+        console.log(value);
+        window.location.reload();
+      }
     );
   }
 }

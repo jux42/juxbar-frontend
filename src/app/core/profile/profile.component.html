@@ -4,8 +4,14 @@
   <h2>Your creations</h2>
   <ng-container *ngIf="personalCocktails">
     <div class="thisFlex">
-      <app-personalCocktail *ngFor="let personalCocktail of personalCocktails"
-                            [personalCocktail]="personalCocktail"></app-personalCocktail>
+      <ng-container *ngFor="let personalCocktail of personalCocktails">
+        @if (personalCocktail.state==State.SHOWED){
+          <app-personalCocktail
+            [personalCocktail]="personalCocktail">
+          </app-personalCocktail>
+
+        }
+      </ng-container>
     </div>
   </ng-container>
 </div>

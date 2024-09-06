@@ -1,5 +1,6 @@
 import {Cocktail} from "./cocktail";
 import {Ingredient} from "./ingredient";
+import {State} from "./state";
 
 export class PersonalCocktail extends Cocktail{
 
@@ -12,4 +13,7 @@ export class PersonalCocktail extends Cocktail{
 
   ownerName !: string;
 
+  state!: State;
+
 }
+

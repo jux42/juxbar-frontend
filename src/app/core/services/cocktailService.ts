@@ -6,6 +6,7 @@ import {environment} from "../../../environments/environment";
 import {PersonalCocktail} from "../models/personal-cocktail";
 import {AuthService} from "../login/auth-service";
 import {take} from "rxjs/operators";
+import {State} from "../models/state";
 
 @Injectable({
   providedIn: 'root'
@@ -142,7 +143,11 @@ export class PersonalCocktailService {
       switchMap(username => {
         if (username) {
           const url = `http://${environment.apiUrl}/user/personalcocktails`;
-          return this.http.get<PersonalCocktail[]>(url);
+          return this.http.get<PersonalCocktail[]>(url).pipe(
+            map(cocktails => cocktails.map(cocktail => {
+              cocktail.state = cocktail.state || State.SHOWED;
+              return cocktail;
+            })))
         } else
           return of([]);
       })
@@ -167,5 +172,9 @@ export class PersonalCocktailService {
     return this.http.delete(`http://${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
   }
 
+  trashPersonalCocktail(personalCocktail: PersonalCocktail): Observable<string> {
+    return this.http.put(`http://${environment.apiUrl}/user/personalcocktail/trash/${personalCocktail.id}`, {}, { responseType: 'text' });
+
+  }
 
 }
