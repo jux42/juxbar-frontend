@@ -56,6 +56,18 @@
     transform: translate(-4px, -2px);
   }
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 5%;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1000ms ease-in-out;
+}
 
 .tiniest {
   grid-column: span 2;
