@@ -9,6 +9,7 @@ import {UserRequest} from "../../../../core/models/UserRequest";
 import {AuthService} from "../../../../core/login/auth-service";
 import {PersonalCocktail} from "../../../../core/models/personal-cocktail";
 import {FavouriteService} from "../../../../core/services/favourite.service";
+import {LazyLoadImageModule} from "ng-lazyload-image";
 
 @Component({
   selector: 'app-cocktail',
@@ -21,7 +22,8 @@ import {FavouriteService} from "../../../../core/services/favourite.service";
     NgForOf,
     RouterLink,
     NgStyle,
-    NgClass
+    NgClass,
+    LazyLoadImageModule
   ],
   templateUrl: './cocktail.component.html',
   styleUrl: './cocktail.component.scss'

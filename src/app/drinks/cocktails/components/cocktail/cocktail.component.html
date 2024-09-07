@@ -8,13 +8,22 @@
       <div class="titleRow">
         <h4>{{ truncateText(cocktail.strDrink | titlecase, 15) }}</h4>
       </div>
+
       <div class="img-container">
+        @if (!imageLoaded[cocktail.id]){
+          <p class="Loader">LOADING</p>
+
+        }
+        @if (imageLoaded[cocktail.id]){
+
+        }
         <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"
              (mouseenter)="onMouseEnter()"
              *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
-             [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
+             [lazyLoad]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
              class="clickable fadeIn">
       </div>
+
     </div>
     <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
       <div class="favIcon">

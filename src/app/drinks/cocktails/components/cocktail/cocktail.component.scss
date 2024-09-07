@@ -67,6 +67,28 @@
     visibility: hidden;
   }
 }
+.Loader {
+  text-align: center;
+  font-size: medium;
+  font-weight: bolder;
+  font-style: italic;
+  color: darkblue;
+  animation: breatheAnimation 800ms ease-out infinite;
+}
+@keyframes breatheAnimation {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.loadIcon{
+
+  border: #2A3E5F;
+  border-radius: 50%;
+}
 
 
 .thisGrid {
