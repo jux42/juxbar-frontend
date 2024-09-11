@@ -14,9 +14,7 @@
           <p class="Loader">LOADING</p>
 
         }
-        @if (imageLoaded[cocktail.id]){
 
-        }
         <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"
              (mouseenter)="onMouseEnter()"
              *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"

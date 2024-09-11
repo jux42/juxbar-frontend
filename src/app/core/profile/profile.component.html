@@ -1,6 +1,9 @@
+<div class="background-container"></div>
 <h1 *ngIf="loggedIn" class="test-class">Welcome to your personal page, {{ userName }}</h1>
 <div *ngIf="isLoading"></div>
-<div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
+<div class="mainFrame">
+
+<div class="frame" *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
   <h2>Your creations</h2>
   <ng-container *ngIf="personalCocktails">
     <div class="thisFlex">
@@ -15,8 +18,9 @@
     </div>
   </ng-container>
 </div>
-<h2>Your favourites</h2>
-<div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
+
+<div class="frame" *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
+  <h2>Your favourites</h2>
   <ng-container *ngIf="favouriteCocktails">
     <div class="thisFlex">
       <div *ngFor="let favouriteCocktail of favouriteCocktails"
@@ -35,4 +39,5 @@
       </div>
     </div>
   </ng-container>
+</div>
 </div>

@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {
-  BehaviorSubject,
+  BehaviorSubject, combineLatest,
   debounceTime,
   distinctUntilChanged,
   finalize,
   map,
-  Observable,
+  Observable, of,
   startWith,
   Subject,
   takeUntil,
@@ -46,51 +46,39 @@ import {Ingredient} from "../../../../core/models/ingredient";
   styleUrls: ['./cocktail-list.component.scss']
 })
 export class CocktailListComponent implements OnInit {
-
-  alphabet: string[] = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  lastAnchorLetter = '';
-  @Input() cocktail !: Cocktail;
+  alphabet: string[] = ['*', '#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  selectedLetter: string = '*';
   cocktails$!: Observable<Cocktail[]>;
+  filteredCocktails$!: Observable<Cocktail[]>;
   cocktailForm!: FormGroup;
-  id!: number;
   isLoading: boolean = true;
-  protected readonly animation = animation;
   private cocktailsSubject = new BehaviorSubject<Cocktail[]>([]);
+  private letterSubject = new BehaviorSubject<string>(this.selectedLetter);
   private destroy$ = new Subject<void>();
 
-  constructor(private scroller: ViewportScroller, private cocktailService: CocktailService, private route: ActivatedRoute, private formBuilder: FormBuilder) {
-  }
+  constructor(private cocktailService: CocktailService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
     this.cocktailService.getCocktailsPaginated().pipe(
       takeUntil(this.destroy$),
       tap(data => this.cocktailsSubject.next(data)),
-      finalize(() => this.isLoading = false))
-      .subscribe();
+      finalize(() => this.isLoading = false)
+    ).subscribe();
 
     this.cocktailForm = this.formBuilder.group({
       strDrink: '',
       strFirstIngredient: '',
       strSecondIngredient: '',
       strThirdIngredient: ''
-
     });
 
-    this.cocktails$ = this.cocktailForm.valueChanges.pipe(
-      startWith({strDrink: '', strFirstIngredient: '', strSecondIngredient: '', strThirdIngredient: ''}),
-      debounceTime(400),
-      distinctUntilChanged(),
-      map(formValue => this.filterCocktails(formValue.strDrink, [
-        formValue.strFirstIngredient,
-        formValue.strSecondIngredient,
-        formValue.strThirdIngredient,
-      ])),
+    this.filteredCocktails$ = combineLatest([
+      this.cocktailForm.valueChanges.pipe(startWith(this.cocktailForm.value), debounceTime(400), distinctUntilChanged()),
+      this.letterSubject
+    ]).pipe(
+      map(([formValue, selectedLetter]) => this.filterCocktails(formValue, selectedLetter))
     );
   }
 
@@ -99,52 +87,27 @@ export class CocktailListComponent implements OnInit {
     this.destroy$.complete();
   }
 
-  trackByCocktails(index: number, cocktail: Cocktail): number {
-    return cocktail.id;
-  }
+  private filterCocktails(formValue: any, selectedLetter: string): Cocktail[] {
+    const { strDrink, strFirstIngredient, strSecondIngredient, strThirdIngredient } = formValue;
+    const searchIngredients = [strFirstIngredient, strSecondIngredient, strThirdIngredient];
 
-  shouldAddAnchor(cocktailName: string): boolean {
-    const currentFirstLetter = cocktailName[0].toUpperCase();
-    if (currentFirstLetter !== this.lastAnchorLetter) {
-      this.lastAnchorLetter = currentFirstLetter;
-      return true;
-    }
-    return false;
-  }
-
-  getAnchorId(cocktailName: string): string {
-    return cocktailName[0].toUpperCase();
-  }
-
-  goToLetter(letter: string) {
-    letter = letter == '#' ? 'top'
-      : letter;
-    if (letter == 'top') {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      const element = document.getElementById(letter);
-      if (element) {
-
-        element.scrollIntoView({behavior: 'smooth'});
-      }
-
-    }
-
-  }
-
-  private filterCocktails(searchText: string, searchIngredient: string[]): Cocktail[] {
     return this.cocktailsSubject.value
       .filter(cocktail => {
-        const textMatch = !searchText || cocktail.strDrink.toLowerCase().includes(searchText.toLowerCase());
-        const ingredientMatch = searchIngredient.every(ingredient =>
-          ingredient ? this.ingredientMatches(cocktail, ingredient) : true);
-        return textMatch && ingredientMatch;
-      })
-      .map(cocktail => ({...cocktail, _uniqueKey: Date.now() + Math.random()}));
+        const textMatch = !strDrink || cocktail.strDrink.toLowerCase().includes(strDrink.toLowerCase());
+        const ingredientMatch = searchIngredients.every(ingredient =>
+          ingredient ? this.ingredientMatches(cocktail, ingredient) : true
+        );
+
+        if (selectedLetter === '*') {
+          return textMatch && ingredientMatch;
+        }
+
+        const letterMatch = selectedLetter === '#' ?
+          /^[0-9]/.test(cocktail.strDrink) :
+          cocktail.strDrink.startsWith(selectedLetter);
+
+        return textMatch && ingredientMatch && letterMatch;
+      });
   }
 
   private ingredientMatches(cocktail: Cocktail, searchIngredient: string): boolean {
@@ -155,5 +118,14 @@ export class CocktailListComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  filterByLetter(letter: string) {
+    this.selectedLetter = letter;
+    this.letterSubject.next(letter);
+  }
+
+  trackByCocktails(index: number, cocktail: Cocktail): number {
+    return cocktail.id;
   }
 }

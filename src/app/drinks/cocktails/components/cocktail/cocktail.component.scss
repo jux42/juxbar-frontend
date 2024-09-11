@@ -74,6 +74,8 @@
   font-style: italic;
   color: darkblue;
   animation: breatheAnimation 800ms ease-out infinite;
+  will-change: opacity;
+
 }
 @keyframes breatheAnimation {
   0%, 100% {

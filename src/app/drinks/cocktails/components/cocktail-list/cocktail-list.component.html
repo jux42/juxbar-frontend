@@ -3,21 +3,16 @@
 
 <ng-container *ngIf="isLoading;  then loadingBlock; else loadedBlock"></ng-container>
 <ng-template #loadingBlock>
-
   <h1 class="loading">LOADING</h1>
 </ng-template>
 
 <ng-template #loadedBlock>
-
-
   <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-    <ng-container *ngIf="cocktails$ | async as cocktails; ">
-
-
+    <ng-container *ngIf="filteredCocktails$ | async as filteredCocktails;">
       <div class="searchBlock">
         <div class="alphabetBlock">
-          <button (click)="goToLetter(letter)" *ngFor="let letter of alphabet"
-                  class="alphabet-navigation">{{ letter }}
+          <button (click)="filterByLetter(letter)" *ngFor="let letter of alphabet"
+                  [class.active]="letter === selectedLetter" class="alphabet-navigation">{{ letter }}
           </button>
         </div>
         <div class="formBlock">
@@ -40,18 +35,15 @@
             </div>
           </form>
         </div>
-
       </div>
-      <div *ngIf="(cocktails$ | async)?.length === 0" class="nothing">
-        No cocktail found
+
+      <div *ngIf="filteredCocktails.length === 0" class="nothing">
+        No cocktails found
       </div>
 
       <div class="thisFlex">
-
-        <app-cocktail *ngFor="let cocktail of cocktails; trackBy: trackByCocktails" @simpleFadeInAnimation [attr.id]="getAnchorId(cocktail.strDrink)"
-                      [cocktail]="cocktail">
-
-
+        <app-cocktail *ngFor="let cocktail of filteredCocktails; trackBy: trackByCocktails"
+                      @simpleFadeInAnimation [cocktail]="cocktail">
         </app-cocktail>
       </div>
     </ng-container>
