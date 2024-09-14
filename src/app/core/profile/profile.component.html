@@ -1,5 +1,7 @@
 <div class="background-container"></div>
-<h1 *ngIf="loggedIn" class="test-class">Welcome to your personal page, {{ userName }}</h1>
+<!--<h1 *ngIf="loggedIn" class="test-class">Welcome to your personal page, {{ userName }}</h1>-->
+
+<div class="profile-container">
 <div *ngIf="isLoading"></div>
 <div class="mainFrame">
 
@@ -7,6 +9,9 @@
     <h2>Your creations</h2>
     <ng-container *ngIf="personalCocktails">
       <div class="thisFlex">
+        @if (personalCocktails.length==0){
+          <p>no personal drinks for now</p>
+        }
         <ng-container *ngFor="let personalCocktail of personalCocktails">
           @if (personalCocktail.state == State.SHOWED) {
             <app-personalCocktail
@@ -20,9 +25,12 @@
   </div>
 
   <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
-    <h2>Your favourites</h2>
+    <h2>Your favourites cocktails</h2>
     <ng-container *ngIf="favouriteCocktails">
       <div class="thisFlex">
+        @if (favouriteCocktails.length==0){
+          <p>no favourite cocktail for now</p>
+        }
         <div *ngFor="let favouriteCocktail of favouriteCocktails"
              [ngClass]="{'fade-out': true, 'fade-out-leave': removingCocktailIds.has(favouriteCocktail.id)}">
           <app-cocktail [cocktail]="favouriteCocktail"></app-cocktail>
@@ -30,9 +38,13 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
+  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
+    <h2>Your favourites softdrinks</h2>
     <ng-container *ngIf="favouriteSoftDrinks">
       <div class="thisFlex">
+        @if (favouriteSoftDrinks.length==0){
+          <p>no favourite softdrink for now</p>
+        }
         <div *ngFor="let favouriteSoftDrink of favouriteSoftDrinks"
              [ngClass]="{'fade-out': true, 'fade-out-leave': removingSoftDrinkIds.has(favouriteSoftDrink.id)}">
           <app-soft-drink [softDrink]="favouriteSoftDrink"></app-soft-drink>
@@ -40,4 +52,5 @@
       </div>
     </ng-container>
   </div>
+</div>
 </div>
