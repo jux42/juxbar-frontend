@@ -13,13 +13,13 @@
              (mouseenter)="onMouseEnter()"
              *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
              [src]="personalCocktail.strDrinkThumb"
-             class="clickable fadeIn" alt="">
+             alt="" class="clickable fadeIn">
       </div>
     </div>
     <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
       <div class="favIcon">
-                <a class="clickable">😁</a>
-                <a class="clickable" (click)="onTrashCocktail(personalCocktail)">🗑</a>
+        <a class="clickable">😁</a>
+        <a (click)="onTrashCocktail(personalCocktail)" class="clickable">🗑</a>
 
       </div>
 

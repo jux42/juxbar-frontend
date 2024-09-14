@@ -58,9 +58,7 @@ export class CocktailService {
         Object.values(cocktail).slice(0, 12).includes(ingredient.replace(/\b\w{3,}\b/g, word =>
           word.replace(/^\w/, first => first.toLocaleUpperCase()))) ||
         Object.values(cocktail).slice(0, 12).includes(ingredient.toLowerCase()))
-
       )
-
     );
   }
 
@@ -104,26 +102,26 @@ export class CocktailService {
     return this.pseudoRandomNumber(seed, 1, maxId);
   }
 
-  private pseudoRandomNumber(seed: number, min: number, max: number): number {
-    const x = Math.sin(seed) * 10000;
-    return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
-  }
-
-  updateAllListsFromExtAPI(){
-    return[
+  updateAllListsFromExtAPI() {
+    return [
       this.http.get<string>(`http://${environment.apiUrl}/cocktails/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadimages`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadpreviews`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/download`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softDrinks/downloadimages`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/downloadpreviews`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/download`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadimages`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadpreviews`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadimages`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadpreviews`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/download`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softDrinks/downloadimages`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/downloadpreviews`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/download`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadimages`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadpreviews`, {responseType: 'text' as 'json'}),
 
 
     ]
 
+  }
+
+  private pseudoRandomNumber(seed: number, min: number, max: number): number {
+    const x = Math.sin(seed) * 10000;
+    return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
   }
 
 }
@@ -168,12 +166,12 @@ export class PersonalCocktailService {
     return this.http.post(`http://${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
   }
 
-  deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any>{
+  deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
     return this.http.delete(`http://${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
   }
 
   trashPersonalCocktail(personalCocktail: PersonalCocktail): Observable<string> {
-    return this.http.put(`http://${environment.apiUrl}/user/personalcocktail/trash/${personalCocktail.id}`, {}, { responseType: 'text' });
+    return this.http.put(`http://${environment.apiUrl}/user/personalcocktail/trash/${personalCocktail.id}`, {}, {responseType: 'text'});
 
   }
 

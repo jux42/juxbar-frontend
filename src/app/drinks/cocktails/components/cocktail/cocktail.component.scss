@@ -24,12 +24,13 @@
     width: 160px;
     //margin: 10px;
     //background-image: linear-gradient(#235c71 0, #15404f 100%);
-    background-image: radial-gradient( #186b85 0, #65243f 100% );
+    background-image: radial-gradient(#186b85 0, #65243f 100%);
 
     box-shadow: 5px 5px 20px black;
     overflow: hidden;
 
   }
+
   &:hover {
     transform: scale(1.2);
     z-index: 2000;
@@ -67,6 +68,7 @@
     visibility: hidden;
   }
 }
+
 .Loader {
   text-align: center;
   font-size: medium;
@@ -77,6 +79,7 @@
   will-change: opacity;
 
 }
+
 @keyframes breatheAnimation {
   0%, 100% {
     opacity: 0.1;
@@ -86,7 +89,7 @@
   }
 }
 
-.loadIcon{
+.loadIcon {
 
   border: #2A3E5F;
   border-radius: 50%;

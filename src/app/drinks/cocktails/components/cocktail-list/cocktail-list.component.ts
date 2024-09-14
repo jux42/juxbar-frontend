@@ -1,24 +1,23 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {
-  BehaviorSubject, combineLatest,
+  BehaviorSubject,
+  combineLatest,
   debounceTime,
   distinctUntilChanged,
   finalize,
   map,
-  Observable, of,
+  Observable,
   startWith,
   Subject,
   takeUntil,
   tap
 } from "rxjs";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {ActivatedRoute} from "@angular/router";
-import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle, ViewportScroller} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {CocktailComponent} from "../cocktail/cocktail.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {animate, animation, query, stagger, style, transition, trigger} from "@angular/animations";
-import {Ingredient} from "../../../../core/models/ingredient";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 
 @Component({
@@ -27,8 +26,8 @@ import {Ingredient} from "../../../../core/models/ingredient";
   animations: [
     trigger('simpleFadeInAnimation', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        style({opacity: 0, transform: 'translateY(20px)'}),
+        animate('300ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
       ])
     ])
   ],
@@ -56,10 +55,11 @@ export class CocktailListComponent implements OnInit {
   private letterSubject = new BehaviorSubject<string>(this.selectedLetter);
   private destroy$ = new Subject<void>();
 
-  constructor(private cocktailService: CocktailService, private formBuilder: FormBuilder) {}
+  constructor(private cocktailService: CocktailService, private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
 
     this.cocktailService.getCocktailsPaginated().pipe(
       takeUntil(this.destroy$),
@@ -87,8 +87,17 @@ export class CocktailListComponent implements OnInit {
     this.destroy$.complete();
   }
 
+  filterByLetter(letter: string) {
+    this.selectedLetter = letter;
+    this.letterSubject.next(letter);
+  }
+
+  trackByCocktails(index: number, cocktail: Cocktail): number {
+    return cocktail.id;
+  }
+
   private filterCocktails(formValue: any, selectedLetter: string): Cocktail[] {
-    const { strDrink, strFirstIngredient, strSecondIngredient, strThirdIngredient } = formValue;
+    const {strDrink, strFirstIngredient, strSecondIngredient, strThirdIngredient} = formValue;
     const searchIngredients = [strFirstIngredient, strSecondIngredient, strThirdIngredient];
 
     return this.cocktailsSubject.value
@@ -118,14 +127,5 @@ export class CocktailListComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  filterByLetter(letter: string) {
-    this.selectedLetter = letter;
-    this.letterSubject.next(letter);
-  }
-
-  trackByCocktails(index: number, cocktail: Cocktail): number {
-    return cocktail.id;
   }
 }

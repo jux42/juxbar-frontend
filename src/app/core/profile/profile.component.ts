@@ -56,12 +56,11 @@ export class ProfileComponent implements OnInit {
   personalCocktails!: PersonalCocktail[];
   favouriteCocktails!: Cocktail[];
   favouriteSoftDrinks!: SoftDrink[];
-  private favouriteRemovedSubscription!: Subscription;
   removingCocktailIds: Set<number> = new Set();
   removingSoftDrinkIds: Set<number> = new Set();
   State = State;
-
-
+  protected readonly PersonalCocktail = PersonalCocktail;
+  private favouriteRemovedSubscription!: Subscription;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -88,11 +87,10 @@ export class ProfileComponent implements OnInit {
       this.loadFavouriteCocktails();
       this.loadFavouriteSoftDrinks();
       this.favouriteRemovedSubscription = this.favouriteService.favouriteRemoved$.subscribe(({id, type}) => {
-        if (type==='cocktail'){
+        if (type === 'cocktail') {
           this.removeCocktailById(id);
           this.startRemoveCocktail(id);
-        }
-        else if (type === 'softDrink') {
+        } else if (type === 'softDrink') {
           this.removeSoftDrinkById(id);
           this.startRemoveSoftDrink(id);
         }
@@ -101,7 +99,6 @@ export class ProfileComponent implements OnInit {
 
 
   }
-
 
   loadPersonalCocktails() {
     this.personalCocktailService.getAllPersonalCocktails().subscribe({
@@ -125,15 +122,15 @@ export class ProfileComponent implements OnInit {
       if (username) {
         this.cocktailService.getFavouriteCocktails()?.subscribe({
 
-      next: (favCocktails) => {
-        if (!favCocktails) favCocktails = [];
-        this.favouriteCocktails = favCocktails;
+          next: (favCocktails) => {
+            if (!favCocktails) favCocktails = [];
+            this.favouriteCocktails = favCocktails;
 
-      },
-      error: (error) => {
-        console.error('No cocktails to load', error);
-        this.isLoading = false;
-      }
+          },
+          error: (error) => {
+            console.error('No cocktails to load', error);
+            this.isLoading = false;
+          }
         })
       }
     });
@@ -169,11 +166,13 @@ export class ProfileComponent implements OnInit {
       this.userName = username;
     });
   }
+
   removeCocktailById(cocktailId: number) {
     this.favouriteCocktails = this.favouriteCocktails.filter(cocktail => cocktail.id !== cocktailId);
   }
-  removeSoftDrinkById(softDrinkId: number){
-    this.favouriteSoftDrinks = this.favouriteSoftDrinks.filter(softDrink=>softDrink.id !== softDrinkId);
+
+  removeSoftDrinkById(softDrinkId: number) {
+    this.favouriteSoftDrinks = this.favouriteSoftDrinks.filter(softDrink => softDrink.id !== softDrinkId);
   }
 
   startRemoveCocktail(cocktailId: number) {
@@ -195,6 +194,4 @@ export class ProfileComponent implements OnInit {
 
     }, 1000);
   }
-
-  protected readonly PersonalCocktail = PersonalCocktail;
 }

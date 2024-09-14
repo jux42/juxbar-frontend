@@ -3,14 +3,14 @@
   <ng-container *ngIf="cocktails$ | async as cocktails">
     <div
       *ngFor="let cocktail of cocktails; let i = index"
-      class="grid-item"
       [ngClass]="getClass(i)"
       [ngStyle]="{
         'animation-delay': i % 3 === 0 ? '0s' : (i % 3 === 1 ? '1s' : '2s'),
         'animation-duration': i % 2 === 0 ? '5s' : '6s'
-      }">
-      <img [src]="'http://' + environment.apiUrl + '/cocktail/' + cocktail.id + '/image'"
-           alt="Cocktail Image" class="cocktail-image clickable" (click)="goToCocktail(cocktail.id)">
+      }"
+      class="grid-item">
+      <img (click)="goToCocktail(cocktail.id)"
+           [src]="'http://' + environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="cocktail-image clickable">
     </div>
   </ng-container>
 </div>

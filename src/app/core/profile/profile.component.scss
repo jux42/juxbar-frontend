@@ -9,14 +9,15 @@
   color: palegoldenrod;
   transition: all 0.3s ease-in-out;
 }
-.mainFrame{
+
+.mainFrame {
   width: 100dvh;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
 }
 
-.frame{
+.frame {
   background-color: rgba(whitesmoke, 0.3);
   border-radius: 10px;
   padding: 25px;
@@ -53,6 +54,7 @@ h2 {
   overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
   &:hover {
     transform: scale(1.05);
     box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7); // Légère animation au survol

@@ -3,7 +3,8 @@
   <div *ngIf="softDrink" class="softDrink-card">
     <div class="thisFlex"><h2>{{ softDrink.strDrink | titlecase }}</h2>
       <img (load)="imageLoaded[softDrink.id] = true" *ngIf="softDrink"
-           [class.visible]="imageLoaded[softDrink.id]" [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'"
+           [class.visible]="imageLoaded[softDrink.id]"
+           [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'"
            alt="soft Image"
            class="fadeIn">
 

@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {animate, style, transition, trigger} from "@angular/animations";
-import { Router, RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {CocktailService} from "../../services/cocktailService";
 import {CocktailComponent} from "../../../drinks/cocktails/components/cocktail/cocktail.component";
 import {Cocktail} from "../../models/cocktail";
@@ -41,18 +41,20 @@ export class SideBarComponent implements OnInit {
   cocktail!: Cocktail;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
+  isAdmin$ = new BehaviorSubject<boolean>(false);
+  adminSectionIsOn: boolean = false;
+  adminButtonText: string = "afficher l'espace Admin";
   // ingredientString!: string;
   protected readonly environment = environment;
-  isAdmin$ = new BehaviorSubject<boolean>(false);
-  adminSectionIsOn : boolean = false;
-  adminButtonText: string = "afficher l'espace Admin";
+
   // newUser = { username: '', password: '' };
+  protected readonly sessionStorage = sessionStorage;
 
   constructor(private router: Router,
               private ngZone: NgZone,
               private cocktailService: CocktailService,
               private ingredientService: IngredientService,
-              private adminService : AdminService,
+              private adminService: AdminService,
               private cdr: ChangeDetectorRef,
               private capitalizeFirst: CapitalizeFirstPipe) {
   }
@@ -70,37 +72,35 @@ export class SideBarComponent implements OnInit {
     ).subscribe();
 
 
-
     this.ingredientService.getAllIngredients().subscribe(
       data => this.ingredientsList = data
     )
   }
-
 
   checkIfAdmin() {
     const username = sessionStorage.getItem('username');
     this.isAdmin$.next(username === 'admin' || username === 'superadmin');
   }
 
-  showAdminSection(){
+  showAdminSection() {
     this.checkIfAdmin();
-    if(this.adminSectionIsOn){
+    if (this.adminSectionIsOn) {
       this.adminSectionIsOn = false;
       this.adminButtonText = "afficher l'espace admin"
-    }
-    else {
+    } else {
       this.adminSectionIsOn = true;
       this.adminButtonText = "cacher l'espace admin"
     }
     console.log(this.adminSectionIsOn)
   }
 
-  onGoToCocktailsAlpha(){
+  onGoToCocktailsAlpha() {
 
     this.router.navigate(['/juxbar/listall']);
 
   }
-  onGoToSoftdrinksAlpha(){
+
+  onGoToSoftdrinksAlpha() {
     this.router.navigateByUrl('/juxbar/listallsofts', {skipLocationChange: true});
   }
 
@@ -135,7 +135,7 @@ export class SideBarComponent implements OnInit {
     this.router.navigate(['juxbar/profile/createcocktail']);
   }
 
-  onDevUpdate(){
+  onDevUpdate() {
     forkJoin(this.cocktailService.updateAllListsFromExtAPI()).subscribe(
       (responses) => {
         responses.forEach(response => {
@@ -163,7 +163,7 @@ export class SideBarComponent implements OnInit {
   }
 
   async onCreateUser(form: any) {
-    const { username, password } = form.value;
+    const {username, password} = form.value;
     try {
       const response = await firstValueFrom(this.adminService.createUser(username, password));
       console.log(response);
@@ -175,14 +175,11 @@ export class SideBarComponent implements OnInit {
     }
   }
 
-  reloadComponent(page: string){
+  reloadComponent(page: string) {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([`${page}`]);
     });
   }
-
-
-  protected readonly sessionStorage = sessionStorage;
 }
 
 

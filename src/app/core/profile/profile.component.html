@@ -3,41 +3,41 @@
 <div *ngIf="isLoading"></div>
 <div class="mainFrame">
 
-<div class="frame" *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-  <h2>Your creations</h2>
-  <ng-container *ngIf="personalCocktails">
-    <div class="thisFlex">
-      <ng-container *ngFor="let personalCocktail of personalCocktails">
-        @if (personalCocktail.state==State.SHOWED){
-          <app-personalCocktail
-            [personalCocktail]="personalCocktail">
-          </app-personalCocktail>
+  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
+    <h2>Your creations</h2>
+    <ng-container *ngIf="personalCocktails">
+      <div class="thisFlex">
+        <ng-container *ngFor="let personalCocktail of personalCocktails">
+          @if (personalCocktail.state == State.SHOWED) {
+            <app-personalCocktail
+              [personalCocktail]="personalCocktail">
+            </app-personalCocktail>
 
-        }
-      </ng-container>
-    </div>
-  </ng-container>
-</div>
+          }
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
 
-<div class="frame" *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-  <h2>Your favourites</h2>
-  <ng-container *ngIf="favouriteCocktails">
-    <div class="thisFlex">
-      <div *ngFor="let favouriteCocktail of favouriteCocktails"
-           [ngClass]="{'fade-out': true, 'fade-out-leave': removingCocktailIds.has(favouriteCocktail.id)}">
-        <app-cocktail [cocktail]="favouriteCocktail"></app-cocktail>
+  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
+    <h2>Your favourites</h2>
+    <ng-container *ngIf="favouriteCocktails">
+      <div class="thisFlex">
+        <div *ngFor="let favouriteCocktail of favouriteCocktails"
+             [ngClass]="{'fade-out': true, 'fade-out-leave': removingCocktailIds.has(favouriteCocktail.id)}">
+          <app-cocktail [cocktail]="favouriteCocktail"></app-cocktail>
+        </div>
       </div>
-    </div>
-  </ng-container>
-</div>
-<div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
-  <ng-container *ngIf="favouriteSoftDrinks">
-    <div class="thisFlex">
-      <div *ngFor="let favouriteSoftDrink of favouriteSoftDrinks"
-           [ngClass]="{'fade-out': true, 'fade-out-leave': removingSoftDrinkIds.has(favouriteSoftDrink.id)}">
-        <app-soft-drink [softDrink]="favouriteSoftDrink"></app-soft-drink>
+    </ng-container>
+  </div>
+  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
+    <ng-container *ngIf="favouriteSoftDrinks">
+      <div class="thisFlex">
+        <div *ngFor="let favouriteSoftDrink of favouriteSoftDrinks"
+             [ngClass]="{'fade-out': true, 'fade-out-leave': removingSoftDrinkIds.has(favouriteSoftDrink.id)}">
+          <app-soft-drink [softDrink]="favouriteSoftDrink"></app-soft-drink>
+        </div>
       </div>
-    </div>
-  </ng-container>
-</div>
+    </ng-container>
+  </div>
 </div>

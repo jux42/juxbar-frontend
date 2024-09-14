@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {FavouriteService} from "../../core/services/favourite.service";
@@ -18,10 +18,11 @@ export class DrinkComponent implements OnInit, OnDestroy {
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
   mouseIsOn: boolean = false;
-  private destroy$ = new Subject<void>();
   protected readonly environment = environment;
+  private destroy$ = new Subject<void>();
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private favouriteService: FavouriteService) {}
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private favouriteService: FavouriteService) {
+  }
 
   ngOnInit() {
     this.checkFavourites();

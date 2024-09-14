@@ -26,6 +26,7 @@
     overflow: hidden;
 
   }
+
   &:hover {
     transform: scale(1.05);
     z-index: 10;
@@ -132,6 +133,7 @@ p {
     }
   }
 }
+
 .clickable:hover {
   color: goldenrod;
 }

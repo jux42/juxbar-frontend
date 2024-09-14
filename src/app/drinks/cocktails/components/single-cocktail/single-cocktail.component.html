@@ -4,7 +4,8 @@
   <div *ngIf="cocktail" class="cocktail-card">
     <div class="thisFlex"><h2>{{ cocktail.strDrink | titlecase }}</h2>
       <img (load)="imageLoaded[cocktail.id] = true" *ngIf="cocktail"
-           [class.visible]="imageLoaded[cocktail.id]" [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'"
+           [class.visible]="imageLoaded[cocktail.id]"
+           [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'"
            alt="Cocktail Image"
            class="fadeIn">
       <button (click)="goBack()">Retour</button>

@@ -36,7 +36,8 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
   cocktailPreview$!: Observable<Cocktail>;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
-
+  protected readonly environment = environment;
+  protected readonly last = last;
 
   constructor(private formBuilder: FormBuilder, private personalCocktailService: PersonalCocktailService, private router: Router, private ingredientService: IngredientService) {
   }
@@ -52,19 +53,19 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
     this.personalCocktailForm = this.formBuilder.group({
       strDrink: ['', Validators.required],
       strDrinkThumb: ['', [Validators.pattern(this.urlRegex)]],
-      strIngredient1: ['', ],
-      strIngredient2: ['', ],
-      strIngredient3: ['', ],
-      strIngredient4: ['', ],
-      strIngredient5: ['', ],
-      strIngredient6: ['', ],
+      strIngredient1: ['',],
+      strIngredient2: ['',],
+      strIngredient3: ['',],
+      strIngredient4: ['',],
+      strIngredient5: ['',],
+      strIngredient6: ['',],
       strInstructions: ['',],
 
     });
-  this.cocktailPreview$ = this.personalCocktailForm.valueChanges.pipe(
-    map(formValue=>({
-      ...formValue
-    }))
+    this.cocktailPreview$ = this.personalCocktailForm.valueChanges.pipe(
+      map(formValue => ({
+        ...formValue
+      }))
     )
 
   }
@@ -85,6 +86,7 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
       tap(() => this.router.navigateByUrl('juxbar/profile')))
       .subscribe();
   }
+
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
@@ -92,6 +94,7 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
       return text;
     }
   }
+
   onImageError(event: any) {
     console.error('Image loading error', event);
   }
@@ -105,7 +108,4 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
     this.mouseIsOn = false;
     console.log("mouse leave");
   }
-
-  protected readonly environment = environment;
-  protected readonly last = last;
 }

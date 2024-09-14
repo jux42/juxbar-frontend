@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of, shareReplay, Subject, switchMap, tap} from "rxjs";
 import {Cocktail} from "../models/cocktail";
 import {take} from "rxjs/operators";
@@ -11,15 +11,14 @@ import {AuthService} from "../login/auth-service";
 })
 export class FavouriteService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
-
-  private favouriteRemovedSource = new Subject<{id: number, type : string}>();
+  private favouriteRemovedSource = new Subject<{ id: number, type: string }>();
   favouriteRemoved$ = this.favouriteRemovedSource.asObservable();
-
   private favouriteDrink$ = this.getFavouriteDrink().pipe(
     shareReplay(1)
   );
 
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
 
   announceFavouriteRemoved(id: number, type: string) {
     this.favouriteRemovedSource.next({id, type});

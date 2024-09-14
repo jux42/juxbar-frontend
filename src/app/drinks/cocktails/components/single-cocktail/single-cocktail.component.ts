@@ -68,7 +68,7 @@ export class SingleCocktailComponent implements OnInit {
   }
 
   formatIngredientURL(ingredient: string): string {
-    let formattedIngredient:string = this.capitalizeFirst.transform(ingredient)
+    let formattedIngredient: string = this.capitalizeFirst.transform(ingredient)
     return `/juxbar/detailledingredient/${formattedIngredient}`;
   }
 }

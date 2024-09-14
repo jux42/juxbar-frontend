@@ -2,7 +2,7 @@
 <div class="container">
   <div class="formCard">
 
-    <form [formGroup]="personalCocktailForm" (ngSubmit)="onSubmitForm()">
+    <form (ngSubmit)="onSubmitForm()" [formGroup]="personalCocktailForm">
       <div class="formGroup">
         <label for="strDrink">Name</label>
         <input formControlName="strDrink" id="strDrink" type="text">
@@ -14,11 +14,11 @@
       <div class="formGroup">
         <label for="strIngredient1">1st Ingredient</label>
         <div *ngIf="ingredientsList; else loading">
-        <select formControlName="strIngredient1" class="ingredientSelect">
-          <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
-            {{ ingredient.strIngredient }}
-          </option>
-        </select>
+          <select class="ingredientSelect" formControlName="strIngredient1">
+            <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
+              {{ ingredient.strIngredient }}
+            </option>
+          </select>
         </div>
         <ng-template #loading>
           <div class="ingLoader">
@@ -30,7 +30,7 @@
       <div class="formGroup">
         <label for="strIngredient2">2nd Ingredient</label>
         <div *ngIf="ingredientsList; else loading">
-          <select formControlName="strIngredient2" class="ingredientSelect">
+          <select class="ingredientSelect" formControlName="strIngredient2">
             <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
               {{ ingredient.strIngredient }}
             </option>
@@ -46,7 +46,7 @@
       <div class="formGroup">
         <label for="strIngredient3">3rd Ingredient</label>
         <div *ngIf="ingredientsList; else loading">
-          <select formControlName="strIngredient3" class="ingredientSelect">
+          <select class="ingredientSelect" formControlName="strIngredient3">
             <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
               {{ ingredient.strIngredient }}
             </option>
@@ -62,7 +62,7 @@
       <div class="formGroup">
         <label for="strIngredient4">4th Ingredient</label>
         <div *ngIf="ingredientsList; else loading">
-          <select formControlName="strIngredient4" class="ingredientSelect">
+          <select class="ingredientSelect" formControlName="strIngredient4">
             <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
               {{ ingredient.strIngredient }}
             </option>
@@ -78,7 +78,7 @@
       <div class="formGroup">
         <label for="strIngredient5">5th Ingredient</label>
         <div *ngIf="ingredientsList; else loading">
-          <select formControlName="strIngredient5" class="ingredientSelect">
+          <select class="ingredientSelect" formControlName="strIngredient5">
             <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
               {{ ingredient.strIngredient }}
             </option>
@@ -94,7 +94,7 @@
       <div class="formGroup">
         <label for="strIngredient6">6th Ingredient</label>
         <div *ngIf="ingredientsList; else loading">
-          <select formControlName="strIngredient6" class="ingredientSelect">
+          <select class="ingredientSelect" formControlName="strIngredient6">
             <option *ngFor="let ingredient of ingredientsList" [value]="ingredient.strIngredient">
               {{ ingredient.strIngredient }}
             </option>
@@ -119,27 +119,28 @@
   <div class="preview">
     <h2 style="text-align: center">Aperçu :</h2>
     <div (mouseleave)="onMouseLeave()">
-    <div *ngIf="cocktailPreview$ | async as cocktail" class="cocktail-card" [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}">
-      <div class="thisGrid">
-        <div class="titleRow">
-          <h3>{{ truncateText(cocktail.strDrink | titlecase, 18) }}</h3>
+      <div *ngIf="cocktailPreview$ | async as cocktail" [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}"
+           class="cocktail-card">
+        <div class="thisGrid">
+          <div class="titleRow">
+            <h3>{{ truncateText(cocktail.strDrink | titlecase, 18) }}</h3>
+          </div>
+          <img (mouseenter)="onMouseEnter()" [src]="cocktail.strDrinkThumb" alt="Cocktail Image" class="clickable">
         </div>
-        <img [src]="cocktail.strDrinkThumb" (mouseenter)="onMouseEnter()"  alt="Cocktail Image" class="clickable">
-      </div>
-      <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
-        <div class="favIcon">
-          <a class="clickable">😁</a>
-        </div>
-        <div class="ingBlock">
-          <p *ngIf="cocktail.strIngredient1" class="ingredient clickable">{{ cocktail.strIngredient1 }}</p>
-          <p *ngIf="cocktail.strIngredient2" class="ingredient clickable">{{ cocktail.strIngredient2 }}</p>
-          <p *ngIf="cocktail.strIngredient3" class="ingredient clickable">{{ cocktail.strIngredient3 }}</p>
-          <p *ngIf="cocktail.strIngredient4" class="ingredient clickable">{{ cocktail.strIngredient4 }}</p>
-          <p *ngIf="cocktail.strIngredient5" class="ingredient clickable">{{ cocktail.strIngredient5 }}</p>
-          <p *ngIf="cocktail.strIngredient6" class="ingredient clickable">{{ cocktail.strIngredient6 }}</p>
+        <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
+          <div class="favIcon">
+            <a class="clickable">😁</a>
+          </div>
+          <div class="ingBlock">
+            <p *ngIf="cocktail.strIngredient1" class="ingredient clickable">{{ cocktail.strIngredient1 }}</p>
+            <p *ngIf="cocktail.strIngredient2" class="ingredient clickable">{{ cocktail.strIngredient2 }}</p>
+            <p *ngIf="cocktail.strIngredient3" class="ingredient clickable">{{ cocktail.strIngredient3 }}</p>
+            <p *ngIf="cocktail.strIngredient4" class="ingredient clickable">{{ cocktail.strIngredient4 }}</p>
+            <p *ngIf="cocktail.strIngredient5" class="ingredient clickable">{{ cocktail.strIngredient5 }}</p>
+            <p *ngIf="cocktail.strIngredient6" class="ingredient clickable">{{ cocktail.strIngredient6 }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
