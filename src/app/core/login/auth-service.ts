@@ -35,9 +35,9 @@ export class AuthService {
           this.setAuthState(true, credentials.username);
         }),
         catchError(error => {
-          console.error('Login failed', error);
+          const errorMessage = error.error || 'Login failed';
           this.setAuthState(false, null);
-          return throwError(() => new Error('Login failed'));
+          return throwError(() => new Error(errorMessage));
         })
       );
   }

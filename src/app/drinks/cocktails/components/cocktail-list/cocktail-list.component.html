@@ -10,11 +10,11 @@
   <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}">
     <ng-container *ngIf="filteredCocktails$ | async as filteredCocktails;">
       <div class="searchBlock">
-        <div class="alphabetBlock">
+<!--        <div class="alphabetBlock">-->
           <button (click)="filterByLetter(letter)" *ngFor="let letter of alphabet"
                   [class.active]="letter === selectedLetter" class="alphabet-navigation">{{ letter }}
           </button>
-        </div>
+<!--        </div>-->
         <div class="formBlock">
           <form [formGroup]="cocktailForm" class="cocktailForm">
             <div class="formGroup">

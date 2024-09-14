@@ -12,7 +12,8 @@ import {AsyncPipe, NgIf} from "@angular/common";
     NgIf,
     AsyncPipe
   ],
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   credentials: AuthRequest = {username: '', password: ''};
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['juxbar/profile']);
       },
       error: error => {
-        this.message = 'Échec de la connexion, vérifiez votre nom d’utilisateur/mot de passe';
+        this.message = error.message || 'Échec de la connexion, vérifiez votre nom d’utilisateur/mot de passe';
         console.error('Login error', error);
       }
     });

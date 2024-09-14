@@ -111,15 +111,15 @@ export class CocktailService {
 
   updateAllListsFromExtAPI(){
     return[
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/save`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/saveimages`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/savepreviews`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/save`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softDrinks/saveimages`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/savepreviews`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/save`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/saveimages`,{responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/savesmallimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/download`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadpreviews`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/download`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softDrinks/downloadimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/downloadpreviews`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/download`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadimages`,{responseType: 'text' as 'json'}),
+      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadpreviews`,{responseType: 'text' as 'json'}),
 
 
     ]

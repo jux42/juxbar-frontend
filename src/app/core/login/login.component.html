@@ -1,6 +1,8 @@
+<div class="background-container"></div>
+<div class="login-container">
 <div *ngIf="message"><p class="alert">{{ message }}</p></div>
 
-<form (submit)="login()" method="post">
+<form class="login-form" (submit)="login()" method="post">
   <div>
     <input [(ngModel)]="credentials.username" name="username" required type="text">
   </div>
@@ -9,3 +11,4 @@
   </div>
   <button type="submit">Login</button>
 </form>
+</div>
