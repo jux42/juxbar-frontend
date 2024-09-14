@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 import {SoftDrinkService} from "../../../../core/services/softDrinkService";
 import {ActivatedRoute} from "@angular/router";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
-import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
+import {animate, style, transition, trigger} from "@angular/animations";
 import {SoftDrink} from "../../../../core/models/softDrink";
 import {SoftDrinkComponent} from "../soft-drink/soft-drink.component";
 import {Cocktail} from "../../../../core/models/cocktail";
@@ -13,8 +13,8 @@ import {Cocktail} from "../../../../core/models/cocktail";
   animations: [
     trigger('simpleFadeInAnimation', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        style({opacity: 0, transform: 'translateY(20px)'}),
+        animate('300ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
       ])
     ])
   ],

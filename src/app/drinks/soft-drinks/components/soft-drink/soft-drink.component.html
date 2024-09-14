@@ -9,12 +9,12 @@
         <h4>{{ truncateText(softDrink.strDrink | titlecase, 15) }}</h4>
       </div>
       <div class="img-container">
-      <img (click)="goToSoftDrink()" (load)="imageLoaded[softDrink.id] = true"
-           (mouseenter)="onMouseEnter()"
-           *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
-           [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
-           class="clickable fadeIn">
-    </div>
+        <img (click)="goToSoftDrink()" (load)="imageLoaded[softDrink.id] = true"
+             (mouseenter)="onMouseEnter()"
+             *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
+             [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
+             class="clickable fadeIn">
+      </div>
     </div>
 
     <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">

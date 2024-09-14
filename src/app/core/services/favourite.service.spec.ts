@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { FavouriteService } from './favourite.service';
+import {FavouriteService} from './favourite.service';
 
 describe('FavouriteService', () => {
   let service: FavouriteService;

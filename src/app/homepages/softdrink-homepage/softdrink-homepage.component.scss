@@ -34,7 +34,6 @@
 }
 
 
-
 .softDrink-image:hover {
   -webkit-filter: grayscale(0%) blur(0px);
   transform: scale(1.2);
@@ -56,6 +55,7 @@
     transform: translate(-4px, -2px);
   }
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 5%;

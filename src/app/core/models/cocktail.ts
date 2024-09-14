@@ -1,7 +1,6 @@
 import {Drink} from "./drink";
-import {Ingredient} from "./ingredient";
 
-export class Cocktail extends Drink{
+export class Cocktail extends Drink {
   override id !: number;
 
   override idDrink!: string

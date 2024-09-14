@@ -26,8 +26,10 @@ export class SoftdrinkHomepageComponent implements OnInit {
   softDrinks$!: Observable<SoftDrink[]>;
   classes: string[] = [];
   index!: number;
+  protected readonly environment = environment;
 
-  constructor(private softDrinkService: SoftDrinkService, private router: Router) {}
+  constructor(private softDrinkService: SoftDrinkService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.softDrinks$ = this.getRandomSoftDrinks();
@@ -57,6 +59,7 @@ export class SoftdrinkHomepageComponent implements OnInit {
     const requests = Array.from(uniqueIds).map(id => this.softDrinkService.getOneSoftDrinkById(id));
     return forkJoin(requests);
   }
+
   initializeClasses(): void {
     this.classes = [
       'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'large', 'tiny', 'medium', 'small',
@@ -77,6 +80,4 @@ export class SoftdrinkHomepageComponent implements OnInit {
   getClass(index: number): string {
     return this.classes[index % this.classes.length];
   }
-
-  protected readonly environment = environment;
 }

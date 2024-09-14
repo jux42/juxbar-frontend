@@ -5,7 +5,6 @@ import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from
 import {RouterLink} from "@angular/router";
 import {environment} from "../../../environments/environment";
 import {PersonalCocktailService} from "../../core/services/cocktailService";
-import {State} from "../../core/models/state";
 
 @Component({
   selector: 'app-personalCocktail',
@@ -73,18 +72,19 @@ export class PersonalCocktailComponent implements OnInit {
     }
     return ingredients;
   }
-  onDeleteCocktail(personalCocktail : PersonalCocktail) {
+
+  onDeleteCocktail(personalCocktail: PersonalCocktail) {
     this.personalCocktailService.deletePersonalCocktail(personalCocktail).subscribe(
-      value =>{
+      value => {
         console.log(value);
         window.location.reload();
-              }
+      }
     );
   }
 
-  onTrashCocktail(personalCocktail : PersonalCocktail) {
+  onTrashCocktail(personalCocktail: PersonalCocktail) {
     this.personalCocktailService.trashPersonalCocktail(personalCocktail).subscribe(
-      value =>{
+      value => {
         console.log(value);
         window.location.reload();
       }

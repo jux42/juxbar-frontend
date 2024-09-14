@@ -1,12 +1,11 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {Observable, Subject} from "rxjs";
+import {Subject} from "rxjs";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle, TitleCasePipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
 import {UserRequest} from "../../../../core/models/UserRequest";
-import {AuthService} from "../../../../core/login/auth-service";
 import {PersonalCocktail} from "../../../../core/models/personal-cocktail";
 import {FavouriteService} from "../../../../core/services/favourite.service";
 import {LazyLoadImageModule} from "ng-lazyload-image";
@@ -31,20 +30,17 @@ import {LazyLoadImageModule} from "ng-lazyload-image";
 export class CocktailComponent implements OnInit, OnDestroy {
 
   @Input() cocktail !: Cocktail;
-  cocktail$!: Observable<Cocktail>;
-  imageData!: Response;
   id!: number;
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
-  isFavourite$!: Observable<boolean>;
   @Input() userRequest!: UserRequest
   mouseIsOn: boolean = false;
   protected readonly environment = environment;
+  protected readonly PersonalCocktail = PersonalCocktail;
   private destroy$ = new Subject<void>();
 
   constructor(private cdr: ChangeDetectorRef,
               private router: Router,
-              private authService: AuthService,
               private cocktailService: CocktailService,
               private favouriteService: FavouriteService) {
   }
@@ -59,12 +55,10 @@ export class CocktailComponent implements OnInit, OnDestroy {
     }
   }
 
-
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 
   checkFavourites() {
     let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
@@ -97,7 +91,6 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   }
 
-
   onMouseEnter() {
     this.mouseIsOn = true;
     console.log("mouse enter");
@@ -129,7 +122,6 @@ export class CocktailComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...';
@@ -159,7 +151,4 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
     return ingredients;
   }
-
-
-  protected readonly PersonalCocktail = PersonalCocktail;
 }

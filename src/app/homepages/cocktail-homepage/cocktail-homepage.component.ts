@@ -26,8 +26,10 @@ export class CocktailHomepageComponent implements OnInit {
   cocktails$!: Observable<Cocktail[]>;
   classes: string[] = [];
   index!: number;
+  protected readonly environment = environment;
 
-  constructor(private cocktailService: CocktailService, private router: Router) {}
+  constructor(private cocktailService: CocktailService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.cocktails$ = this.getRandomCocktails();
@@ -46,7 +48,7 @@ export class CocktailHomepageComponent implements OnInit {
 
   getRandomCocktails(): Observable<Cocktail[]> {
     //TODO chiffres alignés sur les id de la BDD ==> crée méthode back qui retourne un tableau d'id
-    const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * 569));
+    const randomIds = Array.from({length: 36}, () => Math.floor(Math.random() * 569));
     const requests = randomIds.map(id => this.cocktailService.getOneCocktailById(id));
     return forkJoin(requests);
   }
@@ -71,6 +73,4 @@ export class CocktailHomepageComponent implements OnInit {
   getClass(index: number): string {
     return this.classes[index % this.classes.length];
   }
-
-  protected readonly environment = environment;
 }

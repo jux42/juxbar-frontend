@@ -1,14 +1,14 @@
 <div class="background-container"></div>
 <div class="login-container">
-<div *ngIf="message"><p class="alert">{{ message }}</p></div>
+  <div *ngIf="message"><p class="alert">{{ message }}</p></div>
 
-<form class="login-form" (submit)="login()" method="post">
-  <div>
-    <input [(ngModel)]="credentials.username" name="username" required type="text">
-  </div>
-  <div>
-    <input [(ngModel)]="credentials.password" name="password" required type="password">
-  </div>
-  <button type="submit">Login</button>
-</form>
+  <form (submit)="login()" class="login-form" method="post">
+    <div>
+      <input [(ngModel)]="credentials.username" name="username" required type="text">
+    </div>
+    <div>
+      <input [(ngModel)]="credentials.password" name="password" required type="password">
+    </div>
+    <button type="submit">Login</button>
+  </form>
 </div>

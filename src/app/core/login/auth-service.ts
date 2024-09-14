@@ -42,14 +42,9 @@ export class AuthService {
       );
   }
 
-  private storeToken(token: string): void {
-    sessionStorage.setItem(this.tokenKey, token);
-  }
-
   getToken(): string | null {
     return sessionStorage.getItem(this.tokenKey);
   }
-
 
   getUsername(): Observable<string | null> {
     return this.username.asObservable();
@@ -76,6 +71,10 @@ export class AuthService {
     sessionStorage.removeItem('favouritesoftdrinks');
     this.setAuthState(false, null);
     this.router.navigate(['/']);
+  }
+
+  private storeToken(token: string): void {
+    sessionStorage.setItem(this.tokenKey, token);
   }
 
   private setAuthState(isAuthenticated: boolean, username: string | null): void {

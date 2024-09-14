@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SoftdrinkHomepageComponent } from './softdrink-homepage.component';
+import {SoftdrinkHomepageComponent} from './softdrink-homepage.component';
 
 describe('SoftdrinkHomepageComponent', () => {
   let component: SoftdrinkHomepageComponent;
@@ -10,8 +10,8 @@ describe('SoftdrinkHomepageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SoftdrinkHomepageComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SoftdrinkHomepageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
