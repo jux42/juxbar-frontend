@@ -1,0 +1,43 @@
+<div class="personalCocktail-management">
+  <div userlistBlock>
+
+    <h2>Personal Cocktail Management</h2>
+      <div class="innerFrameBold">
+        <h3>Select a user</h3>
+        <select [(ngModel)]="selectedUsername" (ngModelChange)="onUserDetails()" class="userSelect" >
+          <option *ngFor="let username of usernames" [value]="username">
+            {{ username }}
+          </option>
+        </select>
+
+    </div >
+
+
+    <div *ngIf="isLoading">Loading cocktails...</div>
+    <div *ngIf="personalCocktails">
+    <div *ngIf="!isLoading && personalCocktails.length > 0">
+      <div *ngFor="let personalCocktail of personalCocktails">
+        <div *ngIf="personalCocktail.state == State.SHOWED" class="cocktailLineShowed">
+
+        <p>{{ personalCocktail.strDrink }}</p>
+        <p> this Cocktail is visible </p>
+        </div>
+        <div *ngIf="personalCocktail.state == State.TRASHED" class="cocktailLineTrashed">
+          <p>{{ personalCocktail.strDrink }}</p>
+          <p (click)="onRestorePersonalCocktail(personalCocktail.id)" class="clickable">this cocktail is in trash </p>
+        </div>
+      </div>
+    </div></div>
+    <div *ngIf="!isLoading && personalCocktails?.length === 0">
+      <p>No personal cocktails found for this user.</p>
+    </div>
+  </div>
+</div>
+
+    <p>➖➖➖➖➖➖➖➖➖➖➖➖➖</p>
+    <div class="innerFrameBold">
+
+
+
+    </div>
+

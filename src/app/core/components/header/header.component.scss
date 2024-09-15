@@ -29,6 +29,11 @@ h1 {
   justify-content: space-between;
 }
 
+.loginBlock{
+  display: flex;
+  flex-direction: row;
+}
+
 .login {
   margin-top: 25px;
   margin-right: 20px;
@@ -50,5 +55,15 @@ h1 {
 
 .clickable:hover {
   color: goldenrod;
+}
+
+.adminWarning{
+  border: solid 1px darkblue;
+  padding: 10px;
+  background: #210505;
+  color: darkred;
+  font-weight: 600;
+  text-shadow: 1px 0 black;
+
 }
 
