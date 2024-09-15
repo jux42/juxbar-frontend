@@ -1,0 +1,54 @@
+<div class="user-management">
+  <div userlistBlock>
+
+  <h2>User Management</h2>
+    <div class="innerFrameBold">
+      <h3>create user : </h3>
+      <form #userForm="ngForm" (ngSubmit)="onCreateUser(userForm)">
+        <label for="username"></label>
+        <input id="username" name="username" ngModel required type="text" class="inputfield" placeholder="username">
+
+        <label for="password"></label>
+        <input id="password" name="password" ngModel required type="password" class="inputfield" placeholder="password">
+
+        <button class="form-button" type="submit">Create User</button>
+      </form>
+    </div>
+
+    <p>➖➖➖➖➖➖➖➖➖➖➖➖➖</p>
+    <div class="innerFrameBold">
+    <h3>Select an existing user</h3>
+    <select [(ngModel)]="selectedUsername" (ngModelChange)="onUserDetails()" class="userSelect" >
+      <option *ngFor="let username of usernames" [value]="username">
+        {{ username }}
+      </option>
+    </select>
+
+<div *ngIf="showOptions">
+  <div [class.active]="showOptions" class="showOptions">
+  <h3>{{ detailedUser.username }}</h3>
+    <h4 *ngIf="detailedUser.active" class="activeUser">status : ACTIVE</h4>
+    <h4 *ngIf="!detailedUser.active" class="inactiveUser">status : INACTIVE</h4>
+    <div *ngIf="detailedUser.active">
+      <button class="form-button" (click)="onDeactivate()">Disable</button>
+    <p>change password : </p>
+    <form #pwdForm="ngForm" (ngSubmit)="onChangePassword(pwdForm)">
+      <label for="newPassword"></label>
+      <input id="newPassword" name="newPassword" ngModel required type="password" class="inputfield" placeholder="new password">
+      <label for="newPasswordBis"></label>
+      <input id="newPasswordBis" name="newPasswordBis" ngModel required type="password" class="inputfield" placeholder="confirm">
+      <button class="form-button" type="submit">OK</button>
+    </form>
+    </div>
+    <div *ngIf="!detailedUser.active">
+
+      <button class="form-button" (click)="onReactivate()">Restore</button>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+

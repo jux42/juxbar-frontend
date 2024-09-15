@@ -1,0 +1,70 @@
+.personalCocktail-management {
+  transition: transform 0.4s ease-out;
+  width: 250px;
+  padding: 15px 40px 15px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(darkblue, 0.1);
+  height: 80vh;
+  border-radius: 1%;
+
+}
+
+.inputfield{
+  margin: 3px;
+}
+
+.userSelect{
+  display: block;
+  max-width: calc(100% - 25px);
+  margin: 0 auto;
+}
+
+.cocktailLineShowed{
+  font-weight: 450!important;
+  color: #013401;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; ;
+  align-items: stretch;
+}
+
+.cocktailLineTrashed{
+  font-weight: 650!important;
+  color: #4b0606;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; ;
+  align-items: stretch;
+}
+
+.innerFrameBold {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+  color: wheat;
+  margin-top: 10px;
+  background-color: rgba(darkred, 0.1);
+}
+
+.showOptions {
+  position: relative;
+
+}
+
+.form-button{
+
+  margin-top: 10px;
+  max-width: 50%;
+  height: min-content;
+
+}
+.activeUser{
+  color: #013401;
+}
+.inactiveUser{
+  color: #4b0606;
+}

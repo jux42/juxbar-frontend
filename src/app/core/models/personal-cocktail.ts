@@ -8,6 +8,7 @@ export class PersonalCocktail extends Cocktail {
   override idDrink!: string;
 
 
+
   imageData!: Blob;
 
   ownerName !: string;

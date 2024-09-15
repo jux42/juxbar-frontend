@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = this.authService.isLoggedIn();
   username$ = this.authService.getUsername();
   showModal = false;
-  protected readonly RouterLink = RouterLink;
 
   constructor(private router: Router, private authService: AuthService) {
 

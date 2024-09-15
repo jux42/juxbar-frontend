@@ -46,7 +46,11 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.login(this.credentials).subscribe({
       next: () => {
-        this.router.navigate(['juxbar/profile']);
+        if (this.credentials.username == 'admin' || this.credentials.username == 'superadmin') {
+          this.router.navigate(['juxbar/admin']);
+        }else{
+          this.router.navigate(['juxbar/profile']);
+        }
       },
       error: error => {
         this.message = error.message || 'Échec de la connexion, vérifiez votre nom d’utilisateur/mot de passe';

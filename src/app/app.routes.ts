@@ -5,6 +5,7 @@ import {authGuard} from "./auth-guard";
 import {CocktailListComponent} from "./drinks/cocktails/components/cocktail-list/cocktail-list.component";
 import {CocktailHomepageComponent} from "./homepages/cocktail-homepage/cocktail-homepage.component";
 import {SoftdrinkHomepageComponent} from "./homepages/softdrink-homepage/softdrink-homepage.component";
+import {AdminPageComponent} from "./admin/admin-page/admin-page.component";
 
 export const routes: Routes = [
 
@@ -22,6 +23,13 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [authGuard],
     data: {animation: 'ProfilePage'}
+  },
+  {
+    path: 'juxbar/admin',
+    component: AdminPageComponent,
+    canActivate: [authGuard],
+    data: {animation: 'AdminPage'}
+
   },
   {
     path: 'juxbar/profile/createcocktail',

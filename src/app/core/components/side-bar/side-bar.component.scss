@@ -10,22 +10,22 @@
   border-radius: 1%;
 }
 
+
+
 .clickable:hover {
   color: goldenrod;
 }
 
 .innerFrame {
+
+  font-size: 16px;
   text-align: justify;
   margin-left: 15px;
   margin-right: 60px;
   color: wheat;
 }
 
-.innerFrameBold {
-  text-align: center;
-  font-weight: bold;
-  color: wheat;
-}
+
 
 
 .ingLoader {
@@ -72,6 +72,12 @@
   max-width: calc(100% - 25px);
   margin: 0 auto;
 
+}
+
+.innerFrameBold {
+  text-align: center;
+  font-weight: bold;
+  color: wheat;
 }
 
 .devBlock {

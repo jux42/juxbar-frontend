@@ -152,6 +152,13 @@ export class PersonalCocktailService {
     );
   }
 
+  getPersonalCocktailsOfUser(username: string): Observable<PersonalCocktail[]> {
+
+
+          const url = `http://${environment.apiUrl}/user/personalcocktails?username=${username}`;
+          return this.http.post<PersonalCocktail[]>(url, username)
+  }
+
 
   getOnePersonalCocktailById(id: number): Observable<PersonalCocktail> {
 

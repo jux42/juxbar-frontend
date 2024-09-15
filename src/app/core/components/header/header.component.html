@@ -1,13 +1,25 @@
 <header>
   <div class="titles">
     <h1 (click)="goHome()">juxBar</h1>
+
+      <h2 *ngIf="((username$ | async) === 'superadmin' || (username$ | async) === 'admin')"
+          class="adminWarning">YOU ARE UNDER ADMIN PRIVILEGE, PLEASE DON'T MESS THINGS UP</h2>
+
     <nav class="titles">
       <ng-container *ngIf="isLoggedIn | async; then loggedInBlock; else loggedOutBlock"></ng-container>
       <ng-template #loggedInBlock>
-        <h2 class="login" routerLink="/juxbar/profile">{{ username$ | async }}</h2>
-        <h3 (click)="showModal = true" class="logout">🚪</h3>
-        <app-custom-modal (confirm)="handleConfirmation($event)" *ngIf="showModal"
-                          [message]="'logout: Sure ? ?'"></app-custom-modal>
+        <div *ngIf="username$" class="loginBlock">
+          @if ((username$ | async) === 'superadmin' || (username$ | async) === 'admin') {
+
+            <h2 class="login clickable" routerLink="/juxbar/admin">{{ username$ | async }}</h2>
+          } @else {
+            <h2 class="login clickable" routerLink="/juxbar/profile">{{ username$ | async }}</h2>
+          }
+          <h3 (click)="showModal = true" class="logout clickable">🚪</h3>
+        </div>
+          <app-custom-modal (confirm)="handleConfirmation($event)" *ngIf="showModal"
+                            [message]="'logout: Sure ? ?'"></app-custom-modal>
+
       </ng-template>
       <ng-template #loggedOutBlock>
         <h2 class="login" routerLink="/login">Login</h2>

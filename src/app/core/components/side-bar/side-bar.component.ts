@@ -61,7 +61,6 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit() {
 
-    this.checkIfAdmin();
     //TODO: ID de référence aligné sur l'ID max en BDD ==> créer une méthode pour récupérer ID max
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
     console.log(this.cocktailOfTheDayId)
@@ -77,22 +76,22 @@ export class SideBarComponent implements OnInit {
     )
   }
 
-  checkIfAdmin() {
-    const username = sessionStorage.getItem('username');
-    this.isAdmin$.next(username === 'admin' || username === 'superadmin');
-  }
-
-  showAdminSection() {
-    this.checkIfAdmin();
-    if (this.adminSectionIsOn) {
-      this.adminSectionIsOn = false;
-      this.adminButtonText = "afficher l'espace admin"
-    } else {
-      this.adminSectionIsOn = true;
-      this.adminButtonText = "cacher l'espace admin"
-    }
-    console.log(this.adminSectionIsOn)
-  }
+  // checkIfAdmin() {
+  //   const username = sessionStorage.getItem('username');
+  //   this.isAdmin$.next(username === 'admin' || username === 'superadmin');
+  // }
+  //
+  // showAdminSection() {
+  //   this.checkIfAdmin();
+  //   if (this.adminSectionIsOn) {
+  //     this.adminSectionIsOn = false;
+  //     this.adminButtonText = "afficher l'espace admin"
+  //   } else {
+  //     this.adminSectionIsOn = true;
+  //     this.adminButtonText = "cacher l'espace admin"
+  //   }
+  //   console.log(this.adminSectionIsOn)
+  // }
 
   onGoToCocktailsAlpha() {
 
@@ -152,7 +151,6 @@ export class SideBarComponent implements OnInit {
   }
 
   async onListUsers() {
-    //TODO implémenter composant UserManagement
 
     try {
       const users = await firstValueFrom(this.adminService.listUsers());
@@ -162,18 +160,7 @@ export class SideBarComponent implements OnInit {
     }
   }
 
-  async onCreateUser(form: any) {
-    const {username, password} = form.value;
-    try {
-      const response = await firstValueFrom(this.adminService.createUser(username, password));
-      console.log(response);
-      alert(`${response}`);
-      form.reset();
-    } catch (error) {
-      console.error('An error occurred while creating user:', error);
-      alert(`An error occurred: ${error}`);
-    }
-  }
+
 
   reloadComponent(page: string) {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
