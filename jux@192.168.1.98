@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/jux42/juxbar-backend.git'
+            }
+        }
+        stage('Build Backend Container') {
+            steps {
+                script {
+                    sh 'podman build -t juxbar-backend -f backend/Dockerfile .'
+                }
+            }
+        }
+        stage('Build MariaDB Container') {
+            steps {
+                script {
+                    sh 'podman run --name cocktaildb -e MYSQL_USER=itaka -e MYSQL_PASSWORD=itaka -e MYSQL_DATABASE=cocktailDB -v /srv/mariadb:/var/lib/mysql:Z mariadb:latest'
+                }
+            }
+        }
+        stage('Deploy Containers') {
+            steps {
+                script {
+                    sh 'podman-compose up -d'
+                }
+            }
+        }
+        stage('Tests') {
+            steps {
+                sh 'podman exec -it juxbar-backend ./run-tests.sh'
+            }
+        }
+    }
+}

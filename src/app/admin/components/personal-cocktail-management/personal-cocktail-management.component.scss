@@ -8,6 +8,7 @@
   background: rgba(darkblue, 0.1);
   height: 80vh;
   border-radius: 1%;
+  backdrop-filter: blur(10px);
 
 }
 
@@ -22,20 +23,28 @@
 }
 
 .cocktailLineShowed{
+  background: rgba(lightgreen, 0.1);
+  margin: 5px;
+  border-radius: 5px;
   font-weight: 450!important;
   color: #013401;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between; ;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center; ;
   align-items: stretch;
 }
 
 .cocktailLineTrashed{
+  background: rgba(pink, 0.1);
+  margin: 5px;
+  border-radius: 5px;
   font-weight: 650!important;
   color: #4b0606;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between; ;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center; ;
   align-items: stretch;
 }
 
