@@ -16,15 +16,15 @@
     <div *ngIf="isLoading">Loading cocktails...</div>
     <div *ngIf="personalCocktails">
     <div *ngIf="!isLoading && personalCocktails.length > 0">
-      <div *ngFor="let personalCocktail of personalCocktails">
+      <div *ngFor="let personalCocktail of personalCocktails" >
         <div *ngIf="personalCocktail.state == State.SHOWED" class="cocktailLineShowed">
 
         <p>{{ personalCocktail.strDrink }}</p>
         <p> this Cocktail is visible </p>
         </div>
-        <div *ngIf="personalCocktail.state == State.TRASHED" class="cocktailLineTrashed">
+        <div *ngIf="personalCocktail.state == State.TRASHED" class="cocktailLineTrashed clickable">
           <p>{{ personalCocktail.strDrink }}</p>
-          <p (click)="onRestorePersonalCocktail(personalCocktail.id)" class="clickable">this cocktail is in trash </p>
+          <p (click)="onRestorePersonalCocktail(personalCocktail.id)" >this cocktail is in trash </p>
         </div>
       </div>
     </div></div>
