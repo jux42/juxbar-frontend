@@ -9,7 +9,7 @@
           @if (!juxbarUser.profilePicture) {
             <img src="assets/icons/cockIcon.webp" class="userPic">
           } @else {
-            <img src='http://{{environment.apiUrl}}/user/mypicture' class="userPic">
+            <img src='http://{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic">
           }
           <p>{{ juxbarUser.email }}</p>
           @if (!juxbarUser.aboutMeText) {
@@ -94,7 +94,8 @@
       </form>
 
       <form (ngSubmit)="onSubmitProfilePicture()">
-        <input type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/webp">
+        <label for="profilePicture">Profile Picture</label>
+        <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/jpeg, image/webp">
         <button type="submit" [disabled]="!selectedFile">Update Profile Picture</button>
       </form>
     </div>

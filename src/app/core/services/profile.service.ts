@@ -27,10 +27,16 @@ export class ProfileService {
     return this.http.post(`http://${environment.apiUrl}/user/aboutme`, formData, { responseType: 'text' });
   }
 
-  updateProfilePicture(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('picture', file);
-    return this.http.post(`http://${environment.apiUrl}/user/picture`, formData, { responseType: 'text' });
+  updateProfilePicture(blob: Blob): Observable<any> {
+    return this.http.post(`http://${environment.apiUrl}/user/picture`, blob, {
+      headers: { 'Content-Type': 'application/octet-stream' },  // Type MIME pour les données binaires
+      responseType: 'text'
+    });
+  }
+
+
+  getProfilPicture() {
+    return this.http.get(`http://${environment.apiUrl}/user/mypicture`,{ responseType: 'arraybuffer' });
   }
 
 }

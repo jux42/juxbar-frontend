@@ -8,7 +8,7 @@ export class JuxbarUser {
 
   email!: string;
 
-  profilePicture!: Blob;
+  profilePicture!: ArrayBuffer;
 
   aboutMeText!: string;
 }

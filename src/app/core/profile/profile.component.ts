@@ -13,7 +13,7 @@ import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 import {FavouriteService} from "../services/favourite.service";
-import {BehaviorSubject, Subscription} from "rxjs";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {State} from "../models/state";
 import {map} from "rxjs/operators";
 import {ProfileService} from "../services/profile.service";
@@ -100,6 +100,7 @@ export class ProfileComponent implements OnInit {
 
     if (this.loggedIn) {
       this.loadUser();
+      this.loadProfilePicture();
       console.log(this.loggedIn)
       this.loadPersonalCocktails();
       this.loadFavouriteCocktails();
@@ -134,6 +135,14 @@ export class ProfileComponent implements OnInit {
         console.error('Error loading user:', error);
       }
     });
+  }
+
+  loadProfilePicture(){
+    return this.profileService.getProfilPicture().pipe(
+      map((picture) => {
+        this.juxbarUser.profilePicture = picture;
+      })
+    )
   }
 
 
@@ -262,22 +271,36 @@ export class ProfileComponent implements OnInit {
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
+      const file = input.files[0];
+      console.log('Fichier sélectionné :', file);
+      this.selectedFile = file;
     }
   }
 
+
+
+
   onSubmitProfilePicture() {
     if (this.selectedFile) {
-      this.profileService.updateProfilePicture(this.selectedFile).subscribe({
-        next: (response) => {
-          console.log(response);
-          this.loadUser();
-          this.closeEditModal();
-        },
-        error: (error) => {
-          console.error('Erreur lors de la mise à jour de la photo de profil :', error);
-        },
-      });
+      const reader = new FileReader();
+
+      reader.readAsArrayBuffer(this.selectedFile);
+      reader.onload = () => {
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+
+        this.profileService.updateProfilePicture(blob).subscribe({
+          next: (response) => {
+            console.log('Profile picture updated successfully');
+            this.loadUser();
+            this.loadProfilePicture();
+            this.closeEditModal();
+          },
+          error: (error) => {
+            console.error('Error updating profile picture:', error);
+          }
+        });
+      };
     }
   }
 
