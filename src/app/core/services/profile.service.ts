@@ -29,7 +29,7 @@ export class ProfileService {
 
   updateProfilePicture(blob: Blob): Observable<any> {
     return this.http.post(`http://${environment.apiUrl}/user/picture`, blob, {
-      headers: { 'Content-Type': 'application/octet-stream' },  // Type MIME pour les données binaires
+      headers: { 'Content-Type': 'application/octet-stream' },
       responseType: 'text'
     });
   }

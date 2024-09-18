@@ -17,19 +17,29 @@
   flex-direction: row;
   align-items: flex-start;
 }
+.user-framescontainer {
+  width: 400px;
+  margin-right: 0;
+  background: linear-gradient(to right, rgba(35, 92, 113, 0.9) 1%, rgba(95, 158, 160, 0.7) 100%);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+  flex-shrink: 0;
+}
 
-
-.framescontainer {
+.cocktail-framescontainer {
   flex: 1;
-  backdrop-filter: blur(4px) grayscale(50%);
   display: flex;
   flex-direction: column;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 20px;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
-  background-color: rgba( cadetblue , 0.7);
-  border-radius: 10px;
+  background: linear-gradient(to left, rgba(35, 92, 113, 0.7) 1%, rgba(95, 158, 160, 0.7) 100%);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
   color: palegoldenrod;
   transition: all 0.3s ease-in-out;
@@ -43,6 +53,7 @@
 
 .mainFrame {
   flex: 2;
+  margin-left: -10px;
 }
 
 .mainFrame {
@@ -55,7 +66,7 @@
 .frame {
   margin: 20px;
   background-image: linear-gradient(#235c71 0, #15404f 100%);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 25px;
 }
 
@@ -93,7 +104,7 @@ h2 {
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7); // Légère animation au survol
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
   }
 }
 
@@ -150,7 +161,12 @@ div[ngIf='isLoading'] {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+p{
+  font-weight: 500;
+  color: palegoldenrod;
 }
 
 .modal-content {
