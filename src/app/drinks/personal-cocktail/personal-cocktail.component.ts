@@ -26,7 +26,7 @@ export class PersonalCocktailComponent implements OnInit {
 
   @Input() personalCocktail !: PersonalCocktail;
   personalCocktail$!: Observable<PersonalCocktail>;
-  imageData!: Response;
+  isLoading: boolean = true;
   id!: number;
   imageLoaded: { [key: string]: boolean } = {};
   mouseIsOn: boolean = false;
