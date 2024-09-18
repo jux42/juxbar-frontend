@@ -21,7 +21,7 @@
     color: palegoldenrod;
     width: 160px;
     //margin: 10px;
-    background-image: linear-gradient(#235c71 0, #15404f 100%);
+    background-image: radial-gradient(#65243f 0, #186b85 100%);
     box-shadow: 5px 5px 20px black;
     overflow: hidden;
 
@@ -49,7 +49,7 @@
   //box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out 0.5s, visibility 0.1s ease-in-out 0.5s;
+  transition: opacity 0.3s ease-in-out 0.3s, visibility 0.1s ease-in-out 0.2s;
 
   &.fadeIn {
     opacity: 1;

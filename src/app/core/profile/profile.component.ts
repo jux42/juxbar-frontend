@@ -13,8 +13,13 @@ import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 import {FavouriteService} from "../services/favourite.service";
-import {Subscription} from "rxjs";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {State} from "../models/state";
+import {map} from "rxjs/operators";
+import {ProfileService} from "../services/profile.service";
+import {JuxbarUser} from "../models/juxbar-user";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -39,7 +44,9 @@ import {State} from "../models/state";
     NgForOf,
     AsyncPipe,
     NgClass,
-    SoftDrinkComponent
+    SoftDrinkComponent,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -50,9 +57,12 @@ export class ProfileComponent implements OnInit {
   userName!: string | null;
   loggedIn: boolean = false;
   isLoading: boolean = true;
+  showModal: boolean = false;
+
 
   @Input() personalCocktail!: PersonalCocktail;
 
+  juxbarUser!: JuxbarUser;
   personalCocktails!: PersonalCocktail[];
   favouriteCocktails!: Cocktail[];
   favouriteSoftDrinks!: SoftDrink[];
@@ -61,6 +71,8 @@ export class ProfileComponent implements OnInit {
   State = State;
   protected readonly PersonalCocktail = PersonalCocktail;
   private favouriteRemovedSubscription!: Subscription;
+  aboutMeForm!: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -68,7 +80,9 @@ export class ProfileComponent implements OnInit {
               private cocktailService: CocktailService,
               private softDrinkService: SoftDrinkService,
               private cdr: ChangeDetectorRef,
-              private favouriteService: FavouriteService) {
+              private favouriteService: FavouriteService,
+              private profileService: ProfileService,
+              private formBuilder: FormBuilder ) {
   }
 
   ngOnInit() {
@@ -80,8 +94,13 @@ export class ProfileComponent implements OnInit {
     });
 
     this.checkLoggedIn();
+    this.aboutMeForm = this.formBuilder.group({
+      aboutMeText: [this.juxbarUser?.aboutMeText || '', [Validators.maxLength(1000)]],
+    });
 
     if (this.loggedIn) {
+      this.loadUser();
+      this.loadProfilePicture();
       console.log(this.loggedIn)
       this.loadPersonalCocktails();
       this.loadFavouriteCocktails();
@@ -99,6 +118,34 @@ export class ProfileComponent implements OnInit {
 
 
   }
+
+  loadUser() {
+    return this.profileService.getUser().pipe(
+      map((user) => {
+        if (user.username === 'superadmin' || user.username === 'admin') {
+          console.log(user.username + ' skipped');
+        } else {
+          this.juxbarUser = user;
+          this.cdr.detectChanges();
+          console.log('User loaded:', this.juxbarUser);
+        }
+      })
+    ).subscribe({
+      error: (error) => {
+        console.error('Error loading user:', error);
+      }
+    });
+  }
+
+  loadProfilePicture(){
+    return this.profileService.getProfilPicture().pipe(
+      map((picture) => {
+        this.juxbarUser.profilePicture = picture;
+      })
+    )
+  }
+
+
 
   loadPersonalCocktails() {
     this.personalCocktailService.getAllPersonalCocktails().subscribe({
@@ -194,4 +241,68 @@ export class ProfileComponent implements OnInit {
 
     }, 1000);
   }
+
+
+  openEditModal() {
+    this.showModal = true;
+  }
+
+  closeEditModal() {
+    this.showModal = false;
+  }
+
+  onSubmitAboutMe() {
+    if (this.aboutMeForm.valid) {
+      const aboutMeText = this.aboutMeForm.get('aboutMeText')?.value;
+      this.profileService.updateAboutMeText(aboutMeText).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.juxbarUser.aboutMeText = aboutMeText;
+          this.cdr.detectChanges();
+          this.closeEditModal();
+        },
+        error: (error) => {
+          console.error('Erreur lors de la mise à jour de "About Me" :', error);
+        },
+      });
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      console.log('Fichier sélectionné :', file);
+      this.selectedFile = file;
+    }
+  }
+
+
+
+
+  onSubmitProfilePicture() {
+    if (this.selectedFile) {
+      const reader = new FileReader();
+
+      reader.readAsArrayBuffer(this.selectedFile);
+      reader.onload = () => {
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+
+        this.profileService.updateProfilePicture(blob).subscribe({
+          next: (response) => {
+            console.log('Profile picture updated successfully');
+            this.loadUser();
+            this.loadProfilePicture();
+            this.closeEditModal();
+          },
+          error: (error) => {
+            console.error('Error updating profile picture:', error);
+          }
+        });
+      };
+    }
+  }
+
+  protected readonly environment = environment;
 }

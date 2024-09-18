@@ -9,6 +9,11 @@
         <h4>{{ truncateText(personalCocktail.strDrink | titlecase, 15) }}</h4>
       </div>
       <div class="img-container">
+        @if (!imageLoaded[personalCocktail.id]) {
+          <p class="Loader">LOADING</p>
+
+        }
+      <div class="img-container">
         <img (click)="goToCocktail()" (load)="imageLoaded[personalCocktail.id] = true"
              (mouseenter)="onMouseEnter()"
              *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"

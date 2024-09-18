@@ -41,13 +41,8 @@ export class SideBarComponent implements OnInit {
   cocktail!: Cocktail;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
-  isAdmin$ = new BehaviorSubject<boolean>(false);
-  adminSectionIsOn: boolean = false;
-  adminButtonText: string = "afficher l'espace Admin";
-  // ingredientString!: string;
   protected readonly environment = environment;
 
-  // newUser = { username: '', password: '' };
   protected readonly sessionStorage = sessionStorage;
 
   constructor(private router: Router,
@@ -75,23 +70,6 @@ export class SideBarComponent implements OnInit {
       data => this.ingredientsList = data
     )
   }
-
-  // checkIfAdmin() {
-  //   const username = sessionStorage.getItem('username');
-  //   this.isAdmin$.next(username === 'admin' || username === 'superadmin');
-  // }
-  //
-  // showAdminSection() {
-  //   this.checkIfAdmin();
-  //   if (this.adminSectionIsOn) {
-  //     this.adminSectionIsOn = false;
-  //     this.adminButtonText = "afficher l'espace admin"
-  //   } else {
-  //     this.adminSectionIsOn = true;
-  //     this.adminButtonText = "cacher l'espace admin"
-  //   }
-  //   console.log(this.adminSectionIsOn)
-  // }
 
   onGoToCocktailsAlpha() {
 

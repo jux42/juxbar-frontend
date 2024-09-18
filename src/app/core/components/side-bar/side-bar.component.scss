@@ -18,11 +18,21 @@
 
 .innerFrame {
 
-  font-size: 16px;
-  text-align: justify;
-  margin-left: 15px;
-  margin-right: 60px;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 10px;
+  text-align: center;
+  border-style: groove;
+  border-color: #15404f;
+  //margin-left: 15px;
+  //margin-right: 60px;
   color: wheat;
+  transition: ease-in-out 0.2s;
+}
+
+.innerFrame:hover {
+  scale: 1.05 !important;
+background-color: cadetblue;
 }
 
 
@@ -67,11 +77,35 @@
   cursor: pointer;
 }
 
-.ingredientSelect {
+select {
+  padding: 8px;
+  color: palegoldenrod;
+  border-radius: 5px;
+  border: 1px solid #235c71;
+  font-size: 13px;
   display: block;
+  backdrop-filter: blur(10px);
+  background-color: cadetblue;
   max-width: calc(100% - 25px);
   margin: 0 auto;
+  appearance: none;
+  position: relative;
+  z-index: 1;
 
+}
+
+select:hover {
+  background-color: rgba(35, 92, 113, 0.9);
+}
+
+select option {
+  background-color: rgba(35, 92, 113, 0.7);
+  color: palegoldenrod;
+}
+
+select:focus {
+  outline: none;
+  border-color: #65243f;
 }
 
 .innerFrameBold {
@@ -79,6 +113,13 @@
   font-weight: bold;
   color: wheat;
 }
+
+.ingredientSelect {
+  position: relative;
+  overflow: visible;
+  z-index: 10;
+}
+
 
 .devBlock {
 

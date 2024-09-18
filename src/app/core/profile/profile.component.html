@@ -1,56 +1,102 @@
 <div class="background-container"></div>
-<!--<h1 *ngIf="loggedIn" class="test-class">Welcome to your personal page, {{ userName }}</h1>-->
 
 <div class="profile-container">
-<div *ngIf="isLoading"></div>
-<div class="mainFrame">
-
-  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
-    <h2>Your creations</h2>
-    <ng-container *ngIf="personalCocktails">
-      <div class="thisFlex">
-        @if (personalCocktails.length==0){
-          <p>no personal drinks for now</p>
-        }
-        <ng-container *ngFor="let personalCocktail of personalCocktails">
-          @if (personalCocktail.state == State.SHOWED) {
-            <app-personalCocktail
-              [personalCocktail]="personalCocktail">
-            </app-personalCocktail>
-
+  <div class="user-framescontainer">
+    <div class="userFrame">
+      <div class="frame">
+        <div *ngIf="juxbarUser">
+          <p><strong>{{ juxbarUser.username }}</strong></p>
+          @if (!juxbarUser.profilePicture) {
+            <img src="assets/icons/cockIcon.webp" class="userPic">
+          } @else {
+            <img src='http://{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic">
           }
+          <p>{{ juxbarUser.email }}</p>
+          @if (!juxbarUser.aboutMeText) {
+            <p>I am {{ juxbarUser.username }}</p>
+          } @else {
+            <p>{{ juxbarUser.aboutMeText }}</p>
+          }
+
+          <button (click)="openEditModal()" >Edit Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cocktail-framescontainer">
+    <div *ngIf="isLoading"></div>
+    <div class="mainFrame">
+
+      <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
+        <h2>Your creations</h2>
+        <ng-container *ngIf="personalCocktails">
+          <div class="thisFlex">
+            @if (personalCocktails.length == 0) {
+              <p>no personal drinks for now</p>
+            }
+            <ng-container *ngFor="let personalCocktail of personalCocktails">
+              @if (personalCocktail.state == State.SHOWED) {
+                <app-personalCocktail
+                  [personalCocktail]="personalCocktail">
+                </app-personalCocktail>
+
+              }
+            </ng-container>
+          </div>
         </ng-container>
       </div>
-    </ng-container>
-  </div>
 
-  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
-    <h2>Your favourites cocktails</h2>
-    <ng-container *ngIf="favouriteCocktails">
-      <div class="thisFlex">
-        @if (favouriteCocktails.length==0){
-          <p>no favourite cocktail for now</p>
-        }
-        <div *ngFor="let favouriteCocktail of favouriteCocktails"
-             [ngClass]="{'fade-out': true, 'fade-out-leave': removingCocktailIds.has(favouriteCocktail.id)}">
-          <app-cocktail [cocktail]="favouriteCocktail"></app-cocktail>
-        </div>
+      <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
+        <h2>Your favourites cocktails</h2>
+        <ng-container *ngIf="favouriteCocktails">
+          <div class="thisFlex">
+            @if (favouriteCocktails.length == 0) {
+              <p>no favourite cocktail for now</p>
+            }
+            <div *ngFor="let favouriteCocktail of favouriteCocktails"
+                 [ngClass]="{'fade-out': true, 'fade-out-leave': removingCocktailIds.has(favouriteCocktail.id)}">
+              <app-cocktail [cocktail]="favouriteCocktail"></app-cocktail>
+            </div>
+          </div>
+        </ng-container>
       </div>
-    </ng-container>
-  </div>
-  <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
-    <h2>Your favourites softdrinks</h2>
-    <ng-container *ngIf="favouriteSoftDrinks">
-      <div class="thisFlex">
-        @if (favouriteSoftDrinks.length==0){
-          <p>no favourite softdrink for now</p>
-        }
-        <div *ngFor="let favouriteSoftDrink of favouriteSoftDrinks"
-             [ngClass]="{'fade-out': true, 'fade-out-leave': removingSoftDrinkIds.has(favouriteSoftDrink.id)}">
-          <app-soft-drink [softDrink]="favouriteSoftDrink"></app-soft-drink>
-        </div>
+      <div *ngIf="!isLoading" [ngClass]="{'this-animation': !isLoading}" class="frame">
+        <h2>Your favourites softdrinks</h2>
+        <ng-container *ngIf="favouriteSoftDrinks">
+          <div class="thisFlex">
+            @if (favouriteSoftDrinks.length == 0) {
+              <p>no favourite softdrink for now</p>
+            }
+            <div *ngFor="let favouriteSoftDrink of favouriteSoftDrinks"
+                 [ngClass]="{'fade-out': true, 'fade-out-leave': removingSoftDrinkIds.has(favouriteSoftDrink.id)}">
+              <app-soft-drink [softDrink]="favouriteSoftDrink"></app-soft-drink>
+            </div>
+          </div>
+        </ng-container>
+
       </div>
-    </ng-container>
+
+    </div>
   </div>
 </div>
-</div>
+<div style="margin-top: 150px"></div>
+
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeEditModal()">&times;</span>
+      <h2>Edit Profile</h2>
+
+      <form [formGroup]="aboutMeForm" (ngSubmit)="onSubmitAboutMe()">
+        <textarea formControlName="aboutMeText" placeholder="Write something about yourself..."></textarea>
+        <button type="submit">Update About Me</button>
+      </form>
+
+      <form (ngSubmit)="onSubmitProfilePicture()">
+        <label for="profilePicture">Profile Picture</label>
+        <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/jpeg, image/webp">
+        <button type="submit" [disabled]="!selectedFile">Update Profile Picture</button>
+      </form>
+    </div>
+  </div>
