@@ -88,13 +88,19 @@
       <span class="close" (click)="closeEditModal()">&times;</span>
       <h2>Edit Profile</h2>
 
+      <h3 class="modal-h3" >About me :</h3>
       <form [formGroup]="aboutMeForm" (ngSubmit)="onSubmitAboutMe()">
-        <textarea formControlName="aboutMeText" placeholder="Write something about yourself..."></textarea>
+        @if (juxbarUser.aboutMeText){
+          <textarea formControlName="aboutMeText" placeholder="{{juxbarUser.aboutMeText}}"></textarea>
+        } @else {
+          <textarea formControlName="aboutMeText" placeholder="Write something about yourself..."></textarea>
+        }
         <button type="submit">Update About Me</button>
       </form>
 
       <form (ngSubmit)="onSubmitProfilePicture()">
-        <label for="profilePicture">Profile Picture</label>
+        <h3 class="modal-h3">Profile picture :</h3>
+        <label for="profilePicture"></label>
         <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/jpeg, image/webp">
         <button type="submit" [disabled]="!selectedFile">Update Profile Picture</button>
       </form>

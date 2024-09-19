@@ -6,7 +6,7 @@ import {PersonalCocktailComponent} from "../../drinks/personal-cocktail/personal
 import {CocktailComponent} from "../../drinks/cocktails/components/cocktail/cocktail.component";
 import {CocktailService, PersonalCocktailService} from "../services/cocktailService";
 import {PersonalCocktail} from "../models/personal-cocktail";
-import {slideInAnimation} from "../../animations";
+import {FadeInOutAnimation} from "../../animations";
 import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
 import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
@@ -26,7 +26,7 @@ import {environment} from "../../../environments/environment";
   selector: 'app-profile',
   standalone: true,
   animations: [
-    slideInAnimation,
+    FadeInOutAnimation,
     trigger('listAnimation', [
       transition('* <=> *', [
         query(':enter', [

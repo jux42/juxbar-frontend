@@ -1,51 +1,51 @@
+<div class="background-container"></div>
+
 <button (click)="goBack()">Retour</button>
 
-<div class="mainFlex">
+<div class="main-container">
+  <div class="grid-container">
+    <!-- Bloc Ingrédient -->
+    <div *ngIf="ingredient" class="ingredient-container">
+      <img (load)="imageLoaded[ingredient.id] = true" [alt]="ingredient.strIngredient"
+           [class.visible]="imageLoaded[ingredient.id]" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
+            + ingredient.strIngredient + '/image'" class="ingredient-image fadeIn">
+    </div>
 
-  <div *ngIf="cocktails$ | async as cocktails" class="listContainer">
-    <h3>Cocktails with this ingredient:</h3>
-    <p *ngIf="(cocktails.length === 0)" style="font-style: italic; text-align: center"> no cocktail with that.</p>
-    <ul class="threeColumnsRecap" style="list-style-type: none;">
-      <li *ngFor="let cocktail of cocktails">
-        <a (click)="goToCocktail(cocktail)" class="clickable">
-          <img (load)="imageLoaded[cocktail.id] = true" *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
-               [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'" alt=""
-               class="preview fadeIn">
-        </a>
-      </li>
-    </ul>
-  </div>
+    <!-- Bloc Liste de Cocktails -->
+    <div *ngIf="cocktails$ | async as cocktails" class="list-container">
+      <h3>Cocktails with this ingredient:</h3>
+      <p *ngIf="cocktails.length === 0" class="no-content">No cocktail with that.</p>
+      <ul class="grid-list">
+        <li *ngFor="let cocktail of cocktails">
+          <a (click)="goToCocktail(cocktail)" class="clickable">
+            <img (load)="imageLoaded[cocktail.id] = true" *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
+                 [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'" alt=""
+                 class="preview fadeIn">
+          </a>
+        </li>
+      </ul>
+    </div>
 
-  <div *ngIf="softDrinks$ | async as softDrinks" class="listContainer">
-    <h3>Softs with this ingredient:</h3>
-    <p *ngIf="(softDrinks.length === 0)" style="font-style: italic; text-align: center"> no soft with that.</p>
-
-    <ul class="threeColumnsRecap" style="list-style-type: none;">
-      <li *ngFor="let softDrink of softDrinks">
-        <a (click)="goToSoftDrink(softDrink)" class="clickable">
-          <img (load)="imageLoaded[softDrink.id] = true" *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
-               [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/preview'" alt=""
-               class="preview fadeIn">
-        </a>
-      </li>
-    </ul>
-
-  </div>
-  <div *ngIf="ingredient" class="ingredient-card">
-    <div class="thisFlex"><h3>{{ ingredient.strIngredient | titlecase }}</h3>
-      <div>
-        <img (load)="imageLoaded[ingredient.id] = true" [alt]="ingredient.strIngredient"
-             [class.visible]="imageLoaded[ingredient.id]" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
-              + ingredient.strIngredient + '/image'"
-             class="pic fadeIn">
-      </div>
+    <!-- Bloc Liste de Soft Drinks -->
+    <div *ngIf="softDrinks$ | async as softDrinks" class="list-container">
+      <h3>Softs with this ingredient:</h3>
+      <p *ngIf="softDrinks.length === 0" class="no-content">No soft with that.</p>
+      <ul class="grid-list">
+        <li *ngFor="let softDrink of softDrinks">
+          <a (click)="goToSoftDrink(softDrink)" class="clickable">
+            <img (load)="imageLoaded[softDrink.id] = true" *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
+                 [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/preview'" alt=""
+                 class="preview fadeIn">
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="twoColumns">
+
+  <!-- Bloc Texte Description -->
+  <div class="description-container">
     <ng-container *ngIf="ingredient; else loading">
-      <div>
-        <ng-container *ngIf="ingredient.strDescription; then hasDescription else noDescription"></ng-container>
-      </div>
+      <ng-container *ngIf="ingredient.strDescription; then hasDescription else noDescription"></ng-container>
     </ng-container>
 
     <ng-template #loading>
@@ -53,14 +53,11 @@
     </ng-template>
 
     <ng-template #hasDescription>
-      <p
-        [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"></p>
+      <div class="description" [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"></div>
     </ng-template>
 
     <ng-template #noDescription>
       <h2>This is some {{ ingredient.strIngredient }}</h2>
     </ng-template>
-
   </div>
-
 </div>

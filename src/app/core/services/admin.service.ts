@@ -48,4 +48,9 @@ export class AdminService {
     console.log(id);
     return this.http.get(`http://${environment.apiUrl}/admin/untrash/${username}/${id}`, {responseType: 'text' as 'json'});
   }
+
+  trashPersonalCocktail(username: string, id:number){
+    console.log(id);
+    return this.http.get(`http://${environment.apiUrl}/admin/trash/${username}/${id}`, {responseType: 'text' as 'json'});
+  }
 }

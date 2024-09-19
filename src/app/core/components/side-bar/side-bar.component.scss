@@ -21,22 +21,22 @@
   font-size: 22px;
   font-weight: 500;
   margin: 10px;
+  border-radius: 2px;
   text-align: center;
-  border-style: groove;
-  border-color: #15404f;
+  border: groove thin black;
   //margin-left: 15px;
   //margin-right: 60px;
   color: wheat;
-  transition: ease-in-out 0.2s;
+  transition: ease-in-out 0.3s;
 }
 
 .innerFrame:hover {
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
   scale: 1.05 !important;
-background-color: cadetblue;
+background-color: #65243f;
+color: white;
+font-weight: 800;
 }
-
-
-
 
 .ingLoader {
   text-align: center;
@@ -121,26 +121,7 @@ select:focus {
 }
 
 
-.devBlock {
 
-  background-color: darkred;
-  margin-top: auto;
 
-}
 
-.form-button {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 80%;
-  background: indianred;
-}
 
-.adminButton {
-  color: #9d9267;
-  height: min-content;
-  line-height: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: fit-content;
-  background: #186b85;
-}

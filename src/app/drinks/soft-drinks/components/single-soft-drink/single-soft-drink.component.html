@@ -1,29 +1,30 @@
+<div class="background-container"></div>
 <div class="mainFlex">
-
   <div *ngIf="softDrink" class="softDrink-card">
-    <div class="thisFlex"><h2>{{ softDrink.strDrink | titlecase }}</h2>
+    <div class="image-container">
       <img (load)="imageLoaded[softDrink.id] = true" *ngIf="softDrink"
            [class.visible]="imageLoaded[softDrink.id]"
-           [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'"
-           alt="soft Image"
-           class="fadeIn">
+           [src]="'http://' + environment.apiUrl + '/softdrink/' + softDrink.id + '/image'"
+           alt="Cocktail Image"
+           class="cocktail-image">
+    </div>
+  </div>
 
-      <button (click)="goBack()">Retour</button>
+  <div *ngIf="softDrink" class="details-container">
+    <h2>{{ softDrink.strDrink | titlecase }}</h2>
+    <div class="ingredients-list">
+      <div *ngFor="let ingredient of getIngredients(softDrink)" [routerLink]="formatIngredientURL(ingredient)">
+        <img (load)="imageLoaded[ingredient] = true"
+             [alt]="ingredient"
+             [class.visible]="imageLoaded[ingredient]"
+             [src]="'http://' + environment.apiUrl + '/ingredient/' + ingredient + '/image'"
+             class="ingredient-image fadeIn">
+        <p>{{ ingredient }}</p>
+      </div>
     </div>
 
-  </div>
-  <div *ngIf="softDrink" class="ingredientList clickable">
-    <div *ngFor="let ingredient of getIngredients(softDrink)" [routerLink]=formatIngredientURL(ingredient)
-    ><img (load)="imageLoaded[ingredient] = true" [alt]="ingredient"
-          [class.visible]="imageLoaded[ingredient]" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
-   + ingredient + '/image'"
-          class="pic fadeIn">
-
-      <p> {{ ingredient }} </p></div>
-
-  </div>
-  <div *ngIf="softDrink" class="instructions">
-    <div><p class="instructions">{{ softDrink.strInstructions }}</p>
+    <div *ngIf="softDrink" class="instructions">
+      <p>{{ softDrink.strInstructions }}</p>
     </div>
   </div>
 </div>
