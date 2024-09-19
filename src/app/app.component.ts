@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./core/components/header/header.component";
-import {slideInAnimation} from "./animations";
+import {FadeInOutAnimation} from "./animations";
 import {SideBarComponent} from "./core/components/side-bar/side-bar.component";
 import {NgIf} from "@angular/common";
 
@@ -12,7 +12,7 @@ import {NgIf} from "@angular/common";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [
-    slideInAnimation
+    FadeInOutAnimation
   ],
 
 })

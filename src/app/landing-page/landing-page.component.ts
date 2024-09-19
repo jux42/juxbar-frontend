@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {slideInAnimation} from "../animations";
+import {FadeInOutAnimation} from "../animations";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 
 
 @Component({
-  animations: [slideInAnimation],
+  animations: [FadeInOutAnimation],
   selector: 'app-landing-page',
   standalone: true,
   imports: [

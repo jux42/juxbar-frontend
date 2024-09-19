@@ -22,10 +22,31 @@
   margin: 0 auto;
 }
 
+.cocktailName{
+  font-weight: 600;
+  color: black;
+}
+
+.very-tiny-image{
+  align-self: center;
+  width: 50px;
+  height: 50px;
+}
+
+.trashUntrashBtn{
+  width: 50%;
+  height: 60px;
+  align-self: center;
+  text-align: center;
+}
+
+
+
 .cocktailLineShowed{
   background: rgba(lightgreen, 0.1);
   margin: 5px;
   border-radius: 5px;
+  text-align: center;
   font-weight: 450!important;
   color: #013401;
   display: flex;
@@ -39,6 +60,7 @@
   background: rgba(pink, 0.1);
   margin: 5px;
   border-radius: 5px;
+  text-align: center;
   font-weight: 650!important;
   color: #4b0606;
   display: flex;
@@ -49,6 +71,7 @@
 }
 
 .innerFrameBold {
+  border: darkslategrey ridge thin;
   padding-top: 10px;
   padding-bottom: 10px;
   flex-direction: column;

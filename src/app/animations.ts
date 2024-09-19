@@ -1,25 +1,27 @@
 import {animate, group, query, style, transition, trigger} from "@angular/animations";
 
-export const slideInAnimation = trigger('routeAnimation', [
+export const FadeInOutAnimation =  trigger('routeAnimation', [
   transition('* <=> *', [
+    // Cache l'élément sortant et entrant avec position absolue
     query(':enter, :leave', [
       style({
         position: 'absolute',
-
-        width: '100%'
+        width: '100%',
+        opacity: 0 // Initialise l'opacité à 0
       })
-    ], {optional: true}),
-
+    ], { optional: true }),
 
     group([
+      // Animation de fade-out pour l'élément sortant
       query(':leave', [
-        animate('0.8s 80ms ease-in', style({transform: 'translateX(-100%)'}))
-      ], {optional: true}),
+        animate('0.5s ease-in', style({ opacity: 0 }))
+      ], { optional: true }),
 
+      // Animation de fade-in pour l'élément entrant
       query(':enter', [
-        style({transform: 'scale(0.2)'}),
-        animate('800ms 80ms ease-out', style({transform: 'translateX(0)'}))
-      ], {optional: true})
+        style({ opacity: 0 }), // Assure que l'élément est invisible avant le fade-in
+        animate('0.5s ease-out', style({ opacity: 1 }))
+      ], { optional: true })
     ])
   ])
 ]);

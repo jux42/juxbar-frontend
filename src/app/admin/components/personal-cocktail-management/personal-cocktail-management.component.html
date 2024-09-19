@@ -13,32 +13,34 @@
     </div >
 
 
-    <div *ngIf="isLoading">Loading cocktails...</div>
+    <div *ngIf="isLoading">waiting for cocktail list</div>
     <div *ngIf="personalCocktails">
     <div *ngIf="!isLoading && personalCocktails.length > 0">
       <div *ngFor="let personalCocktail of personalCocktails" >
         <div *ngIf="personalCocktail.state == State.SHOWED" class="cocktailLineShowed">
+            <p class="cocktailName">{{ personalCocktail.strDrink }}</p>
+          <img [src]="personalCocktail.strDrinkThumb" class="very-tiny-image">
 
-        <p>{{ personalCocktail.strDrink }}</p>
         <p> this Cocktail is visible </p>
+          <button (click)="onTrashPersonalCocktail(personalCocktail.id)" class="trashUntrashBtn">TRASH</button>
+
         </div>
-        <div *ngIf="personalCocktail.state == State.TRASHED" class="cocktailLineTrashed clickable">
-          <p>{{ personalCocktail.strDrink }}</p>
-          <p (click)="onRestorePersonalCocktail(personalCocktail.id)" >this cocktail is in trash </p>
+        <div *ngIf="personalCocktail.state == State.TRASHED" class="cocktailLineTrashed ">
+            <p class="cocktailName">{{ personalCocktail.strDrink }}</p>
+            <img [src]="personalCocktail.strDrinkThumb" class="very-tiny-image">
+          <p>this cocktail is in trash </p>
+          <button (click)="onRestorePersonalCocktail(personalCocktail.id)" class="trashUntrashBtn">RESTORE</button>
+
         </div>
       </div>
+
     </div></div>
     <div *ngIf="!isLoading && personalCocktails?.length === 0">
-      <p>No personal cocktails found for this user.</p>
+      <p class="cocktailLineTrashed">No personal cocktails found for this user.</p>
     </div>
   </div>
 </div>
 
 
-    <div class="innerFrameBold">
 
 
-
-    </div>
-
-<p>➖➖➖➖➖➖➖➖➖➖➖➖➖</p>

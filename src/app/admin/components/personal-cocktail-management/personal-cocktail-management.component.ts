@@ -8,6 +8,7 @@ import {PersonalCocktail} from "../../../core/models/personal-cocktail";
 import {PersonalCocktailService} from "../../../core/services/cocktailService";
 import {State} from "../../../core/models/state";
 import {firstValueFrom} from "rxjs";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-personal-cocktail-management',
@@ -101,7 +102,26 @@ export class PersonalCocktailManagementComponent implements OnInit {
   }
 
 
+  async onTrashPersonalCocktail(id: number){
+    try {
+      const response = await firstValueFrom(this.adminService.trashPersonalCocktail(this.selectedUsername, id));
+      alert(`${response}`);
+      this.personalCocktails.forEach(c=>{
+        if (c.id == id){
+          c.state = State.TRASHED;
+        }
+      })
+      this.cdr.detectChanges()
+    }catch (error){
+      console.error('An error occurred while restoring cocktail:', error);
+      alert(`An error occurred: ${error}`);
+    }
+
+  }
+
+
   protected readonly State = State;
+  protected readonly environment = environment;
 }
 
 

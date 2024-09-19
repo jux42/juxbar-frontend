@@ -21,7 +21,9 @@
     color: palegoldenrod;
     width: 160px;
     //margin: 10px;
-    background-image: linear-gradient(#235c71 0, #15404f 100%);
+    //background-image: linear-gradient(#235c71 0, #15404f 100%);
+    background-image: linear-gradient(#186b85 15%, #65243f 150%);
+
     box-shadow: 5px 5px 20px black;
     overflow: hidden;
 
@@ -72,7 +74,7 @@
       "image";
   justify-items: center;
   align-items: start;
-  gap: 5px; /* Ajout d'un espace entre les éléments */
+  gap: 5px;
 }
 
 

@@ -16,22 +16,22 @@
   top: 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre le contenu horizontalement */
+  align-items: center;
   margin-top: 50px;
-  justify-content: center; /* Centre le contenu verticalement */
-  height: 100vh; /* S'assure que la section couvre toute la hauteur de la vue */
+  justify-content: center;
+  height: 100vh;
 }
 
 h1 {
-  background-color: rgba(255, 255, 255, 0.2); /* Couleur de fond semi-transparente */
-  backdrop-filter: blur(10px); /* Applique un flou à l'arrière-plan */
-  padding: 20px 40px; /* Ajoute du padding autour du texte pour créer un espace */
-  border-radius: 10px; /* Adoucit les bords */
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 20px 40px;
+  border-radius: 10px;
   font-size: 5em;
   color: #333333;
   text-align: center;
-  width: auto; /* Ajuste automatiquement la largeur en fonction du contenu */
-  display: inline-block; /* Permet à l'élément de s'ajuster au contenu */
+  width: auto;
+  display: inline-block;
 }
 
 .to {

@@ -1,4 +1,16 @@
-
+.background-softdrinkList-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background-image: url('/assets/images/DALL·E 2024-09-01 17.39.24.webp');
+  filter: blur(5px) grayscale(30%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
 .this-animation {
   animation-delay: 1s !important;
 }
@@ -41,8 +53,8 @@ button {
 
 
 h2 {
-  padding-top: 70px; /* Adjust according to your header's height */
-  margin-top: -70px; /* Same as padding-top but negative */
+  padding-top: 70px;
+  margin-top: -70px;
 }
 
 .softDrinkForm {
