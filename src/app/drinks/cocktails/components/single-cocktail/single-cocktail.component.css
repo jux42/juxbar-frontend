@@ -7,7 +7,6 @@
 
 .cocktail-card {
   padding-bottom: 30px;
-  /* Fournit de l'espace pour le paragraphe positionné absolument */
   border-radius: 5% 10%;
   width: 650px;
   height: 750px;
@@ -32,9 +31,7 @@
 
 p {
   margin-top: 15px;
-  /* Réinitialise les marges par défaut des paragraphes pour un meilleur contrôle */
   padding: 0 15px;
-  /* Ajuste le padding si nécessaire pour l'espacement à l'intérieur des cellules de la grille */
 }
 
 .pic {
@@ -67,8 +64,6 @@ img:hover {
   font-size: 1.3em;
   text-align: justify;
   margin: 60px;
-  /* Pour Firefox */
-  /* Standard */
   max-height: 700px;
   overflow-y: visible;
   font-weight: 450;
