@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, Observable, of, tap, throwError} from 'rxjs
 import {Router} from "@angular/router";
 import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
+import {environment} from "../../../environments/environment";
 
 export interface AuthRequest {
   username: string;
@@ -18,7 +19,7 @@ export class AuthService {
   favSoftDrinksList: BehaviorSubject<SoftDrink[]> = new BehaviorSubject<SoftDrink[]>([]);
   username = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
   loggedIn = new BehaviorSubject<boolean>(sessionStorage.getItem('isAuthenticated') === 'true');
-  private loginUrl = 'http://localhost:8080/login';
+  private loginUrl = `http://${environment.apiUrl}/login`;
   private tokenKey = 'token';
 
   constructor(private http: HttpClient, private router: Router) {
