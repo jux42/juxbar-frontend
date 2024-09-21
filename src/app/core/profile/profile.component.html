@@ -13,9 +13,9 @@
           }
           <p>{{ juxbarUser.email }}</p>
           @if (!juxbarUser.aboutMeText) {
-            <p>I am {{ juxbarUser.username }}</p>
+            <p class="about">I am {{ juxbarUser.username }}</p>
           } @else {
-            <p>{{ juxbarUser.aboutMeText }}</p>
+            <p class="about">{{ juxbarUser.aboutMeText }}</p>
           }
 
           <button (click)="openEditModal()" >Edit Profile</button>

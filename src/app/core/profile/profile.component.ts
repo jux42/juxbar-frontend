@@ -13,13 +13,14 @@ import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 import {FavouriteService} from "../services/favourite.service";
-import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {catchError, of, Subscription} from "rxjs";
 import {State} from "../models/state";
 import {map} from "rxjs/operators";
 import {ProfileService} from "../services/profile.service";
 import {JuxbarUser} from "../models/juxbar-user";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {environment} from "../../../environments/environment";
+import {MagicNumerFileValidationService} from "../services/magic-numer-file-validation.service";
 
 
 @Component({
@@ -69,10 +70,12 @@ export class ProfileComponent implements OnInit {
   removingCocktailIds: Set<number> = new Set();
   removingSoftDrinkIds: Set<number> = new Set();
   State = State;
-  protected readonly PersonalCocktail = PersonalCocktail;
-  private favouriteRemovedSubscription!: Subscription;
   aboutMeForm!: FormGroup;
-  selectedFile: File | null = null;
+  selectedFile!: File;
+  validationMessage!: string;
+  protected readonly PersonalCocktail = PersonalCocktail;
+  protected readonly environment = environment;
+  private favouriteRemovedSubscription!: Subscription;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -82,7 +85,8 @@ export class ProfileComponent implements OnInit {
               private cdr: ChangeDetectorRef,
               private favouriteService: FavouriteService,
               private profileService: ProfileService,
-              private formBuilder: FormBuilder ) {
+              private formBuilder: FormBuilder,
+              private magicNumberValidationService: MagicNumerFileValidationService) {
   }
 
   ngOnInit() {
@@ -137,15 +141,13 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  loadProfilePicture(){
+  loadProfilePicture() {
     return this.profileService.getProfilPicture().pipe(
       map((picture) => {
         this.juxbarUser.profilePicture = picture;
       })
     )
   }
-
-
 
   loadPersonalCocktails() {
     this.personalCocktailService.getAllPersonalCocktails().subscribe({
@@ -242,7 +244,6 @@ export class ProfileComponent implements OnInit {
     }, 1000);
   }
 
-
   openEditModal() {
     this.showModal = true;
   }
@@ -272,37 +273,44 @@ export class ProfileComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      console.log('Fichier sélectionné :', file);
+      console.log('file :', file);
       this.selectedFile = file;
     }
   }
 
-
-
-
   onSubmitProfilePicture() {
     if (this.selectedFile) {
-      const reader = new FileReader();
+      this.magicNumberValidationService.validateFile(this.selectedFile).pipe(
+        catchError((error) => {
+          this.validationMessage = `Erreur de validation : ${error}`;
+          return of(false);
+        })
+      ).subscribe((isValid) => {
+        if (isValid) {
+          const reader = new FileReader();
+          reader.readAsArrayBuffer(this.selectedFile);
+          reader.onload = () => {
+            const arrayBuffer = reader.result as ArrayBuffer;
+            const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
 
-      reader.readAsArrayBuffer(this.selectedFile);
-      reader.onload = () => {
-        const arrayBuffer = reader.result as ArrayBuffer;
-        const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
-
-        this.profileService.updateProfilePicture(blob).subscribe({
-          next: (response) => {
-            console.log('Profile picture updated successfully');
-            this.loadUser();
-            this.loadProfilePicture();
-            this.closeEditModal();
-          },
-          error: (error) => {
-            console.error('Error updating profile picture:', error);
-          }
-        });
-      };
+            this.profileService.updateProfilePicture(blob).subscribe({
+              next: (response) => {
+                alert('Profile picture updated successfully');
+                this.loadUser();
+                this.closeEditModal();
+                this.loadProfilePicture();
+                window.location.reload();
+              },
+              error: (error) => {
+                console.error('Error updating profile picture:', error);
+              }
+            });
+          };
+        } else {
+          alert('File not valid');
+        }
+      });
     }
   }
 
-  protected readonly environment = environment;
 }
