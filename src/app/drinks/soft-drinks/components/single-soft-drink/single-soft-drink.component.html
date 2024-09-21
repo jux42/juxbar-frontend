@@ -2,7 +2,9 @@
 <div class="mainFlex">
   <div *ngIf="softDrink" class="softDrink-card">
     <div class="image-container">
-      <img (load)="imageLoaded[softDrink.id] = true" *ngIf="softDrink"
+      <img (load)="imageLoaded[softDrink.id] = true"
+           (click)="openModal()"
+           *ngIf="softDrink"
            [class.visible]="imageLoaded[softDrink.id]"
            [src]="'http://' + environment.apiUrl + '/softdrink/' + softDrink.id + '/image'"
            alt="Cocktail Image"
@@ -19,7 +21,13 @@
              [class.visible]="imageLoaded[ingredient]"
              [src]="'http://' + environment.apiUrl + '/ingredient/' + ingredient + '/image'"
              class="ingredient-image fadeIn">
-        <p>{{ ingredient }}</p>
+        @if (ingredient == softDrink.strIngredient1 ||
+        ingredient == softDrink.strIngredient3 ||
+        ingredient == softDrink.strIngredient5) {
+          <p class="odd">{{ ingredient }} &nbsp; </p>
+        } @else {
+          <p class="even">{{ ingredient }} &nbsp; </p>
+        }
       </div>
     </div>
 
@@ -28,3 +36,12 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <img [src]="'http://' + environment.apiUrl + '/softdrink/' + softDrink.id + '/image'" alt="softImage" class="modal-image">
+  </div>
+</div>
+
