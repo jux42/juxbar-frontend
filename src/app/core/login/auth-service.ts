@@ -19,7 +19,7 @@ export class AuthService {
   favSoftDrinksList: BehaviorSubject<SoftDrink[]> = new BehaviorSubject<SoftDrink[]>([]);
   username = new BehaviorSubject<string | null>(sessionStorage.getItem('username'));
   loggedIn = new BehaviorSubject<boolean>(sessionStorage.getItem('isAuthenticated') === 'true');
-  private loginUrl = `http://${environment.apiUrl}/login`;
+  private loginUrl = `${environment.apiUrl}/login`;
   private tokenKey = 'token';
 
   constructor(private http: HttpClient, private router: Router) {

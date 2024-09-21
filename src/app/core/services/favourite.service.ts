@@ -31,7 +31,7 @@ export class FavouriteService {
   //     take(1),
   //     switchMap(username => {
   //       if (username) {
-  //         const url = `http://${environment.apiUrl}/user/favouritecocktails`;
+  //         const url = `${environment.apiUrl}/user/favouritecocktails`;
   //         return this.http.get<Cocktail[]>(url).pipe(
   //           tap(favCocktails => {
   //             sessionStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
@@ -45,12 +45,12 @@ export class FavouriteService {
   // }
 
   addFavouriteDrink(id: number, drinkType: string): Observable<String> {
-    const url = `http://${environment.apiUrl}/user/favouritecocktail/${id}`;
+    const url = `${environment.apiUrl}/user/favouritecocktail/${id}`;
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
   removeFavouriteDrink(id: number, drinkType: string): Observable<String> {
-    const url = `http://${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
+    const url = `${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 

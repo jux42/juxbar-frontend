@@ -9,7 +9,7 @@
           @if (!juxbarUser.profilePicture) {
             <img src="assets/icons/cockIcon.webp" class="userPic" alt="">
           } @else {
-            <img src='http://{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic" alt="">
+            <img src='{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic" alt="">
           }
           <p>{{ juxbarUser.email }}</p>
           @if (!juxbarUser.aboutMeText) {

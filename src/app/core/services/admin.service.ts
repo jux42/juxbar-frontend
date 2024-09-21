@@ -20,12 +20,12 @@ export class AdminService {
 
     return username.length < 3 ? of("username must contain at least 3 characters")
       : password.length < 6 ? of("password must contain at least 6 characters")
-        : this.http.post(`http://${environment.apiUrl}/admin/user`, params, {responseType: 'text' as 'json'});
+        : this.http.post(`${environment.apiUrl}/admin/user`, params, {responseType: 'text' as 'json'});
   }
 
 
   listUsers() {
-    return this.http.get<JuxbarUser[]>(`http://${environment.apiUrl}/admin/users`).pipe(
+    return this.http.get<JuxbarUser[]>(`${environment.apiUrl}/admin/users`).pipe(
       tap(users => console.log("API Response:", users))
     );
   }
@@ -33,24 +33,24 @@ export class AdminService {
   changePassword(username: string, newPassword: string) {
     const params = new HttpParams().set('newPassword', newPassword);
     return newPassword.length < 6 ? of("password must contain at least 6 characters")
-      :this.http.put<string>(`http://${environment.apiUrl}/admin/userpassword/${username}`, params, {responseType: 'text' as 'json'});
+      :this.http.put<string>(`${environment.apiUrl}/admin/userpassword/${username}`, params, {responseType: 'text' as 'json'});
   }
 
   reactivateUser(username: string) {
-    return this.http.get(`http://${environment.apiUrl}/admin/reactivate/${username}`, {responseType: 'text' as 'json'});
+    return this.http.get(`${environment.apiUrl}/admin/reactivate/${username}`, {responseType: 'text' as 'json'});
   }
 
   deactivate(username: string) {
-    return this.http.get(`http://${environment.apiUrl}/admin/disable/${username}`, {responseType: 'text' as 'json'});
+    return this.http.get(`${environment.apiUrl}/admin/disable/${username}`, {responseType: 'text' as 'json'});
   }
 
   restorePersonalCocktail(username: string, id:number){
     console.log(id);
-    return this.http.get(`http://${environment.apiUrl}/admin/untrash/${username}/${id}`, {responseType: 'text' as 'json'});
+    return this.http.get(`${environment.apiUrl}/admin/untrash/${username}/${id}`, {responseType: 'text' as 'json'});
   }
 
   trashPersonalCocktail(username: string, id:number){
     console.log(id);
-    return this.http.get(`http://${environment.apiUrl}/admin/trash/${username}/${id}`, {responseType: 'text' as 'json'});
+    return this.http.get(`${environment.apiUrl}/admin/trash/${username}/${id}`, {responseType: 'text' as 'json'});
   }
 }

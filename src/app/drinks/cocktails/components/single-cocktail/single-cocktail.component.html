@@ -6,7 +6,7 @@
            (click)="openModal()"
            *ngIf="cocktail"
            [class.visible]="imageLoaded[cocktail.id]"
-           [src]="'http://' + environment.apiUrl + '/cocktail/' + cocktail.id + '/image'"
+           [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'"
            alt="Cocktail Image"
            class="cocktail-image">
     </div>
@@ -19,7 +19,7 @@
         <img (load)="imageLoaded[ingredient] = true"
              [alt]="ingredient"
              [class.visible]="imageLoaded[ingredient]"
-             [src]="'http://' + environment.apiUrl + '/ingredient/' + ingredient + '/image'"
+             [src]="environment.apiUrl + '/ingredient/' + ingredient + '/image'"
              class="ingredient-image fadeIn clickable">
         @if (ingredient == cocktail.strIngredient1 ||
         ingredient == cocktail.strIngredient3 ||
@@ -41,6 +41,6 @@
 <div class="modal" *ngIf="showModal" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="closeModal()">&times;</span>
-    <img [src]="'http://' + environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="modal-image">
+    <img [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="modal-image">
   </div>
 </div>

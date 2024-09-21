@@ -12,7 +12,7 @@
         <img (click)="goToSoftDrink()" (load)="imageLoaded[softDrink.id] = true"
              (mouseenter)="onMouseEnter()"
              *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
-             [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
+             [src]="[environment.apiUrl] + '/softdrink/' + softDrink.id + '/image'" alt="Soft Image"
              class="clickable fadeIn">
       </div>
     </div>

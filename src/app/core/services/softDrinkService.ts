@@ -18,18 +18,18 @@ export class SoftDrinkService {
 
   getAllSoftDrinks(): Observable<SoftDrink[]> {
 
-    return this.http.get<SoftDrink[]>(`http://${environment.apiUrl}/softdrinks`)
+    return this.http.get<SoftDrink[]>(`${environment.apiUrl}/softdrinks`)
   }
 
   getOneSoftDrinkById(id: number): Observable<SoftDrink> {
 
-    return this.http.get<SoftDrink>(`http://${environment.apiUrl}/softdrink/${id}`);
+    return this.http.get<SoftDrink>(`${environment.apiUrl}/softdrink/${id}`);
 
   }
 
   getSoftDrinkByIngredient(ingredient: string): Observable<SoftDrink[]> {
 
-    return this.http.get<SoftDrink[]>(`http://${environment.apiUrl}/softdrinks`).pipe(
+    return this.http.get<SoftDrink[]>(`${environment.apiUrl}/softdrinks`).pipe(
       map(softDrinks => softDrinks.filter(softDrink =>
         Object.values(softDrink).slice(0, 12).includes(ingredient) ||
         Object.values(softDrink).slice(0, 12).includes(ingredient.replace(/\b\w{3,}\b/g, word =>
@@ -43,7 +43,7 @@ export class SoftDrinkService {
       take(1),
       switchMap(username => {
         if (username) {
-          const url = `http://${environment.apiUrl}/user/favouritesoftdrinks`;
+          const url = `${environment.apiUrl}/user/favouritesoftdrinks`;
           return this.http.get<SoftDrink[]>(url).pipe(
             tap(favDrinks => {
               sessionStorage.setItem("favouritesoftdrinks", JSON.stringify(favDrinks));
@@ -56,12 +56,12 @@ export class SoftDrinkService {
   }
 
   addFavouriteSoftDrink(id: number): Observable<String> {
-    const url = `http://${environment.apiUrl}/user/favouritesoftdrink/${id}`;
+    const url = `${environment.apiUrl}/user/favouritesoftdrink/${id}`;
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
   removeFavouriteCocktail(id: number): Observable<String> {
-    const url = `http://${environment.apiUrl}/user/rmfavouritesoftdrink/${id}`;
+    const url = `${environment.apiUrl}/user/rmfavouritesoftdrink/${id}`;
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 

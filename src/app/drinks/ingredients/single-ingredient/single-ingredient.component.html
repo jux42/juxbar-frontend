@@ -7,7 +7,7 @@
     <!-- Bloc Ingrédient -->
     <div *ngIf="ingredient" class="ingredient-container">
       <img (load)="imageLoaded[ingredient.id] = true" [alt]="ingredient.strIngredient"
-           [class.visible]="imageLoaded[ingredient.id]" [src]="'http://' + [environment.apiUrl] + '/ingredient/'
+           [class.visible]="imageLoaded[ingredient.id]" [src]="[environment.apiUrl] + '/ingredient/'
             + ingredient.strIngredient + '/image'" class="ingredient-image fadeIn">
     </div>
 
@@ -19,7 +19,7 @@
         <li *ngFor="let cocktail of cocktails">
           <a (click)="goToCocktail(cocktail)" class="clickable">
             <img (load)="imageLoaded[cocktail.id] = true" *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
-                 [src]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'" alt=""
+                 [src]="[environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'" alt=""
                  class="preview fadeIn">
           </a>
         </li>
@@ -34,7 +34,7 @@
         <li *ngFor="let softDrink of softDrinks">
           <a (click)="goToSoftDrink(softDrink)" class="clickable">
             <img (load)="imageLoaded[softDrink.id] = true" *ngIf="softDrink" [class.visible]="imageLoaded[softDrink.id]"
-                 [src]="'http://' + [environment.apiUrl] + '/softdrink/' + softDrink.id + '/preview'" alt=""
+                 [src]="[environment.apiUrl] + '/softdrink/' + softDrink.id + '/preview'" alt=""
                  class="preview fadeIn">
           </a>
         </li>

@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.http.get(`http://${environment.apiUrl}/appname`, {responseType: 'text'}).subscribe(data => {
+    this.http.get(`${environment.apiUrl}/appname`, {responseType: 'text'}).subscribe(data => {
       this.appName = data;
     });
 
