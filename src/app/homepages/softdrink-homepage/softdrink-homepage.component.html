@@ -10,7 +10,7 @@
       }"
       class="grid-item">
       <img (click)="goToSoftDrink(softDrink.id)"
-           [src]="'http://' + environment.apiUrl + '/softdrink/' + softDrink.id + '/image'" alt="Cocktail Image" class="softDrink-image clickable">
+           [src]="environment.apiUrl + '/softdrink/' + softDrink.id + '/image'" alt="Cocktail Image" class="softDrink-image clickable">
     </div>
   </ng-container>
 </div>

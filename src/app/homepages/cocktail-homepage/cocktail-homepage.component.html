@@ -10,7 +10,7 @@
       }"
       class="grid-item">
       <img (click)="goToCocktail(cocktail.id)"
-           [src]="'http://' + environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="cocktail-image clickable">
+           [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="cocktail-image clickable">
     </div>
   </ng-container>
 </div>

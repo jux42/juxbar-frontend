@@ -28,6 +28,7 @@ export class SingleCocktailComponent implements OnInit {
   @Input() cocktail !: Cocktail;
   cocktail$!: Observable<Cocktail>;
   imageData!: Response;
+  showModal: boolean = false;
   id!: number;
   imageLoaded: { [key: string]: boolean } = {};
   protected readonly RouterLink = RouterLink;
@@ -70,5 +71,13 @@ export class SingleCocktailComponent implements OnInit {
   formatIngredientURL(ingredient: string): string {
     let formattedIngredient: string = this.capitalizeFirst.transform(ingredient)
     return `/juxbar/detailledingredient/${formattedIngredient}`;
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }

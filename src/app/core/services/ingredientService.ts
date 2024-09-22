@@ -16,23 +16,23 @@ export class IngredientService {
 
   getAllIngredients(): Observable<Ingredient[]> {
 
-    return this.http.get<Ingredient[]>(`http://${environment.apiUrl}/ingredients`)
+    return this.http.get<Ingredient[]>(`${environment.apiUrl}/ingredients`)
   }
 
   getOneIngredientById(id: number): Observable<Ingredient> {
 
-    return this.http.get<Ingredient>(`http://${environment.apiUrl}/ingredient/${id}`);
+    return this.http.get<Ingredient>(`${environment.apiUrl}/ingredient/${id}`);
 
   }
 
   getOneIngredientByName(strDescription: string): Observable<Ingredient> {
 
-    return this.http.get<Ingredient>(`http://${environment.apiUrl}/ingredient/name/${strDescription}`);
+    return this.http.get<Ingredient>(`${environment.apiUrl}/ingredient/name/${strDescription}`);
 
   }
 
   getAllIngredientsStrings(): Observable<string[]> {
-    return this.http.get<string[]>(`http://${environment.apiUrl}/ingredientstrings`);
+    return this.http.get<string[]>(`${environment.apiUrl}/ingredientstrings`);
   }
 
 }

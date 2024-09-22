@@ -7,15 +7,15 @@
         <div *ngIf="juxbarUser">
           <p><strong>{{ juxbarUser.username }}</strong></p>
           @if (!juxbarUser.profilePicture) {
-            <img src="assets/icons/cockIcon.webp" class="userPic">
+            <img src="assets/icons/cockIcon.webp" class="userPic" alt="">
           } @else {
-            <img src='http://{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic">
+            <img src='{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic" alt="">
           }
           <p>{{ juxbarUser.email }}</p>
           @if (!juxbarUser.aboutMeText) {
-            <p>I am {{ juxbarUser.username }}</p>
+            <p class="about">I am {{ juxbarUser.username }}</p>
           } @else {
-            <p>{{ juxbarUser.aboutMeText }}</p>
+            <p class="about">{{ juxbarUser.aboutMeText }}</p>
           }
 
           <button (click)="openEditModal()" >Edit Profile</button>

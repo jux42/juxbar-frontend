@@ -27,7 +27,7 @@ export class CocktailService {
 
   getAllCocktails(): Observable<Cocktail[]> {
 
-    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`)
+    return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`)
   }
 
   getCocktailsPaginated(page: number = 0, limit: number = 10): Observable<Cocktail[]> {
@@ -35,7 +35,7 @@ export class CocktailService {
       .set('page', String(page))
       .set('size', String(limit));
 
-    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`, {params});
+    return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`, {params});
   }
 
   getAllCocktailsCached() {
@@ -45,14 +45,14 @@ export class CocktailService {
 
   getOneCocktailById(id: number): Observable<Cocktail> {
 
-    return this.http.get<Cocktail>(`http://${environment.apiUrl}/cocktail/${id}`);
+    return this.http.get<Cocktail>(`${environment.apiUrl}/cocktail/${id}`);
 
   }
 
   getCocktailsByIngredient(ingredient: string): Observable<Cocktail[]> {
     console.log(ingredient);
 
-    return this.http.get<Cocktail[]>(`http://${environment.apiUrl}/cocktails`).pipe(
+    return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`).pipe(
       map(cocktails => cocktails.filter(cocktail =>
         Object.values(cocktail).slice(0, 12).includes(ingredient) ||
         Object.values(cocktail).slice(0, 12).includes(ingredient.replace(/\b\w{3,}\b/g, word =>
@@ -67,7 +67,7 @@ export class CocktailService {
       take(1),
       switchMap(username => {
         if (username) {
-          const url = `http://${environment.apiUrl}/user/favouritecocktails`;
+          const url = `${environment.apiUrl}/user/favouritecocktails`;
           return this.http.get<Cocktail[]>(url).pipe(
             tap(favCocktails => {
               sessionStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
@@ -81,12 +81,12 @@ export class CocktailService {
   }
 
   addFavouriteCocktail(id: number): Observable<String> {
-    const url = `http://${environment.apiUrl}/user/favouritecocktail/${id}`;
+    const url = `${environment.apiUrl}/user/favouritecocktail/${id}`;
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
   removeFavouriteCocktail(id: number): Observable<String> {
-    const url = `http://${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
+    const url = `${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
@@ -104,15 +104,15 @@ export class CocktailService {
 
   updateAllListsFromExtAPI() {
     return [
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadimages`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/cocktails/downloadpreviews`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softDrinks/downloadimages`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/softdrinks/downloadpreviews`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadimages`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`http://${environment.apiUrl}/ingredients/downloadpreviews`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/cocktails/download`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/cocktails/downloadimages`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/cocktails/downloadpreviews`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/softdrinks/download`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/softDrinks/downloadimages`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/softdrinks/downloadpreviews`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/ingredients/download`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/ingredients/downloadimages`, {responseType: 'text' as 'json'}),
+      this.http.get<string>(`${environment.apiUrl}/ingredients/downloadpreviews`, {responseType: 'text' as 'json'}),
 
 
     ]
@@ -140,7 +140,7 @@ export class PersonalCocktailService {
       take(1),
       switchMap(username => {
         if (username) {
-          const url = `http://${environment.apiUrl}/user/personalcocktails`;
+          const url = `${environment.apiUrl}/user/personalcocktails`;
           return this.http.get<PersonalCocktail[]>(url).pipe(
             map(cocktails => cocktails.map(cocktail => {
               cocktail.state = cocktail.state || State.SHOWED;
@@ -155,14 +155,14 @@ export class PersonalCocktailService {
   getPersonalCocktailsOfUser(username: string): Observable<PersonalCocktail[]> {
 
 
-          const url = `http://${environment.apiUrl}/user/personalcocktails?username=${username}`;
+          const url = `${environment.apiUrl}/user/personalcocktails?username=${username}`;
           return this.http.post<PersonalCocktail[]>(url, username)
   }
 
 
   getOnePersonalCocktailById(id: number): Observable<PersonalCocktail> {
 
-    return this.http.get<PersonalCocktail>(`http://${environment.apiUrl}/user/personalcocktail/${id}`);
+    return this.http.get<PersonalCocktail>(`${environment.apiUrl}/user/personalcocktail/${id}`);
 
   }
 
@@ -170,15 +170,15 @@ export class PersonalCocktailService {
   savePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
 
 
-    return this.http.post(`http://${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
+    return this.http.post(`${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
   }
 
   deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
-    return this.http.delete(`http://${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
+    return this.http.delete(`${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
   }
 
   trashPersonalCocktail(personalCocktail: PersonalCocktail): Observable<string> {
-    return this.http.put(`http://${environment.apiUrl}/user/personalcocktail/trash/${personalCocktail.id}`, {}, {responseType: 'text'});
+    return this.http.put(`${environment.apiUrl}/user/personalcocktail/trash/${personalCocktail.id}`, {}, {responseType: 'text'});
 
   }
 

@@ -22,7 +22,7 @@ export class SingleSoftDrinkComponent implements OnInit {
 
   @Input() softDrink!: SoftDrink;
   imageLoaded: { [key: string]: boolean } = {};
-
+  showModal: boolean = false;
   id!: number;
   protected readonly environment = environment;
 
@@ -64,5 +64,12 @@ export class SingleSoftDrinkComponent implements OnInit {
   formatIngredientURL(ingredient: string): string {
     let formattedIngredient: string = this.capitalizeFirst.transform(ingredient)
     return `/juxbar/detailledingredient/${formattedIngredient}`;
+  }
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }

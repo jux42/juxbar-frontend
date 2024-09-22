@@ -18,7 +18,7 @@
         <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"
              (mouseenter)="onMouseEnter()"
              *ngIf="cocktail" [class.visible]="imageLoaded[cocktail.id]"
-             [lazyLoad]="'http://' + [environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
+             [lazyLoad]="[environment.apiUrl] + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
              class="clickable fadeIn">
       </div>
 

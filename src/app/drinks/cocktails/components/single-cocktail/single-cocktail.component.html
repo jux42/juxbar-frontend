@@ -2,9 +2,11 @@
 <div class="mainFlex">
   <div *ngIf="cocktail" class="cocktail-card">
     <div class="image-container">
-      <img (load)="imageLoaded[cocktail.id] = true" *ngIf="cocktail"
+      <img (load)="imageLoaded[cocktail.id] = true"
+           (click)="openModal()"
+           *ngIf="cocktail"
            [class.visible]="imageLoaded[cocktail.id]"
-           [src]="'http://' + environment.apiUrl + '/cocktail/' + cocktail.id + '/image'"
+           [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'"
            alt="Cocktail Image"
            class="cocktail-image">
     </div>
@@ -17,14 +19,28 @@
         <img (load)="imageLoaded[ingredient] = true"
              [alt]="ingredient"
              [class.visible]="imageLoaded[ingredient]"
-             [src]="'http://' + environment.apiUrl + '/ingredient/' + ingredient + '/image'"
-             class="ingredient-image fadeIn">
-        <p>{{ ingredient }}</p>
+             [src]="environment.apiUrl + '/ingredient/' + ingredient + '/image'"
+             class="ingredient-image fadeIn clickable">
+        @if (ingredient == cocktail.strIngredient1 ||
+        ingredient == cocktail.strIngredient3 ||
+        ingredient == cocktail.strIngredient5) {
+          <p class="odd">{{ ingredient }} &nbsp; </p>
+        } @else {
+          <p class="even">{{ ingredient }} &nbsp; </p>
+        }
       </div>
     </div>
 
     <div *ngIf="cocktail" class="instructions">
       <p>{{ cocktail.strInstructions }}</p>
     </div>
+  </div>
+</div>
+
+<!-- Modale -->
+<div class="modal" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <img [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="modal-image">
   </div>
 </div>

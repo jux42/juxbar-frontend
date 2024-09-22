@@ -1,7 +1,7 @@
 <div *ngIf="ingredient">
   <div class="thisFlex"><h2>{{ ingredient.strIngredient | titlecase }}</h2></div>
   <img [alt]="ingredient.strIngredient"
-       [src]="'http://' + [environment.apiUrl] + '/ingredient/' + ingredient.strIngredient + '/smallimage'">
+       [src]="[environment.apiUrl] + '/ingredient/' + ingredient.strIngredient + '/smallimage'">
 
 
 </div>
