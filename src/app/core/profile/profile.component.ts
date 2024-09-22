@@ -13,7 +13,7 @@ import {SoftDrink} from "../models/softDrink";
 import {SoftDrinkService} from "../services/softDrinkService";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 import {FavouriteService} from "../services/favourite.service";
-import {catchError, of, Subscription} from "rxjs";
+import {catchError, of, Subscription, switchMap} from "rxjs";
 import {State} from "../models/state";
 import {map} from "rxjs/operators";
 import {ProfileService} from "../services/profile.service";
@@ -255,19 +255,34 @@ export class ProfileComponent implements OnInit {
   onSubmitAboutMe() {
     if (this.aboutMeForm.valid) {
       const aboutMeText = this.aboutMeForm.get('aboutMeText')?.value;
-      this.profileService.updateAboutMeText(aboutMeText).subscribe({
+
+      this.profileService.checkTextSecurity(aboutMeText).pipe(
+        switchMap((isSecure: boolean) => {
+          if (isSecure) {
+            return this.profileService.updateAboutMeText(aboutMeText);
+          } else {
+            console.warn('text is not secured.');
+            alert('this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)')
+            return of({ error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)' });
+          }
+        })
+      ).subscribe({
         next: (response) => {
-          console.log(response);
-          this.juxbarUser.aboutMeText = aboutMeText;
-          this.cdr.detectChanges();
-          this.closeEditModal();
+          if (response.error) {
+            console.warn(response.error);
+          } else {
+            this.juxbarUser.aboutMeText = aboutMeText;
+            this.cdr.detectChanges();
+            this.closeEditModal();
+          }
         },
         error: (error) => {
-          console.error('Erreur lors de la mise à jour de "About Me" :', error);
-        },
+          console.error('Erreur lors de la vérification de sécurité ou de la mise à jour :', error);
+        }
       });
     }
   }
+
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;

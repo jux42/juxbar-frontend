@@ -21,6 +21,12 @@ export class ProfileService {
 
   }
 
+  checkTextSecurity(text: string) {
+    const formData = new FormData();
+    formData.append('aboutMe', text);
+    return this.http.post<boolean>(`${environment.apiUrl}/user/aboutme/securize`, formData);
+  }
+
   updateAboutMeText(aboutMeText: string): Observable<any> {
     const formData = new FormData();
     formData.append('aboutMe', aboutMeText);
