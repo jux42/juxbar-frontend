@@ -1,0 +1,26 @@
+<div class="user-management">
+
+      <h4>Change my password</h4>
+      <form #pwdForm="ngForm" (ngSubmit)="onChangePassword(pwdForm)">
+        <label for="newPassword"></label>
+        <input id="newPassword" name="newPassword" ngModel required type="password" class="inputfield" placeholder="new password">
+        <label for="newPasswordBis"></label>
+        <input id="newPasswordBis" name="newPasswordBis" ngModel required type="password" class="inputfield" placeholder="confirm">
+        <button class="form-button" type="submit">OK</button>
+      </form>
+    </div>
+
+    <h3 class="warning">delete my account</h3>
+  <button (click)="openDeleteModal()">DELETE</button>
+
+<!-- Modale de confirmation -->
+<div class="modal-background" *ngIf="showDeleteModal">
+  <div class="modal-content">
+    <h2>Delete Account</h2>
+    <h3>Are you sure you want to delete your account?<span class="warning">This action is irreversible.</span></h3>
+    <div class="modal-buttons">
+      <button class="modal-button" (click)="onDeleteConfirmed()">Yes</button>
+      <button class="modal-button" (click)="closeDeleteModal()">No</button>
+    </div>
+  </div>
+</div>

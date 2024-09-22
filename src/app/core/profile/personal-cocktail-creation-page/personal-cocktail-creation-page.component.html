@@ -1,6 +1,9 @@
-<h2 style="text-align: center">New Personal Cocktail</h2>
+<div class="background-container"></div>
+
 <div class="container">
+
   <div class="formCard">
+    <h2 style="text-align: center">New Personal Cocktail</h2>
 
     <form (ngSubmit)="onSubmitForm()" [formGroup]="personalCocktailForm">
       <div class="formGroup">
@@ -112,12 +115,11 @@
         <input formControlName="strInstructions" id="strInstructions">
       </div>
       <div class="action-buttons">
-        <button [disabled]="personalCocktailForm.invalid" type="submit">CREATE</button>
+        <button [disabled]="personalCocktailForm.invalid">CREATE</button>
       </div>
     </form>
   </div>
   <div class="preview">
-    <h2 style="text-align: center">Aperçu :</h2>
     <div (mouseleave)="onMouseLeave()">
       <div *ngIf="cocktailPreview$ | async as cocktail" [ngClass]="{'active': mouseIsOn, 'inactive': !mouseIsOn}"
            class="cocktail-card">

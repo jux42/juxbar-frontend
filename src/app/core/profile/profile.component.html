@@ -13,16 +13,25 @@
           }
           <p>{{ juxbarUser.email }}</p>
           @if (!juxbarUser.aboutMeText) {
-            <p class="about">I am {{ juxbarUser.username }}</p>
+            <p class="about">"I am {{ juxbarUser.username }}"</p>
           } @else {
-            <p class="about">{{ juxbarUser.aboutMeText }}</p>
+            <p class="about">"{{ juxbarUser.aboutMeText }}"</p>
           }
 
           <button (click)="openEditModal()" >Edit Profile</button>
+          <button (click)="toggleAccountManager()">Manage Account</button>
         </div>
       </div>
+
+      <div *ngIf="showAccountManager">
+        <div class="frame">
+        <app-account-manager></app-account-manager>
+      </div>
+      </div>
     </div>
+
   </div>
+
 
   <div class="cocktail-framescontainer">
     <div *ngIf="isLoading"></div>
