@@ -1,14 +1,12 @@
-<div class="custom-modal">
-  <div class="custom-modal-content">
+<div class="modal-background">
+  <div class="modal-content">
     <div class="custom-modal-header">
       <h4 class="confirm">Confirmation</h4>
     </div>
-    <div class="custom-modal-body">
-      <p class="message">{{ message }}</p>
-    </div>
-    <div class="custom-modal-footer">
-      <button (click)="onConfirm()" class="btn">OK</button>
-      <button (click)="onCancel()" class="btn">Annuler</button>
+      <h3>{{ message }}</h3>
+    <div class="modal-buttons">
+      <button (click)="onConfirm()" class="modal-button">OK</button>
+      <button (click)="onCancel()" class="modal-button">Annuler</button>
     </div>
   </div>
 </div>

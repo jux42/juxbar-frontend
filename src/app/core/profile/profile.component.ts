@@ -21,6 +21,7 @@ import {JuxbarUser} from "../models/juxbar-user";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {environment} from "../../../environments/environment";
 import {MagicNumerFileValidationService} from "../services/magic-numer-file-validation.service";
+import {AccountManagerComponent} from "./account-manager/account-manager.component";
 
 
 @Component({
@@ -47,7 +48,8 @@ import {MagicNumerFileValidationService} from "../services/magic-numer-file-vali
     NgClass,
     SoftDrinkComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AccountManagerComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -59,7 +61,7 @@ export class ProfileComponent implements OnInit {
   loggedIn: boolean = false;
   isLoading: boolean = true;
   showModal: boolean = false;
-
+  showAccountManager: boolean = false;
 
   @Input() personalCocktail!: PersonalCocktail;
 
@@ -327,5 +329,10 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+
+  toggleAccountManager() {
+    this.showAccountManager = !this.showAccountManager;
+  }
+
 
 }

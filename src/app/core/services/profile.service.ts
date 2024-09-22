@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Ingredient} from "../models/ingredient";
 import {environment} from "../../../environments/environment";
 import {JuxbarUser} from "../models/juxbar-user";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,19 @@ export class ProfileService {
 
   getProfilPicture() {
     return this.http.get(`${environment.apiUrl}/user/mypicture`,{ responseType: 'arraybuffer' });
+  }
+
+  deleteAccount(username: string) {
+    return this.http.delete<string>(`${environment.apiUrl}/user/${username}`, {responseType: "text" as 'json'});
+  }
+
+  changePassword(username: string | null, newPassword: string) {
+    if (username == null) {
+      return of("you are not authenticated");
+    }
+    const params = new HttpParams().set('newPassword', newPassword);
+    return newPassword.length < 6 ? of("password must contain at least 6 characters")
+      :this.http.put<string>(`${environment.apiUrl}/user/${username}/password`, params, {responseType: 'text' as 'json'});
   }
 
 }
