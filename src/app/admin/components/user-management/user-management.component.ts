@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AdminService} from "../../../core/services/admin.service";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {map} from "rxjs/operators";
-import {firstValueFrom, Observable, tap} from "rxjs";
+import {firstValueFrom} from "rxjs";
 import {JuxbarUser} from "../../../core/models/juxbar-user";
 import {FormsModule, NgForm} from "@angular/forms";
 

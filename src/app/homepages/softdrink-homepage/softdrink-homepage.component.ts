@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {forkJoin, Observable} from "rxjs";
+import {forkJoin, Observable, switchMap} from "rxjs";
 import {SoftDrink} from "../../core/models/softDrink";
 import {SoftDrinkService} from "../../core/services/softDrinkService";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink/soft-drink.component";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-homepages',
@@ -47,19 +48,15 @@ export class SoftdrinkHomepageComponent implements OnInit {
   }
 
   getRandomSoftDrinks(): Observable<SoftDrink[]> {
-    const uniqueIds = new Set<number>();
-    const maxId = 58;
-    const numIdsNeeded = 58;
-
-    while (uniqueIds.size < numIdsNeeded) {
-      const randomId = Math.floor(Math.random() * maxId) + 1;
-      uniqueIds.add(randomId);
-    }
-
-    const requests = Array.from(uniqueIds).map(id => this.softDrinkService.getOneSoftDrinkById(id));
-    return forkJoin(requests);
+    return this.softDrinkService.getSoftDrinksArraySize().pipe(
+      switchMap(maxId => {
+        const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * maxId));
+        const requests = randomIds.map(id => this.softDrinkService.getOneSoftDrinkById(id));
+        return forkJoin(requests);
+      }),
+      map((softDrinks: SoftDrink[]) => softDrinks.filter(softDrink => softDrink != null && softDrink.id != null))
+    );
   }
-
   initializeClasses(): void {
     this.classes = [
       'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'large', 'tiny', 'medium', 'small',

@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {forkJoin, Observable} from "rxjs";
+import {forkJoin, Observable, switchMap, tap} from "rxjs";
 import {Cocktail} from "../../core/models/cocktail";
 import {CocktailService} from "../../core/services/cocktailService";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgStyle} from "@angular/common";
 import {CocktailComponent} from "../../drinks/cocktails/components/cocktail/cocktail.component";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-homepages',
@@ -26,6 +27,7 @@ export class CocktailHomepageComponent implements OnInit {
   cocktails$!: Observable<Cocktail[]>;
   classes: string[] = [];
   index!: number;
+  cocktailsArraySize!: number;
   protected readonly environment = environment;
 
   constructor(private cocktailService: CocktailService, private router: Router) {
@@ -46,11 +48,21 @@ export class CocktailHomepageComponent implements OnInit {
 
   }
 
+  getCocktailsArraySize(): Observable<number> {
+    return this.cocktailService.getCocktailsArraySize().pipe(
+      tap(size => this.cocktailsArraySize = size)
+    );
+  }
+
   getRandomCocktails(): Observable<Cocktail[]> {
-    //TODO chiffres alignés sur les id de la BDD ==> crée méthode back qui retourne un tableau d'id
-    const randomIds = Array.from({length: 36}, () => Math.floor(Math.random() * 569));
-    const requests = randomIds.map(id => this.cocktailService.getOneCocktailById(id));
-    return forkJoin(requests);
+    return this.getCocktailsArraySize().pipe(
+      switchMap(arraySize => {
+        const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * arraySize));
+        const requests = randomIds.map(id => this.cocktailService.getOneCocktailById(id));
+        return forkJoin(requests);
+      }),
+      map((cocktails: Cocktail[]) => cocktails.filter(cocktail => cocktail != null && cocktail.id != null))
+    );
   }
 
   initializeClasses(): void {
@@ -73,4 +85,6 @@ export class CocktailHomepageComponent implements OnInit {
   getClass(index: number): string {
     return this.classes[index % this.classes.length];
   }
+
+
 }

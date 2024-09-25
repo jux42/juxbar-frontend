@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormsModule, NgForm} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {firstValueFrom} from "rxjs";
-import {map} from "rxjs/operators";
 import {ProfileService} from "../../services/profile.service";
 import {AuthService} from "../../login/auth-service";
 import {user} from "@angular/fire/auth";

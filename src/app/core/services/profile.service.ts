@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Ingredient} from "../models/ingredient";
 import {environment} from "../../../environments/environment";
 import {JuxbarUser} from "../models/juxbar-user";
 import {BehaviorSubject, Observable, of} from "rxjs";

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PersonalCocktailManagementComponent } from './personal-cocktail-management.component';
+import {PersonalCocktailManagementComponent} from './personal-cocktail-management.component';
 
 describe('CocktailManagementComponent', () => {
   let component: PersonalCocktailManagementComponent;

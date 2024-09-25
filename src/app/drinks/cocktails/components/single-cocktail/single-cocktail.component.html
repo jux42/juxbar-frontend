@@ -10,6 +10,7 @@
            alt="Cocktail Image"
            class="cocktail-image">
     </div>
+
   </div>
 
   <div *ngIf="cocktail" class="details-container">
@@ -21,26 +22,34 @@
              [class.visible]="imageLoaded[ingredient]"
              [src]="environment.apiUrl + '/ingredient/' + ingredient + '/image'"
              class="ingredient-image fadeIn clickable">
-        @if (ingredient == cocktail.strIngredient1 ||
-        ingredient == cocktail.strIngredient3 ||
-        ingredient == cocktail.strIngredient5) {
-          <p class="odd">{{ ingredient }} &nbsp; </p>
-        } @else {
-          <p class="even">{{ ingredient }} &nbsp; </p>
-        }
+        <p class="odd" *ngIf="ingredient == cocktail.strIngredient1 || ingredient == cocktail.strIngredient3 || ingredient == cocktail.strIngredient5">
+          {{ ingredient }} &nbsp;
+        </p>
+        <p class="even" *ngIf="ingredient !== cocktail.strIngredient1 && ingredient !== cocktail.strIngredient3 && ingredient !== cocktail.strIngredient5">
+          {{ ingredient }} &nbsp;
+        </p>
       </div>
+
     </div>
 
     <div *ngIf="cocktail" class="instructions">
       <p>{{ cocktail.strInstructions }}</p>
     </div>
   </div>
+  <div class="favIcon">
+    <ng-container *ngIf="isFavourite">
+      <a class="clickable" (click)="onRemoveFavouriteCocktail(cocktail)"> ⭐</a>
+    </ng-container>
+    <ng-container *ngIf="!isFavourite">
+      <a class="clickable" (click)="onAddFavouriteCocktail(cocktail)">➕</a>
+    </ng-container>
+  </div>
 </div>
 
 <!-- Modale -->
 <div class="modal" *ngIf="showModal" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close" (click)="closeModal()">&times;</span>
+    <span class="close" (click)="closeModal()">❌</span>
     <img [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image" class="modal-image">
   </div>
 </div>

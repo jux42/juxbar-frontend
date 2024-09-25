@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, shareReplay, Subject, switchMap, tap} from "rxjs";
-import {Cocktail} from "../models/cocktail";
-import {take} from "rxjs/operators";
+import {Observable, Subject} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../login/auth-service";
