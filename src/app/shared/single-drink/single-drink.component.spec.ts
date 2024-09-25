@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SingleDrinkComponent } from './single-drink.component';
+import {SingleDrinkComponent} from './single-drink.component';
 
 describe('SingleDrinkComponent', () => {
   let component: SingleDrinkComponent;

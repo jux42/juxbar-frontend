@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MagicNumerFileValidationService } from './magic-numer-file-validation.service';
+import {MagicNumerFileValidationService} from './magic-numer-file-validation.service';
 
 describe('FileValidationService', () => {
   let service: MagicNumerFileValidationService;

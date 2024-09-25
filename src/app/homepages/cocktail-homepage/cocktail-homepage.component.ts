@@ -7,8 +7,6 @@ import {CocktailComponent} from "../../drinks/cocktails/components/cocktail/cock
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
-import {SoftDrink} from "../../core/models/softDrink";
 
 @Component({
   selector: 'app-homepages',

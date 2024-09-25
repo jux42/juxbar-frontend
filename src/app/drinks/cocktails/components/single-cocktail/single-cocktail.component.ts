@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Cocktail} from "../../../../core/models/cocktail";
 import {CocktailService} from "../../../../core/services/cocktailService";
-import {Observable, Subject} from "rxjs";
+import {Subject} from "rxjs";
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {BoldWordsPipe} from "../../../../core/services/bold-words.pipe";
@@ -27,15 +27,12 @@ import {FavouriteService} from "../../../../core/services/favourite.service";
 export class SingleCocktailComponent implements OnInit, OnDestroy {
 
   @Input() cocktail !: Cocktail;
-  cocktail$!: Observable<Cocktail>;
-  imageData!: Response;
   showModal: boolean = false;
   id!: number;
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
   mouseIsOn: boolean = false;
   private destroy$ = new Subject<void>();
-  protected readonly RouterLink = RouterLink;
   protected readonly environment = environment;
 
   constructor(private cocktailService: CocktailService,
@@ -65,7 +62,7 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
 
   onAddFavouriteCocktail(cocktail: Cocktail): void {
     if (sessionStorage.getItem('username') == null) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']).then(r =>r );
     } else {
       if (!this.isFavourite) {
         let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
@@ -127,7 +124,4 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
     this.showModal = false;
   }
 
-  goBack() {
-    this.router.navigateByUrl('juxbar/listall');
-  }
 }

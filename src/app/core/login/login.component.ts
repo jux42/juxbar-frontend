@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   left: 0,
+    //   behavior: 'smooth'
+    // });
 
     console.log('OnInit: credentials', this.credentials);
     this.route.queryParams.subscribe(params => {
