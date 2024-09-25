@@ -7,9 +7,10 @@
            *ngIf="softDrink"
            [class.visible]="imageLoaded[softDrink.id]"
            [src]="environment.apiUrl + '/softdrink/' + softDrink.id + '/image'"
-           alt="Cocktail Image"
-           class="cocktail-image">
+           alt="Soft Drink Image"
+           class="softDrink-image">
     </div>
+
   </div>
 
   <div *ngIf="softDrink" class="details-container">
@@ -21,13 +22,12 @@
              [class.visible]="imageLoaded[ingredient]"
              [src]="environment.apiUrl + '/ingredient/' + ingredient + '/image'"
              class="ingredient-image fadeIn">
-        @if (ingredient == softDrink.strIngredient1 ||
-        ingredient == softDrink.strIngredient3 ||
-        ingredient == softDrink.strIngredient5) {
-          <p class="odd">{{ ingredient }} &nbsp; </p>
-        } @else {
-          <p class="even">{{ ingredient }} &nbsp; </p>
-        }
+        <p class="odd" *ngIf="ingredient == softDrink.strIngredient1 || ingredient == softDrink.strIngredient3 || ingredient == softDrink.strIngredient5">
+          {{ ingredient }} &nbsp;
+        </p>
+        <p class="even" *ngIf="ingredient !== softDrink.strIngredient1 && ingredient !== softDrink.strIngredient3 && ingredient !== softDrink.strIngredient5">
+          {{ ingredient }} &nbsp;
+        </p>
       </div>
     </div>
 
@@ -35,13 +35,20 @@
       <p>{{ softDrink.strInstructions }}</p>
     </div>
   </div>
-</div>
-
-
-<div class="modal" *ngIf="showModal" (click)="closeModal()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close" (click)="closeModal()">&times;</span>
-    <img [src]="environment.apiUrl + '/softdrink/' + softDrink.id + '/image'" alt="softImage" class="modal-image">
+  <div class="favIcon">
+    <ng-container *ngIf="isFavourite">
+      <a class="clickable" (click)="onRemoveFavouriteSoftDrink(softDrink)"> ⭐</a>
+    </ng-container>
+    <ng-container *ngIf="!isFavourite">
+      <a class="clickable" (click)="onAddFavouriteSoftDrink(softDrink)">➕</a>
+    </ng-container>
   </div>
 </div>
 
+<!-- Modale -->
+<div class="modal" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">❌</span>
+    <img [src]="environment.apiUrl + '/softdrink/' + softDrink.id + '/image'" alt="softDrink Image" class="modal-image">
+  </div>
+</div>

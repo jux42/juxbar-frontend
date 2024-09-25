@@ -27,6 +27,10 @@ export class SoftDrinkService {
 
   }
 
+  getSoftDrinksArraySize(): Observable<number> {
+    return this.http.get<number>(`${environment.apiUrl}/softdrinks/arraysize`);
+  }
+
   getSoftDrinkByIngredient(ingredient: string): Observable<SoftDrink[]> {
 
     return this.http.get<SoftDrink[]>(`${environment.apiUrl}/softdrinks`).pipe(

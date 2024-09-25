@@ -30,6 +30,10 @@ export class CocktailService {
     return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`)
   }
 
+  getCocktailsArraySize():Observable<number>{
+    return this.http.get<number>(`${environment.apiUrl}/cocktails/arraysize`);
+  }
+
   getCocktailsPaginated(page: number = 0, limit: number = 10): Observable<Cocktail[]> {
     let params = new HttpParams()
       .set('page', String(page))
