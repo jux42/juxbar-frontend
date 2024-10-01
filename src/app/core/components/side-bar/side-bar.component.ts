@@ -96,17 +96,18 @@ export class SideBarComponent implements OnInit {
     ).subscribe()
   }
 
-  onGoToRandomCocktail() {
+  getSecureRandomInt(max: number): number {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return array[0] % max;
+  }
 
+  onGoToRandomCocktail() {
 
 
     console.log("array size : " + this.multiplier);
 
-    const crypto = window.crypto;
-    let array = new Uint32Array(this.multiplier);
-    crypto.getRandomValues(array);
-
-    let randomCocktailId = Math.floor(Math.random() * array.length);
+    let randomCocktailId = this.getSecureRandomInt(this.multiplier);
     console.log(randomCocktailId);
 
 
