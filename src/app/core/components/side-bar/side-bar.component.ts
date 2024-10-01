@@ -37,6 +37,7 @@ import {AdminService} from "../../services/admin.service";
 })
 export class SideBarComponent implements OnInit {
 
+  multiplier!: number;
   cocktailOfTheDayId!: number;
   cocktail!: Cocktail;
   ingredientsList!: Ingredient[];
@@ -56,6 +57,7 @@ export class SideBarComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getArraySize();
     //TODO: ID de référence aligné sur l'ID max en BDD ==> créer une méthode pour récupérer ID max
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
     console.log(this.cocktailOfTheDayId)
@@ -88,9 +90,19 @@ export class SideBarComponent implements OnInit {
     });
   }
 
+  getArraySize(){
+    return this.cocktailService.getCocktailsArraySize().pipe(
+      map(arraySize => this.multiplier = arraySize),
+    ).subscribe()
+  }
+
   onGoToRandomCocktail() {
-    let randomCocktailId = Math.floor(Math.random() * 570);
+
+
+    console.log("array size : " + this.multiplier);
+    let randomCocktailId = Math.floor(Math.random() * this.multiplier);
     console.log(randomCocktailId);
+
 
     window.scrollTo({
       top: 0,
