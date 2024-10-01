@@ -103,7 +103,7 @@ export class SideBarComponent implements OnInit {
     console.log("array size : " + this.multiplier);
 
     const crypto = window.crypto;
-    var array = new Uint32Array(this.multiplier);
+    let array = new Uint32Array(this.multiplier);
     crypto.getRandomValues(array);
 
     let randomCocktailId = Math.floor(Math.random() * array.length);
