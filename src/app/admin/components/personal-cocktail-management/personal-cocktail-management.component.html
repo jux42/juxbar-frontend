@@ -13,7 +13,7 @@
     </div >
 
 
-    <div *ngIf="isLoading">waiting for cocktail list</div>
+    <div *ngIf="isLoading" class="no-content">waiting for cocktail list</div>
     <div *ngIf="personalCocktails">
     <div *ngIf="!isLoading && personalCocktails.length > 0">
       <div *ngFor="let personalCocktail of personalCocktails" >

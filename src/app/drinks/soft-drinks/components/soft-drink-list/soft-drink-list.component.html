@@ -34,6 +34,9 @@
                     [softDrink]="softDrink"></app-soft-drink>
 
   </div>
+  <div *ngIf="softDrinks.length === 0" class="no-content">
+    No Soft found
+  </div>
 
 
 </ng-container>
