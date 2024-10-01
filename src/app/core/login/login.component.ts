@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['authRequired']) {
         console.log('TEST' + this.message);
-        this.message = 'Vous devez vous authentifier d\'abord.';
+        this.message = 'You need to login first';
       }
     });
   }

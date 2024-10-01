@@ -24,7 +24,8 @@
     width: 160px;
     //margin: 10px;
     //background-image: linear-gradient(#235c71 0, #15404f 100%);
-    background-image: radial-gradient(#186b85 0, #65243f 100%);
+    //background-image: radial-gradient(#186b85 0, #65243f 100%);
+    background-image: linear-gradient(#65243f 15%, #186b85 250%);
 
     box-shadow: 5px 5px 20px black;
     overflow: hidden;
@@ -130,7 +131,7 @@
 
 .ingredient {
   font-size: 0.9em;
-  text-align: justify;
+  text-align: left;
   margin-left: 5px;
   margin-right: 5px;
   color: palegoldenrod;

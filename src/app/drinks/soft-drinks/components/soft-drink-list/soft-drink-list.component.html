@@ -9,19 +9,19 @@
     <div class="formBlock">
       <form [formGroup]="softDrinkForm" class="softDrinkForm">
         <div class="formGroup">
-          <label for="strDrink">Nom</label>
+          <label for="strDrink">Name</label>
           <input formControlName="strDrink" id="strDrink" type="text">
         </div>
         <div class="formGroup">
-          <label for="strFirstIngredient">Ingrédient</label>
+          <label for="strFirstIngredient">Ingredient</label>
           <input formControlName="strFirstIngredient" id="strFirstIngredient">
         </div>
         <div class="formGroup">
-          <label for="strSecondIngredient">Ingrédient</label>
+          <label for="strSecondIngredient">Ingredient</label>
           <input formControlName="strSecondIngredient" id="strSecondIngredient">
         </div>
         <div class="formGroup">
-          <label for="strThirdIngredient">Ingrédient</label>
+          <label for="strThirdIngredient">Ingredient</label>
           <input formControlName="strThirdIngredient" id="strThirdIngredient">
         </div>
       </form>
@@ -33,6 +33,9 @@
                     [attr.id]="getAnchorId(softDrink.strDrink)"
                     [softDrink]="softDrink"></app-soft-drink>
 
+  </div>
+  <div *ngIf="softDrinks.length === 0" class="no-content">
+    No Soft found
   </div>
 
 

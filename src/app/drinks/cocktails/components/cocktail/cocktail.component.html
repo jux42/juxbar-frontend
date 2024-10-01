@@ -34,8 +34,8 @@
 
       <div class="ingBlock">
         <ng-container *ngFor="let ingredient of getIngredients(cocktail); let i = index; let last = last;">
-          <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable">
-            {{ ingredient }}<span *ngIf="!last">, </span>
+          <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable listedItems" title="{{ingredient}}">
+            {{ truncateText(ingredient, 10) }}<span *ngIf="!last">, </span>
           </p>
         </ng-container>
       </div>

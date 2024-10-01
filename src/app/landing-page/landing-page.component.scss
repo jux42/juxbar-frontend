@@ -41,6 +41,7 @@ h1 {
 
 .juxbar {
   color: #2A3E5F;
+  -webkit-text-stroke: 1px darkslategrey;
 }
 
 .buttonContainer {
@@ -50,21 +51,27 @@ h1 {
 }
 
 button:hover {
-  opacity: .9;
-  background: #A9BDA7;
+  font-size: 26px !important;
+  background: #2A3E5F !important;
+  scale: 1.05;
+  opacity: 1;
+  color: #A9BDA7 ;
+  //background: #A9BDA7;
 
 }
 
 .ButtonOne {
 
-  font-size: 18px;
+  font-size: 24px !important;
+  font-weight: bolder !important;
   background: #A9BDA7;
   color: #2A3E5F;
   margin-right: 10px;
 }
 
 .ButtonTwo {
-  font-size: 18px;
+  font-size: 24px !important;
+  font-weight: bolder !important;
   background: #A9BDA7;
   color: #2A3E5F;
   margin-left: 10px;

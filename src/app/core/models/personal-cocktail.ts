@@ -9,11 +9,12 @@ export class PersonalCocktail extends Cocktail {
 
 
 
-  imageData!: Blob;
+  localImage!: ArrayBuffer;
 
   ownerName !: string;
 
   state!: State;
+
 
 }
 

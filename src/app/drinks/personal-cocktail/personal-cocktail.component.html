@@ -17,7 +17,7 @@
         <img (click)="goToCocktail()" (load)="imageLoaded[personalCocktail.id] = true"
              (mouseenter)="onMouseEnter()"
              *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
-             [src]="personalCocktail.strDrinkThumb"
+             [src]="environment.apiUrl+'/user/personalcocktail/image/'+ personalCocktail.id"
              alt="" class="clickable fadeIn">
       </div>
     </div>

@@ -12,6 +12,11 @@
 
 }
 
+h2{
+  text-align: center;
+  color: #4b0606;
+}
+
 .inputfield{
   margin: 3px;
 }
@@ -25,6 +30,8 @@
 .cocktailName{
   font-weight: 600;
   color: black;
+  border: solid 1px #2A3E5F;
+  padding: 10px;
 }
 
 .very-tiny-image{

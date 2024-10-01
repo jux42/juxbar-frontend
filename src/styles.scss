@@ -4,12 +4,32 @@
   cursor: pointer;
 }
 
+.juxBarTypo{
+  font-family: "Glass Antiqua", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.no-content {
+  font-family: Asap Condensed, sans-serif;
+  font-size: 1.5em;
+  color: #2A3E5F;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+}
+
+.listedItems{
+  line-height: 1.5em ;
+}
+
 
 body {
   background-size: cover;
   background: radial-gradient(circle at 50% 50%, rgba(35, 92, 113, 1) 0%, rgba(245, 222, 179, 1) 100%) no-repeat fixed;
 
-  font-family: "Raleway", sans-serif;
+  //font-family: Asap, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;

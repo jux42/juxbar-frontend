@@ -2,13 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PersonalCocktailService} from "../../services/cocktailService";
 import {Router} from "@angular/router";
-import {last, map, Observable, tap} from "rxjs";
+import {catchError, last, map, Observable, of, tap} from "rxjs";
 import {Cocktail} from "../../models/cocktail";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {CocktailComponent} from "../../../drinks/cocktails/components/cocktail/cocktail.component";
 import {environment} from "../../../../environments/environment";
 import {IngredientService} from "../../services/ingredientService";
 import {Ingredient} from "../../models/ingredient";
+import {MagicNumerFileValidationService} from "../../services/magic-numer-file-validation.service";
+import {PersonalCocktail} from "../../models/personal-cocktail";
 
 @Component({
   selector: 'app-personal-cocktail-creation-page',
@@ -33,13 +35,15 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
   personalCocktailForm!: FormGroup;
   username!: string | null;
   urlRegex!: RegExp;
-  cocktailPreview$!: Observable<Cocktail>;
+  cocktailPreview$!: Observable<PersonalCocktail>;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
   protected readonly environment = environment;
   protected readonly last = last;
+  selectedFile!: File;
+  imagePreview: string | null = null;
 
-  constructor(private formBuilder: FormBuilder, private personalCocktailService: PersonalCocktailService, private router: Router, private ingredientService: IngredientService) {
+  constructor(private formBuilder: FormBuilder,private magicNumberValidationService : MagicNumerFileValidationService,  private personalCocktailService: PersonalCocktailService, private router: Router, private ingredientService: IngredientService) {
   }
 
   ngOnInit() {
@@ -52,7 +56,7 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
 
     this.personalCocktailForm = this.formBuilder.group({
       strDrink: ['', Validators.required],
-      strDrinkThumb: ['', [Validators.pattern(this.urlRegex)]],
+      localImage: Blob,
       strIngredient1: ['',],
       strIngredient2: ['',],
       strIngredient3: ['',],
@@ -76,6 +80,7 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
       console.error('Username is not defined');
       return;
     }
+
     const cocktailData = {
       ...this.personalCocktailForm.value,
       ownerName: sessionStorage.getItem('username')
@@ -83,9 +88,48 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
     console.log(cocktailData)
 
     this.personalCocktailService.savePersonalCocktail(cocktailData).pipe(
-      tap(() => this.router.navigateByUrl('juxbar/profile')))
-      .subscribe();
+      tap(() => {
+        if (this.selectedFile) {
+          this.magicNumberValidationService.validateFile(this.selectedFile).pipe(
+            catchError((error) => {
+              console.error("Image validation failed", error);
+              return of(false);
+            }),
+            tap((isValid) => {
+              if (isValid) {
+                this.personalCocktailService.savePersonalCocktailImage(cocktailData.strDrink, this.selectedFile)
+                  .subscribe(() => this.router.navigateByUrl('juxbar/profile'));
+              }
+            })
+          ).subscribe();
+        } else {
+          this.router.navigateByUrl('juxbar/profile');
+        }
+      })
+    ).subscribe();
+
+
   }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(this.selectedFile);
+      reader.onload = () => {
+        const arrayBuffer = reader.result as ArrayBuffer;
+        const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+
+        const objectURL = URL.createObjectURL(blob);
+        this.imagePreview = objectURL;
+      };
+
+    }
+  }
+
 
   truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {

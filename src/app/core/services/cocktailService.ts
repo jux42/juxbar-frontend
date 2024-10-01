@@ -177,6 +177,13 @@ export class PersonalCocktailService {
     return this.http.post(`${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
   }
 
+  savePersonalCocktailImage(cocktailName: string, blob: Blob): Observable<any> {
+       return this.http.post(`${environment.apiUrl}/user/personalcocktail/image/${cocktailName}`, blob, {
+      headers: { 'Content-Type': 'application/octet-stream' },
+      responseType: 'text'
+    });
+  }
+
   deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
   }
