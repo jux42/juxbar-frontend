@@ -6,6 +6,7 @@ import {CocktailListComponent} from "./drinks/cocktails/components/cocktail-list
 import {CocktailHomepageComponent} from "./homepages/cocktail-homepage/cocktail-homepage.component";
 import {SoftdrinkHomepageComponent} from "./homepages/softdrink-homepage/softdrink-homepage.component";
 import {AdminPageComponent} from "./admin/admin-page/admin-page.component";
+import {RegisterComponent} from "./core/register/register.component";
 
 export const routes: Routes = [
 
@@ -23,6 +24,10 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [authGuard],
     data: {animation: 'ProfilePage'}
+  },
+  {
+    path: 'juxbar/register',
+    component: RegisterComponent
   },
   {
     path: 'juxbar/admin',

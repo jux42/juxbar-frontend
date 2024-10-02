@@ -1,0 +1,25 @@
+  <div class="login-container">
+  <h2>Créer un compte</h2>
+    <form #accountForm="ngForm" (submit)="onCreateAccount(accountForm)" class="login-form">
+      <div>
+        <input [(ngModel)]="username" name="username" required type="text" placeholder="Pseudo">
+      </div>
+      <div>
+        <input [(ngModel)]="password" name="password" required type="password" placeholder="Mot de passe">
+      </div>
+      <div>
+        <input [(ngModel)]="confirmPassword" name="confirmPassword" required type="password" placeholder="Confirmez le mot de passe">
+      </div>
+      <div>
+        <select [(ngModel)]="secretQuestion" name="secretQuestion" required>
+          <option value="" disabled selected>Sélectionnez une question</option>
+          <option *ngFor="let question of secretQuestions" [value]="question">{{ question }}</option>
+        </select>
+      </div>
+      <div>
+        <input [(ngModel)]="secretAnswer" name="secretAnswer" required type="text" placeholder="Réponse">
+      </div>
+      <button type="submit">Créer un compte</button>
+      <p *ngIf="message">{{ message }}</p>
+    </form>
+  </div>

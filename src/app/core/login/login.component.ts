@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthRequest, AuthService} from './auth-service';
 import {FormsModule} from "@angular/forms";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import {AsyncPipe, NgIf} from "@angular/common";
   imports: [
     FormsModule,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    ForgotPasswordComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
@@ -18,7 +20,7 @@ import {AsyncPipe, NgIf} from "@angular/common";
 export class LoginComponent implements OnInit {
   credentials: AuthRequest = {username: '', password: ''};
   message: string = '';
-
+  forgotPasswordVisible: boolean = false;
 
   constructor(protected authService: AuthService, private router: Router, private route: ActivatedRoute) {
     console.log('Constructor: credentials', this.credentials);
@@ -64,4 +66,16 @@ export class LoginComponent implements OnInit {
     this.authService.logout();
 
   }
+
+  onCreateAccount(): void {
+    this.router.navigate(['juxbar/register']);
+  }
+
+  toggleForgotPasswordForm(): void {
+    this.forgotPasswordVisible = !this.forgotPasswordVisible;
+  }
+
+
 }
+
+

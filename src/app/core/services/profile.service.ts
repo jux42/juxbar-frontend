@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {JuxbarUser} from "../models/juxbar-user";
 import {BehaviorSubject, Observable, of} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,16 @@ export class ProfileService {
     const params = new HttpParams().set('newPassword', newPassword);
     return newPassword.length < 6 ? of("password must contain at least 6 characters")
       :this.http.put<string>(`${environment.apiUrl}/user/${username}/password`, params, {responseType: 'text' as 'json'});
+  }
+
+  createAccount(username: string, secretQuestion: string, secretAnswer: string, password: string): Observable<string> {
+    const params = new HttpParams()
+      .set('username', username)
+      .set('secretQuestion', secretQuestion)
+      .set('secretAnswer', secretAnswer)
+      .set('password', password);
+
+    return this.http.post(`${environment.apiUrl}/register`, null, { params, responseType: 'text' });
   }
 
 }
