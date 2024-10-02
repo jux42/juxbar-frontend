@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'juxbar/register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: 'juxbar/admin',
