@@ -144,7 +144,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfilePicture() {
-    return this.profileService.getProfilPicture().pipe(
+    return this.profileService.getProfilePicture().pipe(
       map((picture) => {
         this.juxbarUser.profilePicture = picture;
       })
@@ -191,7 +191,6 @@ export class ProfileComponent implements OnInit {
     this.authService.getUsername().subscribe(username => {
       if (username) {
         this.softDrinkService.getFavouriteSoftDrinks()?.subscribe({
-
           next: (favSoftDrinks) => {
             if (!favSoftDrinks) favSoftDrinks = [];
             this.favouriteSoftDrinks = favSoftDrinks;
@@ -265,7 +264,7 @@ export class ProfileComponent implements OnInit {
           } else {
             console.warn('text is not secured.');
             alert('this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)')
-            return of({ error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)' });
+            return of({error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)'});
           }
         })
       ).subscribe({
@@ -308,7 +307,7 @@ export class ProfileComponent implements OnInit {
           reader.readAsArrayBuffer(this.selectedFile);
           reader.onload = () => {
             const arrayBuffer = reader.result as ArrayBuffer;
-            const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+            const blob = new Blob([arrayBuffer], {type: this.selectedFile?.type});
 
             this.profileService.updateProfilePicture(blob).subscribe({
               next: (response) => {
