@@ -110,6 +110,7 @@ export class UserManagementComponent implements OnInit {
   async onDeactivate(){
     try{
       const response = await firstValueFrom(this.adminService.deactivate(this.detailedUser.username));
+      console.log(response);
       alert(`${response}`);
       this.detailedUser.active = false;
       this.cdr.detectChanges();

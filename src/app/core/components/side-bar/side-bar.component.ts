@@ -59,9 +59,9 @@ export class SideBarComponent implements OnInit {
 
     this.getArraySize();
     //TODO: ID de référence aligné sur l'ID max en BDD ==> créer une méthode pour récupérer ID max
-    this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDayId(569);
+    this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDay(569);
     console.log(this.cocktailOfTheDayId)
-    this.cocktailService.getOneCocktailById(this.cocktailOfTheDayId).pipe(
+    this.cocktailService.getOneById('cocktail',this.cocktailOfTheDayId).pipe(
       map(
         data => this.cocktail = data
       )
@@ -131,21 +131,7 @@ export class SideBarComponent implements OnInit {
     this.router.navigate(['juxbar/profile/createcocktail']);
   }
 
-  onDevUpdate() {
-    forkJoin(this.cocktailService.updateAllListsFromExtAPI()).subscribe(
-      (responses) => {
-        responses.forEach(response => {
-          console.log(response); // Log each response
-          alert(`Update successful: ${response}`);
 
-        });
-      },
-      (error) => {
-        console.error('An error occurred:', error);
-        alert(`An error occurred: ${error.message}`);
-      }
-    );
-  }
 
   async onListUsers() {
 

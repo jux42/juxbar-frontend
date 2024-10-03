@@ -1,126 +1,30 @@
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {map, Observable, of, shareReplay, switchMap, tap} from "rxjs";
 import {Cocktail} from "../models/cocktail";
+import {GenericDrinkService} from "./generic-drink.service";
+import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {PersonalCocktail} from "../models/personal-cocktail";
 import {AuthService} from "../login/auth-service";
-import {take} from "rxjs/operators";
-import {State} from "../models/state";
+import {SoftDrink} from "../models/softDrink";
 
 @Injectable({
   providedIn: 'root'
 
 })
 
-export class CocktailService {
+export class CocktailService extends GenericDrinkService<Cocktail> {
 
-  private favouriteCocktails$ = this.getFavouriteCocktails().pipe(
-    shareReplay(1)
-  );
-  private allCocktails$ = this.getAllCocktails().pipe(
-    shareReplay(1)
-  );
-
-  constructor(private http: HttpClient, private authService: AuthService) {
-  }
-
-  getAllCocktails(): Observable<Cocktail[]> {
-
-    return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`)
+  constructor(http: HttpClient, authService: AuthService) {
+    super(http, authService);
   }
 
   getCocktailsArraySize():Observable<number>{
     return this.http.get<number>(`${environment.apiUrl}/cocktails/arraysize`);
   }
-
-  getCocktailsPaginated(page: number = 0, limit: number = 10): Observable<Cocktail[]> {
-    let params = new HttpParams()
-      .set('page', String(page))
-      .set('size', String(limit));
-
-    return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`, {params});
-  }
-
-  getAllCocktailsCached() {
-    return this.allCocktails$.pipe();
-  }
-
-
-  getOneCocktailById(id: number): Observable<Cocktail> {
-
-    return this.http.get<Cocktail>(`${environment.apiUrl}/cocktail/${id}`);
-
-  }
-
-  getCocktailsByIngredient(ingredient: string): Observable<Cocktail[]> {
-    console.log(ingredient);
-
-    return this.http.get<Cocktail[]>(`${environment.apiUrl}/cocktails`).pipe(
-      map(cocktails => cocktails.filter(cocktail =>
-        Object.values(cocktail).slice(0, 12).includes(ingredient) ||
-        Object.values(cocktail).slice(0, 12).includes(ingredient.replace(/\b\w{3,}\b/g, word =>
-          word.replace(/^\w/, first => first.toLocaleUpperCase()))) ||
-        Object.values(cocktail).slice(0, 12).includes(ingredient.toLowerCase()))
-      )
-    );
-  }
-
-  getFavouriteCocktails(): Observable<Cocktail[]> {
-    return this.authService.getUsername().pipe(
-      take(1),
-      switchMap(username => {
-        if (username) {
-          const url = `${environment.apiUrl}/user/favouritecocktails`;
-          return this.http.get<Cocktail[]>(url).pipe(
-            tap(favCocktails => {
-              sessionStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
-            })
-          );
-        } else {
-          return of([]);
-        }
-      })
-    );
-  }
-
-  addFavouriteCocktail(id: number): Observable<String> {
-    const url = `${environment.apiUrl}/user/favouritecocktail/${id}`;
-    return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
-  }
-
-  removeFavouriteCocktail(id: number): Observable<String> {
-    const url = `${environment.apiUrl}/user/rmfavouritecocktail/${id}`;
-    return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
-  }
-
-
-  getFavouriteCocktailsCached(): Observable<Cocktail[]> {
-    return this.favouriteCocktails$;
-  }
-
-  getCocktailOfTheDayId(maxId: number): number {
+  getCocktailOfTheDay(maxId: number): number {
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    //TODO créer méthode backend pour récup tableau ID
     return this.pseudoRandomNumber(seed, 1, maxId);
-  }
-
-  updateAllListsFromExtAPI() {
-    return [
-      this.http.get<string>(`${environment.apiUrl}/cocktails/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/cocktails/downloadimages`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/cocktails/downloadpreviews`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/softdrinks/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/softDrinks/downloadimages`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/softdrinks/downloadpreviews`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/ingredients/download`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/ingredients/downloadimages`, {responseType: 'text' as 'json'}),
-      this.http.get<string>(`${environment.apiUrl}/ingredients/downloadpreviews`, {responseType: 'text' as 'json'}),
-
-
-    ]
-
   }
 
   private pseudoRandomNumber(seed: number, min: number, max: number): number {
@@ -128,69 +32,15 @@ export class CocktailService {
     return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
   }
 
-}
-
-
-@Injectable({
-  providedIn: 'root'
-
-})
-export class PersonalCocktailService {
-  constructor(private http: HttpClient, private authService: AuthService) {
+  getFavouriteCocktails(): Observable<SoftDrink[]> {
+    return this.http.get<Cocktail[]>(`${environment.apiUrl}/user/favouritecocktails`);
   }
 
-  getAllPersonalCocktails(): Observable<PersonalCocktail[]> {
-    return this.authService.getUsername().pipe(
-      take(1),
-      switchMap(username => {
-        if (username) {
-          const url = `${environment.apiUrl}/user/personalcocktails`;
-          return this.http.get<PersonalCocktail[]>(url).pipe(
-            map(cocktails => cocktails.map(cocktail => {
-              cocktail.state = cocktail.state || State.SHOWED;
-              return cocktail;
-            })))
-        } else
-          return of([]);
-      })
-    );
+  addFavouriteCocktail(id: number): Observable<String> {
+    return this.addFavorite('user/favouritecocktail', id);
   }
 
-  getPersonalCocktailsOfUser(username: string): Observable<PersonalCocktail[]> {
-
-
-          const url = `${environment.apiUrl}/user/personalcocktails?username=${username}`;
-          return this.http.post<PersonalCocktail[]>(url, username)
+  removeFavouriteCocktail(id: number): Observable<String> {
+    return this.removeFavorite('user/rmfavouritecocktail', id);
   }
-
-
-  getOnePersonalCocktailById(id: number): Observable<PersonalCocktail> {
-
-    return this.http.get<PersonalCocktail>(`${environment.apiUrl}/user/personalcocktail/${id}`);
-
-  }
-
-
-  savePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
-
-
-    return this.http.post(`${environment.apiUrl}/user/personalcocktail`, personalCocktail, {responseType: 'text' as 'json'});
-  }
-
-  savePersonalCocktailImage(cocktailName: string, blob: Blob): Observable<any> {
-       return this.http.post(`${environment.apiUrl}/user/personalcocktail/image/${cocktailName}`, blob, {
-      headers: { 'Content-Type': 'application/octet-stream' },
-      responseType: 'text'
-    });
-  }
-
-  deletePersonalCocktail(personalCocktail: PersonalCocktail): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/user/personalcocktail/${personalCocktail.id}`, {responseType: 'text' as 'json'});
-  }
-
-  trashPersonalCocktail(personalCocktail: PersonalCocktail): Observable<string> {
-    return this.http.put(`${environment.apiUrl}/user/personalcocktail/trash/${personalCocktail.id}`, {}, {responseType: 'text'});
-
-  }
-
 }

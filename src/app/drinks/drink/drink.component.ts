@@ -12,9 +12,9 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./drink.component.scss']
 })
 export class DrinkComponent implements OnInit, OnDestroy {
-  @Input() drink!: any;
-  @Input() drinkType!: string;
-  @Input() favouritesKey!: string;
+  @Input() drink!: any;  // 'drink' peut être un Cocktail ou un SoftDrink
+  @Input() drinkType!: string; // 'cocktail' ou 'softdrink'
+  @Input() favouritesKey!: string; // Clé pour le local storage (par exemple, 'favouritecocktails' ou 'favouritesoftdrinks')
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
   mouseIsOn: boolean = false;
