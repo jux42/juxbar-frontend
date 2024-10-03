@@ -62,32 +62,26 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   checkFavourites() {
     let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
+    // console.log(userFav);
     this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
   }
 
   onAddFavouriteCocktail(cocktail: Cocktail): void {
     if (sessionStorage.getItem('username') == null) {
-      this.router.navigate(['/login']);
-
+      this.router.navigate(['/login']).then(r =>r );
     } else {
-
       if (!this.isFavourite) {
         let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
-        this.cocktailService.addFavouriteCocktail(cocktail.id).subscribe(
-          fav => {
-            this.isFavourite = true;
-          }
-        );
+        this.cocktailService.addFavouriteCocktail(cocktail.id).subscribe(() => {
+          this.isFavourite = true;
+        });
         userFav.push(this.cocktail);
         sessionStorage.setItem('favouritecocktails', JSON.stringify(userFav));
       } else {
-        alert("This is already a fav");
+        alert("This is already a favourite.");
       }
       this.checkFavourites();
-      this.cdr.detectChanges();
-
     }
-
   }
 
   onMouseEnter() {
@@ -103,22 +97,17 @@ export class CocktailComponent implements OnInit, OnDestroy {
   onRemoveFavouriteCocktail(cocktail: Cocktail): void {
     if (this.isFavourite) {
       let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
-      this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(
-        fav => {
-          this.isFavourite = false;
-          this.favouriteService.announceFavouriteRemoved(cocktail.id, 'cocktail');
-        }
-      );
+      this.cocktailService.removeFavouriteCocktail(cocktail.id).subscribe(() => {
+        this.isFavourite = false;
+        this.favouriteService.announceFavouriteRemoved(cocktail.id, 'cocktail');
+      });
 
-      const filteredFavs = userFav.filter((fav: Cocktail) => {
-        fav != cocktail
-      })
+      const filteredFavs = userFav.filter((fav: Cocktail) => fav.id !== cocktail.id);
       sessionStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
     } else {
-      alert("This is NOT a fav yet");
+      alert(`This is not a favourite yet.`);
     }
     this.checkFavourites();
-    this.cdr.detectChanges();
   }
 
   truncateText(text: string, maxLength: number): string {
@@ -147,7 +136,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
         ingredients.push(ingredient);
       }
     }
+
     return ingredients;
   }
-
 }

@@ -40,7 +40,7 @@ export class ProfileService {
   }
 
 
-  getProfilePicture() {
+  getProfilPicture() {
     return this.http.get(`${environment.apiUrl}/user/mypicture`,{ responseType: 'arraybuffer' });
   }
 

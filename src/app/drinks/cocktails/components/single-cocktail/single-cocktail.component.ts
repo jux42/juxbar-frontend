@@ -89,7 +89,7 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
       const filteredFavs = userFav.filter((fav: Cocktail) => fav.id !== cocktail.id);
       sessionStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
     } else {
-      alert(`This is not a favourite yet.`);
+      alert("This is not a favourite yet.");
     }
     this.checkFavourites();
   }
