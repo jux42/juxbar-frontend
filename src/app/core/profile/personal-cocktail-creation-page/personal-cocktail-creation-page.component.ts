@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {PersonalCocktailService} from "../../services/cocktailService";
 import {Router} from "@angular/router";
 import {catchError, last, map, Observable, of, tap} from "rxjs";
 import {Cocktail} from "../../models/cocktail";
@@ -11,6 +10,7 @@ import {IngredientService} from "../../services/ingredientService";
 import {Ingredient} from "../../models/ingredient";
 import {MagicNumerFileValidationService} from "../../services/magic-numer-file-validation.service";
 import {PersonalCocktail} from "../../models/personal-cocktail";
+import {PersonalCocktailService} from "../../services/personal-cocktail.service";
 
 @Component({
   selector: 'app-personal-cocktail-creation-page',

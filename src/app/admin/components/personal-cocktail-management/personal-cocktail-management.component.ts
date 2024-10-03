@@ -5,10 +5,10 @@ import {map} from "rxjs/operators";
 import {AdminService} from "../../../core/services/admin.service";
 import {JuxbarUser} from "../../../core/models/juxbar-user";
 import {PersonalCocktail} from "../../../core/models/personal-cocktail";
-import {PersonalCocktailService} from "../../../core/services/cocktailService";
 import {State} from "../../../core/models/state";
 import {firstValueFrom} from "rxjs";
 import {environment} from "../../../../environments/environment";
+import {PersonalCocktailService} from "../../../core/services/personal-cocktail.service";
 
 @Component({
   selector: 'app-personal-cocktail-management',
@@ -62,12 +62,12 @@ export class PersonalCocktailManagementComponent implements OnInit {
   loadPersonalCocktails(username: string) {
     this.isLoading = true;
     this.personalCocktailService.getPersonalCocktailsOfUser(username).subscribe({
-      next: (cocktails) => {
+      next: (cocktails: PersonalCocktail[]) => {
         this.personalCocktails = cocktails;
         this.isLoading = false;
         this.cdr.detectChanges();
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading personal cocktails:', error);
         this.isLoading = false;
       }

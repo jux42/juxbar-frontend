@@ -74,11 +74,14 @@ export class AccountManagerComponent implements OnInit {
   handleConfirmation(result: boolean) {
     this.showDeleteModal = false;
     if (result) {
-      this.deleteConfirmed().then(r => this.route.navigate(['login']) );
+      this.deleteConfirmed().then(r =>
+        this.route.navigate(['login'])
+      );
     } else {
+      return;
     }
   }
-  
+
   async deleteConfirmed() {
     const username = sessionStorage.getItem("username");
     if (username) {

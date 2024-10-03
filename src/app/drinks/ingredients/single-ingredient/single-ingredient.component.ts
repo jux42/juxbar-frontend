@@ -54,8 +54,8 @@ export class SingleIngredientComponent implements OnInit {
 
     const strIngredient: string = this.route.snapshot.params['strIngredient'];
     this.ingredientService.getOneIngredientByName(strIngredient).subscribe(data => {
-        this.cocktails$ = this.cocktailService.getCocktailsByIngredient(strIngredient);
-        this.softDrinks$ = this.softDrinkService.getSoftDrinkByIngredient(strIngredient);
+        this.cocktails$ = this.cocktailService.getByIngredient('cocktails', strIngredient);
+        this.softDrinks$ = this.softDrinkService.getByIngredient('softdrinks',strIngredient);
         this.ingredient = data;
 
 

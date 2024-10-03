@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {environment} from "../../../environments/environment";
-import {PersonalCocktailService} from "../../core/services/cocktailService";
+import {PersonalCocktailService} from "../../core/services/personal-cocktail.service";
 
 @Component({
   selector: 'app-personalCocktail',
@@ -75,7 +75,7 @@ export class PersonalCocktailComponent implements OnInit {
 
   onDeleteCocktail(personalCocktail: PersonalCocktail) {
     this.personalCocktailService.deletePersonalCocktail(personalCocktail).subscribe(
-      value => {
+        (value: any) => {
         console.log(value);
         window.location.reload();
       }
@@ -84,7 +84,7 @@ export class PersonalCocktailComponent implements OnInit {
 
   onTrashCocktail(personalCocktail: PersonalCocktail) {
     this.personalCocktailService.trashPersonalCocktail(personalCocktail).subscribe(
-      value => {
+        (value: any) => {
         console.log(value);
         window.location.reload();
       }

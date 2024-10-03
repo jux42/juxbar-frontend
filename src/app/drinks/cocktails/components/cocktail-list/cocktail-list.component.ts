@@ -61,7 +61,7 @@ export class CocktailListComponent implements OnInit {
   ngOnInit() {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
 
-    this.cocktailService.getCocktailsPaginated().pipe(
+    this.cocktailService.getPaginated('cocktails').pipe(
       takeUntil(this.destroy$),
       tap(data => this.cocktailsSubject.next(data)),
       finalize(() => this.isLoading = false)

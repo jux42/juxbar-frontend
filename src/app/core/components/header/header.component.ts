@@ -56,8 +56,9 @@ export class HeaderComponent implements OnInit {
   handleConfirmation(result: boolean) {
     this.showModal = false;
     if (result) {
-      this.goLogout()
+      this.goLogout();
     } else {
+      return;
     }
   }
 

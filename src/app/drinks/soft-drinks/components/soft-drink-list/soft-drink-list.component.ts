@@ -63,7 +63,7 @@ export class SoftDrinkListComponent implements OnInit {
 
     });
 
-    this.softDrinkService.getAllSoftDrinks().subscribe(data => {
+    this.softDrinkService.getAll('softdrinks').subscribe(data => {
       this.softDrinksSubject.next(data)
 
     });
