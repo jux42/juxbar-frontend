@@ -65,26 +65,19 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   onAddFavouriteSoftDrink(softDrink: SoftDrink): void {
     if (sessionStorage.getItem('username') == null) {
       this.router.navigate(['/login']);
-
     } else {
-
       if (!this.isFavourite) {
         let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
-        this.softDrinkService.addFavouriteSoftDrink(softDrink.id).subscribe(
-          fav => {
-            this.isFavourite = true;
-          }
-        );
+        this.softDrinkService.addFavouriteSoftDrink(softDrink.id).subscribe(() => {
+          this.isFavourite = true;
+        });
         userFav.push(this.softDrink);
         sessionStorage.setItem('favouritesoftdrinks', JSON.stringify(userFav));
       } else {
-        alert("This is already a fav");
+        alert("This is already a favourite.");
       }
       this.checkFavourites();
-      this.cdr.detectChanges();
-
     }
-
   }
 
   onMouseEnter() {
@@ -100,21 +93,17 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {
     if (this.isFavourite) {
       let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
-      this.softDrinkService.removeFavouriteSoftDrink(softDrink.id).subscribe(
-        fav => {
-          this.isFavourite = false;
-          this.favouriteService.announceFavouriteRemoved(softDrink.id, 'softDrink');
-        }
-      );
-      const filteredFavs = userFav.filter((fav: SoftDrink) => {
-        fav != softDrink
-      })
+      this.softDrinkService.removeFavouriteSoftDrink(softDrink.id).subscribe(() => {
+        this.isFavourite = false;
+        this.favouriteService.announceFavouriteRemoved(softDrink.id, 'softDrink');
+      });
+
+      const filteredFavs = userFav.filter((fav: SoftDrink) => fav.id !== softDrink.id);
       sessionStorage.setItem('favouritesoftdrinks', JSON.stringify(filteredFavs));
     } else {
-      alert("This is NOT a fav yet");
+      alert("This is not a favourite yet.");
     }
     this.checkFavourites();
-    this.cdr.detectChanges();
   }
 
   truncateText(text: string, maxLength: number): string {

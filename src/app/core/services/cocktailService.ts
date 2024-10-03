@@ -2,10 +2,11 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Cocktail} from "../models/cocktail";
 import {GenericDrinkService} from "./generic-drink.service";
-import {Observable} from "rxjs";
+import {Observable, of, switchMap, tap} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {AuthService} from "../login/auth-service";
 import {SoftDrink} from "../models/softDrink";
+import {take} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,20 @@ export class CocktailService extends GenericDrinkService<Cocktail> {
   }
 
   getFavouriteCocktails(): Observable<SoftDrink[]> {
-    return this.http.get<Cocktail[]>(`${environment.apiUrl}/user/favouritecocktails`);
+    return this.authService.getUsername().pipe(
+      take(1),
+      switchMap(username => {
+        if (username) {
+          const url = `${environment.apiUrl}/user/favouritecocktails`;
+          return this.http.get<Cocktail[]>(url).pipe(
+            tap(favDrinks => {
+              sessionStorage.setItem("favouritecocktails", JSON.stringify(favDrinks));
+            })
+          );
+        } else
+          return of([]);
+      })
+    );
   }
 
   addFavouriteCocktail(id: number): Observable<String> {

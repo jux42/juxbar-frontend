@@ -11,7 +11,7 @@ import {Cocktail} from "../models/cocktail";
 })
 export class GenericDrinkService<T> {
 
-  constructor(protected http: HttpClient, private authService: AuthService) {}
+  constructor(protected http: HttpClient, protected authService: AuthService) {}
 
   getAll(endpoint: string): Observable<T[]> {
     return this.http.get<T[]>(`${environment.apiUrl}/${endpoint}`);
