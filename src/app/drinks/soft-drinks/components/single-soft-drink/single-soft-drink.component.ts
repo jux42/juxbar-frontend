@@ -39,7 +39,7 @@ export class SingleSoftDrinkComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.id = this.route.snapshot.params["id"];
-    this.softDrinkService.getOneSoftDrinkById(this.id).subscribe(data => {
+    this.softDrinkService.getOneById('softdrink',this.id).subscribe(data => {
       this.softDrink = data;
       this.checkFavourites();
     });
@@ -76,7 +76,7 @@ export class SingleSoftDrinkComponent implements OnInit, OnDestroy {
   onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {
     if (this.isFavourite) {
       let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
-      this.softDrinkService.removeFavouriteCocktail(softDrink.id).subscribe(() => {
+      this.softDrinkService.removeFavouriteSoftDrink(softDrink.id).subscribe(() => {
         this.isFavourite = false;
         this.favouriteService.announceFavouriteRemoved(softDrink.id, 'softDrink');
       });

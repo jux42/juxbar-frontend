@@ -62,7 +62,6 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   checkFavourites() {
     let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
-    // console.log(userFav);
     this.isFavourite = userFav.some((fav: any) => fav.id === this.cocktail.id);
   }
 
@@ -148,7 +147,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
         ingredients.push(ingredient);
       }
     }
-
     return ingredients;
   }
+
 }

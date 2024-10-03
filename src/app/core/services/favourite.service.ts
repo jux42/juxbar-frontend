@@ -11,9 +11,6 @@ export class FavouriteService {
 
   private favouriteRemovedSource = new Subject<{ id: number, type: string }>();
   favouriteRemoved$ = this.favouriteRemovedSource.asObservable();
-  // private favouriteDrink$ = this.getFavouriteDrink().pipe(
-  //   shareReplay(1)
-  // );
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -22,25 +19,6 @@ export class FavouriteService {
     this.favouriteRemovedSource.next({id, type});
   }
 
-
-
-  // getFavouriteDrink(): Observable<Cocktail[]> {
-  //   return this.authService.getUsername().pipe(
-  //     take(1),
-  //     switchMap(username => {
-  //       if (username) {
-  //         const url = `${environment.apiUrl}/user/favouritecocktails`;
-  //         return this.http.get<Cocktail[]>(url).pipe(
-  //           tap(favCocktails => {
-  //             sessionStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
-  //           })
-  //         );
-  //       } else {
-  //         return of([]);
-  //       }
-  //     })
-  //   );
-  // }
 
   addFavouriteDrink(id: number, drinkType: string): Observable<String> {
     const url = `${environment.apiUrl}/user/favouritecocktail/${id}`;
@@ -52,8 +30,4 @@ export class FavouriteService {
     return this.http.put<String>(url, {}, {responseType: 'text' as 'json'});
   }
 
-
-  // getFavouriteCocktailsCached(): Observable<Cocktail[]> {
-  //   return this.favouriteDrink$;
-  // }
 }

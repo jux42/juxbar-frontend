@@ -69,7 +69,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
     } else {
 
       if (!this.isFavourite) {
-        let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');
+        let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
         this.softDrinkService.addFavouriteSoftDrink(softDrink.id).subscribe(
           fav => {
             this.isFavourite = true;
@@ -100,7 +100,7 @@ export class SoftDrinkComponent implements OnInit, OnDestroy {
   onRemoveFavouriteSoftDrink(softDrink: SoftDrink): void {
     if (this.isFavourite) {
       let userFav = JSON.parse(sessionStorage.getItem('favouritesoftdrinks') || '[]');
-      this.softDrinkService.removeFavouriteCocktail(softDrink.id).subscribe(
+      this.softDrinkService.removeFavouriteSoftDrink(softDrink.id).subscribe(
         fav => {
           this.isFavourite = false;
           this.favouriteService.announceFavouriteRemoved(softDrink.id, 'softDrink');

@@ -5,15 +5,18 @@ import {firstValueFrom} from "rxjs";
 import {ProfileService} from "../../services/profile.service";
 import {AuthService} from "../../login/auth-service";
 import {user} from "@angular/fire/auth";
+import {CustomModalComponent} from "../../components/custom-modal/custom-modal.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-account-manager',
   standalone: true,
-    imports: [
-        FormsModule,
-        NgForOf,
-        NgIf
-    ],
+  imports: [
+    FormsModule,
+    NgForOf,
+    NgIf,
+    CustomModalComponent
+  ],
   templateUrl: './account-manager.component.html',
   styleUrl: './account-manager.component.scss'
 })
@@ -22,6 +25,7 @@ export class AccountManagerComponent implements OnInit {
   active!: boolean;
   showOptions: boolean = false;
 
+  deleteAccountWarning: string = "Are you sure you want to delete your account?\nAll you personal data, favourites, and custom cocktails will be erased from our database"
   title: string = 'Confirm Action';
   message: string = 'Are you sure you want to proceed?';
   showDeleteModal: boolean = false;
@@ -29,7 +33,8 @@ export class AccountManagerComponent implements OnInit {
 
   constructor(private profileService: ProfileService,
               private authService: AuthService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private route: Router,) {
   }
 
   ngOnInit(): void {
@@ -66,7 +71,18 @@ export class AccountManagerComponent implements OnInit {
     this.showDeleteModal = false;
   }
 
-  async onDeleteConfirmed() {
+  handleConfirmation(result: boolean) {
+    this.showDeleteModal = false;
+    if (result) {
+      this.deleteConfirmed().then(r =>
+        this.route.navigate(['login'])
+      );
+    } else {
+      return;
+    }
+  }
+
+  async deleteConfirmed() {
     const username = sessionStorage.getItem("username");
     if (username) {
       try {
@@ -79,7 +95,6 @@ export class AccountManagerComponent implements OnInit {
         alert(`An error occurred: ${error}`);
       }
     }
-    this.closeDeleteModal();
   }
 
 

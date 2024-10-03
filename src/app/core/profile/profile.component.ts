@@ -4,7 +4,8 @@ import {Router} from "@angular/router";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {PersonalCocktailComponent} from "../../drinks/personal-cocktail/personal-cocktail.component";
 import {CocktailComponent} from "../../drinks/cocktails/components/cocktail/cocktail.component";
-import {CocktailService, PersonalCocktailService} from "../services/cocktailService";
+import {CocktailService} from "../services/cocktailService";
+import {PersonalCocktailService} from "../services/personal-cocktail.service";
 import {PersonalCocktail} from "../models/personal-cocktail";
 import {FadeInOutAnimation} from "../../animations";
 import {animate, query, stagger, style, transition, trigger} from "@angular/animations";
@@ -144,7 +145,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfilePicture() {
-    return this.profileService.getProfilPicture().pipe(
+    return this.profileService.getProfilePicture().pipe(
       map((picture) => {
         this.juxbarUser.profilePicture = picture;
       })
@@ -171,7 +172,7 @@ export class ProfileComponent implements OnInit {
   loadFavouriteCocktails() {
     this.authService.getUsername().subscribe(username => {
       if (username) {
-        this.cocktailService.getFavouriteCocktails()?.subscribe({
+        this.cocktailService.getFavourite('favouritecocktails')?.subscribe({
 
           next: (favCocktails) => {
             if (!favCocktails) favCocktails = [];
@@ -190,8 +191,7 @@ export class ProfileComponent implements OnInit {
   loadFavouriteSoftDrinks() {
     this.authService.getUsername().subscribe(username => {
       if (username) {
-        this.softDrinkService.getFavouriteSoftDrinks()?.subscribe({
-
+        this.softDrinkService.getFavourite('favouritesoftdrinks')?.subscribe({
           next: (favSoftDrinks) => {
             if (!favSoftDrinks) favSoftDrinks = [];
             this.favouriteSoftDrinks = favSoftDrinks;
@@ -265,7 +265,7 @@ export class ProfileComponent implements OnInit {
           } else {
             console.warn('text is not secured.');
             alert('this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)')
-            return of({ error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)' });
+            return of({error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)'});
           }
         })
       ).subscribe({
@@ -308,7 +308,7 @@ export class ProfileComponent implements OnInit {
           reader.readAsArrayBuffer(this.selectedFile);
           reader.onload = () => {
             const arrayBuffer = reader.result as ArrayBuffer;
-            const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+            const blob = new Blob([arrayBuffer], {type: this.selectedFile?.type});
 
             this.profileService.updateProfilePicture(blob).subscribe({
               next: (response) => {

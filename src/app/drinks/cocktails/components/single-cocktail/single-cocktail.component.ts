@@ -44,7 +44,7 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const id = +this.route.snapshot.params['id'];
-    this.cocktailService.getOneCocktailById(id).subscribe(data => {
+    this.cocktailService.getOneById('cocktail',id).subscribe(data => {
       this.cocktail = data;
       this.checkFavourites();
     });
@@ -89,7 +89,7 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
       const filteredFavs = userFav.filter((fav: Cocktail) => fav.id !== cocktail.id);
       sessionStorage.setItem('favouritecocktails', JSON.stringify(filteredFavs));
     } else {
-      alert("This is not a favourite yet.");
+      alert(`This is not a favourite yet.`);
     }
     this.checkFavourites();
   }

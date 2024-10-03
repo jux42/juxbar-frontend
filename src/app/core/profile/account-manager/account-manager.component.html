@@ -13,16 +13,8 @@
     <h3 class="warning">delete my account</h3>
   <button (click)="openDeleteModal()">DELETE</button>
 
-<!-- Modale de confirmation -->
-<div class="modal-background" *ngIf="showDeleteModal">
-  <div class="modal-content">
-    <h2>Delete Account</h2>
-    <h3>Are you sure you want to delete your account? <br>
-      All you personal data, favourites, and custom cocktails<br>
-      will be erased from our database<span class="warning">This action is irreversible.</span></h3>
-    <div class="modal-buttons">
-      <button class="modal-button" (click)="onDeleteConfirmed()">Yes</button>
-      <button class="modal-button" (click)="closeDeleteModal()">No</button>
-    </div>
-  </div>
-</div>
+<app-custom-modal (confirm)="handleConfirmation($event)" *ngIf="showDeleteModal"
+                  [message] = deleteAccountWarning>
+  <div modal-body>
+    <h3 class="warning">This action is irreversible.</h3>
+  </div></app-custom-modal>
