@@ -12,7 +12,6 @@
       <div class="img-container">
         @if (!imageLoaded[cocktail.id]) {
           <p class="Loader">LOADING</p>
-
         }
 
         <img (click)="goToCocktail()" (load)="imageLoaded[cocktail.id] = true"
