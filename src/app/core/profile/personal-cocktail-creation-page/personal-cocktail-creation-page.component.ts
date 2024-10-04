@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {catchError, last, map, Observable, of, tap} from "rxjs";
-import {Cocktail} from "../../models/cocktail";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage, TitleCasePipe} from "@angular/common";
 import {CocktailComponent} from "../../../drinks/cocktails/components/cocktail/cocktail.component";
 import {environment} from "../../../../environments/environment";

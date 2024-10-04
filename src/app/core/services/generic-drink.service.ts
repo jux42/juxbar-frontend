@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Injectable} from "@angular/core";
 import {Observable, of, switchMap, tap} from "rxjs";
-import { environment } from "../../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {map, take} from "rxjs/operators";
 import {AuthService} from "../login/auth-service";
 import {Cocktail} from "../models/cocktail";

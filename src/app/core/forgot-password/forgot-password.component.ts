@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
-import { PasswordRecoveryService} from "../services/password-recovery.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {PasswordRecoveryService} from "../services/password-recovery.service";
 import {firstValueFrom} from "rxjs";
 import {NgForOf, NgIf} from "@angular/common";
 

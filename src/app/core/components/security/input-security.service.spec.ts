@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { InputSecurityService } from './input-security.service';
+import {InputSecurityService} from './input-security.service';
 
 describe('InputSecurityService', () => {
   let service: InputSecurityService;
