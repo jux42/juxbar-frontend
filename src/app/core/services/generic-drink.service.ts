@@ -9,9 +9,9 @@ import {Cocktail} from "../models/cocktail";
 @Injectable({
   providedIn: 'root'
 })
-export class GenericDrinkService<T> {
+export abstract class GenericDrinkService<T> {
 
-  constructor(protected http: HttpClient, protected authService: AuthService) {}
+  protected constructor(protected http: HttpClient,protected authService: AuthService) {}
 
   getAll(endpoint: string): Observable<T[]> {
     return this.http.get<T[]>(`${environment.apiUrl}/${endpoint}`);
