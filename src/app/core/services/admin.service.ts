@@ -33,7 +33,7 @@ export class AdminService {
   changePassword(username: string, newPassword: string) {
     const params = new HttpParams().set('newPassword', newPassword);
     return newPassword.length < 6 ? of("password must contain at least 6 characters")
-      :this.http.put<string>(`${environment.apiUrl}/admin/userpassword/${username}`, params, {responseType: 'text' as 'json'});
+      : this.http.put<string>(`${environment.apiUrl}/admin/userpassword/${username}`, params, {responseType: 'text' as 'json'});
   }
 
   reactivateUser(username: string) {
@@ -44,12 +44,12 @@ export class AdminService {
     return this.http.get(`${environment.apiUrl}/admin/disable/${username}`, {responseType: 'text' as 'json'});
   }
 
-  restorePersonalCocktail(username: string, id:number){
+  restorePersonalCocktail(username: string, id: number) {
     console.log(id);
     return this.http.get(`${environment.apiUrl}/admin/untrash/${username}/${id}`, {responseType: 'text' as 'json'});
   }
 
-  trashPersonalCocktail(username: string, id:number){
+  trashPersonalCocktail(username: string, id: number) {
     console.log(id);
     return this.http.get(`${environment.apiUrl}/admin/trash/${username}/${id}`, {responseType: 'text' as 'json'});
   }

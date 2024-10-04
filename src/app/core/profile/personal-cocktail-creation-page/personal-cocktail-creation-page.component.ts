@@ -37,12 +37,12 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
   cocktailPreview$!: Observable<PersonalCocktail>;
   ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
-  protected readonly environment = environment;
-  protected readonly last = last;
   selectedFile!: File;
   imagePreview: string | null = null;
+  protected readonly environment = environment;
+  protected readonly last = last;
 
-  constructor(private formBuilder: FormBuilder,private magicNumberValidationService : MagicNumerFileValidationService,  private personalCocktailService: PersonalCocktailService, private router: Router, private ingredientService: IngredientService) {
+  constructor(private formBuilder: FormBuilder, private magicNumberValidationService: MagicNumerFileValidationService, private personalCocktailService: PersonalCocktailService, private router: Router, private ingredientService: IngredientService) {
   }
 
   ngOnInit() {
@@ -120,7 +120,7 @@ export class PersonalCocktailCreationPageComponent implements OnInit {
       reader.readAsArrayBuffer(this.selectedFile);
       reader.onload = () => {
         const arrayBuffer = reader.result as ArrayBuffer;
-        const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+        const blob = new Blob([arrayBuffer], {type: this.selectedFile?.type});
 
         const objectURL = URL.createObjectURL(blob);
         this.imagePreview = objectURL;

@@ -27,8 +27,8 @@ export class SingleSoftDrinkComponent implements OnInit, OnDestroy {
   showModal: boolean = false;
   id!: number;
   isFavourite: boolean = false;
-  private destroy$ = new Subject<void>();
   protected readonly environment = environment;
+  private destroy$ = new Subject<void>();
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -39,7 +39,7 @@ export class SingleSoftDrinkComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.id = this.route.snapshot.params["id"];
-    this.softDrinkService.getOneById('softdrink',this.id).subscribe(data => {
+    this.softDrinkService.getOneById('softdrink', this.id).subscribe(data => {
       this.softDrink = data;
       this.checkFavourites();
     });

@@ -12,11 +12,12 @@
   background-repeat: no-repeat;
 }
 
-.profile-container{
+.profile-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
+
 .user-framescontainer {
   width: 400px;
   margin-right: 0;
@@ -49,7 +50,6 @@
   width: 300px;
   margin-right: 20px;
 }
-
 
 
 .mainFrame {
@@ -148,7 +148,7 @@ div[ngIf='isLoading'] {
   object-fit: cover;
 }
 
-.about{
+.about {
   max-width: 20ch;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -170,7 +170,7 @@ div[ngIf='isLoading'] {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-p{
+p {
   font-weight: 500;
   color: palegoldenrod;
 }
@@ -204,9 +204,9 @@ textarea, input[type="file"] {
   border-radius: 5px;
 }
 
-.modal-h3{
+.modal-h3 {
   text-align: center;
-  color:  goldenrod;
+  color: goldenrod;
   text-shadow: #15404f 10px 10px 10px;
 }
 

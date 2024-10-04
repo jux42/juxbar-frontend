@@ -32,7 +32,8 @@ export class RegisterComponent implements OnInit {
     'Quel est le prénom de votre meilleur ami d’enfance ?'
   ];
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private profileService: ProfileService ) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, private profileService: ProfileService) {
+  }
 
   ngOnInit(): void {
     // this.registerForm = this.formBuilder.group({
@@ -47,14 +48,14 @@ export class RegisterComponent implements OnInit {
   checkPasswords(group: FormGroup) {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { notSame: true };
+    return password === confirmPassword ? null : {notSame: true};
   }
 
   async onCreateAccount(form: any) {
     const {username, secretQuestion, secretAnswer, password} = form.value;
     try {
       const response = await firstValueFrom(this.profileService.createAccount(username, secretQuestion, secretAnswer, password));
-      if (password.length <6) {
+      if (password.length < 6) {
         alert("password must be 6 caracters at least")
         return;
       }

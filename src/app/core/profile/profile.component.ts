@@ -266,7 +266,7 @@ export class ProfileComponent implements OnInit {
           } else {
             console.warn('text is not secured.');
             alert('this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)')
-            return of({ error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)' });
+            return of({error: 'this is not a valid entry. PLease try something else (malicious code injections are obviously not allowed)'});
           }
         })
       ).subscribe({
@@ -309,7 +309,7 @@ export class ProfileComponent implements OnInit {
           reader.readAsArrayBuffer(this.selectedFile);
           reader.onload = () => {
             const arrayBuffer = reader.result as ArrayBuffer;
-            const blob = new Blob([arrayBuffer], { type: this.selectedFile?.type });
+            const blob = new Blob([arrayBuffer], {type: this.selectedFile?.type});
 
             this.profileService.updateProfilePicture(blob).subscribe({
               next: (response) => {

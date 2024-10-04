@@ -36,7 +36,8 @@ export class ForgotPasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private passwordRecoveryService: PasswordRecoveryService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -48,7 +49,7 @@ export class ForgotPasswordComponent implements OnInit {
       alert("password must be 6 characters at least")
       return;
     }
-    if (password != confirmPassword ) {
+    if (password != confirmPassword) {
       alert("passwords do not match")
       return;
     }

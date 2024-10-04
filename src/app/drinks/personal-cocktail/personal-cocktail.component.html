@@ -13,29 +13,29 @@
           <p class="Loader">LOADING</p>
 
         }
-      <div class="img-container">
-        <img (click)="goToCocktail()" (load)="imageLoaded[personalCocktail.id] = true"
-             (mouseenter)="onMouseEnter()"
-             *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
-             [src]="environment.apiUrl+'/user/personalcocktail/image/'+ personalCocktail.id"
-             alt="" class="clickable fadeIn">
+        <div class="img-container">
+          <img (click)="goToCocktail()" (load)="imageLoaded[personalCocktail.id] = true"
+               (mouseenter)="onMouseEnter()"
+               *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
+               [src]="environment.apiUrl+'/user/personalcocktail/image/'+ personalCocktail.id"
+               alt="" class="clickable fadeIn">
+        </div>
       </div>
-    </div>
-    <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
-      <div class="favIcon">
-        <a class="clickable">😁</a>
-        <a (click)="onTrashCocktail(personalCocktail)" class="clickable">🗑</a>
+      <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
+        <div class="favIcon">
+          <a class="clickable">😁</a>
+          <a (click)="onTrashCocktail(personalCocktail)" class="clickable">🗑</a>
 
-      </div>
+        </div>
 
-      <div class="ingBlock">
-        <ng-container *ngFor="let ingredient of getIngredients(personalCocktail); let i = index; let last = last;">
-          <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable">
-            {{ ingredient }}<span *ngIf="!last">, </span>
-          </p>
-        </ng-container>
+        <div class="ingBlock">
+          <ng-container *ngFor="let ingredient of getIngredients(personalCocktail); let i = index; let last = last;">
+            <p [routerLink]="'/juxbar/detailledingredient/' + ingredient" class="ingredient clickable">
+              {{ ingredient }}<span *ngIf="!last">, </span>
+            </p>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

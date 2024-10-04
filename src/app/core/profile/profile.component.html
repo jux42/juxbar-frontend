@@ -18,15 +18,15 @@
             <p class="about">"{{ juxbarUser.aboutMeText }}"</p>
           }
 
-          <button (click)="openEditModal()" >Edit Profile</button>
+          <button (click)="openEditModal()">Edit Profile</button>
           <button (click)="toggleAccountManager()">Manage Account</button>
         </div>
       </div>
 
       <div *ngIf="showAccountManager">
         <div class="frame">
-        <app-account-manager></app-account-manager>
-      </div>
+          <app-account-manager></app-account-manager>
+        </div>
       </div>
     </div>
 
@@ -92,26 +92,26 @@
 <div style="margin-top: 150px"></div>
 
 
-  <div class="modal" *ngIf="showModal">
-    <div class="modal-content">
-      <span class="close" (click)="closeEditModal()">&times;</span>
-      <h2>Edit Profile</h2>
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <span (click)="closeEditModal()" class="close">&times;</span>
+    <h2>Edit Profile</h2>
 
-      <h3 class="modal-h3" >About me :</h3>
-      <form [formGroup]="aboutMeForm" (ngSubmit)="onSubmitAboutMe()">
-        @if (juxbarUser.aboutMeText){
-          <textarea formControlName="aboutMeText" placeholder="{{juxbarUser.aboutMeText}}"></textarea>
-        } @else {
-          <textarea formControlName="aboutMeText" placeholder="Write something about yourself..."></textarea>
-        }
-        <button type="submit">Update About Me</button>
-      </form>
+    <h3 class="modal-h3">About me :</h3>
+    <form (ngSubmit)="onSubmitAboutMe()" [formGroup]="aboutMeForm">
+      @if (juxbarUser.aboutMeText) {
+        <textarea formControlName="aboutMeText" placeholder="{{juxbarUser.aboutMeText}}"></textarea>
+      } @else {
+        <textarea formControlName="aboutMeText" placeholder="Write something about yourself..."></textarea>
+      }
+      <button type="submit">Update About Me</button>
+    </form>
 
-      <form (ngSubmit)="onSubmitProfilePicture()">
-        <h3 class="modal-h3">Profile picture :</h3>
-        <label for="profilePicture"></label>
-        <input type="file" id="profilePicture" (change)="onFileSelected($event)" accept="image/jpeg, image/webp">
-        <button type="submit" [disabled]="!selectedFile">Update Profile Picture</button>
-      </form>
-    </div>
+    <form (ngSubmit)="onSubmitProfilePicture()">
+      <h3 class="modal-h3">Profile picture :</h3>
+      <label for="profilePicture"></label>
+      <input (change)="onFileSelected($event)" accept="image/jpeg, image/webp" id="profilePicture" type="file">
+      <button [disabled]="!selectedFile" type="submit">Update Profile Picture</button>
+    </form>
   </div>
+</div>

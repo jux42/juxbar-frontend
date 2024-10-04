@@ -75,7 +75,7 @@ export class PersonalCocktailComponent implements OnInit {
 
   onDeleteCocktail(personalCocktail: PersonalCocktail) {
     this.personalCocktailService.deletePersonalCocktail(personalCocktail).subscribe(
-        (value: any) => {
+      (value: any) => {
         console.log(value);
         window.location.reload();
       }
@@ -84,7 +84,7 @@ export class PersonalCocktailComponent implements OnInit {
 
   onTrashCocktail(personalCocktail: PersonalCocktail) {
     this.personalCocktailService.trashPersonalCocktail(personalCocktail).subscribe(
-        (value: any) => {
+      (value: any) => {
         console.log(value);
         window.location.reload();
       }

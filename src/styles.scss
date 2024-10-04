@@ -1,10 +1,9 @@
 
-
 .clickable {
   cursor: pointer;
 }
 
-.juxBarTypo{
+.juxBarTypo {
   font-family: "Glass Antiqua", cursive;
   font-weight: 400;
   font-style: normal;
@@ -20,8 +19,8 @@
   text-align: center;
 }
 
-.listedItems{
-  line-height: 1.5em ;
+.listedItems {
+  line-height: 1.5em;
 }
 
 
@@ -60,6 +59,7 @@ button {
   vertical-align: bottom;
   width: 260px;
 }
+
 button:hover {
   opacity: .7;
   backdrop-filter: blur(10px);
@@ -74,7 +74,8 @@ button:hover {
   align-items: center;
   height: 50%;
   background: rgba(cadetblue, 0.2);
-  backdrop-filter: blur(15px) ;  border-radius: 10px;
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
   padding: 20px;
   width: 80vh;
   box-sizing: border-box;
@@ -154,7 +155,8 @@ button:hover {
     font-size: 14px;
   }
 }
-.form-button{
+
+.form-button {
   background: #65243f;
   color: palegoldenrod;
   border: none;

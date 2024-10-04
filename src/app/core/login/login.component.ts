@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       next: () => {
         if (this.credentials.username == 'admin' || this.credentials.username == 'superadmin') {
           this.router.navigate(['juxbar/admin']);
-        }else{
+        } else {
           this.router.navigate(['juxbar/profile']);
         }
       },

@@ -68,7 +68,7 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
   onAddFavouriteCocktail(cocktail: Cocktail): void {
     if (sessionStorage.getItem('username') == null) {
-      this.router.navigate(['/login']).then(r =>r );
+      this.router.navigate(['/login']).then(r => r);
     } else {
       if (!this.isFavourite) {
         let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');

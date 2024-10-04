@@ -8,7 +8,6 @@ export class PersonalCocktail extends Cocktail {
   override idDrink!: string;
 
 
-
   localImage!: ArrayBuffer;
 
   ownerName !: string;

@@ -1,9 +1,9 @@
-
 # Juxbar - Frontend
 
 This project is the frontend of the **Juxbar** application, an Angular-based web app for managing cocktails, soft drinks, and ingredients. The app provides functionalities for browsing, filtering, and viewing details of drinks, managing user profiles, and creating custom drinks. This README will walk you through the project's structure, features, and usage instructions.
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Project Structure](#project-structure)
 - [Main Features](#main-features)
@@ -19,34 +19,44 @@ This project is the frontend of the **Juxbar** application, an Angular-based web
 ## Installation
 
 ### Prerequisites
+
 To run this project, ensure you have the following installed:
+
 - [Node.js](https://nodejs.org/en/download/) (version 16 or higher recommended)
 - [Angular CLI](https://angular.io/cli) (version 15 or higher)
 - A modern web browser (e.g., Chrome, Firefox)
 
 ### Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/juxbar-frontend.git
 cd juxbar-frontend
 ```
 
 ### Install dependencies
+
 ```bash
 npm install
 ```
 
 ### Running the development server
+
 To start a local development server, run:
+
 ```bash
 ng serve
 ```
+
 The application will be available at `http://localhost:4200`.
 
 ### Building the project
+
 To build the project for production:
+
 ```bash
 ng build
 ```
+
 The production files will be located in the `dist/` directory.
 
 ---
@@ -81,6 +91,7 @@ The production files will be located in the `dist/` directory.
 ## Routing
 
 The application uses Angular's built-in routing system. Below are some of the key routes:
+
 - `/` : The landing page.
 - `/login` : The login page.
 - `/juxbar/cocktailhome` : The homepage for cocktails.
@@ -99,23 +110,28 @@ Lazy loading is implemented for several components to improve performance.
 ## Services
 
 ### CocktailService
+
 - **getAllCocktails()** : Fetches all cocktails.
 - **getOneCocktailById(id: number)** : Fetches details of a specific cocktail.
 - **getCocktailsByIngredient(ingredient: string)** : Filters cocktails by ingredient.
 
 ### SoftDrinkService
+
 - **getAllSoftDrinks()** : Fetches all soft drinks.
 - **getOneSoftDrinkById(id: number)** : Fetches details of a specific soft drink.
 - **getSoftDrinksByIngredient(ingredient: string)** : Filters soft drinks by ingredient.
 
 ### IngredientService
+
 - **getAllIngredients()** : Fetches all available ingredients.
 - **getIngredientDetails(ingredient: string)** : Fetches details of a specific ingredient.
 
 ### AuthGuard
+
 - Protects routes that require authentication.
 
 ### AuthService
+
 - Manages authentication and user sessions.
 
 ---
@@ -123,14 +139,17 @@ Lazy loading is implemented for several components to improve performance.
 ## Components
 
 ### Cocktail Components
+
 - **CocktailListComponent** : Displays the list of cocktails with search and filter options.
 - **SingleCocktailComponent** : Displays the details of a selected cocktail, including ingredients.
 
 ### Soft Drink Components
+
 - **SoftDrinkListComponent** : Displays the list of soft drinks with search and filter options.
 - **SingleSoftDrinkComponent** : Displays the details of a selected soft drink, including ingredients.
 
 ### Common Components
+
 - **HeaderComponent** : The main header/navigation bar, conditionally displayed based on the route.
 - **LandingPageComponent** : The main landing page when the app is first loaded.
 - **ProfileComponent** : Displays and manages user profile information.
@@ -142,6 +161,7 @@ All components are modular and use Angular's **standalone component** feature fo
 ## Animations
 
 The project uses custom Angular animations to enhance the user experience. Some key animations include:
+
 - **slideInAnimation** : Used for smooth page transitions.
 - **fadeInAnimation** : Provides a fade-in effect when elements appear on the page.
 
@@ -150,6 +170,7 @@ The project uses custom Angular animations to enhance the user experience. Some 
 ## Contributing
 
 Contributions are welcome! To contribute:
+
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature/your-feature-name`).
 3. Make your changes and commit them (`git commit -m 'Add your feature'`).

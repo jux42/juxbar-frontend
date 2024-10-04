@@ -25,7 +25,6 @@ export class SoftDrinkService extends GenericDrinkService<SoftDrink> {
   }
 
 
-
   addFavouriteSoftDrink(id: number): Observable<String> {
     return this.addFavorite('user/favouritesoftdrink', id);
   }

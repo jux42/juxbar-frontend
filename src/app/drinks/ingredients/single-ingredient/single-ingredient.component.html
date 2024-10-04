@@ -53,7 +53,8 @@
     </ng-template>
 
     <ng-template #hasDescription>
-      <div class="description" [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"></div>
+      <div [innerHTML]="ingredient.strDescription | highlightWords: [ingredient.strIngredient, 'wine', 'rum', 'beer', 'whisky', 'whiskey', 'liquor']"
+           class="description"></div>
     </ng-template>
 
     <ng-template #noDescription>

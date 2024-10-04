@@ -12,16 +12,16 @@
 
 }
 
-h2{
+h2 {
   text-align: center;
   color: #4b0606;
 }
 
-.inputfield{
+.inputfield {
   margin: 3px;
 }
 
-.userSelect{
+.userSelect {
   display: block;
   max-width: calc(100% - 25px);
   margin: 0 auto;
@@ -44,16 +44,18 @@ h2{
 
 }
 
-.form-button{
+.form-button {
 
   margin-top: 10px;
   max-width: 50%;
   height: min-content;
 
 }
-.activeUser{
+
+.activeUser {
   color: #013401;
 }
-.inactiveUser{
+
+.inactiveUser {
   color: #4b0606;
 }

@@ -11,7 +11,8 @@ import {Cocktail} from "../models/cocktail";
 })
 export abstract class GenericDrinkService<T> {
 
-  protected constructor(protected http: HttpClient,protected authService: AuthService) {}
+  protected constructor(protected http: HttpClient, protected authService: AuthService) {
+  }
 
   getAll(endpoint: string): Observable<T[]> {
     return this.http.get<T[]>(`${environment.apiUrl}/${endpoint}`);
@@ -25,11 +26,11 @@ export abstract class GenericDrinkService<T> {
     let params = new HttpParams()
       .set('page', String(page))
       .set('size', String(limit));
-    return this.http.get<T[]>(`${environment.apiUrl}/${endpoint}`, { params });
+    return this.http.get<T[]>(`${environment.apiUrl}/${endpoint}`, {params});
   }
 
   addFavorite(endpoint: string, id: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${endpoint}/${id}`,{}, {responseType:'text' as 'json'});
+    return this.http.put(`${environment.apiUrl}/${endpoint}/${id}`, {}, {responseType: 'text' as 'json'});
   }
 
   getFavourite(endpoint: string): Observable<any> {
@@ -40,10 +41,10 @@ export abstract class GenericDrinkService<T> {
           const url = `${environment.apiUrl}/user/${endpoint}`;
           return this.http.get<Cocktail[]>(url).pipe(
             tap(favCocktails => {
-              if (endpoint == 'user/favouritecocktails'){
+              if (endpoint == 'user/favouritecocktails') {
                 sessionStorage.setItem("favouritecocktails", JSON.stringify(favCocktails));
 
-              }else if(endpoint == 'user/favouritesoftdrinks'){
+              } else if (endpoint == 'user/favouritesoftdrinks') {
                 sessionStorage.setItem("favouritesoftdrinks", JSON.stringify(favCocktails));
               }
             })
@@ -56,7 +57,7 @@ export abstract class GenericDrinkService<T> {
   }
 
   removeFavorite(endpoint: string, id: number): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${endpoint}/${id}`, {}, {responseType:'text' as 'json'}).pipe();
+    return this.http.put(`${environment.apiUrl}/${endpoint}/${id}`, {}, {responseType: 'text' as 'json'}).pipe();
   }
 
   getByIngredient(endpoint: string, ingredient: string): Observable<T[]> {

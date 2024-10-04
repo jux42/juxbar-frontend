@@ -26,13 +26,17 @@ export class UserManagementComponent implements OnInit {
   detailedUser!: JuxbarUser;
   active!: boolean;
   showOptions: boolean = false;
-  constructor(private adminService: AdminService, private cdr: ChangeDetectorRef,) {}
+  protected readonly HTMLSelectElement = HTMLSelectElement;
+
+  constructor(private adminService: AdminService, private cdr: ChangeDetectorRef,) {
+  }
 
   ngOnInit(): void {
     this.loadUsers();
 
 
   }
+
   async onCreateUser(form: any) {
     const {username, password} = form.value;
     try {
@@ -52,7 +56,7 @@ export class UserManagementComponent implements OnInit {
         users.forEach((user) => {
           if (user.username == 'superadmin' || user.username == 'admin') {
             console.log(user.username + ' skipped');
-          }else {
+          } else {
             console.log(user.username, user.active);
             this.juxbarUsers.push(user);
             this.usernames.push(user.username);
@@ -92,37 +96,33 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
-  async onReactivate(){
-    try{
+  async onReactivate() {
+    try {
       const response = await firstValueFrom(this.adminService.reactivateUser(this.detailedUser.username));
       console.log(response);
       alert(`${response}`);
       this.detailedUser.active = true;
       this.cdr.detectChanges();
 
-    }catch (error){
+    } catch (error) {
       console.error('An error occurred while restoring user:', error);
       alert(`An error occurred: ${error}`);
     }
 
   }
 
-  async onDeactivate(){
-    try{
+  async onDeactivate() {
+    try {
       const response = await firstValueFrom(this.adminService.deactivate(this.detailedUser.username));
       console.log(response);
       alert(`${response}`);
       this.detailedUser.active = false;
       this.cdr.detectChanges();
 
-    }catch (error){
+    } catch (error) {
       console.error('An error occurred while disabling user:', error);
       alert(`An error occurred: ${error}`);
     }
 
   }
-
-
-
-  protected readonly HTMLSelectElement = HTMLSelectElement;
 }

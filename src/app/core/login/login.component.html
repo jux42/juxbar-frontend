@@ -1,25 +1,25 @@
 <div class="background-container"></div>
 <div *ngIf="!forgotPasswordVisible" class="login-container">
   <div *ngIf="message"><p class="alert">{{ message }}</p></div>
-<h2 style="color: midnightblue">Please enter your username and password</h2>
+  <h2 style="color: midnightblue">Please enter your username and password</h2>
   <form (submit)="login()" class="login-form" method="post">
     <div>
-      <input [(ngModel)]="credentials.username" name="username" required type="text" placeholder="username">
+      <input [(ngModel)]="credentials.username" name="username" placeholder="username" required type="text">
     </div>
     <div>
-      <input [(ngModel)]="credentials.password" name="password" required type="password" placeholder="password">
+      <input [(ngModel)]="credentials.password" name="password" placeholder="password" required type="password">
     </div>
-    <button type="submit" class="form-button">Login</button>
+    <button class="form-button" type="submit">Login</button>
   </form>
 </div>
 <div *ngIf="!forgotPasswordVisible" class="action-visible">
-<div class="action-link">
-  <p><a (click)="onCreateAccount()" class="clickable">Sign Up</a></p>
-</div>
+  <div class="action-link">
+    <p><a (click)="onCreateAccount()" class="clickable">Sign Up</a></p>
+  </div>
 
-<div class="action-link">
-  <p class="clickable"><a (click)="toggleForgotPasswordForm()">Forgot password ?</a></p>
-</div>
+  <div class="action-link">
+    <p class="clickable"><a (click)="toggleForgotPasswordForm()">Forgot password ?</a></p>
+  </div>
 </div>
 <div *ngIf="forgotPasswordVisible">
   <app-forgot-password></app-forgot-password>

@@ -1,9 +1,9 @@
 <header>
   <div class="titles">
-    <h1 class="juxBarTypo" (click)="goHome()" onkeydown="goHome()">juxBar</h1>
+    <h1 (click)="goHome()" class="juxBarTypo" onkeydown="goHome()">juxBar</h1>
 
-      <h2 *ngIf="((username$ | async) === 'superadmin' || (username$ | async) === 'admin')"
-          class="adminWarning">YOU ARE UNDER ADMIN PRIVILEGE, PLEASE DON'T MESS THINGS UP</h2>
+    <h2 *ngIf="((username$ | async) === 'superadmin' || (username$ | async) === 'admin')"
+        class="adminWarning">YOU ARE UNDER ADMIN PRIVILEGE, PLEASE DON'T MESS THINGS UP</h2>
 
     <nav class="titles">
       <ng-container *ngIf="isLoggedIn | async; then loggedInBlock; else loggedOutBlock"></ng-container>
@@ -17,8 +17,8 @@
           }
           <h3 (click)="showModal = true" class="logout clickable">🚪</h3>
         </div>
-          <app-custom-modal (confirm)="handleConfirmation($event)" *ngIf="showModal"
-                            [message]="'logout: Sure ? ?'"></app-custom-modal>
+        <app-custom-modal (confirm)="handleConfirmation($event)" *ngIf="showModal"
+                          [message]="'logout: Sure ? ?'"></app-custom-modal>
 
       </ng-template>
       <ng-template #loggedOutBlock>
