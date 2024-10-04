@@ -8,7 +8,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {environment} from "../../../../environments/environment";
 import {IngredientService} from "../../services/ingredientService";
 import {FormsModule} from "@angular/forms";
-import {firstValueFrom, forkJoin, map} from "rxjs";
+import {firstValueFrom, map} from "rxjs";
 import {Ingredient} from "../../models/ingredient";
 import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
 import {AdminService} from "../../services/admin.service";

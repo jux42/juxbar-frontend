@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { SoftDrink } from "../models/softDrink";
-import { GenericDrinkService } from "./generic-drink.service";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {SoftDrink} from "../models/softDrink";
+import {GenericDrinkService} from "./generic-drink.service";
 import {Observable, of, switchMap, tap} from "rxjs";
-import { environment } from "../../../environments/environment";
-import {map, take} from "rxjs/operators";
+import {environment} from "../../../environments/environment";
+import {take} from "rxjs/operators";
 import {AuthService} from "../login/auth-service";
 
 @Injectable({

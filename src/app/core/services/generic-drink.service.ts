@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Injectable} from "@angular/core";
 import {Observable, of, switchMap, tap} from "rxjs";
-import { environment } from "../../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {map, take} from "rxjs/operators";
 import {AuthService} from "../login/auth-service";
 import {Cocktail} from "../models/cocktail";
@@ -9,9 +9,9 @@ import {Cocktail} from "../models/cocktail";
 @Injectable({
   providedIn: 'root'
 })
-export class GenericDrinkService<T> {
+export abstract class GenericDrinkService<T> {
 
-  constructor(protected http: HttpClient, protected authService: AuthService) {}
+  protected constructor(protected http: HttpClient,protected authService: AuthService) {}
 
   getAll(endpoint: string): Observable<T[]> {
     return this.http.get<T[]>(`${environment.apiUrl}/${endpoint}`);

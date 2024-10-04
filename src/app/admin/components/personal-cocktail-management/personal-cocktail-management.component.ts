@@ -32,9 +32,9 @@ export class PersonalCocktailManagementComponent implements OnInit {
   isLoading: boolean = true;
 
 
-  constructor(private adminService: AdminService,
-              private cdr: ChangeDetectorRef,
-              private personalCocktailService: PersonalCocktailService ) {
+  constructor(readonly adminService: AdminService,
+              readonly cdr: ChangeDetectorRef,
+              readonly personalCocktailService: PersonalCocktailService ) {
   }
 
   ngOnInit() {
