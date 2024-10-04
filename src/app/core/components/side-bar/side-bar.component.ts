@@ -61,7 +61,7 @@ export class SideBarComponent implements OnInit {
     //TODO: ID de référence aligné sur l'ID max en BDD ==> créer une méthode pour récupérer ID max
     this.cocktailOfTheDayId = this.cocktailService.getCocktailOfTheDay(569);
     console.log(this.cocktailOfTheDayId)
-    this.cocktailService.getOneById('cocktail',this.cocktailOfTheDayId).pipe(
+    this.cocktailService.getOneById('cocktail', this.cocktailOfTheDayId).pipe(
       map(
         data => this.cocktail = data
       )
@@ -90,7 +90,7 @@ export class SideBarComponent implements OnInit {
     });
   }
 
-  getArraySize(){
+  getArraySize() {
     return this.cocktailService.getCocktailsArraySize().pipe(
       map(arraySize => this.multiplier = arraySize),
     ).subscribe()
@@ -132,7 +132,6 @@ export class SideBarComponent implements OnInit {
   }
 
 
-
   async onListUsers() {
 
     try {
@@ -142,7 +141,6 @@ export class SideBarComponent implements OnInit {
       console.error('An error occurred while fetching users:', error);
     }
   }
-
 
 
   reloadComponent(page: string) {

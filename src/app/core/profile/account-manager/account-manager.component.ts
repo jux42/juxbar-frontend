@@ -9,11 +9,11 @@ import {user} from "@angular/fire/auth";
 @Component({
   selector: 'app-account-manager',
   standalone: true,
-    imports: [
-        FormsModule,
-        NgForOf,
-        NgIf
-    ],
+  imports: [
+    FormsModule,
+    NgForOf,
+    NgIf
+  ],
   templateUrl: './account-manager.component.html',
   styleUrl: './account-manager.component.scss'
 })
@@ -25,7 +25,8 @@ export class AccountManagerComponent implements OnInit {
   title: string = 'Confirm Action';
   message: string = 'Are you sure you want to proceed?';
   showDeleteModal: boolean = false;
-
+  protected readonly sessionStorage = sessionStorage;
+  protected readonly user = user;
 
   constructor(private profileService: ProfileService,
               private authService: AuthService,
@@ -35,8 +36,6 @@ export class AccountManagerComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-
 
   async onChangePassword(pwdForm: NgForm) {
     const newPassword = pwdForm.value.newPassword;
@@ -81,8 +80,4 @@ export class AccountManagerComponent implements OnInit {
     }
     this.closeDeleteModal();
   }
-
-
-  protected readonly sessionStorage = sessionStorage;
-  protected readonly user = user;
 }

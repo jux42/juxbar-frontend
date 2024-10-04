@@ -10,13 +10,13 @@
         <label for="strDrink">Name</label>
         <input formControlName="strDrink" id="strDrink" type="text">
       </div>
-<!--      <div class="formGroup">-->
-<!--        <label for="strDrinkThumb">Image URL</label>-->
-<!--        <input formControlName="strDrinkThumb" id="strDrinkThumb" type="text">-->
-<!--      </div>-->
+      <!--      <div class="formGroup">-->
+      <!--        <label for="strDrinkThumb">Image URL</label>-->
+      <!--        <input formControlName="strDrinkThumb" id="strDrinkThumb" type="text">-->
+      <!--      </div>-->
       <div class="formGroup">
         <label for="localImage">Image file</label>
-        <input type="file" id="localImage" (change)="onFileSelected($event)" accept="image/jpeg, image/webp">
+        <input (change)="onFileSelected($event)" accept="image/jpeg, image/webp" id="localImage" type="file">
 
       </div>
       <div class="formGroup">
@@ -132,7 +132,8 @@
           <div class="titleRow">
             <h3>{{ truncateText(cocktail.strDrink | titlecase, 18) }}</h3>
           </div>
-          <img (mouseenter)="onMouseEnter()" [src]="imagePreview || 'default-image-path.jpg'" alt="Cocktail Image" class="clickable">
+          <img (mouseenter)="onMouseEnter()" [src]="imagePreview || 'default-image-path.jpg'" alt="Cocktail Image"
+               class="clickable">
         </div>
         <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
           <div class="favIcon">

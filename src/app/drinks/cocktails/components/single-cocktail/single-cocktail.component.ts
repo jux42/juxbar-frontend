@@ -32,8 +32,8 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
   imageLoaded: { [key: string]: boolean } = {};
   isFavourite: boolean = false;
   mouseIsOn: boolean = false;
-  private destroy$ = new Subject<void>();
   protected readonly environment = environment;
+  private destroy$ = new Subject<void>();
 
   constructor(private cocktailService: CocktailService,
               private route: ActivatedRoute,
@@ -44,7 +44,7 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const id = +this.route.snapshot.params['id'];
-    this.cocktailService.getOneById('cocktail',id).subscribe(data => {
+    this.cocktailService.getOneById('cocktail', id).subscribe(data => {
       this.cocktail = data;
       this.checkFavourites();
     });
@@ -62,7 +62,7 @@ export class SingleCocktailComponent implements OnInit, OnDestroy {
 
   onAddFavouriteCocktail(cocktail: Cocktail): void {
     if (sessionStorage.getItem('username') == null) {
-      this.router.navigate(['/login']).then(r =>r );
+      this.router.navigate(['/login']).then(r => r);
     } else {
       if (!this.isFavourite) {
         let userFav = JSON.parse(sessionStorage.getItem('favouritecocktails') || '[]');

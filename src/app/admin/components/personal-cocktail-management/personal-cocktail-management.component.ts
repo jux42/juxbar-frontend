@@ -28,13 +28,14 @@ export class PersonalCocktailManagementComponent implements OnInit {
   usernames: string[] = [];
   selectedUsername!: string;
   detailedUser!: JuxbarUser;
-  personalCocktails: PersonalCocktail[]= [];
+  personalCocktails: PersonalCocktail[] = [];
   isLoading: boolean = true;
-
+  protected readonly State = State;
+  protected readonly environment = environment;
 
   constructor(readonly adminService: AdminService,
               readonly cdr: ChangeDetectorRef,
-              readonly personalCocktailService: PersonalCocktailService ) {
+              readonly personalCocktailService: PersonalCocktailService) {
   }
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class PersonalCocktailManagementComponent implements OnInit {
         users.forEach((user) => {
           if (user.username == 'superadmin' || user.username == 'admin') {
             console.log(user.username + ' skipped');
-          }else {
+          } else {
             console.log(user.username, user.active);
             this.juxbarUsers.push(user);
             this.usernames.push(user.username);
@@ -84,44 +85,39 @@ export class PersonalCocktailManagementComponent implements OnInit {
     }
   }
 
-  async onRestorePersonalCocktail(id: number){
+  async onRestorePersonalCocktail(id: number) {
     try {
       const response = await firstValueFrom(this.adminService.restorePersonalCocktail(this.selectedUsername, id));
       alert(`${response}`);
-      this.personalCocktails.forEach(c=>{
-        if (c.id == id){
+      this.personalCocktails.forEach(c => {
+        if (c.id == id) {
           c.state = State.SHOWED;
         }
       })
       this.cdr.detectChanges()
-    }catch (error){
+    } catch (error) {
       console.error('An error occurred while restoring cocktail:', error);
       alert(`An error occurred: ${error}`);
     }
 
   }
 
-
-  async onTrashPersonalCocktail(id: number){
+  async onTrashPersonalCocktail(id: number) {
     try {
       const response = await firstValueFrom(this.adminService.trashPersonalCocktail(this.selectedUsername, id));
       alert(`${response}`);
-      this.personalCocktails.forEach(c=>{
-        if (c.id == id){
+      this.personalCocktails.forEach(c => {
+        if (c.id == id) {
           c.state = State.TRASHED;
         }
       })
       this.cdr.detectChanges()
-    }catch (error){
+    } catch (error) {
       console.error('An error occurred while restoring cocktail:', error);
       alert(`An error occurred: ${error}`);
     }
 
   }
-
-
-  protected readonly State = State;
-  protected readonly environment = environment;
 }
 
 

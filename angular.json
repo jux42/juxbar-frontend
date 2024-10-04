@@ -85,17 +85,14 @@
               ]
             }
           },
-
           "defaultConfiguration": "production"
         },
         "serve": {
-
           "options": {
             "ssl": true,
             "sslKey": "src/ssl/key.pem",
             "sslCert": "src/ssl/cert.pem"
           },
-
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -110,9 +107,7 @@
             "ngrok": {
               "buildTarget": "juxBar:build:ngrok"
             }
-
           },
-
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

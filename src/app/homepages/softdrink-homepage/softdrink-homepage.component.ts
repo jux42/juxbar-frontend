@@ -50,13 +50,14 @@ export class SoftdrinkHomepageComponent implements OnInit {
   getRandomSoftDrinks(): Observable<SoftDrink[]> {
     return this.softDrinkService.getSoftDrinksArraySize().pipe(
       switchMap(maxId => {
-        const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * maxId));
-        const requests = randomIds.map(id => this.softDrinkService.getOneById('softdrink',id));
+        const randomIds = Array.from({length: 36}, () => Math.floor(Math.random() * maxId));
+        const requests = randomIds.map(id => this.softDrinkService.getOneById('softdrink', id));
         return forkJoin(requests);
       }),
       map((softDrinks: SoftDrink[]) => softDrinks.filter(softDrink => softDrink != null && softDrink.id != null))
     );
   }
+
   initializeClasses(): void {
     this.classes = [
       'tiny', 'small', 'medium', 'tiniest', 'tiny', 'small', 'large', 'tiny', 'medium', 'small',

@@ -13,7 +13,8 @@ export class MagicNumerFileValidationService {
     "52494646": "image/webp"
   };
 
-  constructor() {}
+  constructor() {
+  }
 
   validateFile(file: File): Observable<boolean> {
     const fileReader = new FileReader();

@@ -45,23 +45,23 @@ button {
   margin-top: 20px;
 }
 
-.modal-button{
+.modal-button {
   width: 45%;
 }
 
-  .confirm {
-    font-style: italic;
-    font-weight: normal;
-    text-align: left;
+.confirm {
+  font-style: italic;
+  font-weight: normal;
+  text-align: left;
 
-  }
+}
 
-  .custom-modal-body,
-  .custom-modal-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 5px;
-  }
+.custom-modal-body,
+.custom-modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 5px;
+}
 
 

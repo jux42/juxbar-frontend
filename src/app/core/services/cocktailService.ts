@@ -19,18 +19,14 @@ export class CocktailService extends GenericDrinkService<Cocktail> {
     super(http, authService);
   }
 
-  getCocktailsArraySize():Observable<number>{
+  getCocktailsArraySize(): Observable<number> {
     return this.http.get<number>(`${environment.apiUrl}/cocktails/arraysize`);
   }
+
   getCocktailOfTheDay(maxId: number): number {
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     return this.pseudoRandomNumber(seed, 1, maxId);
-  }
-
-  private pseudoRandomNumber(seed: number, min: number, max: number): number {
-    const x = Math.sin(seed) * 10000;
-    return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
   }
 
   getFavouriteCocktails(): Observable<SoftDrink[]> {
@@ -56,5 +52,10 @@ export class CocktailService extends GenericDrinkService<Cocktail> {
 
   removeFavouriteCocktail(id: number): Observable<String> {
     return this.removeFavorite('user/rmfavouritecocktail', id);
+  }
+
+  private pseudoRandomNumber(seed: number, min: number, max: number): number {
+    const x = Math.sin(seed) * 10000;
+    return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
   }
 }

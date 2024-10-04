@@ -1,25 +1,26 @@
-  <div class="login-container">
+<div class="login-container">
   <h2>Sign Up</h2>
-    <form #accountForm="ngForm" (submit)="onCreateAccount(accountForm)" class="login-form">
-      <div>
-        <input [(ngModel)]="username" name="username" required type="text" placeholder="Username">
-      </div>
-      <div>
-        <input [(ngModel)]="password" name="password" required type="password" placeholder="Password">
-      </div>
-      <div>
-        <input [(ngModel)]="confirmPassword" name="confirmPassword" required type="password" placeholder="Confirm password">
-      </div>
-      <div>
-        <select [(ngModel)]="secretQuestion" name="secretQuestion" required>
-          <option value="" disabled selected>Select a secret question</option>
-          <option *ngFor="let question of secretQuestions" [value]="question">{{ question }}</option>
-        </select>
-      </div>
-      <div>
-        <input [(ngModel)]="secretAnswer" name="secretAnswer" required type="text" placeholder="Secret answer">
-      </div>
-      <button type="submit" class="form-button">Create account</button>
-      <p *ngIf="message">{{ message }}</p>
-    </form>
-  </div>
+  <form #accountForm="ngForm" (submit)="onCreateAccount(accountForm)" class="login-form">
+    <div>
+      <input [(ngModel)]="username" name="username" placeholder="Username" required type="text">
+    </div>
+    <div>
+      <input [(ngModel)]="password" name="password" placeholder="Password" required type="password">
+    </div>
+    <div>
+      <input [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm password" required
+             type="password">
+    </div>
+    <div>
+      <select [(ngModel)]="secretQuestion" name="secretQuestion" required>
+        <option disabled selected value="">Select a secret question</option>
+        <option *ngFor="let question of secretQuestions" [value]="question">{{ question }}</option>
+      </select>
+    </div>
+    <div>
+      <input [(ngModel)]="secretAnswer" name="secretAnswer" placeholder="Secret answer" required type="text">
+    </div>
+    <button class="form-button" type="submit">Create account</button>
+    <p *ngIf="message">{{ message }}</p>
+  </form>
+</div>

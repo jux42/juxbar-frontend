@@ -1,5 +1,5 @@
-.background-container{
-background-image: url('../../../assets/images/admin-background.webp');
+.background-container {
+  background-image: url('../../../assets/images/admin-background.webp');
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@ background-image: url('../../../assets/images/admin-background.webp');
   background-repeat: no-repeat;
 }
 
-.mainContainer{
+.mainContainer {
   display: flex;
   width: 80vh;
   flex-direction: row;

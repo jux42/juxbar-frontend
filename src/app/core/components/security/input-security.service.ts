@@ -5,7 +5,8 @@ import {Injectable} from '@angular/core';
 })
 export class InputSecurityService {
 
-  constructor() { }
+  constructor() {
+  }
 
   validateInput(input: string): boolean {
     const regex = /^[a-zA-Z0-9\s.,!?-]+$/;

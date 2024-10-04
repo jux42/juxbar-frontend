@@ -57,8 +57,8 @@ export class CocktailHomepageComponent implements OnInit {
   getRandomCocktails(): Observable<Cocktail[]> {
     return this.getCocktailsArraySize().pipe(
       switchMap(arraySize => {
-        const randomIds = Array.from({ length: 36 }, () => Math.floor(Math.random() * arraySize));
-        const requests = randomIds.map(id => this.cocktailService.getOneById('cocktail',id));
+        const randomIds = Array.from({length: 36}, () => Math.floor(Math.random() * arraySize));
+        const requests = randomIds.map(id => this.cocktailService.getOneById('cocktail', id));
         return forkJoin(requests);
       }),
       map((cocktails: Cocktail[]) => cocktails.filter(cocktail => cocktail != null && cocktail.id != null))
