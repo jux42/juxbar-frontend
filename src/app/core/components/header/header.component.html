@@ -1,6 +1,6 @@
 <header>
   <div class="titles">
-    <h1 class="juxBarTypo" (click)="goHome()">juxBar</h1>
+    <h1 class="juxBarTypo" (click)="goHome()" onkeydown="goHome()">juxBar</h1>
 
       <h2 *ngIf="((username$ | async) === 'superadmin' || (username$ | async) === 'admin')"
           class="adminWarning">YOU ARE UNDER ADMIN PRIVILEGE, PLEASE DON'T MESS THINGS UP</h2>
