@@ -28,7 +28,11 @@
       <div *ngIf="showOptions">
         <div [class.active]="showOptions" class="showOptions">
           <h3>{{ detailedUser.username }}</h3>
-          <img [src]="environment.apiUrl+'/user/'+detailedUser.username+'/mypicture'" class="very-tiny-user-image">
+          @if (!detailedUser.profilePicture){
+            <img src="assets/icons/cockIcon.webp" alt="default profile picture" class="very-tiny-user-image">
+          } @else {
+            <img [src]="environment.apiUrl+'/user/'+detailedUser.username+'/mypicture'" class="very-tiny-user-image">
+          }
           <h4 *ngIf="detailedUser.active" class="activeUser">status : ACTIVE</h4>
           <h4 *ngIf="!detailedUser.active" class="inactiveUser">status : INACTIVE</h4>
           <div *ngIf="detailedUser.active">
