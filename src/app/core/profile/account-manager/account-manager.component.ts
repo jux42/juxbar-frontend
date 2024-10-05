@@ -17,7 +17,7 @@ import {user} from "@angular/fire/auth";
   templateUrl: './account-manager.component.html',
   styleUrl: './account-manager.component.scss'
 })
-export class AccountManagerComponent implements OnInit {
+export class AccountManagerComponent {
 
   active!: boolean;
   showOptions: boolean = false;
@@ -33,9 +33,7 @@ export class AccountManagerComponent implements OnInit {
               private cdr: ChangeDetectorRef) {
   }
 
-  ngOnInit(): void {
 
-  }
 
   async onChangePassword(pwdForm: NgForm) {
     const newPassword = pwdForm.value.newPassword;

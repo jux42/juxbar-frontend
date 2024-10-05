@@ -71,6 +71,7 @@ export class UserManagementComponent implements OnInit {
   onUserDetails() {
     const user = this.juxbarUsers.find(u => u.username === this.selectedUsername);
     if (user) {
+      console.log(user);
       this.detailedUser = user;
       this.showOptions = true;
       this.cdr.detectChanges();

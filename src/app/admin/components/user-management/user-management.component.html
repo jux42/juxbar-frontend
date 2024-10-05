@@ -19,7 +19,7 @@
     <p>➖➖➖➖➖➖➖➖➖➖➖➖➖</p>
     <div class="innerFrameBold">
       <h3>Select an existing user</h3>
-      <select (ngModelChange)="onUserDetails()" [(ngModel)]="selectedUsername" class="userSelect">
+      <select (change)="onUserDetails()" [(ngModel)]="selectedUsername" class="userSelect">
         <option *ngFor="let username of usernames" [value]="username">
           {{ username }}
         </option>

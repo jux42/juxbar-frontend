@@ -14,7 +14,7 @@ import {IngredientService} from "../../../core/services/ingredientService";
   templateUrl: './ingredient.component.html',
   styleUrl: './ingredient.component.scss'
 })
-export class IngredientComponent implements OnInit {
+export class IngredientComponent {
 
   @Input() ingredient!: Ingredient;
   ingredients: Ingredient[] = [];
@@ -23,8 +23,4 @@ export class IngredientComponent implements OnInit {
   constructor(private ingredientService: IngredientService) {
   }
 
-
-  ngOnInit(): void {
-
-  }
 }

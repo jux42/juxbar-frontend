@@ -17,7 +17,7 @@ import {NgForOf, NgIf} from "@angular/common";
   ],
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent {
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
@@ -39,8 +39,6 @@ export class ForgotPasswordComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-  }
 
 
   async onRecover(form: any) {

@@ -22,7 +22,7 @@ import {PersonalCocktailService} from "../../core/services/personal-cocktail.ser
   templateUrl: './personal-cocktail.component.html',
   styleUrl: './personal-cocktail.component.scss'
 })
-export class PersonalCocktailComponent implements OnInit {
+export class PersonalCocktailComponent {
 
   @Input() personalCocktail !: PersonalCocktail;
   personalCocktail$!: Observable<PersonalCocktail>;
@@ -33,10 +33,6 @@ export class PersonalCocktailComponent implements OnInit {
   protected readonly environment = environment;
 
   constructor(private personalCocktailService: PersonalCocktailService) {
-  }
-
-  ngOnInit() {
-
   }
 
   truncateText(text: string, maxLength: number): string {

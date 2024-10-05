@@ -4,7 +4,7 @@
     <h2>Personal Cocktail Management</h2>
     <div class="innerFrameBold">
       <h3>Select a user</h3>
-      <select (ngModelChange)="onUserDetails()" [(ngModel)]="selectedUsername" class="userSelect">
+      <select (change)="onUserDetails()" [(ngModel)]="selectedUsername" class="userSelect">
         <option *ngFor="let username of usernames" [value]="username">
           {{ username }}
         </option>
@@ -19,7 +19,7 @@
         <div *ngFor="let personalCocktail of personalCocktails">
           <div *ngIf="personalCocktail.state == State.SHOWED" class="cocktailLineShowed">
             <p class="cocktailName">{{ personalCocktail.strDrink }}</p>
-            <img [src]="personalCocktail.strDrinkThumb" class="very-tiny-image">
+            <img [src]="environment.apiUrl+'/user/personalcocktail/image/'+ personalCocktail.id" class="very-tiny-image">
 
             <p> this Cocktail is visible </p>
             <button (click)="onTrashPersonalCocktail(personalCocktail.id)" class="trashUntrashBtn">TRASH</button>
@@ -27,7 +27,7 @@
           </div>
           <div *ngIf="personalCocktail.state == State.TRASHED" class="cocktailLineTrashed ">
             <p class="cocktailName">{{ personalCocktail.strDrink }}</p>
-            <img [src]="personalCocktail.strDrinkThumb" class="very-tiny-image">
+            <img [src]="environment.apiUrl+'/user/personalcocktail/image/'+ personalCocktail.id" class="very-tiny-image">
             <p>this cocktail is in trash </p>
             <button (click)="onRestorePersonalCocktail(personalCocktail.id)" class="trashUntrashBtn">RESTORE</button>
 
