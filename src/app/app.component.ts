@@ -17,7 +17,7 @@ import {NgIf} from "@angular/common";
 
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'juxBar';
   showNavBar = true;
 
@@ -36,6 +36,5 @@ export class AppComponent implements OnInit {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 
-  ngOnInit() {
-  }
+
 }

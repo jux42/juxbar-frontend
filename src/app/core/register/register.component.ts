@@ -17,7 +17,7 @@ import {firstValueFrom} from "rxjs";
   ],
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
@@ -35,15 +35,6 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder, private profileService: ProfileService) {
   }
 
-  ngOnInit(): void {
-    // this.registerForm = this.formBuilder.group({
-    //   username: ['', Validators.required],
-    //   password: ['', [Validators.required, Validators.minLength(6)]],
-    //   confirmPassword: ['', Validators.required],
-    //   secretQuestion: ['', Validators.required],
-    //   secretAnswer: ['', Validators.required]
-    // }, { validator: this.checkPasswords });
-  }
 
   checkPasswords(group: FormGroup) {
     const password = group.get('password')?.value;
