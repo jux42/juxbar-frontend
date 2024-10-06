@@ -1,6 +1,6 @@
-<div class="background-container"></div>
-<div class="mainFlex">
-  <div *ngIf="cocktail" class="cocktail-card">
+<div class="background-container"  @simpleFadeInAnimation></div>
+<div class="mainFlex"  @simpleFadeInAnimation>
+  <div *ngIf="cocktail" class="cocktail-card"  @simpleFadeInAnimation>
     <div class="image-container">
       <img (click)="openModal()"
            (load)="imageLoaded[cocktail.id] = true"
@@ -13,7 +13,7 @@
 
   </div>
 
-  <div *ngIf="cocktail" class="details-container">
+  <div *ngIf="cocktail" class="details-container"  @simpleFadeInAnimation>
     <h2>{{ cocktail.strDrink | titlecase }}</h2>
     <div class="ingredients-list">
       <div *ngFor="let ingredient of getIngredients(cocktail)" [routerLink]="formatIngredientURL(ingredient)">

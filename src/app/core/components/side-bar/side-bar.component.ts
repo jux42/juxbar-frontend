@@ -4,7 +4,7 @@ import {Router, RouterLink} from "@angular/router";
 import {CocktailService} from "../../services/cocktailService";
 import {CocktailComponent} from "../../../drinks/cocktails/components/cocktail/cocktail.component";
 import {Cocktail} from "../../models/cocktail";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {environment} from "../../../../environments/environment";
 import {IngredientService} from "../../services/ingredientService";
 import {FormsModule} from "@angular/forms";
@@ -22,7 +22,8 @@ import {AdminService} from "../../services/admin.service";
     AsyncPipe,
     FormsModule,
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.scss',
@@ -80,7 +81,7 @@ export class SideBarComponent implements OnInit {
   }
 
   onGoToSoftdrinksAlpha() {
-    this.router.navigateByUrl('/juxbar/listallsofts', {skipLocationChange: true});
+    this.router.navigate(['/juxbar/listallsofts']);
   }
 
   goToIngredient(ingredientString: string) {

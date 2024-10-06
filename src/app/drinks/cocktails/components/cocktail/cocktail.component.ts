@@ -10,6 +10,8 @@ import {PersonalCocktail} from "../../../../core/models/personal-cocktail";
 import {FavouriteService} from "../../../../core/services/favourite.service";
 import {LazyLoadImageModule} from "ng-lazyload-image";
 
+
+
 @Component({
   selector: 'app-cocktail',
   standalone: true,
@@ -124,7 +126,9 @@ export class CocktailComponent implements OnInit, OnDestroy {
       left: 0,
       behavior: 'auto'
     });
-    this.router.navigateByUrl(`juxbar/onecocktail/${this.cocktail.id}`)
+    this.router.navigateByUrl(`juxbar/onecocktail/${this.cocktail.id}`).then(r =>{
+      console.log("go to " + this.cocktail.strDrink);
+    } )
   }
 
   getIngredients(cocktail: any): string[] {
@@ -139,4 +143,5 @@ export class CocktailComponent implements OnInit, OnDestroy {
 
     return ingredients;
   }
+
 }

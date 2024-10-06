@@ -7,6 +7,7 @@ import {CocktailHomepageComponent} from "./homepages/cocktail-homepage/cocktail-
 import {SoftdrinkHomepageComponent} from "./homepages/softdrink-homepage/softdrink-homepage.component";
 import {AdminPageComponent} from "./admin/admin-page/admin-page.component";
 import {RegisterComponent} from "./core/register/register.component";
+import {SoftDrinkListComponent} from "./drinks/soft-drinks/components/soft-drink-list/soft-drink-list.component";
 
 export const routes: Routes = [
 
@@ -16,7 +17,9 @@ export const routes: Routes = [
     data: {animation: 'LandingPage'}
   },
   {path: 'login', component: LoginComponent,},
-  {path: 'juxbar/cocktailhome', component: CocktailHomepageComponent},
+  {path: 'juxbar/cocktailhome', loadComponent: () => import ('./homepages/cocktail-homepage/cocktail-homepage.component')
+      .then(mod => mod.CocktailHomepageComponent), data: {animation: 'CocktailHomepage'}},
+
   {path: 'juxbar/softdrinkhome', component: SoftdrinkHomepageComponent},
 
   {
@@ -44,7 +47,11 @@ export const routes: Routes = [
   },
 
 
-  {path: 'juxbar/listall', component: CocktailListComponent, data: {animation: 'CocktailListPage'}},
+  {path: 'juxbar/listall', component: CocktailListComponent},
+
+  {
+    path: 'juxbar/listallsofts', component: SoftDrinkListComponent},
+
   {
     path: 'juxbar/onecocktail/:id',
     loadComponent: () => import('./drinks/cocktails/components/single-cocktail/single-cocktail.component')
@@ -55,12 +62,7 @@ export const routes: Routes = [
     loadComponent: () => import('./drinks/soft-drinks/components/single-soft-drink/single-soft-drink.component')
       .then(mod => mod.SingleSoftDrinkComponent), data: {animation: 'OneSoftPage'}
   },
-  {
-    path: 'juxbar/listallsofts',
-    loadComponent: () => import('./drinks/soft-drinks/components/soft-drink-list/soft-drink-list.component')
-      .then(mod => mod.SoftDrinkListComponent),
-    data: {animation: 'SoftListPage'}
-  },
+
   {
     path: 'juxbar/detailledingredient/:strIngredient',
     loadComponent: () => (import('./drinks/ingredients/single-ingredient/single-ingredient.component'))

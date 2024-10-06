@@ -44,6 +44,25 @@
   overflow-y: auto;
 }
 
+.loader {
+  text-align: center;
+  font-weight: bolder;
+  color: darkslategrey;
+  font-size: 70px;
+  font-style: italic;
+  animation: breatheAnimation 1s ease-out infinite;
+
+}
+
+@keyframes breatheAnimation {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .ingredient-container {
   padding: 15px;
   height: 350px;

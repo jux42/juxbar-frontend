@@ -9,11 +9,20 @@ import {Cocktail} from "../../../core/models/cocktail";
 import {SoftDrink} from "../../../core/models/softDrink";
 import {CocktailService} from "../../../core/services/cocktailService";
 import {SoftDrinkService} from "../../../core/services/softDrinkService";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-single-ingredient',
   standalone: true,
+  animations: [
+    trigger('simpleFadeInAnimation', [
+      transition(':enter', [
+        style({opacity: 0, transform: 'translateY(20px)'}),
+        animate('600ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+      ])
+    ])
+  ],
   imports: [
     NgIf,
     TitleCasePipe,
@@ -30,6 +39,8 @@ export class SingleIngredientComponent implements OnInit {
   cocktails$!: Observable<Cocktail[]>;
   softDrinks$!: Observable<SoftDrink[]>;
   imageLoaded: { [key: string]: boolean } = {};
+  cocktailsLoading : boolean = true;
+  softDrinksLoading : boolean = true;
 
 
   protected readonly environment = environment;
@@ -54,10 +65,16 @@ export class SingleIngredientComponent implements OnInit {
 
     const strIngredient: string = this.route.snapshot.params['strIngredient'];
     this.ingredientService.getOneIngredientByName(strIngredient).subscribe(data => {
-        this.cocktails$ = this.cocktailService.getByIngredient('cocktails', strIngredient);
-        this.softDrinks$ = this.softDrinkService.getByIngredient('softdrinks', strIngredient);
+        this.cocktails$ = this.cocktailService.getByIngredient('cocktails', strIngredient).pipe(
+          tap(data => {
+            this.cocktailsLoading = false;
+          })
+        );
+        this.softDrinks$ = this.softDrinkService.getByIngredient('softdrinks', strIngredient).pipe(
+          tap(data => {
+            this.softDrinksLoading = false;
+          }));
         this.ingredient = data;
-
 
       },
     )

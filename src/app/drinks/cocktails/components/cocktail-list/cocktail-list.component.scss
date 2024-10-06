@@ -12,9 +12,6 @@
   background-repeat: no-repeat;
 }
 
-.this-animation {
-  animation-delay: 1s !important;
-}
 
 .searchBlock {
   position: sticky;
@@ -40,6 +37,30 @@
   background-image: linear-gradient(rgb(193, 177, 141) 0, rgb(157, 146, 103) 100%);
   color: darkslategray;
   z-index: 1002;
+}
+
+.loader {
+  text-align: center;
+  font-weight: bolder;
+  color: darkslategrey;
+  font-size: 70px;
+  font-style: italic;
+  animation: breatheAnimation 2s ease-in-out infinite;
+
+}
+
+@keyframes breatheAnimation {
+  0%, 50%, 100% {
+    font-size: 5em;
+    text-shadow: 3px 3px 10px #000;
+    opacity: 1;
+    color: #4b0606;
+  }
+  25%, 75% {
+    color: darkslategrey;
+    font-size: 4.8em;
+    opacity: 0.8;
+  }
 }
 
 
@@ -79,24 +100,9 @@ h2 {
 
 }
 
-.loading {
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 250px;
-  animation: breatheAnimation 3s infinite;
 
-}
 
-@keyframes breatheAnimation {
-  100% {
-    font-size: 124px;
-  }
-  0% {
-    font-size: 8px;
-  }
-}
 
 .alphabetBlock {
   margin-left: 25px;

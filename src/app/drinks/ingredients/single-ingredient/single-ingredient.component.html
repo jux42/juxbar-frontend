@@ -1,9 +1,9 @@
-<div class="background-container"></div>
+<div class="background-container" @simpleFadeInAnimation></div>
 
 <button (click)="goBack()">Back</button>
 
-<div class="main-container">
-  <div class="grid-container">
+<div class="main-container" @simpleFadeInAnimation>
+  <div class="grid-container" @simpleFadeInAnimation>
     <!-- Bloc Ingrédient -->
     <div *ngIf="ingredient" class="ingredient-container">
       <img (load)="imageLoaded[ingredient.id] = true" [alt]="ingredient.strIngredient"
@@ -12,9 +12,12 @@
     </div>
 
     <!-- Bloc Liste de Cocktails -->
-    <div *ngIf="cocktails$ | async as cocktails" class="list-container">
+
+    <div class="list-container" @simpleFadeInAnimation>
       <h3>Cocktails with this ingredient:</h3>
-      <p *ngIf="cocktails.length === 0" class="no-content">No cocktail with that.</p>
+      <p *ngIf="cocktailsLoading" class="loader">loading</p>
+      <div *ngIf="cocktails$ | async as cocktails">
+        <p *ngIf="cocktails.length === 0" class="no-content">No cocktail with that.</p>
       <ul class="grid-list">
         <li *ngFor="let cocktail of cocktails">
           <a (click)="goToCocktail(cocktail)" class="clickable">
@@ -25,10 +28,12 @@
         </li>
       </ul>
     </div>
+    </div>
 
-    <!-- Bloc Liste de Soft Drinks -->
-    <div *ngIf="softDrinks$ | async as softDrinks" class="list-container">
+    <div class="list-container" @simpleFadeInAnimation>
       <h3>Softs with this ingredient:</h3>
+      <p *ngIf="softDrinksLoading"  class="loader">loading</p>
+      <div *ngIf="softDrinks$ | async as softDrinks">
       <p *ngIf="softDrinks.length === 0" class="no-content">No soft with that.</p>
       <ul class="grid-list">
         <li *ngFor="let softDrink of softDrinks">
@@ -41,9 +46,9 @@
       </ul>
     </div>
   </div>
-
+  </div>
   <!-- Bloc Texte Description -->
-  <div class="description-container">
+  <div class="description-container" @simpleFadeInAnimation>
     <ng-container *ngIf="ingredient; else loading">
       <ng-container *ngIf="ingredient.strDescription; then hasDescription else noDescription"></ng-container>
     </ng-container>
