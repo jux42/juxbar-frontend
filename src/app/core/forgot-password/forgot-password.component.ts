@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {PasswordRecoveryService} from "../services/password-recovery.service";
 import {firstValueFrom} from "rxjs";
 import {NgForOf, NgIf} from "@angular/common";
+import {PasswordCkeckerService} from "../components/security/password-ckecker.service";
+import {InputSecurityService} from "../components/security/input-security.service";
 
 @Component({
   selector: 'app-forgot-password',
@@ -35,7 +37,9 @@ export class ForgotPasswordComponent {
   constructor(
     private formBuilder: FormBuilder,
     private passwordRecoveryService: PasswordRecoveryService,
-    private router: Router
+    private router: Router,
+    readonly passwordChecker : PasswordCkeckerService,
+    readonly inputSecurity : InputSecurityService,
   ) {
   }
 
@@ -43,12 +47,11 @@ export class ForgotPasswordComponent {
 
   async onRecover(form: any) {
     const {username, secretQuestion, secretAnswer, password, confirmPassword} = form.value;
-    if (password.length < 6 || password === '') {
-      alert("password must be 6 characters at least")
+    if (!this.passwordChecker.checkPasswordValidity(password, confirmPassword)) {
       return;
     }
-    if (password != confirmPassword) {
-      alert("passwords do not match")
+    if (!this.inputSecurity.validateInput(username) || !this.inputSecurity.validateInput(secretAnswer)) {
+      alert("username and secret answer should only contain letters and digits")
       return;
     }
     try {

@@ -5,6 +5,8 @@ import {firstValueFrom} from "rxjs";
 import {ProfileService} from "../../services/profile.service";
 import {AuthService} from "../../login/auth-service";
 import {user} from "@angular/fire/auth";
+import {InputSecurityService} from "../../components/security/input-security.service";
+import {PasswordCkeckerService} from "../../components/security/password-ckecker.service";
 
 @Component({
   selector: 'app-account-manager',
@@ -30,7 +32,8 @@ export class AccountManagerComponent {
 
   constructor(private profileService: ProfileService,
               private authService: AuthService,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              readonly passwordChecker: PasswordCkeckerService) {
   }
 
 
@@ -40,10 +43,10 @@ export class AccountManagerComponent {
     const newPasswordBis = pwdForm.value.newPasswordBis;
     const username = sessionStorage.getItem("username");
 
-    if (newPassword !== newPasswordBis) {
-      alert("Passwords do not match!");
+    if (!this.passwordChecker.checkPasswordValidity(newPassword, newPasswordBis)){
       return;
     }
+
     try {
       const response = await firstValueFrom(this.profileService.changePassword(username, newPassword));
       console.log(response);

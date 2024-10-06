@@ -4,6 +4,8 @@ import {NgForOf, NgIf} from "@angular/common";
 import {ProfileService} from "../services/profile.service";
 import {Router} from "@angular/router";
 import {firstValueFrom} from "rxjs";
+import {PasswordCkeckerService} from "../components/security/password-ckecker.service";
+import {InputSecurityService} from "../components/security/input-security.service";
 
 @Component({
   selector: 'app-register',
@@ -32,18 +34,29 @@ export class RegisterComponent {
     'Quel est le prénom de votre meilleur ami d’enfance ?'
   ];
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private profileService: ProfileService) {
+  constructor(private router: Router, private formBuilder: FormBuilder,
+              private profileService: ProfileService,
+              readonly  passwordChecker: PasswordCkeckerService,
+              readonly inputSecurity : InputSecurityService,) {
   }
 
 
-  checkPasswords(group: FormGroup) {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : {notSame: true};
-  }
+  // checkPasswords(group: FormGroup) {
+  //   const password = group.get('password')?.value;
+  //   const confirmPassword = group.get('confirmPassword')?.value;
+  //   return password === confirmPassword ? null : {notSame: true};
+  // }
 
   async onCreateAccount(form: any) {
-    const {username, secretQuestion, secretAnswer, password} = form.value;
+    const {username, secretQuestion, secretAnswer, password, confirmPassword} = form.value;
+    if(!this.passwordChecker.checkPasswordValidity(password, confirmPassword )) {
+      return;
+    }
+    if(!this.inputSecurity.validateInput(username) || !this.inputSecurity.validateInput(secretAnswer)) {
+      alert("username and secret answer can only contain letters and digits");
+      return;
+    }
+
     try {
       const response = await firstValueFrom(this.profileService.createAccount(username, secretQuestion, secretAnswer, password));
       if (password.length < 6) {
