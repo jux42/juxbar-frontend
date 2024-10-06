@@ -135,6 +135,7 @@ h2 {
 }
 
 .thisFlex {
+  content-visibility: auto;
   position: relative;
   display: flex;
   flex-wrap: wrap;
