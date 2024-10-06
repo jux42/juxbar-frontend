@@ -4,9 +4,9 @@
     <h3 class="innerFrameBold">Today's Cocktail : </h3>
 
     <img (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail"
-         [src]="[environment.apiUrl] + '/cocktail/' + cocktail.id + '/preview'"
+         ngSrc="{{environment.apiUrl}}/cocktail/{{cocktail.id}}/preview"
          alt="Cocktail Image"
-         class="clickable dayPic">
+         class="clickable dayPic" width="220" height="220">
 
     <div>
       <p class="innerFrameBold">++++++++++++++++++++++++++</p>

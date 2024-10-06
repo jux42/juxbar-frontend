@@ -6,11 +6,19 @@
       <div class="frame">
         <div *ngIf="juxbarUser">
           <p><strong>{{ juxbarUser.username }}</strong></p>
-          @if (!juxbarUser.profilePicture) {
-            <img src="assets/icons/cockIcon.webp" class="userPic" alt="">
+
+          @if (juxbarUser.profilePicture) {
+            <img ngSrc='{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture'
+                 class="userPic"
+                 alt="my profile picture"
+                 width="width" height="height">
           } @else {
-            <img src='{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture' class="userPic" alt="">
+            <img ngSrc="assets/icons/cockIcon.webp"
+                 class="userPic"
+                 alt="default profile picture"
+                 width="1024" height="1024">
           }
+
           <p>{{ juxbarUser.email }}</p>
           @if (!juxbarUser.aboutMeText) {
             <p class="about">"I am {{ juxbarUser.username }}"</p>

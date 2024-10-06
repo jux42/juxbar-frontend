@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../login/auth-service";
 import {Router} from "@angular/router";
-import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {PersonalCocktailComponent} from "../../drinks/personal-cocktail/personal-cocktail.component";
 import {CocktailComponent} from "../../drinks/cocktails/components/cocktail/cocktail.component";
 import {PersonalCocktail} from "../models/personal-cocktail";
@@ -50,7 +50,8 @@ import {CocktailService} from "../services/cocktailService";
     SoftDrinkComponent,
     ReactiveFormsModule,
     FormsModule,
-    AccountManagerComponent
+    AccountManagerComponent,
+    NgOptimizedImage
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
