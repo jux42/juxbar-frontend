@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {Cocktail} from "../models/cocktail";
 import {SoftDrink} from "../models/softDrink";
 import {environment} from "../../../environments/environment";
+import {PasswordCkeckerService} from "../components/security/password-ckecker.service";
+import {exitCodeFromResult} from "@angular/compiler-cli";
 
 export interface AuthRequest {
   username: string;
@@ -26,6 +28,10 @@ export class AuthService {
   }
 
   login(credentials: { username: string; password: string }): Observable<string> {
+
+
+
+
     const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     const body = new URLSearchParams(credentials);
 

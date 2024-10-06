@@ -4,6 +4,8 @@ import {AuthRequest, AuthService} from './auth-service';
 import {FormsModule} from "@angular/forms";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
+import {PasswordCkeckerService} from "../components/security/password-ckecker.service";
+import {InputSecurityService} from "../components/security/input-security.service";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,11 @@ export class LoginComponent implements OnInit {
   message: string = '';
   forgotPasswordVisible: boolean = false;
 
-  constructor(protected authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(protected authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute,
+              readonly passwordChecker : PasswordCkeckerService,
+              readonly inputSecurity : InputSecurityService,) {
     console.log('Constructor: credentials', this.credentials);
   }
 
@@ -46,6 +52,15 @@ export class LoginComponent implements OnInit {
 
 
   login(): void {
+
+    if(!this.passwordChecker.checkPasswordCompliance(this.credentials.password)) {
+      return;
+    }
+    if (!this.inputSecurity.validateInput(this.credentials.username)) {
+      alert("username should be only letters and digits")
+      return;
+    }
+
     this.authService.login(this.credentials).subscribe({
       next: () => {
         if (this.credentials.username == 'admin' || this.credentials.username == 'superadmin') {

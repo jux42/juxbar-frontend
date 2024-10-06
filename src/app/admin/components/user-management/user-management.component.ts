@@ -5,6 +5,7 @@ import {map} from "rxjs/operators";
 import {firstValueFrom} from "rxjs";
 import {JuxbarUser} from "../../../core/models/juxbar-user";
 import {FormsModule, NgForm} from "@angular/forms";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-user-management',
@@ -126,4 +127,6 @@ export class UserManagementComponent implements OnInit {
     }
 
   }
+
+  protected readonly environment = environment;
 }

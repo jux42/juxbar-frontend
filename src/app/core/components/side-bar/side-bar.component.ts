@@ -132,15 +132,6 @@ export class SideBarComponent implements OnInit {
   }
 
 
-  async onListUsers() {
-
-    try {
-      const users = await firstValueFrom(this.adminService.listUsers());
-      console.log(users);
-    } catch (error) {
-      console.error('An error occurred while fetching users:', error);
-    }
-  }
 
 
   reloadComponent(page: string) {
@@ -149,5 +140,3 @@ export class SideBarComponent implements OnInit {
     });
   }
 }
-
-
