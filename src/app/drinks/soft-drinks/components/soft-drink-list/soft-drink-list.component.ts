@@ -55,6 +55,11 @@ export class SoftDrinkListComponent implements OnInit {
       behavior: 'smooth'
     });
 
+    this.softDrinkService.getAll('softdrinks').subscribe(data => {
+      this.softDrinksSubject.next(data);
+      this.initSoftDrinksFiltering();
+    });
+
     this.softDrinkForm = this.formBuilder.group({
       strDrink: '',
       strFirstIngredient: '',
@@ -63,11 +68,9 @@ export class SoftDrinkListComponent implements OnInit {
 
     });
 
-    this.softDrinkService.getAll('softdrinks').subscribe(data => {
-      this.softDrinksSubject.next(data)
+  }
 
-    });
-
+  private initSoftDrinksFiltering() {
     this.softDrinks$ = this.softDrinkForm.valueChanges.pipe(
       startWith({strDrink: '', strFirstIngredient: '', strSecondIngredient: '', strThirdIngredient: ''}),
       debounceTime(400),
@@ -79,16 +82,6 @@ export class SoftDrinkListComponent implements OnInit {
       ])),
     );
   }
-
-  shouldAddAnchor(softDrinkName: string): boolean {
-    const currentFirstLetter = softDrinkName[0].toUpperCase();
-    if (currentFirstLetter !== this.lastAnchorLetter) {
-      this.lastAnchorLetter = currentFirstLetter;
-      return true;
-    }
-    return false;
-  }
-
   getAnchorId(softDrinkName: string): string {
     return softDrinkName[0].toUpperCase();
   }

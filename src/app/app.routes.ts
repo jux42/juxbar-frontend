@@ -46,7 +46,7 @@ export const routes: Routes = [
   },
 
 
-  {path: 'juxbar/listall', component: CocktailListComponent, data: {animation: 'CocktailListPage'}},
+  {path: 'juxbar/listall', component: CocktailListComponent},
   {
     path: 'juxbar/onecocktail/:id',
     loadComponent: () => import('./drinks/cocktails/components/single-cocktail/single-cocktail.component')
