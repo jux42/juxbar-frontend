@@ -8,7 +8,7 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {environment} from "../../../../environments/environment";
 import {IngredientService} from "../../services/ingredientService";
 import {FormsModule} from "@angular/forms";
-import {BehaviorSubject, finalize, firstValueFrom, map, Subject, takeUntil, tap} from "rxjs";
+import {firstValueFrom, map} from "rxjs";
 import {Ingredient} from "../../models/ingredient";
 import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
 import {AdminService} from "../../services/admin.service";
@@ -40,16 +40,9 @@ export class SideBarComponent implements OnInit {
   multiplier!: number;
   cocktailOfTheDayId!: number;
   cocktail!: Cocktail;
-  ingredientsList: Ingredient[] = [];
+  ingredientsList!: Ingredient[];
   ingredient!: Ingredient;
   protected readonly environment = environment;
-  private destroy$ = new Subject<void>();
-  private ingredientsSubjet = new BehaviorSubject<Ingredient[]>([]);
-  isLoading: boolean = true;
-  currentPage: number = 0;
-  pageSize: number = 10;
-  totalIngredients: number = 0;
-
 
   protected readonly sessionStorage = sessionStorage;
 
@@ -75,8 +68,9 @@ export class SideBarComponent implements OnInit {
     ).subscribe();
 
 
-    this.loadIngredients(this.currentPage, this.pageSize);
-
+    this.ingredientService.getAllIngredients().subscribe(
+      data => this.ingredientsList = data
+    )
   }
 
   onGoToCocktailsAlpha() {
@@ -88,23 +82,6 @@ export class SideBarComponent implements OnInit {
   onGoToSoftdrinksAlpha() {
     this.router.navigateByUrl('/juxbar/listallsofts', {skipLocationChange: true});
   }
-  loadIngredients(page: number, size: number) {
-    this.isLoading = true;
-    this.ingredientService.getPaginated('ingredients', page, size).pipe(
-      tap((data: Ingredient[]) => {
-        this.ingredientsList = [...this.ingredientsList, ...data];
-      }),
-      finalize(() => {
-        this.isLoading = false;
-      })
-    ).subscribe();
-  }
-
-  onScroll() {
-    this.currentPage++;
-    this.loadIngredients(this.currentPage, this.pageSize);
-  }
-
 
   goToIngredient(ingredientString: string) {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
@@ -155,15 +132,6 @@ export class SideBarComponent implements OnInit {
   }
 
 
-  // async onListUsers() {
-  //
-  //   try {
-  //     const users = await firstValueFrom(this.adminService.listUsers());
-  //     console.log(users);
-  //   } catch (error) {
-  //     console.error('An error occurred while fetching users:', error);
-  //   }
-  // }
 
 
   reloadComponent(page: string) {
@@ -172,5 +140,3 @@ export class SideBarComponent implements OnInit {
     });
   }
 }
-
-

@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {Ingredient} from "../models/ingredient";
@@ -17,13 +17,6 @@ export class IngredientService {
   getAllIngredients(): Observable<Ingredient[]> {
 
     return this.http.get<Ingredient[]>(`${environment.apiUrl}/ingredients`)
-  }
-
-  getPaginated(endpoint: string, page: number = 0, limit: number = 10): Observable<Ingredient[]> {
-    let params = new HttpParams()
-      .set('page', String(page))
-      .set('size', String(limit));
-    return this.http.get<Ingredient[]>(`${environment.apiUrl}/${endpoint}`, {params});
   }
 
   getOneIngredientById(id: number): Observable<Ingredient> {
