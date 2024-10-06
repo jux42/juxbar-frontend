@@ -16,7 +16,9 @@ export const routes: Routes = [
     data: {animation: 'LandingPage'}
   },
   {path: 'login', component: LoginComponent,},
-  {path: 'juxbar/cocktailhome', component: CocktailHomepageComponent},
+  {path: 'juxbar/cocktailhome', loadComponent: () => import ('./homepages/cocktail-homepage/cocktail-homepage.component')
+      .then(mod => mod.CocktailHomepageComponent), data: {animation: 'CocktailHomepage'}},
+
   {path: 'juxbar/softdrinkhome', component: SoftdrinkHomepageComponent},
 
   {

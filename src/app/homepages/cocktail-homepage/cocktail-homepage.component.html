@@ -1,6 +1,6 @@
 <div class="background-cocktailHome-container"></div>
 <div class="grid-container fade-in">
-  <ng-container *ngIf="cocktails$ | async as cocktails">
+  <ng-container *ngIf="cocktails$ | async as cocktails" >
     <div
       *ngFor="let cocktail of cocktails; let i = index"
       [ngClass]="getClass(i)"
@@ -8,7 +8,7 @@
         'animation-delay': i % 3 === 0 ? '0s' : (i % 3 === 1 ? '1s' : '2s'),
         'animation-duration': i % 2 === 0 ? '5s' : '6s'
       }"
-      class="grid-item">
+      class="grid-item" @simpleFadeInAnimation>
       <img (click)="goToCocktail(cocktail.id)"
            [src]="environment.apiUrl + '/cocktail/' + cocktail.id + '/image'" alt="Cocktail Image"
            class="cocktail-image clickable">

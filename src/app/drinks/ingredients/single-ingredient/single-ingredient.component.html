@@ -1,9 +1,9 @@
-<div class="background-container"></div>
+<div class="background-container" @simpleFadeInAnimation></div>
 
 <button (click)="goBack()">Back</button>
 
-<div class="main-container">
-  <div class="grid-container">
+<div class="main-container" @simpleFadeInAnimation>
+  <div class="grid-container" @simpleFadeInAnimation>
     <!-- Bloc Ingrédient -->
     <div *ngIf="ingredient" class="ingredient-container">
       <img (load)="imageLoaded[ingredient.id] = true" [alt]="ingredient.strIngredient"
@@ -13,7 +13,7 @@
 
     <!-- Bloc Liste de Cocktails -->
 
-    <div class="list-container">
+    <div class="list-container" @simpleFadeInAnimation>
       <h3>Cocktails with this ingredient:</h3>
       <p *ngIf="cocktailsLoading" class="loader">loading</p>
       <div *ngIf="cocktails$ | async as cocktails">
@@ -30,7 +30,7 @@
     </div>
     </div>
 
-    <div class="list-container">
+    <div class="list-container" @simpleFadeInAnimation>
       <h3>Softs with this ingredient:</h3>
       <p *ngIf="softDrinksLoading"  class="loader">loading</p>
       <div *ngIf="softDrinks$ | async as softDrinks">
@@ -48,7 +48,7 @@
   </div>
   </div>
   <!-- Bloc Texte Description -->
-  <div class="description-container">
+  <div class="description-container" @simpleFadeInAnimation>
     <ng-container *ngIf="ingredient; else loading">
       <ng-container *ngIf="ingredient.strDescription; then hasDescription else noDescription"></ng-container>
     </ng-container>

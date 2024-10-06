@@ -8,10 +8,19 @@ import {BoldWordsPipe} from "../../../../core/services/bold-words.pipe";
 import {environment} from "../../../../../environments/environment";
 import {CapitalizeFirstPipe} from "../../../../capitalize-first.pipe";
 import {FavouriteService} from "../../../../core/services/favourite.service";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-single-cocktail',
   standalone: true,
+  animations: [
+    trigger('simpleFadeInAnimation', [
+      transition(':enter', [
+        style({opacity: 0, transform: 'translateY(20px)'}),
+        animate('600ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+      ])
+    ])
+  ],
   imports: [
     AsyncPipe,
     TitleCasePipe,
