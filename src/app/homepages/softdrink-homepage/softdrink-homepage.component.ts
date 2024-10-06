@@ -7,10 +7,19 @@ import {SoftDrinkComponent} from "../../drinks/soft-drinks/components/soft-drink
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-homepages',
   standalone: true,
+  animations: [
+    trigger('simpleFadeInAnimation', [
+      transition(':enter', [
+        style({opacity: 0, transform: 'translateY(20px)'}),
+        animate('500ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+      ])
+    ])
+  ],
   imports: [
     AsyncPipe,
     SoftDrinkComponent,
