@@ -10,6 +10,7 @@ import {provideServiceWorker} from '@angular/service-worker';
 import {csrfInterceptor} from "./app/csrf.interceptor";
 
 
+
 bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [
