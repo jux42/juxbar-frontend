@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     CapitalizeFirstPipe,
     provideHttpClient(
       withXsrfConfiguration({
-        cookieName: 'JUXBAR-XSRF-TOKEN',
+        cookieName: 'XSRF-TOKEN',
         headerName: 'X-XSRF-TOKEN',
       }))
 
