@@ -8,10 +8,11 @@
           <p><strong>{{ juxbarUser.username }}</strong></p>
 
           @if (juxbarUser.profilePicture) {
-            <img ngSrc='{{environment.apiUrl}}/user/{{juxbarUser.username}}/mypicture'
+            <img *ngIf="juxbarUser.profilePicture"
+                 ngSrc="{{environment.apiUrl}}/profile/mypicture/{{juxbarUser.username}}"
                  class="userPic"
                  alt="my profile picture"
-                 width="width" height="height">
+                 width="1024" height="1024">
           } @else {
             <img ngSrc="assets/icons/cockIcon.webp"
                  class="userPic"
