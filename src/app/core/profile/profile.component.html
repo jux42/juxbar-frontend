@@ -9,6 +9,7 @@
 
           @if (juxbarUser.profilePicture) {
             <img *ngIf="juxbarUser.profilePicture"
+                 priority="priority"
                  ngSrc="{{environment.apiUrl}}/profile/mypicture/{{juxbarUser.username}}"
                  class="userPic"
                  alt="my profile picture"

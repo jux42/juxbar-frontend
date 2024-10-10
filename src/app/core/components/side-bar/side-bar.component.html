@@ -6,6 +6,7 @@
     <img (click)="onGoToCocktailOfTheDay(cocktail.id)" *ngIf="cocktail"
          ngSrc="{{environment.apiUrl}}/cocktail/{{cocktail.id}}/preview"
          alt="Cocktail Image"
+         priority="priority"
          class="clickable dayPic" width="220" height="220">
 
     <div>
