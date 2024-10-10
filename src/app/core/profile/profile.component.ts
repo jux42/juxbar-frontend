@@ -108,7 +108,6 @@ export class ProfileComponent implements OnInit {
 
     if (this.loggedIn) {
       this.loadUser();
-      this.loadProfilePicture();
       console.log(this.loggedIn)
       this.loadPersonalCocktails();
       this.loadFavouriteCocktails();

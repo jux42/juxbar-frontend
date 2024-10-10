@@ -7,7 +7,6 @@ import {provideAnimationsAsync} from '@angular/platform-browser/animations/async
 import {provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./app/auth.interceptor";
 import {provideServiceWorker} from '@angular/service-worker';
-import {csrfInterceptor} from "./app/csrf.interceptor";
 
 
 
@@ -17,7 +16,7 @@ bootstrapApplication(AppComponent, {
     ...appConfig.providers,
     provideHttpClient(
       // registering interceptors
-      withInterceptors([authInterceptor, csrfInterceptor])),
+      withInterceptors([authInterceptor])),
     importProvidersFrom(BrowserAnimationsModule), provideAnimationsAsync(),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),

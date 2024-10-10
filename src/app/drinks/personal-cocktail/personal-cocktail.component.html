@@ -18,7 +18,7 @@
                (mouseenter)="onMouseEnter()"
                *ngIf="personalCocktail" [class.visible]="imageLoaded[personalCocktail.id]"
                ngSrc="{{environment.apiUrl}}/user/personalcocktail/image/{{personalCocktail.id}}"
-               alt="" class="clickable fadeIn" width="width" height="height">
+               alt="" class="clickable fadeIn" width="1024" height="1024">
         </div>
       </div>
       <div [ngClass]="{'floating-window': true, 'fadeIn': mouseIsOn, 'fadeOut': !mouseIsOn}">
