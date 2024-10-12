@@ -106,9 +106,7 @@ export class ProfileComponent implements OnInit {
       aboutMeText: [this.juxbarUser?.aboutMeText || '', [Validators.maxLength(1000)]],
     });
 
-    if (this.loggedIn &&
-      this.juxbarUser.username != 'admin' &&
-      this.juxbarUser.username != 'superadmin') {
+    if (this.loggedIn) {
       this.loadUser();
       console.log(this.loggedIn)
       this.loadPersonalCocktails();

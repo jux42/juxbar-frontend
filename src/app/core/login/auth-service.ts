@@ -72,6 +72,7 @@ export class AuthService {
   }
 
   logout(): void {
+    console.log('logged out');
     sessionStorage.removeItem('isAuthenticated');
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('token');
@@ -89,8 +90,10 @@ export class AuthService {
 
     this.loggedIn.next(isAuthenticated);
     this.username.next(username);
-    this.favCocktailsList.next(this.favCocktailsList.value);
-    this.favSoftDrinksList.next(this.favSoftDrinksList.value);
+    if (username != 'admin' && username != 'superadmin') {
+      this.favCocktailsList.next(this.favCocktailsList.value);
+      this.favSoftDrinksList.next(this.favSoftDrinksList.value);
+    }
     sessionStorage.setItem('isAuthenticated', isAuthenticated.toString());
     if (username) {
       sessionStorage.setItem('username', username);
