@@ -90,7 +90,7 @@ export class AuthService {
 
     this.loggedIn.next(isAuthenticated);
     this.username.next(username);
-    if (username != 'admin' && username != 'superadmin') {
+    if (username !== 'admin' && username !== 'superadmin') {
       this.favCocktailsList.next(this.favCocktailsList.value);
       this.favSoftDrinksList.next(this.favSoftDrinksList.value);
     }
