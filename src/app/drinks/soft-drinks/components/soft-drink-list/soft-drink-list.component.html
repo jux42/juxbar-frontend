@@ -1,7 +1,7 @@
 <div class="background-softdrinkList-container"></div>
 
 <ng-container *ngIf="softDrinks$ | async as softDrinks">
-  <div *ngIf="softDrinks.length > 0; else noContent">
+
     <div class="searchBlock">
 
     <button (click)="goDown(letter)" *ngFor="let letter of alphabet" class="alphabet-navigation">{{ letter }}</button>
@@ -27,6 +27,7 @@
       </form>
     </div>
     </div>
+  <div *ngIf="softDrinks.length > 0; else noContent">
     <div class="thisFlex">
       <app-soft-drink *ngFor="let softDrink of softDrinks"
                       [attr.id]="getAnchorId(softDrink.strDrink)"
@@ -36,5 +37,6 @@
   <ng-template #noContent>
     <div class="no-content">No Soft found</div>
   </ng-template>
+  <div class="bottomGap"></div>
 </ng-container>
 
