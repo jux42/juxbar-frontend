@@ -106,7 +106,9 @@ export class ProfileComponent implements OnInit {
       aboutMeText: [this.juxbarUser?.aboutMeText || '', [Validators.maxLength(1000)]],
     });
 
-    if (this.loggedIn) {
+    if (this.loggedIn &&
+      this.juxbarUser.username != 'admin' &&
+      this.juxbarUser.username != 'superadmin') {
       this.loadUser();
       console.log(this.loggedIn)
       this.loadPersonalCocktails();
@@ -145,7 +147,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfilePicture() {
-    return this.profileService.getProfilPicture().pipe(
+    return this.profileService.getProfilPicture(this.juxbarUser.username).pipe(
       map((picture) => {
         this.juxbarUser.profilePicture = picture;
       })
