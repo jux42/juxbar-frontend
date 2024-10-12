@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfilePicture() {
-    return this.profileService.getProfilPicture().pipe(
+    return this.profileService.getProfilPicture(this.juxbarUser.username).pipe(
       map((picture) => {
         this.juxbarUser.profilePicture = picture;
       })

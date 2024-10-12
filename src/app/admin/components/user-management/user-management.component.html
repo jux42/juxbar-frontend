@@ -31,7 +31,7 @@
           @if (!detailedUser.profilePicture){
             <img src="assets/icons/cockIcon.webp" alt="default profile picture" class="very-tiny-user-image">
           } @else {
-            <img [src]="environment.apiUrl+'/user/'+detailedUser.username+'/mypicture'" class="very-tiny-user-image">
+            <img [src]="environment.apiUrl+'/profile/mypicture/'+detailedUser.username" class="very-tiny-user-image">
           }
           <h4 *ngIf="detailedUser.active" class="activeUser">status : ACTIVE</h4>
           <h4 *ngIf="!detailedUser.active" class="inactiveUser">status : INACTIVE</h4>

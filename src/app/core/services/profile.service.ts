@@ -41,8 +41,8 @@ export class ProfileService {
   }
 
 
-  getProfilPicture() {
-    return this.http.get(`${environment.apiUrl}/user/mypicture`, {responseType: 'arraybuffer'});
+  getProfilPicture(username: string) {
+    return this.http.get(`${environment.apiUrl}/profile/mypicture/${username}`, {responseType: 'arraybuffer'});
   }
 
   deleteAccount(username: string) {
