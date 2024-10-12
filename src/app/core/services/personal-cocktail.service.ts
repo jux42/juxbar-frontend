@@ -34,8 +34,8 @@ export class PersonalCocktailService {
   getPersonalCocktailsOfUser(username: string): Observable<PersonalCocktail[]> {
 
 
-    const url = `${environment.apiUrl}/user/personalcocktails?username=${username}`;
-    return this.http.post<PersonalCocktail[]>(url, username)
+    const url = `${environment.apiUrl}/user/personalcocktails/${username}`;
+    return this.http.get<PersonalCocktail[]>(url, {responseType: "json"});
   }
 
 
