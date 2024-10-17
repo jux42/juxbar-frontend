@@ -32,7 +32,7 @@ export class IngredientService {
   }
 
   getAllIngredientsStrings(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUrl}/ingredientstrings`);
+    return this.http.get<string[]>(`${environment.apiUrl}/ingredients/strings`);
   }
 
 }
