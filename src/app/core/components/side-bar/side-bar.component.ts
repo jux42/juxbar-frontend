@@ -41,8 +41,8 @@ export class SideBarComponent implements OnInit {
   multiplier!: number;
   cocktailOfTheDayId!: number;
   cocktail!: Cocktail;
-  ingredientsList!: Ingredient[];
-  ingredient!: Ingredient;
+  ingredientsList!: string[];
+  ingredient!: string;
   protected readonly environment = environment;
 
   protected readonly sessionStorage = sessionStorage;
@@ -69,7 +69,7 @@ export class SideBarComponent implements OnInit {
     ).subscribe();
 
 
-    this.ingredientService.getAllIngredients().subscribe(
+    this.ingredientService.getAllIngredientsStrings().subscribe(
       data => this.ingredientsList = data
     )
   }

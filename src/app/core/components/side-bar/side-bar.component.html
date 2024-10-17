@@ -17,9 +17,9 @@
   <div>
     <p class="innerFrameBold"> Browse ingredients :</p>
     <div *ngIf="ingredientsList; else loading">
-      <select (change)="goToIngredient(ingredient.strIngredient)" [(ngModel)]="ingredient" class="ingredientSelect">
+      <select (change)="goToIngredient(ingredient)" [(ngModel)]="ingredient" class="ingredientSelect">
         <option *ngFor="let ingredient of ingredientsList" [ngValue]="ingredient" class="ingOption">
-          {{ ingredient.strIngredient }}
+          {{ ingredient }}
         </option>
       </select>
     </div>
