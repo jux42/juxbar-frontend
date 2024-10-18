@@ -100,9 +100,8 @@
         },
         "serve": {
           "options": {
-            "ssl": true,
-            "sslKey": "src/ssl/key.pem",
-            "sslCert": "src/ssl/cert.pem"
+            "ssl": false,
+            "host": "0.0.0.0"
           },
           "builder": "@angular-devkit/build-angular:dev-server",
 
