@@ -36,6 +36,12 @@
   align-items: center;
   background: rgba(white, 0.3);
   backdrop-filter: blur(8px) grayscale(50);
+  transition: 0.2s;
+}
+
+.action-link:hover {
+  transform: scale(1.05);
+  color: palegoldenrod;
 }
 
 .action-visible {
