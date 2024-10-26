@@ -11,6 +11,7 @@ import {CocktailService} from "../../../core/services/cocktailService";
 import {SoftDrinkService} from "../../../core/services/softDrinkService";
 import {Observable, tap} from "rxjs";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {CapitalizeFirstPipe} from "../../../capitalize-first.pipe";
 
 @Component({
   selector: 'app-single-ingredient',
@@ -51,7 +52,8 @@ export class SingleIngredientComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cocktailService: CocktailService,
-    private softDrinkService: SoftDrinkService) {
+    private softDrinkService: SoftDrinkService,
+    private capitalizeFirst: CapitalizeFirstPipe,) {
 
   }
 
@@ -65,12 +67,13 @@ export class SingleIngredientComponent implements OnInit {
 
     const strIngredient: string = this.route.snapshot.params['strIngredient'];
     this.ingredientService.getOneIngredientByName(strIngredient).subscribe(data => {
-        this.cocktails$ = this.cocktailService.getByIngredient('cocktails', strIngredient).pipe(
+      let capitalizedIgredient = this.capitalizeFirst.transform(strIngredient);
+        this.cocktails$ = this.cocktailService.getByIngredient('cocktails', capitalizedIgredient).pipe(
           tap(data => {
             this.cocktailsLoading = false;
           })
         );
-        this.softDrinks$ = this.softDrinkService.getByIngredient('softdrinks', strIngredient).pipe(
+        this.softDrinks$ = this.softDrinkService.getByIngredient('softdrinks', capitalizedIgredient).pipe(
           tap(data => {
             this.softDrinksLoading = false;
           }));
